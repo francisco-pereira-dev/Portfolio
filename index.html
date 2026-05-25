@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francisco Pereira | Front-end Developer</title>
+    <meta name="description" content="Portfolio of Francisco Pereira, a Computer Engineering student focused on building high-performance web experiences.">
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Devicon for tech icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+</head>
+<body class="light-mode">
+
+    <!-- Full-Screen Overlay Menu -->
+    <div id="overlay-menu" class="overlay-menu">
+        <div class="overlay-content reveal">
+            <h2 class="overlay-greeting">Welcome to my Portfolio</h2>
+            <ul class="overlay-links">
+                <li><a href="#about" class="overlay-link">About</a></li>
+                <li><a href="#skills" class="overlay-link">Skills</a></li>
+                <li><a href="#projects" class="overlay-link">Projects</a></li>
+                <li><a href="#contacts" class="overlay-link">Contacts</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                <span class="bar bar1"></span>
+                <span class="bar bar2"></span>
+                <span class="bar bar3"></span>
+            </button>
+        </div>
+        <div class="nav-center">
+            <span>Portfolio</span>
+        </div>
+        <div class="nav-right">
+            <button id="theme-toggle" class="theme-switch" aria-label="Toggle Dark/Light Mode">
+                <span class="icon-moon" style="display:none;">🌙</span>
+                <span class="icon-sun">☀️</span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content-wrapper">
+                <div class="hero-text-area reveal">
+                    <h1 class="main-title">Hello, I am Francisco Pereira</h1>
+                    <p class="hero-subtitle">Computer Engineering Student | Web Developer | Databases</p>
+                    <div class="hero-buttons">
+                        <a href="assets/docs/CV.pdf" target="_blank" rel="noopener noreferrer" download class="btn btn-primary">Download CV</a>
+                        <a href="#contacts" class="btn btn-outline">Get in touch</a>
+                    </div>
+                </div>
+                <div class="hero-image-area reveal">
+                    <div class="avatar-container">
+                        <img src="assets/images/avatar.jpg" alt="Francisco Pereira Avatar" class="avatar-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="about-section">
+            <h2 class="section-heading reveal">About me</h2>
+            <div class="about-content reveal">
+                <p>
+                    I am a final-year Computer Engineering student at Politécnico de Leiria with a deep fascination for web development and databases. My journey includes hands-on experience building integrated solutions, such as an e-commerce platform with a built-in stock management system developed during my internship. I specialize in bridging robust backend architectures with clean, responsive front-end interfaces. Driven by logical challenges and teamwork, I am constantly looking to learn, evolve, and build high-performance digital experiences.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <h2 class="section-heading reveal">Skills</h2>
+            <div class="skills-grid" id="skills-grid-container">
+                <!-- HTML5 -->
+                <div class="skill-card">
+                    <i class="devicon-html5-plain skill-icon"></i>
+                    <span class="skill-name">HTML5</span>
+                </div>
+                <!-- CSS3 -->
+                <div class="skill-card">
+                    <i class="devicon-css3-plain skill-icon"></i>
+                    <span class="skill-name">CSS3</span>
+                </div>
+                <!-- JavaScript -->
+                <div class="skill-card">
+                    <i class="devicon-javascript-plain skill-icon"></i>
+                    <span class="skill-name">JavaScript</span>
+                </div>
+                <!-- TypeScript -->
+                <div class="skill-card">
+                    <i class="devicon-typescript-plain skill-icon"></i>
+                    <span class="skill-name">TypeScript</span>
+                </div>
+                <!-- Tailwind CSS -->
+                <div class="skill-card">
+                    <i class="devicon-tailwindcss-original skill-icon"></i>
+                    <span class="skill-name">Tailwind CSS</span>
+                </div>
+                <!-- Node.js -->
+                <div class="skill-card">
+                    <i class="devicon-nodejs-plain skill-icon"></i>
+                    <span class="skill-name">Node.js</span>
+                </div>
+                <!-- PHP -->
+                <div class="skill-card">
+                    <i class="devicon-php-plain skill-icon"></i>
+                    <span class="skill-name">PHP</span>
+                </div>
+                <!-- MySQL -->
+                <div class="skill-card">
+                    <i class="devicon-mysql-plain skill-icon"></i>
+                    <span class="skill-name">MySQL</span>
+                </div>
+                <!-- Docker -->
+                <div class="skill-card">
+                    <i class="devicon-docker-plain skill-icon"></i>
+                    <span class="skill-name">Docker</span>
+                </div>
+                <!-- Python -->
+                <div class="skill-card">
+                    <i class="devicon-python-plain skill-icon"></i>
+                    <span class="skill-name">Python</span>
+                </div>
+                <!-- C# -->
+                <div class="skill-card">
+                    <i class="devicon-csharp-plain skill-icon"></i>
+                    <span class="skill-name">C#</span>
+                </div>
+                <!-- Java -->
+                <div class="skill-card">
+                    <i class="devicon-java-plain skill-icon"></i>
+                    <span class="skill-name">Java</span>
+                </div>
+                <!-- Linux -->
+                <div class="skill-card">
+                    <i class="devicon-linux-plain skill-icon"></i>
+                    <span class="skill-name">Linux</span>
+                </div>
+                <!-- Git/GitHub -->
+                <div class="skill-card">
+                    <i class="devicon-github-original skill-icon"></i>
+                    <span class="skill-name">Git/GitHub</span>
+                </div>
+                <!-- REST APIs -->
+                <div class="skill-card">
+                    <div class="skill-icon text-icon">{API}</div>
+                    <span class="skill-name">REST APIs</span>
+                </div>
+                <!-- OutSystems -->
+                <div class="skill-card">
+                    <div class="skill-icon text-icon">OS</div>
+                    <span class="skill-name">OutSystems</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <h2 class="section-heading reveal">Projects</h2>
+            <div class="projects-grid">
+                <!-- Project Card 1 -->
+                <div class="project-card reveal">
+                    <div class="project-thumb">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tech E-commerce & Stock Management">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Tech E-commerce & Stock Management</h3>
+                        <div class="project-tech-icons">
+                            <span class="tech-badge">OutSystems</span>
+                            <span class="tech-badge">SQL</span>
+                        </div>
+                        <button class="btn-view-more" data-modal="modal-ecommerce">View More</button>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                 <div class="project-card reveal">
+                    <div class="project-thumb">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Data Analytics Dashboard">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Data Analytics Dashboard</h3>
+                        <div class="project-tech-icons">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Node.js</span>
+                        </div>
+                        <button class="btn-view-more" data-modal="modal-dashboard">View More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacts Section -->
+        <section id="contacts" class="contacts-section">
+            <h2 class="section-heading reveal">Contacts</h2>
+            <div class="contacts-row">
+                
+                <!-- Email -->
+                <a href="mailto:franciscojrp1004@gmail.com" class="contact-card-link reveal">
+                    <div class="contact-icon-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-svg"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </div>
+                    <span class="contact-title">E-mail</span>
+                    <span class="contact-value">franciscojrp1004@gmail.com</span>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/francisco-pereira-dev/" target="_blank" rel="noopener noreferrer" class="contact-card-link reveal">
+                    <div class="contact-icon-circle">
+                        <i class="devicon-linkedin-plain"></i>
+                    </div>
+                    <span class="contact-title">Linkedin</span>
+                    <span class="contact-value">@francisco-pereira-dev</span>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/francisco-pereira-dev" target="_blank" rel="noopener noreferrer" class="contact-card-link reveal">
+                    <div class="contact-icon-circle">
+                        <i class="devicon-github-original"></i>
+                    </div>
+                    <span class="contact-title">Github</span>
+                    <span class="contact-value">@francisco-pereira-dev</span>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Professional Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>© 2026 Francisco Pereira • Built with HTML, CSS & JavaScript</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    
+    <div class="modal" id="modal-ecommerce">
+        <button class="modal-close">&times;</button>
+        <div class="modal-content">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Tech E-commerce & Stock Management" class="modal-img">
+            <h3 class="modal-title">Tech E-commerce & Stock Management</h3>
+            <p class="modal-desc">A full-featured online technology store integrated with a custom stock management application, developed during my professional internship.</p>
+            <ul class="modal-features">
+                <li>Complete user authentication and profile management.</li>
+                <li>Product catalog with advanced filtering and search capabilities.</li>
+                <li>Secure checkout process and order tracking.</li>
+                <li>Real-time stock synchronization with the backend management system.</li>
+                <li>Admin dashboard for managing products, users, and orders.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal">View LinkedIn Post</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-dashboard">
+        <button class="modal-close">&times;</button>
+        <div class="modal-content">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Data Analytics Dashboard" class="modal-img">
+            <h3 class="modal-title">Data Analytics Dashboard</h3>
+            <p class="modal-desc">A comprehensive dashboard for visualizing key performance indicators and complex data sets.</p>
+            <ul class="modal-features">
+                <li>Interactive charts and graphs.</li>
+                <li>Data export functionalities.</li>
+                <li>Real-time updates via WebSockets.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
