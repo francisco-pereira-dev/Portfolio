@@ -145,52 +145,33 @@ body.dark-mode .nav-center {
 }
 
 .nav-right .theme-switch {
-    background: var(--nav-color);
+    background: transparent;
     border: none;
-    border-radius: 20px;
-    width: 50px;
-    height: 26px;
     cursor: pointer;
-    color: var(--nav-bg);
-    transition: var(--transition);
+    color: var(--nav-color);
+    font-size: 20px;
     display: flex;
     align-items: center;
-    padding: 3px;
-    justify-content: flex-end;
-}
-
-.theme-switch .icon-moon {
-    margin-right: auto;
-    font-size: 14px;
-}
-
-.theme-switch .icon-sun {
-    margin-left: auto;
-    font-size: 14px;
-}
-
-.theme-switch::before {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: var(--nav-bg);
-    border-radius: 50%;
+    justify-content: center;
     transition: transform 0.3s ease;
 }
 
-body.dark-mode .theme-switch::before {
-    transform: translateX(-24px);
-    background: #fff;
+.theme-switch:hover {
+    transform: scale(1.15);
 }
-body.dark-mode .theme-switch {
-    background: rgba(255,255,255,0.2);
+
+body.dark-mode .icon-moon {
+    display: none;
 }
-body.light-mode .theme-switch {
-    background: rgba(0,0,0,0.1);
+body.dark-mode .icon-sun {
+    display: block;
 }
-body.light-mode .theme-switch::before {
-    background: #fff;
+
+body.light-mode .icon-sun {
+    display: none;
+}
+body.light-mode .icon-moon {
+    display: block;
 }
 
 /* Full-Screen Overlay Menu */
