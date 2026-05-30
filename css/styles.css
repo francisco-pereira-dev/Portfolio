@@ -743,3 +743,41 @@ main {
         padding: 1rem;
     }
 }
+
+/* --- Correções para a Modal em Mobile --- */
+@media (max-width: 768px) {
+    /* 1. Ajustar a altura da imagem para ser mais proporcional num ecrã pequeno */
+    .modal-img {
+        height: 200px; 
+    }
+
+    /* 2. Reduzir os paddings interiores para libertar espaço para o texto e botões */
+    .modal-title {
+        font-size: 1.5rem;
+        padding: 1.5rem 1.5rem 0.5rem;
+    }
+    
+    .modal-desc {
+        font-size: 1rem;
+        padding: 0 1.5rem 1rem;
+    }
+    
+    .modal-features {
+        padding: 0 1.5rem 1.5rem 2.5rem;
+    }
+    
+    .modal-actions {
+        padding: 0 1.5rem 1.5rem;
+    }
+
+    /* 3. Aumentar o z-index da modal e do fundo escuro para ficarem por cima da navbar (que tem z-index: 2000) */
+    .modal-overlay {
+        z-index: 2999;
+    }
+    
+    .modal {
+        z-index: 3000;
+        width: 95%; /* Aproveita melhor a largura do telemóvel */
+        max-height: 85vh; /* Dá um pequeno respiro no topo e em baixo */
+    }
+}
