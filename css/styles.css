@@ -589,7 +589,7 @@ main {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
-    z-index: 1001;
+    z-index: 2999;
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -606,7 +606,7 @@ main {
     max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
-    z-index: 1002;
+    z-index: 3000;
     display: none;
     opacity: 0;
     transition: all 0.3s ease;
@@ -646,6 +646,84 @@ main {
 
 .modal-close:hover {
     background: rgba(0,0,0,0.8);
+}
+
+/* Tooltip Button (?) */
+.modal-info-btn {
+    position: absolute;
+    top: 15px;
+    right: 70px;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: help;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+@media (hover: hover) {
+    .modal-info-btn:hover {
+        background-color: var(--accent-color);
+        color: #fff;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 15px var(--shadow-glow);
+    }
+}
+.modal-info-btn.active-tooltip {
+    background-color: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--shadow-glow);
+}
+
+/* Tooltip Balão (Tooltip) */
+.modal-info-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 50px; 
+    right: 0;
+    width: max-content;
+    max-width: 280px;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    text-align: left;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-family: var(--font-main);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    pointer-events: none;
+    line-height: 1.5;
+}
+
+@media (hover: hover) {
+    .modal-info-btn:hover::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+.modal-info-btn.active-tooltip::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .modal-content {
@@ -779,5 +857,11 @@ main {
         z-index: 3000;
         width: 95%; /* Aproveita melhor a largura do telemóvel */
         max-height: 85vh; /* Dá um pequeno respiro no topo e em baixo */
+    }
+    
+    /* 4. Ajustar posição do balão de informação para não sair do ecrã à esquerda */
+    .modal-info-btn::after {
+        right: -45px;
+        width: 260px;
     }
 }
