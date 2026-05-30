@@ -81,6 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
         modals.forEach(m => m.classList.remove('active'));
         overlay.classList.remove('active');
         document.body.style.overflow = '';
+        
+        // Limpar os tooltips ao fechar a janela
+        document.querySelectorAll('.modal-info-btn').forEach(btn => {
+            btn.classList.remove('active-tooltip');
+        });
     }
 
     btnsViewMore.forEach(btn => {
@@ -145,12 +150,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Modal Info Button Logic (Mobile Toggle) ---
     const infoBtns = document.querySelectorAll('.modal-info-btn');
+    
+    // Toggle ao clicar no botão
     infoBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
-            // Em dispositivos móveis (largura <= 768px), o clique serve para abrir/fechar o tooltip
-            if (window.innerWidth <= 768) {
-                this.classList.toggle('active-tooltip');
-            }
+            e.stopPropagation(); // Evitar que o clique se propague para o document
+            this.classList.toggle('active-tooltip');
         });
+    });
+
+    // Fechar tooltip ao clicar em qualquer outro lado da página
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.modal-info-btn')) {
+            infoBtns.forEach(btn => btn.classList.remove('active-tooltip'));
+        }
     });
 });
