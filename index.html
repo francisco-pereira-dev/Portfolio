@@ -217,7 +217,7 @@
                 <!-- Project Card 4 -->
                  <div class="project-card reveal">
                     <div class="project-thumb">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="AINET - Plataforma Full-Stack Laravel">
+                        <img src="assets/images/ainet.jpg" alt="AINET - Plataforma Full-Stack Laravel">
                     </div>
                     <div class="project-info">
                         <h3 class="project-title">AINET - Plataforma Full-Stack Laravel</h3>
@@ -234,7 +234,7 @@
                 <!-- Project Card 5: DAE -->
                 <div class="project-card reveal">
                     <div class="project-thumb">
-                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="DAE - Arquitetura Full-Stack & IA">
+                        <img src="assets/images/dae.jpg" alt="DAE - Arquitetura Full-Stack & IA">
                     </div>
                     <div class="project-info">
                         <h3 class="project-title">DAE - Arquitetura Full-Stack & IA</h3>
@@ -245,6 +245,22 @@
                             <span class="tech-badge">Vite</span>
                         </div>
                         <button class="btn-view-more" data-modal="modal-dae">View More</button>
+                    </div>
+                </div>
+                <!-- Project Card 6: Hotel Inteligente (TI) -->
+                <div class="project-card reveal">
+                    <div class="project-thumb">
+                        <img src="assets/images/ti.png" alt="Hotel Inteligente - Plataforma IoT">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Hotel Inteligente - Plataforma IoT</h3>
+                        <div class="project-tech-icons">
+                            <span class="tech-badge">PHP (Vanilla)</span>
+                            <span class="tech-badge">IoT</span>
+                            <span class="tech-badge">AJAX</span>
+                            <span class="tech-badge">Hardware</span>
+                        </div>
+                        <button class="btn-view-more" data-modal="modal-ti">View More</button>
                     </div>
                 </div>
             </div>
@@ -352,7 +368,7 @@
     <div class="modal" id="modal-ainet">
         <button class="modal-close">&times;</button>
         <div class="modal-content">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="AINET - Plataforma Full-Stack Laravel" class="modal-img">
+            <img src="assets/images/ainet.jpg" alt="AINET - Plataforma Full-Stack Laravel" class="modal-img">
             <h3 class="modal-title">AINET - Plataforma Full-Stack Laravel</h3>
             <p class="modal-desc">Projeto Full-Stack desenvolvido em equipa no âmbito universitário, funcionando como uma plataforma híbrida de Associação e E-commerce. Construído sob a framework Laravel utilizando o padrão arquitetural MVC e Vite no frontend. O grande foco técnico é a segurança e gestão de base de dados relacional.</p>
             <ul class="modal-features">
@@ -370,7 +386,7 @@
     <div class="modal" id="modal-dae">
         <button class="modal-close">&times;</button>
         <div class="modal-content">
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="DAE - Arquitetura Full-Stack & IA" class="modal-img">
+            <img src="assets/images/dae.jpg" alt="DAE - Arquitetura Full-Stack & IA" class="modal-img">
             <h3 class="modal-title">DAE - Arquitetura Full-Stack & IA</h3>
             <p class="modal-desc">Projeto de Engenharia Informática focado na criação de uma arquitetura full-stack robusta e escalável, com forte separação de responsabilidades (SoC). O ecossistema destaca-se pela contentorização completa da infraestrutura e pela integração nativa de um modelo de Inteligência Artificial a correr localmente.</p>
             <ul class="modal-features">
@@ -381,6 +397,26 @@
             <div class="modal-actions">
                 <a href="https://dae-frontend.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
                 <a href="https://github.com/francisco-pereira-dev/DAE.git" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Hotel Inteligente (TI) -->
+    <div class="modal" id="modal-ti">
+        <button class="modal-close">&times;</button>
+        <div class="modal-content">
+            <img src="assets/images/ti.png" alt="Hotel Inteligente - Plataforma IoT" class="modal-img">
+            <h3 class="modal-title">Hotel Inteligente - Plataforma IoT</h3>
+            <p class="modal-desc">Plataforma web de Internet of Things (IoT) focada na monitorização de sensores e hardware (Arduino/ESP32). Diferencia-se por arquitetar uma API "Flat-File" em PHP puro, sem recurso a bases de dados SQL, garantindo uma comunicação leve, segura e resiliente com dispositivos físicos.</p>
+            <ul class="modal-features">
+                <li>Integração direta com hardware (sensores e webcam) via sistema de ficheiros com proteção contra Path Traversal e injeções.</li>
+                <li>Dashboard dinâmica com atualização assíncrona (Fetch API/AJAX) sem necessidade de refresh.</li>
+                <li>Arquitetura otimizada com Princípio DRY e sistema de paginação nativa em ficheiros de log.</li>
+                <li>Segurança reforçada com sanitização de dados (htmlspecialchars) e autenticação robusta (password_hash).</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="https://ti-xp2g.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
+                <a href="https://github.com/francisco-pereira-dev/TI.git" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
             </div>
         </div>
     </div>
