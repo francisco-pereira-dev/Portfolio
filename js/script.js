@@ -1,3 +1,13 @@
+if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
+    // Remove a âncora (#) do URL sem forçar um segundo recarregamento
+    window.history.replaceState(null, null, window.location.pathname);
+    
+    // Como tirámos a âncora, temos de garantir que faz scroll para o topo 
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 0);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- Full-Screen Overlay Menu Logic ---
     const overlayMenu = document.getElementById('overlay-menu');
