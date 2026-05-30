@@ -142,4 +142,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         skillsObserver.observe(skillsGrid);
     }
+
+    // --- Modal Info Button Logic (Mobile Toggle) ---
+    const infoBtns = document.querySelectorAll('.modal-info-btn');
+    infoBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Em dispositivos móveis (largura <= 768px), o clique serve para abrir/fechar o tooltip
+            if (window.innerWidth <= 768) {
+                this.classList.toggle('active-tooltip');
+            }
+        });
+    });
 });
