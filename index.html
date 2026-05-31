@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- DECLARAÇÃO DO TIPO DE DOCUMENTO E IDIOMA PADRÃO -->
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
@@ -16,18 +16,37 @@
 </head>
 <body class="light-mode">
 
-    <!-- Full-Screen Overlay Menu -->
+    <!-- ========================================== -->
+    <!-- MENU OVERLAY EM ECRÃ INTEIRO (HAMBÚRGUER)  -->
+    <!-- ========================================== -->
+    <!-- Contentor de sobreposição do menu móvel e minimalista. -->
     <div id="overlay-menu" class="overlay-menu">
         <div class="overlay-content reveal">
+            <!-- Ligações de navegação rápida pelas secções do portfólio -->
             <ul class="overlay-links">
                 <li><a href="#about" class="overlay-link" data-translate="overlay-about">Sobre</a></li>
                 <li><a href="#skills" class="overlay-link" data-translate="overlay-skills">Competências</a></li>
                 <li><a href="#projects" class="overlay-link" data-translate="overlay-projects">Projetos</a></li>
                 <li><a href="#contacts" class="overlay-link" data-translate="overlay-contacts">Contactos</a></li>
             </ul>
+            <!-- Rodapé do Menu: Ícones de Redes Sociais para equilíbrio de espaço negativo -->
+            <div class="overlay-footer">
+                <a href="https://www.linkedin.com/in/francisco-pereira-dev/" target="_blank" rel="noopener noreferrer" class="overlay-social-icon" aria-label="LinkedIn">
+                    <i class="devicon-linkedin-plain"></i>
+                </a>
+                <a href="https://github.com/francisco-pereira-dev" target="_blank" rel="noopener noreferrer" class="overlay-social-icon" aria-label="GitHub">
+                    <i class="devicon-github-original"></i>
+                </a>
+                <a href="mailto:franciscojrp1004@gmail.com" class="overlay-social-icon" aria-label="E-mail">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
+            </div>
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- BARRA DE NAVEGAÇÃO PRINCIPAL (NAVBAR)      -->
+    <!-- ========================================== -->
     <nav class="navbar">
         <div class="nav-left">
             <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu">
@@ -53,7 +72,9 @@
     </nav>
 
     <main>
-        <!-- Hero Section -->
+        <!-- ========================================== -->
+        <!-- SECÇÃO HERO (APRESENTAÇÃO PRINCIPAL)       -->
+        <!-- ========================================== -->
         <section id="hero" class="hero-section">
             <div class="hero-content-wrapper">
                 <div class="hero-text-area reveal">
@@ -72,7 +93,9 @@
             </div>
         </section>
 
-        <!-- About Me Section -->
+        <!-- ========================================== -->
+        <!-- SECÇÃO SOBRE MIM (SOBRE O DESENVOLVEDOR)   -->
+        <!-- ========================================== -->
         <section id="about" class="about-section">
             <h2 class="section-heading reveal" data-translate="about-heading">Sobre mim</h2>
             <div class="about-content reveal">
@@ -82,7 +105,9 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- ========================================== -->
+        <!-- SECÇÃO COMPETÊNCIAS (STACK TECNOLÓGICA)    -->
+        <!-- ========================================== -->
         <section id="skills" class="skills-section">
             <h2 class="section-heading reveal" data-translate="skills-heading">Competências</h2>
             <div class="skills-grid" id="skills-grid-container">
@@ -169,14 +194,16 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
+        <!-- ========================================== -->
+        <!-- SECÇÃO PROJETOS (PORTFÓLIO DE TRABALHOS)   -->
+        <!-- ========================================== -->
         <section id="projects" class="projects-section">
             <h2 class="section-heading reveal" data-translate="projects-heading">Projetos</h2>
             <div class="projects-grid">
                 <!-- Project Card 1 -->
                 <div class="project-card reveal">
                 <div class="project-thumb">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mr. Pizza - Plataforma E-commerce">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mr. Pizza - Plataforma E-commerce" loading="lazy">
                 </div>
                 <div class="project-info">
                     <h3 class="project-title" data-translate="project-title-mrpizza">Mr. Pizza - Plataforma E-commerce</h3>
@@ -192,7 +219,7 @@
                 <!-- Project Card 2 -->
                  <div class="project-card reveal">
                 <div class="project-thumb">
-                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Catálogo Digital - Diane Arbus">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Catálogo Digital - Diane Arbus" loading="lazy">
                 </div>
                 <div class="project-info">
                     <h3 class="project-title" data-translate="project-title-dianearbus">Catálogo Digital - Diane Arbus</h3>
@@ -207,7 +234,7 @@
                 <!-- Project Card 3 -->
                  <div class="project-card reveal">
                 <div class="project-thumb">
-                    <img src="assets/images/logo-gest.jpg" alt="Gest - E-commerce e Gestão de Stock">
+                    <img src="assets/images/logo-gest.jpg" alt="Gest - E-commerce e Gestão de Stock" loading="lazy">
                 </div>
                 <div class="project-info">
                     <h3 class="project-title" data-translate="project-title-gest">Gest - E-commerce e Gestão de Stock</h3>
@@ -221,7 +248,7 @@
                 <!-- Project Card 4 -->
                  <div class="project-card reveal">
                 <div class="project-thumb">
-                    <img src="assets/images/ainet.jpg" alt="AINET - Plataforma Full-Stack Laravel">
+                    <img src="assets/images/ainet.jpg" alt="AINET - Plataforma Full-Stack Laravel" loading="lazy">
                 </div>
                 <div class="project-info">
                     <h3 class="project-title" data-translate="project-title-ainet">AINET - Plataforma Full-Stack Laravel</h3>
@@ -238,7 +265,7 @@
                 <!-- Project Card 5: DAE -->
                 <div class="project-card reveal">
                 <div class="project-thumb">
-                    <img src="assets/images/dae.jpg" alt="DAE - Arquitetura Full-Stack & IA">
+                    <img src="assets/images/dae.jpg" alt="DAE - Arquitetura Full-Stack & IA" loading="lazy">
                 </div>
                 <div class="project-info">
                     <h3 class="project-title" data-translate="project-title-dae">DAE - Arquitetura Full-Stack & IA</h3>
@@ -254,7 +281,7 @@
                 <!-- Project Card 6: Hotel Inteligente (TI) -->
                 <div class="project-card reveal">
                 <div class="project-thumb">
-                    <img src="assets/images/ti.png" alt="Hotel Inteligente - Plataforma IoT">
+                    <img src="assets/images/ti.png" alt="Hotel Inteligente - Plataforma IoT" loading="lazy">
                 </div>
                 <div class="project-info">
                     <h3 class="project-title" data-translate="project-title-ti">Hotel Inteligente - Plataforma IoT</h3>
@@ -270,7 +297,9 @@
             </div>
         </section>
 
-        <!-- Contacts Section -->
+        <!-- ========================================== -->
+        <!-- SECÇÃO CONTACTOS (REDE E CORREIO)          -->
+        <!-- ========================================== -->
         <section id="contacts" class="contacts-section">
             <h2 class="section-heading reveal" data-translate="contacts-heading">Contactos</h2>
             <div class="contacts-row">
@@ -306,21 +335,25 @@
         </section>
     </main>
 
-    <!-- Professional Footer -->
+    <!-- ========================================== -->
+    <!-- RODAPÉ PROFISSIONAL                        -->
+    <!-- ========================================== -->
     <footer class="site-footer">
         <div class="footer-content">
             <p data-translate="footer-text">© 2026 Francisco Pereira • Desenvolvido com HTML, CSS & JavaScript</p>
         </div>
     </footer>
 
-    <!-- Modals -->
+    <!-- ========================================== -->
+    <!-- CONTENTORES DE DIÁLOGO (JANELAS MODAIS)    -->
+    <!-- ========================================== -->
     <div class="modal-overlay" id="modal-overlay"></div>
     
-    <div class="modal" id="modal-mrpizza">
+    <div class="modal" id="modal-mrpizza" role="dialog" aria-modal="true" aria-labelledby="title-mrpizza">
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Mr. Pizza - Plataforma E-commerce" class="modal-img">
-            <h3 class="modal-title" data-translate="project-title-mrpizza">Mr. Pizza - Plataforma E-commerce</h3>
+            <h3 class="modal-title" id="title-mrpizza" data-translate="project-title-mrpizza">Mr. Pizza - Plataforma E-commerce</h3>
             <p class="modal-desc" data-translate="modal-desc-mrpizza">Plataforma de e-commerce desenvolvida para a cadeia Mr. Pizza. O website permite aos clientes explorar o menu completo (pizzas, bebidas e sobremesas), realizar encomendas online com opção de entrega ao domicílio e proporciona uma experiência de navegação fluida e intuitiva.</p>
             <ul class="modal-features">
                 <li data-translate="modal-feat-mrpizza-1">Catálogo completo de produtos (pizzas, bebidas e sobremesas).</li>
@@ -334,11 +367,11 @@
         </div>
     </div>
 
-    <div class="modal" id="modal-dianearbus">
+    <div class="modal" id="modal-dianearbus" role="dialog" aria-modal="true" aria-labelledby="title-dianearbus">
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Catálogo Digital - Diane Arbus" class="modal-img">
-            <h3 class="modal-title" data-translate="project-title-dianearbus">Catálogo Digital - Diane Arbus</h3>
+            <h3 class="modal-title" id="title-dianearbus" data-translate="project-title-dianearbus">Catálogo Digital - Diane Arbus</h3>
             <p class="modal-desc" data-translate="modal-desc-dianearbus">Um catálogo digital interativo dedicado à obra da fotógrafa Diane Arbus. O projeto apresenta uma galeria com os seus trabalhos fotográficos, incluindo autorretratos, acompanhados de descrições detalhadas que contextualizam cada obra.</p>
             <ul class="modal-features">
                 <li data-translate="modal-feat-dianearbus-1">Galeria interativa de fotografias and autorretratos.</li>
@@ -352,11 +385,11 @@
         </div>
     </div>
 
-    <div class="modal" id="modal-gest">
+    <div class="modal" id="modal-gest" role="dialog" aria-modal="true" aria-labelledby="title-gest">
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="assets/images/logo-gest.jpg" alt="Gest - E-commerce e Gestão de Stock" class="modal-img">
-            <h3 class="modal-title" data-translate="project-title-gest">Gest - E-commerce e Gestão de Stock</h3>
+            <h3 class="modal-title" id="title-gest" data-translate="project-title-gest">Gest - E-commerce e Gestão de Stock</h3>
             <p class="modal-desc" data-translate="modal-desc-gest">Prova de Aptidão Profissional desenvolvida em ambiente empresarial utilizando a plataforma Low-Code OutSystems. O projeto "Gest" consiste num ecossistema integrado que inclui uma plataforma de e-commerce direcionada ao consumidor final e uma infraestrutura robusta de backoffice para a gestão de inventário.</p>
             <ul class="modal-features">
                 <li data-translate="modal-feat-gest-1">Desenvolvimento Full-Stack em plataforma Low-Code.</li>
@@ -369,12 +402,12 @@
         </div>
     </div>
 
-    <div class="modal" id="modal-ainet">
+    <div class="modal" id="modal-ainet" role="dialog" aria-modal="true" aria-labelledby="title-ainet">
         <div class="modal-info-btn" data-translate-tooltip="modal-tooltip-note" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="assets/images/ainet.jpg" alt="AINET - Plataforma Full-Stack Laravel" class="modal-img">
-            <h3 class="modal-title" data-translate="project-title-ainet">AINET - Plataforma Full-Stack Laravel</h3>
+            <h3 class="modal-title" id="title-ainet" data-translate="project-title-ainet">AINET - Plataforma Full-Stack Laravel</h3>
             <p class="modal-desc" data-translate="modal-desc-ainet">Projeto Full-Stack desenvolvido em equipa no âmbito universitário, funcionando como uma plataforma híbrida de Associação e E-commerce. Construído sob a framework Laravel utilizando o padrão arquitetural MVC e Vite no frontend. O grande foco técnico é a segurança e gestão de base de dados relacional.</p>
             <ul class="modal-features">
                 <li data-translate="modal-feat-ainet-1">Implementação de sistema RBAC com 3 níveis de acesso estritos: Board (Direção), Employee (Funcionários) e Member (Sócios).</li>
@@ -388,12 +421,12 @@
         </div>
     </div>
 
-    <div class="modal" id="modal-dae">
+    <div class="modal" id="modal-dae" role="dialog" aria-modal="true" aria-labelledby="title-dae">
         <div class="modal-info-btn" data-translate-tooltip="modal-tooltip-note" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="assets/images/dae.jpg" alt="DAE - Arquitetura Full-Stack & IA" class="modal-img">
-            <h3 class="modal-title" data-translate="project-title-dae">DAE - Arquitetura Full-Stack & IA</h3>
+            <h3 class="modal-title" id="title-dae" data-translate="project-title-dae">DAE - Arquitetura Full-Stack & IA</h3>
             <p class="modal-desc" data-translate="modal-desc-dae">Projeto de Engenharia Informática focado na criação de uma arquitetura full-stack robusta e escalável, com forte separação de responsabilidades (SoC). O ecossistema destaca-se pela contentorização completa da infraestrutura e pela integração nativa de um modelo de Inteligência Artificial a correr localmente.</p>
             <ul class="modal-features">
                 <li data-translate="modal-feat-dae-1">Infraestrutura 100% contentorizada via Docker (serviços móveis, bases de dados e backend isolados).</li>
@@ -408,12 +441,12 @@
     </div>
 
     <!-- Modal Hotel Inteligente (TI) -->
-    <div class="modal" id="modal-ti">
+    <div class="modal" id="modal-ti" role="dialog" aria-modal="true" aria-labelledby="title-ti">
         <div class="modal-info-btn" data-translate-tooltip="modal-tooltip-note" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="assets/images/ti.png" alt="Hotel Inteligente - Plataforma IoT" class="modal-img">
-            <h3 class="modal-title" data-translate="project-title-ti">Hotel Inteligente - Plataforma IoT</h3>
+            <h3 class="modal-title" id="title-ti" data-translate="project-title-ti">Hotel Inteligente - Plataforma IoT</h3>
             <p class="modal-desc" data-translate="modal-desc-ti">Plataforma web de Internet of Things (IoT) focada na monitorização de sensores e hardware (Arduino/ESP32). Diferencia-se por arquitetar uma API "Flat-File" em PHP puro, sem recurso a bases de dados SQL, garantindo uma comunicação leve, segura e resiliente com dispositivos físicos.</p>
             <ul class="modal-features">
                 <li data-translate="modal-feat-ti-1">Integração direta com hardware (sensores e webcam) via sistema de ficheiros com proteção contra Path Traversal e injeções.</li>
