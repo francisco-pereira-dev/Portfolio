@@ -20,6 +20,11 @@
     --nav-bg: rgba(15, 23, 42, 0.8);
     --nav-color: #fff;
     --footer-bg: rgba(15, 23, 42, 0.8);
+    
+    /* Menu Overlay (Dark Theme) */
+    --overlay-bg: rgba(15, 23, 42, 0.95);
+    --overlay-text: #CBD5E1;
+    --overlay-border: rgba(255, 255, 255, 0.1);
 }
 
 body.light-mode {
@@ -34,6 +39,11 @@ body.light-mode {
     --nav-bg: rgba(255, 255, 255, 0.85);
     --nav-color: #0F172A;
     --footer-bg: rgba(255, 255, 255, 0.85);
+    
+    /* Menu Overlay (Light Theme) */
+    --overlay-bg: rgba(248, 250, 252, 0.96);
+    --overlay-text: #475569;
+    --overlay-border: rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -241,7 +251,7 @@ body.light-mode .icon-moon {
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(15, 23, 42, 0.95);
+    background-color: var(--overlay-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 1500;
@@ -278,12 +288,13 @@ body.light-mode .icon-moon {
     gap: 2rem;
     flex-grow: 1;
     justify-content: center;
+    align-items: center;
 }
 
 /* Ligações de navegação do menu overlay. */
 .overlay-link {
     text-decoration: none;
-    color: #CBD5E1;
+    color: var(--overlay-text);
     font-size: 2.5rem;
     font-weight: 600;
     transition: color 0.2s;
@@ -294,7 +305,7 @@ body.light-mode .icon-moon {
     color: var(--accent-color);
 }
 
-/* Destaque da ligação correspondente à secção ativa (Scrollspy). */
+/* Destaque da ligação correspondente à secção activa (Scrollspy). */
 .overlay-link.active-link {
     color: var(--accent-color);
     text-shadow: 0 0 8px var(--shadow-glow), 0 0 15px rgba(139, 92, 246, 0.3);
@@ -308,14 +319,14 @@ body.light-mode .icon-moon {
     gap: 2.5rem;
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--overlay-border);
     width: 100%;
     max-width: 300px;
 }
 
 /* Ícone de rede social individual. */
 .overlay-social-icon {
-    color: #CBD5E1;
+    color: var(--overlay-text);
     font-size: 1.8rem;
     display: flex;
     align-items: center;
