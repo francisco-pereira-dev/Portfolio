@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Francisco Pereira | Portfolio</title>
-    <meta name="description" content="Portfolio of Francisco Pereira, a Computer Engineering student focused on building high-performance web experiences.">
+    <meta name="description" content="Portfólio de Francisco Pereira, estudante de Engenharia Informática focado em criar experiências web de alto desempenho.">
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,12 +19,11 @@
     <!-- Full-Screen Overlay Menu -->
     <div id="overlay-menu" class="overlay-menu">
         <div class="overlay-content reveal">
-            <h2 class="overlay-greeting">Welcome to my Portfolio</h2>
             <ul class="overlay-links">
-                <li><a href="#about" class="overlay-link">About</a></li>
-                <li><a href="#skills" class="overlay-link">Skills</a></li>
-                <li><a href="#projects" class="overlay-link">Projects</a></li>
-                <li><a href="#contacts" class="overlay-link">Contacts</a></li>
+                <li><a href="#about" class="overlay-link" data-translate="overlay-about">Sobre</a></li>
+                <li><a href="#skills" class="overlay-link" data-translate="overlay-skills">Competências</a></li>
+                <li><a href="#projects" class="overlay-link" data-translate="overlay-projects">Projetos</a></li>
+                <li><a href="#contacts" class="overlay-link" data-translate="overlay-contacts">Contactos</a></li>
             </ul>
         </div>
     </div>
@@ -41,6 +40,11 @@
             <span>Portfolio</span>
         </div>
         <div class="nav-right">
+            <button id="lang-toggle" class="lang-switch" aria-label="Alterar idioma / Switch language">
+                <span class="lang-pt active-lang">PT</span>
+                <span class="lang-sep">|</span>
+                <span class="lang-en">EN</span>
+            </button>
             <button id="theme-toggle" class="theme-switch" aria-label="Toggle Dark/Light Mode">
                 <span class="icon-moon">🌙</span>
                 <span class="icon-sun">☀️</span>
@@ -53,11 +57,11 @@
         <section id="hero" class="hero-section">
             <div class="hero-content-wrapper">
                 <div class="hero-text-area reveal">
-                    <h1 class="main-title">Hello, I am Francisco Pereira</h1>
-                    <p class="hero-subtitle">Computer Engineering Student | Web Developer | Databases</p>
+                    <h1 class="main-title" data-translate="hero-title">Olá, sou o Francisco Pereira</h1>
+                    <p class="hero-subtitle" data-translate="hero-subtitle">Estudante de Engenharia Informática | Web Developer | Bases de Dados</p>
                     <div class="hero-buttons">
-                        <a href="assets/docs/CV.pdf" target="_blank" rel="noopener noreferrer" download class="btn btn-primary">Download CV</a>
-                        <a href="#contacts" class="btn btn-outline">Get in touch</a>
+                        <a href="assets/docs/CV.pdf" target="_blank" rel="noopener noreferrer" download class="btn btn-primary" data-translate="hero-btn-cv">Descarregar CV</a>
+                        <a href="#contacts" class="btn btn-outline" data-translate="hero-btn-contact">Entrar em contacto</a>
                     </div>
                 </div>
                 <div class="hero-image-area reveal">
@@ -70,17 +74,17 @@
 
         <!-- About Me Section -->
         <section id="about" class="about-section">
-            <h2 class="section-heading reveal">About me</h2>
+            <h2 class="section-heading reveal" data-translate="about-heading">Sobre mim</h2>
             <div class="about-content reveal">
-                <p>
-                    I am a final-year Computer Engineering student at Politécnico de Leiria with a deep fascination for web development and databases. My journey includes hands-on experience building integrated solutions, such as an e-commerce platform with a built-in stock management system developed during my internship. I specialize in bridging robust backend architectures with clean, responsive front-end interfaces. Driven by logical challenges and teamwork, I am constantly looking to learn, evolve, and build high-performance digital experiences.
+                <p data-translate="about-text">
+                    Sou estudante do último ano de Engenharia Informática no Politécnico de Leiria com um profundo fascínio por desenvolvimento web e bases de dados. A minha jornada inclui experiência prática na construção de soluções integradas, como uma plataforma de e-commerce com sistema de gestão de stock integrado desenvolvida durante o meu estágio. Especializo-me em interligar arquiteturas backend robustas com interfaces front-end limpas e responsivas. Motivado por desafios lógicos e trabalho em equipa, procuro constantemente aprender, evoluir e construir experiências digitais de alto desempenho.
                 </p>
             </div>
         </section>
 
         <!-- Skills Section -->
         <section id="skills" class="skills-section">
-            <h2 class="section-heading reveal">Skills</h2>
+            <h2 class="section-heading reveal" data-translate="skills-heading">Competências</h2>
             <div class="skills-grid" id="skills-grid-container">
                 <!-- HTML5 -->
                 <div class="skill-card">
@@ -167,60 +171,60 @@
 
         <!-- Projects Section -->
         <section id="projects" class="projects-section">
-            <h2 class="section-heading reveal">Projects</h2>
+            <h2 class="section-heading reveal" data-translate="projects-heading">Projetos</h2>
             <div class="projects-grid">
                 <!-- Project Card 1 -->
                 <div class="project-card reveal">
-                    <div class="project-thumb">
-                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mr. Pizza - Plataforma E-commerce">
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Mr. Pizza - Plataforma E-commerce</h3>
+                <div class="project-thumb">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mr. Pizza - Plataforma E-commerce">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title" data-translate="project-title-mrpizza">Mr. Pizza - Plataforma E-commerce</h3>
                         <div class="project-tech-icons">
                             <span class="tech-badge">HTML</span>
                             <span class="tech-badge">CSS</span>
                             <span class="tech-badge">JavaScript</span>
                             <span class="tech-badge">Figma</span>
                         </div>
-                        <button class="btn-view-more" data-modal="modal-mrpizza">View More</button>
+                        <button class="btn-view-more" data-modal="modal-mrpizza" data-translate="project-btn-view-more">Ver Mais</button>
                     </div>
                 </div>
                 <!-- Project Card 2 -->
                  <div class="project-card reveal">
-                    <div class="project-thumb">
-                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Catálogo Digital - Diane Arbus">
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Catálogo Digital - Diane Arbus</h3>
+                <div class="project-thumb">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Catálogo Digital - Diane Arbus">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title" data-translate="project-title-dianearbus">Catálogo Digital - Diane Arbus</h3>
                         <div class="project-tech-icons">
                             <span class="tech-badge">HTML</span>
                             <span class="tech-badge">CSS</span>
                             <span class="tech-badge">Figma</span>
                         </div>
-                        <button class="btn-view-more" data-modal="modal-dianearbus">View More</button>
+                        <button class="btn-view-more" data-modal="modal-dianearbus" data-translate="project-btn-view-more">Ver Mais</button>
                     </div>
                 </div>
                 <!-- Project Card 3 -->
                  <div class="project-card reveal">
-                    <div class="project-thumb">
-                        <img src="assets/images/logo-gest.jpg" alt="Gest - E-commerce e Gestão de Stock">
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Gest - E-commerce e Gestão de Stock</h3>
+                <div class="project-thumb">
+                    <img src="assets/images/logo-gest.jpg" alt="Gest - E-commerce e Gestão de Stock">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title" data-translate="project-title-gest">Gest - E-commerce e Gestão de Stock</h3>
                         <div class="project-tech-icons">
                             <span class="tech-badge">OutSystems</span>
                             <span class="tech-badge">Base de Dados</span>
                         </div>
-                        <button class="btn-view-more" data-modal="modal-gest">View More</button>
+                        <button class="btn-view-more" data-modal="modal-gest" data-translate="project-btn-view-more">Ver Mais</button>
                     </div>
                 </div>
                 <!-- Project Card 4 -->
                  <div class="project-card reveal">
-                    <div class="project-thumb">
-                        <img src="assets/images/ainet.jpg" alt="AINET - Plataforma Full-Stack Laravel">
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">AINET - Plataforma Full-Stack Laravel</h3>
+                <div class="project-thumb">
+                    <img src="assets/images/ainet.jpg" alt="AINET - Plataforma Full-Stack Laravel">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title" data-translate="project-title-ainet">AINET - Plataforma Full-Stack Laravel</h3>
                         <div class="project-tech-icons">
                             <span class="tech-badge">Laravel</span>
                             <span class="tech-badge">PHP</span>
@@ -228,39 +232,39 @@
                             <span class="tech-badge">MySQL</span>
                             <span class="tech-badge">Vite</span>
                         </div>
-                        <button class="btn-view-more" data-modal="modal-ainet">View More</button>
+                        <button class="btn-view-more" data-modal="modal-ainet" data-translate="project-btn-view-more">Ver Mais</button>
                     </div>
                 </div>
                 <!-- Project Card 5: DAE -->
                 <div class="project-card reveal">
-                    <div class="project-thumb">
-                        <img src="assets/images/dae.jpg" alt="DAE - Arquitetura Full-Stack & IA">
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">DAE - Arquitetura Full-Stack & IA</h3>
+                <div class="project-thumb">
+                    <img src="assets/images/dae.jpg" alt="DAE - Arquitetura Full-Stack & IA">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title" data-translate="project-title-dae">DAE - Arquitetura Full-Stack & IA</h3>
                         <div class="project-tech-icons">
                             <span class="tech-badge">Docker</span>
                             <span class="tech-badge">LLaMA 3 (IA)</span>
                             <span class="tech-badge">Full-Stack</span>
                             <span class="tech-badge">Vite</span>
                         </div>
-                        <button class="btn-view-more" data-modal="modal-dae">View More</button>
+                        <button class="btn-view-more" data-modal="modal-dae" data-translate="project-btn-view-more">Ver Mais</button>
                     </div>
                 </div>
                 <!-- Project Card 6: Hotel Inteligente (TI) -->
                 <div class="project-card reveal">
-                    <div class="project-thumb">
-                        <img src="assets/images/ti.png" alt="Hotel Inteligente - Plataforma IoT">
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Hotel Inteligente - Plataforma IoT</h3>
+                <div class="project-thumb">
+                    <img src="assets/images/ti.png" alt="Hotel Inteligente - Plataforma IoT">
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title" data-translate="project-title-ti">Hotel Inteligente - Plataforma IoT</h3>
                         <div class="project-tech-icons">
                             <span class="tech-badge">PHP (Vanilla)</span>
                             <span class="tech-badge">IoT</span>
                             <span class="tech-badge">AJAX</span>
                             <span class="tech-badge">Hardware</span>
                         </div>
-                        <button class="btn-view-more" data-modal="modal-ti">View More</button>
+                        <button class="btn-view-more" data-modal="modal-ti" data-translate="project-btn-view-more">Ver Mais</button>
                     </div>
                 </div>
             </div>
@@ -268,7 +272,7 @@
 
         <!-- Contacts Section -->
         <section id="contacts" class="contacts-section">
-            <h2 class="section-heading reveal">Contacts</h2>
+            <h2 class="section-heading reveal" data-translate="contacts-heading">Contactos</h2>
             <div class="contacts-row">
                 
                 <!-- Email -->
@@ -276,7 +280,7 @@
                     <div class="contact-icon-circle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-svg"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                     </div>
-                    <span class="contact-title">E-mail</span>
+                    <span class="contact-title" data-translate="contact-title-email">E-mail</span>
                     <span class="contact-value">franciscojrp1004@gmail.com</span>
                 </a>
 
@@ -285,7 +289,7 @@
                     <div class="contact-icon-circle">
                         <i class="devicon-linkedin-plain"></i>
                     </div>
-                    <span class="contact-title">Linkedin</span>
+                    <span class="contact-title" data-translate="contact-title-linkedin">Linkedin</span>
                     <span class="contact-value">@francisco-pereira-dev</span>
                 </a>
 
@@ -294,7 +298,7 @@
                     <div class="contact-icon-circle">
                         <i class="devicon-github-original"></i>
                     </div>
-                    <span class="contact-title">Github</span>
+                    <span class="contact-title" data-translate="contact-title-github">Github</span>
                     <span class="contact-value">@francisco-pereira-dev</span>
                 </a>
 
@@ -305,7 +309,7 @@
     <!-- Professional Footer -->
     <footer class="site-footer">
         <div class="footer-content">
-            <p>© 2026 Francisco Pereira • Built with HTML, CSS & JavaScript</p>
+            <p data-translate="footer-text">© 2026 Francisco Pereira • Desenvolvido com HTML, CSS & JavaScript</p>
         </div>
     </footer>
 
@@ -316,16 +320,16 @@
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Mr. Pizza - Plataforma E-commerce" class="modal-img">
-            <h3 class="modal-title">Mr. Pizza - Plataforma E-commerce</h3>
-            <p class="modal-desc">Plataforma de e-commerce desenvolvida para a cadeia Mr. Pizza. O website permite aos clientes explorar o menu completo (pizzas, bebidas e sobremesas), realizar encomendas online com opção de entrega ao domicílio e proporciona uma experiência de navegação fluida e intuitiva.</p>
+            <h3 class="modal-title" data-translate="project-title-mrpizza">Mr. Pizza - Plataforma E-commerce</h3>
+            <p class="modal-desc" data-translate="modal-desc-mrpizza">Plataforma de e-commerce desenvolvida para a cadeia Mr. Pizza. O website permite aos clientes explorar o menu completo (pizzas, bebidas e sobremesas), realizar encomendas online com opção de entrega ao domicílio e proporciona uma experiência de navegação fluida e intuitiva.</p>
             <ul class="modal-features">
-                <li>Catálogo completo de produtos (pizzas, bebidas e sobremesas).</li>
-                <li>Sistema de carrinho de compras e encomendas online.</li>
-                <li>Opção de entrega ao domicílio integrada.</li>
+                <li data-translate="modal-feat-mrpizza-1">Catálogo completo de produtos (pizzas, bebidas e sobremesas).</li>
+                <li data-translate="modal-feat-mrpizza-2">Sistema de carrinho de compras e encomendas online.</li>
+                <li data-translate="modal-feat-mrpizza-3">Opção de entrega ao domicílio integrada.</li>
             </ul>
             <div class="modal-actions">
-                <a href="https://www.figma.com/make/57gTE2ImwjuWhgp7xvIOt0/Mr.Pizza?t=ozhxbP5UJsBfrlE4-20&fullscreen=1" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
-                <a href="https://github.com/francisco-pereira-dev/MR.PIZZA" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+                <a href="https://www.figma.com/make/57gTE2ImwjuWhgp7xvIOt0/Mr.Pizza?t=ozhxbP5UJsBfrlE4-20&fullscreen=1" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-project">Ver Projeto</a>
+                <a href="https://github.com/francisco-pereira-dev/MR.PIZZA" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-repo">Ver Repositório</a>
             </div>
         </div>
     </div>
@@ -334,16 +338,16 @@
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Catálogo Digital - Diane Arbus" class="modal-img">
-            <h3 class="modal-title">Catálogo Digital - Diane Arbus</h3>
-            <p class="modal-desc">Um catálogo digital interativo dedicado à obra da fotógrafa Diane Arbus. O projeto apresenta uma galeria com os seus trabalhos fotográficos, incluindo autorretratos, acompanhados de descrições detalhadas que contextualizam cada obra.</p>
+            <h3 class="modal-title" data-translate="project-title-dianearbus">Catálogo Digital - Diane Arbus</h3>
+            <p class="modal-desc" data-translate="modal-desc-dianearbus">Um catálogo digital interativo dedicado à obra da fotógrafa Diane Arbus. O projeto apresenta uma galeria com os seus trabalhos fotográficos, incluindo autorretratos, acompanhados de descrições detalhadas que contextualizam cada obra.</p>
             <ul class="modal-features">
-                <li>Galeria interativa de fotografias e autorretratos.</li>
-                <li>Secções informativas com detalhes e contexto histórico de cada obra.</li>
-                <li>Design minimalista focado na experiência de visualização artística.</li>
+                <li data-translate="modal-feat-dianearbus-1">Galeria interativa de fotografias and autorretratos.</li>
+                <li data-translate="modal-feat-dianearbus-2">Secções informativas com detalhes e contexto histórico de cada obra.</li>
+                <li data-translate="modal-feat-dianearbus-3">Design minimalista focado na experiência de visualização artística.</li>
             </ul>
             <div class="modal-actions">
-                <a href="https://www.figma.com/make/6iWnse0T44fvjOiNlQpPvj/Catalogo-Diane-Arbus?t=ozhxbP5UJsBfrlE4-20&fullscreen=1" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
-                <a href="https://github.com/francisco-pereira-dev/Catalogo-Diane-Arbus" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+                <a href="https://www.figma.com/make/6iWnse0T44fvjOiNlQpPvj/Catalogo-Diane-Arbus?t=ozhxbP5UJsBfrlE4-20&fullscreen=1" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-project">Ver Projeto</a>
+                <a href="https://github.com/francisco-pereira-dev/Catalogo-Diane-Arbus" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-repo">Ver Repositório</a>
             </div>
         </div>
     </div>
@@ -352,74 +356,74 @@
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="assets/images/logo-gest.jpg" alt="Gest - E-commerce e Gestão de Stock" class="modal-img">
-            <h3 class="modal-title">Gest - E-commerce e Gestão de Stock</h3>
-            <p class="modal-desc">Prova de Aptidão Profissional desenvolvida em ambiente empresarial utilizando a plataforma Low-Code OutSystems. O projeto "Gest" consiste num ecossistema integrado que inclui uma plataforma de e-commerce direcionada ao consumidor final e uma infraestrutura robusta de backoffice para a gestão de inventário.</p>
+            <h3 class="modal-title" data-translate="project-title-gest">Gest - E-commerce e Gestão de Stock</h3>
+            <p class="modal-desc" data-translate="modal-desc-gest">Prova de Aptidão Profissional desenvolvida em ambiente empresarial utilizando a plataforma Low-Code OutSystems. O projeto "Gest" consiste num ecossistema integrado que inclui uma plataforma de e-commerce direcionada ao consumidor final e uma infraestrutura robusta de backoffice para a gestão de inventário.</p>
             <ul class="modal-features">
-                <li>Desenvolvimento Full-Stack em plataforma Low-Code.</li>
-                <li>Loja online com catálogo de produtos e sistema de carrinho de compras.</li>
-                <li>Sincronização de base de dados e gestão de stock em tempo real.</li>
+                <li data-translate="modal-feat-gest-1">Desenvolvimento Full-Stack em plataforma Low-Code.</li>
+                <li data-translate="modal-feat-gest-2">Loja online com catálogo de produtos e sistema de carrinho de compras.</li>
+                <li data-translate="modal-feat-gest-3">Sincronização de base de dados e gestão de stock em tempo real.</li>
             </ul>
             <div class="modal-actions">
-                <a href="https://github.com/francisco-pereira-dev/PAP.git" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+                <a href="https://github.com/francisco-pereira-dev/PAP.git" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-repo">Ver Repositório</a>
             </div>
         </div>
     </div>
 
     <div class="modal" id="modal-ainet">
-        <div class="modal-info-btn" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
+        <div class="modal-info-btn" data-translate-tooltip="modal-tooltip-note" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="assets/images/ainet.jpg" alt="AINET - Plataforma Full-Stack Laravel" class="modal-img">
-            <h3 class="modal-title">AINET - Plataforma Full-Stack Laravel</h3>
-            <p class="modal-desc">Projeto Full-Stack desenvolvido em equipa no âmbito universitário, funcionando como uma plataforma híbrida de Associação e E-commerce. Construído sob a framework Laravel utilizando o padrão arquitetural MVC e Vite no frontend. O grande foco técnico é a segurança e gestão de base de dados relacional.</p>
+            <h3 class="modal-title" data-translate="project-title-ainet">AINET - Plataforma Full-Stack Laravel</h3>
+            <p class="modal-desc" data-translate="modal-desc-ainet">Projeto Full-Stack desenvolvido em equipa no âmbito universitário, funcionando como uma plataforma híbrida de Associação e E-commerce. Construído sob a framework Laravel utilizando o padrão arquitetural MVC e Vite no frontend. O grande foco técnico é a segurança e gestão de base de dados relacional.</p>
             <ul class="modal-features">
-                <li>Implementação de sistema RBAC com 3 níveis de acesso estritos: Board (Direção), Employee (Funcionários) e Member (Sócios).</li>
-                <li>Proteção e segurança avançada de rotas consoante o tipo e privilégios do utilizador autenticado.</li>
-                <li>Gestão relacional complexa de Produtos, Categorias, Encomendas, Custos de Envio e Carrinho de Compras.</li>
+                <li data-translate="modal-feat-ainet-1">Implementação de sistema RBAC com 3 níveis de acesso estritos: Board (Direção), Employee (Funcionários) e Member (Sócios).</li>
+                <li data-translate="modal-feat-ainet-2">Proteção e segurança avançada de rotas consoante o tipo e privilégios do utilizador autenticado.</li>
+                <li data-translate="modal-feat-ainet-3">Gestão relacional complexa de Produtos, Categorias, Encomendas, Custos de Envio e Carrinho de Compras.</li>
             </ul>
             <div class="modal-actions">
-                <a href="https://ainet2425.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
-                <a href="https://github.com/francisco-pereira-dev/Ainet2425.git" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+                <a href="https://ainet2425.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-project">Ver Projeto</a>
+                <a href="https://github.com/francisco-pereira-dev/Ainet2425.git" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-repo">Ver Repositório</a>
             </div>
         </div>
     </div>
 
     <div class="modal" id="modal-dae">
-        <div class="modal-info-btn" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
+        <div class="modal-info-btn" data-translate-tooltip="modal-tooltip-note" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="assets/images/dae.jpg" alt="DAE - Arquitetura Full-Stack & IA" class="modal-img">
-            <h3 class="modal-title">DAE - Arquitetura Full-Stack & IA</h3>
-            <p class="modal-desc">Projeto de Engenharia Informática focado na criação de uma arquitetura full-stack robusta e escalável, com forte separação de responsabilidades (SoC). O ecossistema destaca-se pela contentorização completa da infraestrutura e pela integração nativa de um modelo de Inteligência Artificial a correr localmente.</p>
+            <h3 class="modal-title" data-translate="project-title-dae">DAE - Arquitetura Full-Stack & IA</h3>
+            <p class="modal-desc" data-translate="modal-desc-dae">Projeto de Engenharia Informática focado na criação de uma arquitetura full-stack robusta e escalável, com forte separação de responsabilidades (SoC). O ecossistema destaca-se pela contentorização completa da infraestrutura e pela integração nativa de um modelo de Inteligência Artificial a correr localmente.</p>
             <ul class="modal-features">
-                <li>Infraestrutura 100% contentorizada via Docker (serviços móveis, bases de dados e backend isolados).</li>
-                <li>Integração de IA local (LLaMA 3) no ecossistema utilizando o Ollama.</li>
-                <li>Sistema de permissões RBAC com diferentes níveis de acesso e ambiente de testes seguro com interceção de emails (MailHog).</li>
+                <li data-translate="modal-feat-dae-1">Infraestrutura 100% contentorizada via Docker (serviços móveis, bases de dados e backend isolados).</li>
+                <li data-translate="modal-feat-dae-2">Integração de IA local (LLaMA 3) no ecossistema utilizando o Ollama.</li>
+                <li data-translate="modal-feat-dae-3">Sistema de permissões RBAC com diferentes níveis de acesso e ambiente de testes seguro com interceção de emails (MailHog).</li>
             </ul>
             <div class="modal-actions">
-                <a href="https://dae-frontend.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
-                <a href="https://github.com/francisco-pereira-dev/DAE.git" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+                <a href="https://dae-frontend.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-project">Ver Projeto</a>
+                <a href="https://github.com/francisco-pereira-dev/DAE.git" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-repo">Ver Repositório</a>
             </div>
         </div>
     </div>
 
     <!-- Modal Hotel Inteligente (TI) -->
     <div class="modal" id="modal-ti">
-        <div class="modal-info-btn" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
+        <div class="modal-info-btn" data-translate-tooltip="modal-tooltip-note" data-tooltip="Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!">?</div>
         <button class="modal-close">&times;</button>
         <div class="modal-content">
             <img src="assets/images/ti.png" alt="Hotel Inteligente - Plataforma IoT" class="modal-img">
-            <h3 class="modal-title">Hotel Inteligente - Plataforma IoT</h3>
-            <p class="modal-desc">Plataforma web de Internet of Things (IoT) focada na monitorização de sensores e hardware (Arduino/ESP32). Diferencia-se por arquitetar uma API "Flat-File" em PHP puro, sem recurso a bases de dados SQL, garantindo uma comunicação leve, segura e resiliente com dispositivos físicos.</p>
+            <h3 class="modal-title" data-translate="project-title-ti">Hotel Inteligente - Plataforma IoT</h3>
+            <p class="modal-desc" data-translate="modal-desc-ti">Plataforma web de Internet of Things (IoT) focada na monitorização de sensores e hardware (Arduino/ESP32). Diferencia-se por arquitetar uma API "Flat-File" em PHP puro, sem recurso a bases de dados SQL, garantindo uma comunicação leve, segura e resiliente com dispositivos físicos.</p>
             <ul class="modal-features">
-                <li>Integração direta com hardware (sensores e webcam) via sistema de ficheiros com proteção contra Path Traversal e injeções.</li>
-                <li>Dashboard dinâmica com atualização assíncrona (Fetch API/AJAX) sem necessidade de refresh.</li>
-                <li>Arquitetura otimizada com Princípio DRY e sistema de paginação nativa em ficheiros de log.</li>
-                <li>Segurança reforçada com sanitização de dados (htmlspecialchars) e autenticação robusta (password_hash).</li>
+                <li data-translate="modal-feat-ti-1">Integração direta com hardware (sensores e webcam) via sistema de ficheiros com proteção contra Path Traversal e injeções.</li>
+                <li data-translate="modal-feat-ti-2">Dashboard dinâmica com atualização assíncrona (Fetch API/AJAX) sem necessidade de refresh.</li>
+                <li data-translate="modal-feat-ti-3">Arquitetura otimizada com Princípio DRY e sistema de paginação nativa em ficheiros de log.</li>
+                <li data-translate="modal-feat-ti-4">Segurança reforçada com sanitização de dados (htmlspecialchars) e autenticação robusta (password_hash).</li>
             </ul>
             <div class="modal-actions">
-                <a href="https://ti-xp2g.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-modal">View Project</a>
-                <a href="https://github.com/francisco-pereira-dev/TI.git" target="_blank" rel="noopener noreferrer" class="btn-modal">View Repository</a>
+                <a href="https://ti-xp2g.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-project">Ver Projeto</a>
+                <a href="https://github.com/francisco-pereira-dev/TI.git" target="_blank" rel="noopener noreferrer" class="btn-modal" data-translate="modal-btn-repo">Ver Repositório</a>
             </div>
         </div>
     </div>
