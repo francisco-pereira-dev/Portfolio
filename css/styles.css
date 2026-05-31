@@ -1,3 +1,8 @@
+/* ==========================================================================
+   PORTFÓLIO DE FRANCISCO PEREIRA - FOLHA DE ESTILOS PRINCIPAL (CSS)
+   ========================================================================== */
+
+/* --- VARIÁVEIS DE TEMA E DESIGN SYSTEM --- */
 :root {
     --accent-color: #8B5CF6;
     --font-main: 'Poppins', sans-serif;
@@ -225,7 +230,11 @@ body.light-mode .icon-moon {
     display: block;
 }
 
-/* Full-Screen Overlay Menu */
+/* ========================================== */
+/* MENU DE SOBREPOSIÇÃO (OVERLAY)             */
+/* ========================================== */
+
+/* Contentor principal do menu de ecrã inteiro. */
 .overlay-menu {
     position: fixed;
     top: 0;
@@ -244,29 +253,34 @@ body.light-mode .icon-moon {
     transition: opacity 0.4s ease;
 }
 
+/* Estado ativo do menu que despoleta a visibilidade. */
 .overlay-menu.active {
     opacity: 1;
     pointer-events: auto;
 }
 
+/* Área interior do menu que agrupa as ligações e o rodapé social. */
 .overlay-content {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 6rem 2rem 4rem;
+    width: 100%;
 }
 
-.overlay-greeting {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 3rem;
-    font-weight: 600;
-}
-
+/* Lista ordenada verticalmente contendo as ligações. */
 .overlay-links {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    flex-grow: 1;
+    justify-content: center;
 }
 
+/* Ligações de navegação do menu overlay. */
 .overlay-link {
     text-decoration: none;
     color: #CBD5E1;
@@ -275,13 +289,52 @@ body.light-mode .icon-moon {
     transition: color 0.2s;
 }
 
+/* Destaque ao passar o rato (hover) nas ligações. */
 .overlay-link:hover {
     color: var(--accent-color);
 }
 
+/* Destaque da ligação correspondente à secção ativa (Scrollspy). */
 .overlay-link.active-link {
     color: var(--accent-color);
     text-shadow: 0 0 8px var(--shadow-glow), 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+/* Rodapé social no fundo do menu overlay para preenchimento estético do espaço negativo. */
+.overlay-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Ícone de rede social individual. */
+.overlay-social-icon {
+    color: #CBD5E1;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efeito dinâmico de hover para elevar ligeiramente os ícones e destacar com a cor principal. */
+.overlay-social-icon:hover {
+    color: var(--accent-color);
+    transform: translateY(-4px);
+}
+
+/* Força compatibilidade de proporções em elementos gráficos SVG. */
+.overlay-social-icon svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    stroke: currentColor;
 }
 
 /* Layout Containers */

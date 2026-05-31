@@ -1,19 +1,35 @@
+/**
+ * Portfólio de Francisco Pereira
+ * Ficheiro de Script Principal (JavaScript Vanilla)
+ * 
+ * Este ficheiro gere a interatividade do portfólio, incluindo o alternador de idiomas (PT/EN),
+ * o tema (Claro/Escuro), a exibição de janelas modais com gestão de acessibilidade (foco),
+ * as animações de scroll assíncronas e o destaque ativo de secções (Scrollspy).
+ */
+
+// --- Gestão de Recarregamento de Página ---
+// Deteta se o utilizador recarregou a página. Se sim, remove a âncora (#) do URL
+// para evitar que o browser faça scroll automático para uma secção intermédia,
+// forçando o reposicionamento suave no topo da página.
 if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
-    // Remove a âncora (#) do URL sem forçar um segundo recarregamento
     window.history.replaceState(null, null, window.location.pathname);
-    
-    // Como tirámos a âncora, temos de garantir que faz scroll para o topo 
     setTimeout(() => {
         window.scrollTo(0, 0);
     }, 0);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Full-Screen Overlay Menu Logic ---
+    
+    // --- Lógica do Menu de Navegação Overlay (Ecrã Inteiro) ---
+    // Seleção dos elementos DOM associados ao menu de sobreposição e ao botão hamburger.
     const overlayMenu = document.getElementById('overlay-menu');
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const overlayLinks = document.querySelectorAll('.overlay-link');
 
+    /**
+     * Alterna o estado de visibilidade do menu overlay e do ícone hamburger.
+     * Bloqueia o scroll da página principal quando o menu está visível.
+     */
     function toggleMenu() {
         overlayMenu.classList.toggle('active');
         hamburgerBtn.classList.toggle('active');
@@ -25,19 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    /**
+     * Fecha o menu overlay de forma explícita e restaura o scroll da página.
+     */
     function closeMenu() {
         overlayMenu.classList.remove('active');
         hamburgerBtn.classList.remove('active');
         document.body.style.overflow = '';
     }
 
+    // Registo de escutas de eventos para cliques no botão hamburger e nos links do menu.
     hamburgerBtn.addEventListener('click', toggleMenu);
-
     overlayLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
     });
 
-    // --- Dark/Light Mode Toggle ---
+    // --- Lógica do Alternador de Temas (Dark/Light Mode) ---
+    // Seleção do botão e aplicação inicial do tema guardado nas preferências locais (localStorage).
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
 
@@ -50,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.add('light-mode');
     }
 
+    // Escuta de evento para alternar o tema entre claro e escuro.
     themeToggle.addEventListener('click', () => {
         if (body.classList.contains('light-mode')) {
             body.classList.remove('light-mode');
@@ -62,32 +83,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Modal Logic ---
+    // --- Lógica do Sistema de Modais (Visualização de Detalhes dos Projetos) ---
+    // Seleção dos botões de abertura, fecho, overlay escuro e gestão de acessibilidade de teclado.
     const btnsViewMore = document.querySelectorAll('.btn-view-more');
     const modals = document.querySelectorAll('.modal');
     const overlay = document.getElementById('modal-overlay');
     const closeBtns = document.querySelectorAll('.modal-close');
+    
+    // Variável para guardar o último elemento focado antes da abertura da modal (WCAG Focus Restoration).
+    let lastFocusedElement = null;
 
+    /**
+     * Abre uma janela modal específica, bloqueia o scroll e gere o foco do teclado.
+     * @param {string} modalId - O identificador único da modal no DOM.
+     */
     function openModal(modalId) {
         const modal = document.getElementById(modalId);
         if (modal) {
+            lastFocusedElement = document.activeElement; // Salva o elemento com foco atual
             modal.classList.add('active');
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Move o foco para o botão de fecho para facilitar a navegação por teclado (A11y)
+            const closeBtn = modal.querySelector('.modal-close');
+            if (closeBtn) {
+                setTimeout(() => closeBtn.focus(), 50); // Pequeno atraso para alinhamento com a transição CSS
+            }
         }
     }
 
+    /**
+     * Fecha todas as janelas modais ativas, limpa tooltips e restaura o foco anterior.
+     */
     function closeModal() {
         modals.forEach(m => m.classList.remove('active'));
         overlay.classList.remove('active');
         document.body.style.overflow = '';
         
-        // Limpar os tooltips ao fechar a janela
+        // Remove o estado ativo dos balões informativos (tooltips) nas modais
         document.querySelectorAll('.modal-info-btn').forEach(btn => {
             btn.classList.remove('active-tooltip');
         });
+
+        // Restaura o foco ao botão que iniciou a ação de visualização (A11y)
+        if (lastFocusedElement) {
+            lastFocusedElement.focus();
+            lastFocusedElement = null;
+        }
     }
 
+    // Registo de escutas de eventos para os botões "Ver Mais", botões de fecho e overlay.
     btnsViewMore.forEach(btn => {
         btn.addEventListener('click', () => {
             const modalId = btn.getAttribute('data-modal');
@@ -101,25 +147,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     overlay.addEventListener('click', closeModal);
 
+    // Fecha a modal ativa quando a tecla "Escape" é premida.
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
     });
 
-    // --- Scroll Animations ---
+    // --- Animações de Revelação Dinâmica no Scroll (Reveal CSS) ---
+    // Configuração do IntersectionObserver para aplicar animações de transição suaves
+    // à medida que os elementos entram na área de visualização (viewport).
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1
+        threshold: 0.1 // O gatilho dispara quando 10% do elemento está visível
     };
 
     const observer = new IntersectionObserver((entries) => {
         const intersectingEntries = entries.filter(entry => entry.isIntersecting);
         
         intersectingEntries.forEach((entry, index) => {
+            // Aplica um atraso incremental (stagger) para efeitos mais orgânicos
             setTimeout(() => {
                 entry.target.classList.add('is-visible');
             }, index * 100); 
             
+            // Cancela a observação após o elemento ficar visível para poupar recursos
             observer.unobserve(entry.target);
         });
     }, observerOptions);
@@ -127,7 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealElements = document.querySelectorAll('.reveal');
     revealElements.forEach(el => observer.observe(el));
 
-    // --- Staggered Skills Animation Logic ---
+    // --- Animações Sequenciais na Grelha de Competências (Skills Stagger) ---
+    // Efeito de revelação em cascata aplicado especificamente aos cartões de competências.
     const skillsGrid = document.getElementById('skills-grid-container');
     const skillCards = document.querySelectorAll('.skill-card');
 
@@ -137,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 skillCards.forEach((card, index) => {
                     setTimeout(() => {
                         card.classList.add('is-visible');
-                    }, index * 100); // 100ms stagger for each skill card
+                    }, index * 100);
                 });
                 skillsObserver.unobserve(skillsGrid);
             }
@@ -148,25 +200,26 @@ document.addEventListener('DOMContentLoaded', () => {
         skillsObserver.observe(skillsGrid);
     }
 
-    // --- Modal Info Button Logic (Mobile Toggle) ---
+    // --- Balões Informativos nas Modais (Tooltip em Mobile) ---
+    // Gere a visualização de explicações contextuais nas modais através de toques em mobile.
     const infoBtns = document.querySelectorAll('.modal-info-btn');
     
-    // Toggle ao clicar no botão
     infoBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evitar que o clique se propague para o document
+            e.stopPropagation(); // Evita a propagação do clique para o document
             this.classList.toggle('active-tooltip');
         });
     });
 
-    // Fechar tooltip ao clicar em qualquer outro lado da página
+    // Fecha os balões informativos se o utilizador clicar fora dos mesmos.
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.modal-info-btn')) {
             infoBtns.forEach(btn => btn.classList.remove('active-tooltip'));
         }
     });
 
-    // --- Language Translation Logic ---
+    // --- Lógica do Sistema Integrado de Tradução (PT-PT / EN) ---
+    // Dicionário contendo todos os termos e strings traduzidos para Inglês.
     const translations = {
         en: {
             "overlay-about": "About",
@@ -206,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "modal-desc-gest": "Professional Aptitude Project developed in a corporate environment using the OutSystems Low-Code platform. The 'Gest' project consists of an integrated ecosystem that includes an e-commerce platform targeting the final consumer and a robust backoffice infrastructure for inventory management.",
             "modal-feat-gest-1": "Full-stack development on a Low-Code platform.",
             "modal-feat-gest-2": "Online store with product catalog and shopping cart system.",
-            "modal-feat-gest-3": "Rel-time database synchronization and stock management.",
+            "modal-feat-gest-3": "Real-time database synchronization and stock management.",
             "modal-desc-ainet": "Full-Stack project developed in a team as part of a university course, functioning as a hybrid Association and E-commerce platform. Built with the Laravel framework using the MVC architectural pattern and Vite on the frontend. The main technical focus is on relational database management and security.",
             "modal-feat-ainet-1": "Implementation of RBAC system with 3 strict access levels: Board, Employee, and Member.",
             "modal-feat-ainet-2": "Advanced protection and security of routes based on the authenticated user's type and privileges.",
@@ -224,9 +277,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Objeto vazio para guardar dinamicamente as strings base em Português (PT-PT)
     const ptTranslations = {};
 
-    // Build PT translation map dynamically from index.html base content on load
+    // Mapeia e armazena os conteúdos originais em Português presentes no HTML (data-translate)
     document.querySelectorAll('[data-translate]').forEach(el => {
         const key = el.getAttribute('data-translate');
         if (!ptTranslations[key]) {
@@ -234,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Mapeia e armazena os atributos de ajuda (data-tooltip) originais em Português
     document.querySelectorAll('[data-translate-tooltip]').forEach(el => {
         const key = el.getAttribute('data-translate-tooltip');
         if (!ptTranslations[key]) {
@@ -241,9 +296,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Set Language function
+    /**
+     * Traduz dinamicamente os conteúdos da página web para o idioma selecionado.
+     * @param {string} lang - Código do idioma de destino ('en' ou 'pt').
+     */
     function setLanguage(lang) {
-        // Translation for standard text elements
+        // Atualiza textos baseados em atributos data-translate
         document.querySelectorAll('[data-translate]').forEach(el => {
             const key = el.getAttribute('data-translate');
             if (lang === 'en') {
@@ -257,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Translation for elements with data-tooltip
+        // Atualiza os balões de ajuda contextuais (tooltips)
         document.querySelectorAll('[data-translate-tooltip]').forEach(el => {
             const key = el.getAttribute('data-translate-tooltip');
             if (lang === 'en') {
@@ -271,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Update meta description
+        // Atualiza os metadados de descrição da página (SEO)
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {
             if (lang === 'en') {
@@ -281,10 +339,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Update HTML lang tag
+        // Altera a meta tag de idioma do documento HTML
         document.documentElement.lang = lang === 'en' ? 'en' : 'pt-PT';
 
-        // Update active class in seletor
+        // Atualiza as etiquetas textuais de acessibilidade dos botões da navbar (A11y)
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        if (hamburgerBtn) {
+            hamburgerBtn.setAttribute('aria-label', lang === 'en' ? 'Toggle Menu' : 'Alternar Menu');
+        }
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.setAttribute('aria-label', lang === 'en' ? 'Toggle Dark/Light Mode' : 'Alternar Modo Escuro/Claro');
+        }
+
+        // Atualiza o estado visual e destaque das opções no seletor de idiomas (PT/EN)
         const langToggle = document.getElementById('lang-toggle');
         if (langToggle) {
             const ptSpan = langToggle.querySelector('.lang-pt');
@@ -298,10 +366,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Guarda a preferência linguística nas configurações locais do browser
         localStorage.setItem('language', lang);
     }
 
-    // Lang Toggle event listener
+    // Regista o clique do seletor para comutar o idioma ativo
     const langToggle = document.getElementById('lang-toggle');
     if (langToggle) {
         langToggle.addEventListener('click', () => {
@@ -311,17 +380,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize saved language preference on page load
+    // Inicia e carrega o idioma de preferência do utilizador no arranque
     const savedLang = localStorage.getItem('language') || 'pt';
     if (savedLang === 'en') {
         setLanguage('en');
     }
 
-    // --- Active Link Scrollspy using IntersectionObserver ---
+    // --- Observador Scrollspy para Destaque de Ligações Ativas (Menu Overlay) ---
+    // Observa o scroll da página e aplica um brilho suave à opção de menu cuja secção está no ecrã.
     const sections = document.querySelectorAll('section[id]');
     const scrollspyOptions = {
         root: null,
-        rootMargin: '-40% 0px -40% 0px',
+        rootMargin: '-40% 0px -40% 0px', // Foco calibrado nos 20% centrais do ecrã
         threshold: 0
     };
 
