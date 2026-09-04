@@ -1,6 +1,7 @@
 ---
 import type { Ui } from '../i18n';
 import skills from '../data/skills.json';
+import Icon from './Icon.astro';
 
 interface Props {
   ui: Ui;
@@ -16,7 +17,7 @@ const { ui } = Astro.props;
       skills.map((skill) => (
         <div class="skill-card">
           {skill.kind === 'devicon' ? (
-            <i class={`${skill.icon} skill-icon`} />
+            <Icon name={skill.icon} class="skill-icon" />
           ) : (
             <div class="skill-icon text-icon">{skill.icon}</div>
           )}

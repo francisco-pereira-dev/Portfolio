@@ -29,6 +29,7 @@ const titleId = `title-${p.slug}`;
   <button class="modal-close">&times;</button>
   <div class="modal-content">
     <ProjectImage project={p} variant="modal" alt={t(p.imageAlt, lang)} class="modal-img" />
+
     <h3 class="modal-title" id={titleId}>{t(p.title, lang)}</h3>
     <p class="modal-desc">{t(p.description, lang)}</p>
     <ul class="modal-features">

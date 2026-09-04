@@ -1,6 +1,7 @@
 ---
 import type { Ui } from '../i18n';
 import site from '../data/site.json';
+import Icon from './Icon.astro';
 
 interface Props {
   ui: Ui;
@@ -38,7 +39,7 @@ const links = [
         class="overlay-social-icon"
         aria-label={ui['a11y-social-linkedin']}
       >
-        <i class="devicon-linkedin-plain"></i>
+        <Icon name="linkedin-plain" />
       </a>
       <a
         href={site.githubUrl}
@@ -47,7 +48,7 @@ const links = [
         class="overlay-social-icon"
         aria-label={ui['a11y-social-github']}
       >
-        <i class="devicon-github-original"></i>
+        <Icon name="github-original" />
       </a>
       <a href={`mailto:${site.email}`} class="overlay-social-icon" aria-label={ui['a11y-social-email']}>
         <svg

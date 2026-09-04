@@ -34,29 +34,12 @@ const projects = defineCollection({
         // Projeto alojado em servidor gratuito que precisa de aviso de arranque a frio.
         coldStart: z.boolean(),
 
-        // Imagem local (otimizável) OU par de URLs remotos do Unsplash usados pelo site legado.
-        image: image().optional(),
-        imageRemote: z
-          .object({
-            card: z.string().url(),
-            modal: z.string().url(),
-          })
-          .optional(),
+        // Ficheiro local em assets/images/. Nao ha alternativa remota: as fotografias
+        // de stock do Unsplash sairam. Se o ficheiro faltar, o build falha de proposito.
+        image: image(),
         imageAlt: localized,
       })
       .superRefine((data, ctx) => {
-        if (!data.image && !data.imageRemote) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'É preciso "image" (local) ou "imageRemote" (URLs).',
-          });
-        }
-        if (data.image && data.imageRemote) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Define só um: "image" ou "imageRemote", não os dois.',
-          });
-        }
         if (data.status === 'no-demo' && data.demoUrl) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,

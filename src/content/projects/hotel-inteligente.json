@@ -49,7 +49,7 @@
   "demoUrl": "https://ti-xp2g.onrender.com",
   "status": "live",
   "coldStart": true,
-  "image": "../../../assets/images/ti.png",
+  "image": "../../../assets/images/ti.webp",
   "imageAlt": {
     "pt": "Hotel Inteligente - Plataforma IoT",
     "en": "Smart Hotel - IoT Platform"

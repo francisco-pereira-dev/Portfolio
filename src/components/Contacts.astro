@@ -1,6 +1,7 @@
 ---
 import type { Ui } from '../i18n';
 import site from '../data/site.json';
+import Icon from './Icon.astro';
 
 interface Props {
   ui: Ui;
@@ -40,7 +41,7 @@ const { ui } = Astro.props;
       class="contact-card-link reveal"
     >
       <div class="contact-icon-circle">
-        <i class="devicon-linkedin-plain"></i>
+        <Icon name="linkedin-plain" />
       </div>
       <span class="contact-title">{ui['contact-title-linkedin']}</span>
       <span class="contact-value">{site.linkedinHandle}</span>
@@ -53,7 +54,7 @@ const { ui } = Astro.props;
       class="contact-card-link reveal"
     >
       <div class="contact-icon-circle">
-        <i class="devicon-github-original"></i>
+        <Icon name="github-original" />
       </div>
       <span class="contact-title">{ui['contact-title-github']}</span>
       <span class="contact-value">{site.githubHandle}</span>

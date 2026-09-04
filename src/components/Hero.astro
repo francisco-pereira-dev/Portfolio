@@ -30,7 +30,15 @@ const { ui } = Astro.props;
     </div>
     <div class="hero-image-area reveal">
       <div class="avatar-container">
-        <Image src={avatar} alt={ui['a11y-avatar-alt']} class="avatar-img" />
+        <!-- Acima da dobra: nunca lazy, e com prioridade de carregamento. -->
+        <Image
+          src={avatar}
+          alt={ui['a11y-avatar-alt']}
+          class="avatar-img"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
       </div>
     </div>
   </div>

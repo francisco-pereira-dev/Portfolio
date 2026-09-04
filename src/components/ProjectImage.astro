@@ -1,12 +1,10 @@
 ---
 /**
- * O ÚNICO sítio que sabe da diferença entre os dois modelos de imagem.
+ * Imagem de um projeto, no cartão ou na modal.
  *
- * Quatro projetos têm ficheiro local em assets/images/ (campo `image`, resolvido
- * pelo helper image() do schema e otimizável pelo Astro). Dois fazem hotlink ao
- * Unsplash (campo `imageRemote`), com URLs diferentes para o cartão (w=600) e
- * para a modal (w=1200). O schema garante que cada projeto tem exatamente um dos
- * dois campos, por isso o resto dos componentes só pede a variante que quer.
+ * Deixou de haver dois modelos de imagem: as fotografias de stock do Unsplash
+ * saíram e todos os projetos passam a apontar para um ficheiro em assets/images/.
+ * Se o ficheiro não existir, o build falha — é intencional.
  */
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
@@ -16,16 +14,21 @@ interface Props {
   variant: 'card' | 'modal';
   alt: string;
   class?: string;
-  loading?: 'lazy' | 'eager';
 }
 
-const { project, variant, alt, class: className, loading } = Astro.props;
+const { project, variant, alt, class: className } = Astro.props;
+
+// O cartão mostra no máximo ~450px de largura e a modal ~800px. Pedimos o dobro
+// para ecrãs de alta densidade, sem nunca ampliar acima da origem.
+const LARGURA_ALVO = { card: 900, modal: 1400 } as const;
+const largura = Math.min(LARGURA_ALVO[variant], project.image.width);
 ---
 
-{
-  project.image ? (
-    <Image src={project.image} alt={alt} class={className} loading={loading} />
-  ) : project.imageRemote ? (
-    <img src={project.imageRemote[variant]} alt={alt} class={className} loading={loading} />
-  ) : null
-}
+<Image
+  src={project.image}
+  alt={alt}
+  class={className}
+  width={largura}
+  loading="lazy"
+  decoding="async"
+/>

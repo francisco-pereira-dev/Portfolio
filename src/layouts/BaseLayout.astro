@@ -25,13 +25,15 @@ const { title, description, lang = Astro.currentLocale ?? 'pt' } = Astro.props;
     <meta name="description" content={description} />
     <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {/* Poppins auto-alojada: sem pedidos a terceiros nem ligacao a dois dominios.
+        O peso 400 e o do corpo de texto, o mais usado, por isso vem em preload. */}
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/poppins-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
-    <link rel="stylesheet" href="/css/devicon.css" />
 
     <script is:inline>
       // Tema antes da primeira pintura, para não haver flash.
