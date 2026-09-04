@@ -1,0 +1,15 @@
+---
+import type { Ui } from '../i18n';
+
+interface Props {
+  ui: Ui;
+}
+
+const { ui } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <p>{ui['footer-text']}</p>
+  </div>
+</footer>

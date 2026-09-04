@@ -1,0 +1,16 @@
+---
+import type { Ui } from '../i18n';
+
+interface Props {
+  ui: Ui;
+}
+
+const { ui } = Astro.props;
+---
+
+<section id="about" class="about-section">
+  <h2 class="section-heading reveal">{ui['about-heading']}</h2>
+  <div class="about-content reveal">
+    <p>{ui['about-text']}</p>
+  </div>
+</section>

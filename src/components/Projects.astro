@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Lang, Ui } from '../i18n';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+  lang: Lang;
+  ui: Ui;
+}
+
+const { projects, lang, ui } = Astro.props;
+---
+
+<section id="projects" class="projects-section">
+  <h2 class="section-heading reveal">{ui['projects-heading']}</h2>
+  <div class="projects-grid">
+    {projects.map((project) => <ProjectCard project={project} lang={lang} ui={ui} />)}
+  </div>
+</section>

@@ -1,0 +1,38 @@
+---
+import { localeHref, otherLang, type Lang, type Ui } from '../i18n';
+
+interface Props {
+  ui: Ui;
+  lang: Lang;
+}
+
+const { ui, lang } = Astro.props;
+
+// O seletor de idioma deixou de trocar innerHTML: é um link para a outra língua.
+// A âncora da secção atual é acrescentada em runtime por src/scripts/main.js.
+const href = localeHref[otherLang(lang)];
+---
+
+<nav class="navbar">
+  <div class="nav-left">
+    <button id="hamburger-btn" class="hamburger-btn" aria-label={ui['a11y-menu-toggle']}>
+      <span class="bar bar1"></span>
+      <span class="bar bar2"></span>
+      <span class="bar bar3"></span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <span>{ui['nav-brand']}</span>
+  </div>
+  <div class="nav-right">
+    <a id="lang-toggle" class="lang-switch" href={href} aria-label={ui['a11y-lang-toggle']}>
+      <span class:list={['lang-pt', { 'active-lang': lang === 'pt' }]}>PT</span>
+      <span class="lang-sep">|</span>
+      <span class:list={['lang-en', { 'active-lang': lang === 'en' }]}>EN</span>
+    </a>
+    <button id="theme-toggle" class="theme-switch" aria-label={ui['a11y-theme-toggle']}>
+      <span class="icon-moon">🌙</span>
+      <span class="icon-sun">☀️</span>
+    </button>
+  </div>
+</nav>

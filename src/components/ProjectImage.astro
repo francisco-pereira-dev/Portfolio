@@ -1,0 +1,31 @@
+---
+/**
+ * O ÚNICO sítio que sabe da diferença entre os dois modelos de imagem.
+ *
+ * Quatro projetos têm ficheiro local em assets/images/ (campo `image`, resolvido
+ * pelo helper image() do schema e otimizável pelo Astro). Dois fazem hotlink ao
+ * Unsplash (campo `imageRemote`), com URLs diferentes para o cartão (w=600) e
+ * para a modal (w=1200). O schema garante que cada projeto tem exatamente um dos
+ * dois campos, por isso o resto dos componentes só pede a variante que quer.
+ */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>['data'];
+  variant: 'card' | 'modal';
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { project, variant, alt, class: className, loading } = Astro.props;
+---
+
+{
+  project.image ? (
+    <Image src={project.image} alt={alt} class={className} loading={loading} />
+  ) : project.imageRemote ? (
+    <img src={project.imageRemote[variant]} alt={alt} class={className} loading={loading} />
+  ) : null
+}

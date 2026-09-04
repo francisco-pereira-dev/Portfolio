@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang, type Ui } from '../i18n';
+import ProjectImage from './ProjectImage.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+  ui: Ui;
+}
+
+const { project, lang, ui } = Astro.props;
+const p = project.data;
+
+// As 6 modais ficam no HTML desde o início: openModal() faz getElementById sobre
+// markup estático e o restauro de foco depende de os nós já existirem.
+const modalId = `modal-${p.slug}`;
+const titleId = `title-${p.slug}`;
+---
+
+<div class="modal" id={modalId} role="dialog" aria-modal="true" aria-labelledby={titleId}>
+  {
+    p.coldStart && (
+      <div class="modal-info-btn" data-tooltip={ui['modal-tooltip-note']}>
+        ?
+      </div>
+    )
+  }
+  <button class="modal-close">&times;</button>
+  <div class="modal-content">
+    <ProjectImage project={p} variant="modal" alt={t(p.imageAlt, lang)} class="modal-img" />
+    <h3 class="modal-title" id={titleId}>{t(p.title, lang)}</h3>
+    <p class="modal-desc">{t(p.description, lang)}</p>
+    <ul class="modal-features">
+      {p.features.map((feature) => <li>{t(feature, lang)}</li>)}
+    </ul>
+    <div class="modal-actions">
+      {
+        p.demoUrl && (
+          <a href={p.demoUrl} target="_blank" rel="noopener noreferrer" class="btn-modal">
+            {ui['modal-btn-project']}
+          </a>
+        )
+      }
+      {
+        p.repoUrl && (
+          <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="btn-modal">
+            {ui['modal-btn-repo']}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

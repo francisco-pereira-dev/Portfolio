@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import type { Ui } from '../i18n';
+import site from '../data/site.json';
+// O avatar continua em assets/ na raiz; o Vite importa-o e o Astro otimiza-o.
+import avatar from '../../assets/images/avatar.jpg';
+
+interface Props {
+  ui: Ui;
+}
+
+const { ui } = Astro.props;
+---
+
+<section id="hero" class="hero-section">
+  <div class="hero-content-wrapper">
+    <div class="hero-text-area reveal">
+      <h1 class="main-title">{ui['hero-title']}</h1>
+      <p class="hero-subtitle">{ui['hero-subtitle']}</p>
+      <div class="hero-buttons">
+        <a
+          href={`/${site.cvPath}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+          class="btn btn-primary">{ui['hero-btn-cv']}</a
+        >
+        <a href="#contacts" class="btn btn-outline">{ui['hero-btn-contact']}</a>
+      </div>
+    </div>
+    <div class="hero-image-area reveal">
+      <div class="avatar-container">
+        <Image src={avatar} alt={ui['a11y-avatar-alt']} class="avatar-img" />
+      </div>
+    </div>
+  </div>
+</section>
