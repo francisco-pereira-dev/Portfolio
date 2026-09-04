@@ -1,0 +1,82 @@
+[
+  {
+    "name": "HTML5",
+    "icon": "devicon-html5-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "CSS3",
+    "icon": "devicon-css3-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "JavaScript",
+    "icon": "devicon-javascript-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "TypeScript",
+    "icon": "devicon-typescript-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "Tailwind CSS",
+    "icon": "devicon-tailwindcss-original",
+    "kind": "devicon"
+  },
+  {
+    "name": "Node.js",
+    "icon": "devicon-nodejs-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "PHP",
+    "icon": "devicon-php-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "MySQL",
+    "icon": "devicon-mysql-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "Docker",
+    "icon": "devicon-docker-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "Python",
+    "icon": "devicon-python-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "C#",
+    "icon": "devicon-csharp-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "Java",
+    "icon": "devicon-java-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "Linux",
+    "icon": "devicon-linux-plain",
+    "kind": "devicon"
+  },
+  {
+    "name": "Git/GitHub",
+    "icon": "devicon-github-original",
+    "kind": "devicon"
+  },
+  {
+    "name": "REST APIs",
+    "icon": "{API}",
+    "kind": "text"
+  },
+  {
+    "name": "OutSystems",
+    "icon": "OS",
+    "kind": "text"
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "slug": "dae",
+  "order": 5,
+  "title": {
+    "pt": "DAE - Arquitetura Full-Stack & IA",
+    "en": "DAE - Full-Stack Architecture & AI"
+  },
+  "description": {
+    "pt": "Projeto de Engenharia Informática focado na criação de uma arquitetura full-stack robusta e escalável, com forte separação de responsabilidades (SoC). O ecossistema destaca-se pela contentorização completa da infraestrutura e pela integração nativa de um modelo de Inteligência Artificial a correr localmente.",
+    "en": "Computer Engineering project focused on creating a robust and scalable full-stack architecture, with strong Separation of Concerns (SoC). The ecosystem stands out for its fully containerized infrastructure and the native integration of a locally running Artificial Intelligence model."
+  },
+  "features": [
+    {
+      "pt": "Infraestrutura 100% contentorizada via Docker (serviços móveis, bases de dados e backend isolados).",
+      "en": "100% containerized infrastructure via Docker (isolated mobile services, databases, and backend)."
+    },
+    {
+      "pt": "Integração de IA local (LLaMA 3) no ecossistema utilizando o Ollama.",
+      "en": "Integration of local AI (LLaMA 3) into the ecosystem using Ollama."
+    },
+    {
+      "pt": "Sistema de permissões RBAC com diferentes níveis de acesso e ambiente de testes seguro com interceção de emails (MailHog).",
+      "en": "RBAC permission system with different access levels and a secure test environment with email interception (MailHog)."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "Docker",
+      "en": "Docker"
+    },
+    {
+      "pt": "LLaMA 3 (IA)",
+      "en": "LLaMA 3 (AI)"
+    },
+    {
+      "pt": "Full-Stack",
+      "en": "Full-Stack"
+    },
+    {
+      "pt": "Vite",
+      "en": "Vite"
+    }
+  ],
+  "repoUrl": "https://github.com/francisco-pereira-dev/DAE.git",
+  "demoUrl": "https://dae-frontend.onrender.com/",
+  "status": "live",
+  "coldStart": true,
+  "image": "../../../assets/images/dae.jpg",
+  "imageAlt": {
+    "pt": "DAE - Arquitetura Full-Stack & IA",
+    "en": "DAE - Full-Stack Architecture & AI"
+  }
+}

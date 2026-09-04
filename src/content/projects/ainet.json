@@ -1,0 +1,57 @@
+{
+  "slug": "ainet",
+  "order": 4,
+  "title": {
+    "pt": "AINET - Plataforma Full-Stack Laravel",
+    "en": "AINET - Laravel Full-Stack Platform"
+  },
+  "description": {
+    "pt": "Projeto Full-Stack desenvolvido em equipa no âmbito universitário, funcionando como uma plataforma híbrida de Associação e E-commerce. Construído sob a framework Laravel utilizando o padrão arquitetural MVC e Vite no frontend. O grande foco técnico é a segurança e gestão de base de dados relacional.",
+    "en": "Full-Stack project developed in a team as part of a university course, functioning as a hybrid Association and E-commerce platform. Built with the Laravel framework using the MVC architectural pattern and Vite on the frontend. The main technical focus is on relational database management and security."
+  },
+  "features": [
+    {
+      "pt": "Implementação de sistema RBAC com 3 níveis de acesso estritos: Board (Direção), Employee (Funcionários) e Member (Sócios).",
+      "en": "Implementation of RBAC system with 3 strict access levels: Board, Employee, and Member."
+    },
+    {
+      "pt": "Proteção e segurança avançada de rotas consoante o tipo e privilégios do utilizador autenticado.",
+      "en": "Advanced protection and security of routes based on the authenticated user's type and privileges."
+    },
+    {
+      "pt": "Gestão relacional complexa de Produtos, Categorias, Encomendas, Custos de Envio e Carrinho de Compras.",
+      "en": "Complex relational management of Products, Categories, Orders, Shipping Costs, and Shopping Cart."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "Laravel",
+      "en": "Laravel"
+    },
+    {
+      "pt": "PHP",
+      "en": "PHP"
+    },
+    {
+      "pt": "MVC",
+      "en": "MVC"
+    },
+    {
+      "pt": "MySQL",
+      "en": "MySQL"
+    },
+    {
+      "pt": "Vite",
+      "en": "Vite"
+    }
+  ],
+  "repoUrl": "https://github.com/francisco-pereira-dev/Ainet2425.git",
+  "demoUrl": "https://ainet2425.onrender.com",
+  "status": "live",
+  "coldStart": true,
+  "image": "../../../assets/images/ainet.jpg",
+  "imageAlt": {
+    "pt": "AINET - Plataforma Full-Stack Laravel",
+    "en": "AINET - Laravel Full-Stack Platform"
+  }
+}

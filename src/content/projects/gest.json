@@ -1,0 +1,44 @@
+{
+  "slug": "gest",
+  "order": 3,
+  "title": {
+    "pt": "Gest - E-commerce e Gestão de Stock",
+    "en": "Gest - E-commerce & Stock Management"
+  },
+  "description": {
+    "pt": "Prova de Aptidão Profissional desenvolvida em ambiente empresarial utilizando a plataforma Low-Code OutSystems. O projeto \"Gest\" consiste num ecossistema integrado que inclui uma plataforma de e-commerce direcionada ao consumidor final e uma infraestrutura robusta de backoffice para a gestão de inventário.",
+    "en": "Professional Aptitude Project developed in a corporate environment using the OutSystems Low-Code platform. The 'Gest' project consists of an integrated ecosystem that includes an e-commerce platform targeting the final consumer and a robust backoffice infrastructure for inventory management."
+  },
+  "features": [
+    {
+      "pt": "Desenvolvimento Full-Stack em plataforma Low-Code.",
+      "en": "Full-stack development on a Low-Code platform."
+    },
+    {
+      "pt": "Loja online com catálogo de produtos e sistema de carrinho de compras.",
+      "en": "Online store with product catalog and shopping cart system."
+    },
+    {
+      "pt": "Sincronização de base de dados e gestão de stock em tempo real.",
+      "en": "Real-time database synchronization and stock management."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "OutSystems",
+      "en": "OutSystems"
+    },
+    {
+      "pt": "Base de Dados",
+      "en": "Database"
+    }
+  ],
+  "repoUrl": "https://github.com/francisco-pereira-dev/PAP.git",
+  "status": "no-demo",
+  "coldStart": false,
+  "image": "../../../assets/images/logo-gest.jpg",
+  "imageAlt": {
+    "pt": "Gest - E-commerce e Gestão de Stock",
+    "en": "Gest - E-commerce & Stock Management"
+  }
+}

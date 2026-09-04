@@ -1,0 +1,52 @@
+{
+  "slug": "diane-arbus",
+  "order": 2,
+  "title": {
+    "pt": "Catálogo Digital - Diane Arbus",
+    "en": "Diane Arbus - Digital Catalog"
+  },
+  "description": {
+    "pt": "Um catálogo digital interativo dedicado à obra da fotógrafa Diane Arbus. O projeto apresenta uma galeria com os seus trabalhos fotográficos, incluindo autorretratos, acompanhados de descrições detalhadas que contextualizam cada obra.",
+    "en": "An interactive digital catalog dedicated to the work of photographer Diane Arbus. The project features a gallery of her photographic works, including self-portraits, accompanied by detailed descriptions that contextualize each piece."
+  },
+  "features": [
+    {
+      "pt": "Galeria interativa de fotografias e autorretratos.",
+      "en": "Interactive gallery of photographs and self-portraits."
+    },
+    {
+      "pt": "Secções informativas com detalhes e contexto histórico de cada obra.",
+      "en": "Informative sections with details and historical context of each work."
+    },
+    {
+      "pt": "Design minimalista focado na experiência de visualização artística.",
+      "en": "Minimalist design focused on the artistic viewing experience."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "HTML",
+      "en": "HTML"
+    },
+    {
+      "pt": "CSS",
+      "en": "CSS"
+    },
+    {
+      "pt": "Figma",
+      "en": "Figma"
+    }
+  ],
+  "repoUrl": "https://github.com/francisco-pereira-dev/Catalogo-Diane-Arbus",
+  "demoUrl": "https://www.figma.com/make/6iWnse0T44fvjOiNlQpPvj/Catalogo-Diane-Arbus?t=ozhxbP5UJsBfrlE4-20&fullscreen=1",
+  "status": "live",
+  "coldStart": false,
+  "imageRemote": {
+    "card": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    "modal": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+  },
+  "imageAlt": {
+    "pt": "Catálogo Digital - Diane Arbus",
+    "en": "Diane Arbus - Digital Catalog"
+  }
+}

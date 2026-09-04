@@ -1,0 +1,57 @@
+{
+  "slug": "hotel-inteligente",
+  "order": 6,
+  "title": {
+    "pt": "Hotel Inteligente - Plataforma IoT",
+    "en": "Smart Hotel - IoT Platform"
+  },
+  "description": {
+    "pt": "Plataforma web de Internet of Things (IoT) focada na monitorização de sensores e hardware (Arduino/ESP32). Diferencia-se por arquitetar uma API \"Flat-File\" em PHP puro, sem recurso a bases de dados SQL, garantindo uma comunicação leve, segura e resiliente com dispositivos físicos.",
+    "en": "Web platform for the Internet of Things (IoT) focused on monitoring sensors and hardware (Arduino/ESP32). It differentiates itself by architecting a 'Flat-File' API in pure PHP, without using SQL databases, ensuring lightweight, secure, and resilient communication with physical devices."
+  },
+  "features": [
+    {
+      "pt": "Integração direta com hardware (sensores e webcam) via sistema de ficheiros com proteção contra Path Traversal e injeções.",
+      "en": "Direct integration with hardware (sensors and webcam) via file system with protection against Path Traversal and injections."
+    },
+    {
+      "pt": "Dashboard dinâmica com atualização assíncrona (Fetch API/AJAX) sem necessidade de refresh.",
+      "en": "Dynamic dashboard with asynchronous updates (Fetch API/AJAX) without needing to refresh."
+    },
+    {
+      "pt": "Arquitetura otimizada com Princípio DRY e sistema de paginação nativa em ficheiros de log.",
+      "en": "Optimized architecture with DRY Principle and native pagination in log files."
+    },
+    {
+      "pt": "Segurança reforçada com sanitização de dados (htmlspecialchars) e autenticação robusta (password_hash).",
+      "en": "Reinforced security with data sanitization (htmlspecialchars) and robust authentication (password_hash)."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "PHP (Vanilla)",
+      "en": "PHP (Vanilla)"
+    },
+    {
+      "pt": "IoT",
+      "en": "IoT"
+    },
+    {
+      "pt": "AJAX",
+      "en": "AJAX"
+    },
+    {
+      "pt": "Hardware",
+      "en": "Hardware"
+    }
+  ],
+  "repoUrl": "https://github.com/francisco-pereira-dev/TI.git",
+  "demoUrl": "https://ti-xp2g.onrender.com",
+  "status": "live",
+  "coldStart": true,
+  "image": "../../../assets/images/ti.png",
+  "imageAlt": {
+    "pt": "Hotel Inteligente - Plataforma IoT",
+    "en": "Smart Hotel - IoT Platform"
+  }
+}
