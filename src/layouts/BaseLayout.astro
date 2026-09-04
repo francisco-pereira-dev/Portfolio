@@ -1,0 +1,81 @@
+---
+/**
+ * Casca do documento.
+ *
+ * O <!DOCTYPE html> é intencional: o index.html legado não o tem e corre em
+ * quirks mode. Isto passa o site para standards mode.
+ */
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+}
+
+const { title, description, lang = Astro.currentLocale ?? 'pt' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang} class="light-mode">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/devicon.css" />
+
+    <script is:inline>
+      // Tema antes da primeira pintura, para não haver flash.
+      // O site legado punha light-mode no <body> e só corrigia no DOMContentLoaded:
+      // quem tinha "dark" guardado via a página em claro durante uns instantes.
+      // A classe está no <html> precisamente para poder ser aplicada aqui.
+      (function () {
+        var el = document.documentElement;
+        var tema = null;
+        try {
+          tema = localStorage.getItem('theme');
+        } catch (e) {
+          /* armazenamento bloqueado */
+        }
+        if (tema !== 'dark' && tema !== 'light') {
+          // Não existia fallback nenhum: um visitante novo recebia sempre claro,
+          // mesmo com o sistema em escuro.
+          tema =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        }
+        el.classList.remove('light-mode', 'dark-mode');
+        el.classList.add(tema === 'dark' ? 'dark-mode' : 'light-mode');
+      })();
+    </script>
+
+    <script is:inline>
+      // Portado de js/script.js L14-19, que corria fora do DOMContentLoaded.
+      // Num recarregamento, tira a âncora do URL e volta ao topo, para o browser
+      // não repor o scroll a meio de uma secção. Precisa de correr já — daí o inline.
+      if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+        window.history.replaceState(null, null, window.location.pathname);
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+        }, 0);
+      }
+    </script>
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      import '../scripts/main.js';
+    </script>
+  </body>
+</html>

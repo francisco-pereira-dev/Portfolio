@@ -1,0 +1,13 @@
+# dependências
+node_modules/
+
+# output de build
+dist/
+.astro/
+
+# variáveis de ambiente
+.env*
+
+# sistema operativo / logs
+.DS_Store
+*.log
