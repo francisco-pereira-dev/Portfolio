@@ -95,6 +95,45 @@ function podarAssetsNaoReferenciados() {
   };
 }
 
+/**
+ * Falha o build se alguma TTF chegar ao dist.
+ *
+ * As TTF em scripts/fontes/ são material de build: existem só para o script da
+ * imagem OG converter texto em contornos. O site serve WOFF2 auto-alojada de
+ * public/fonts/ e não precisa delas para nada. Hoje o scripts/ está fora do
+ * publicDir e não é copiado, mas isso deixa de ser verdade se alguém as mover
+ * para public/ — e seriam ~460 KB servidos a ninguém, sem que nada avisasse.
+ */
+function garantirQueAsTTFnaoSaem() {
+  return {
+    name: 'garantir-que-as-ttf-nao-saem',
+    hooks: {
+      'astro:build:done': ({ dir }) => {
+        const raiz = new URL('./', dir).pathname.replace(/^\/([A-Za-z]:)/, '$1');
+        const encontradas = [];
+        (function anda(d) {
+          for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+            const f = path.join(d, e.name);
+            if (e.isDirectory()) anda(f);
+            else if (/\.(ttf|otf|eot)$/i.test(e.name)) {
+              encontradas.push(path.relative(raiz, f).split(path.sep).join('/'));
+            }
+          }
+        })(raiz);
+
+        if (encontradas.length > 0) {
+          throw new Error(
+            `\nFicheiros de fonte de build chegaram ao dist:\n\n` +
+              encontradas.map((f) => `  - dist/${f}`).join('\n') +
+              `\n\nAs TTF/OTF sao material de build e vivem em scripts/fontes/.\n` +
+              `O site serve WOFF2 de public/fonts/ e nao precisa delas.\n`
+          );
+        }
+      },
+    },
+  };
+}
+
 // https://astro.build/config
 export default defineConfig({
   // Domínio próprio servido pelo GitHub Pages (ficheiro public/CNAME).
@@ -115,6 +154,7 @@ export default defineConfig({
       },
     }),
     podarAssetsNaoReferenciados(),
+    garantirQueAsTTFnaoSaem(),
   ],
 
   i18n: {

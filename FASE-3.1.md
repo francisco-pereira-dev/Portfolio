@@ -111,8 +111,25 @@ a 40px nenhum. Nenhum glifo isolado tinha o problema. Passei a compor glifo a
 glifo, aplicando o kerning à mão, e o script rejeita o resultado se ainda assim
 aparecer um `NaN`.
 
-As TTF em `scripts/fontes/` (~460 KB) existem só para este script e não são
-servidas. O site continua a servir as WOFF2 de `public/fonts/`.
+**Caminho seguido: contornos vetoriais.** Das duas saídas possíveis — converter
+o texto em paths, ou desistir e usar uma sans-serif do sistema — a primeira
+funcionou, por isso a imagem sai na tipografia exata do site. Não foi preciso o
+recurso.
+
+### As TTF são material de build
+
+As três TTF (~460 KB) vivem em **`scripts/fontes/`** e existem só para o script
+da imagem OG. Não estão em `public/`, não vão para o `dist` e o site não as
+referencia: o que é servido são as WOFF2 subsetadas de `public/fonts/`, com 52,3
+KB no total.
+
+Como o `scripts/` está fora do `publicDir`, o Astro nunca lhes toca. Isso deixa
+de ser verdade se alguém as mover para `public/`, e o resultado seriam 460 KB
+servidos a ninguém sem nada avisar — por isso o `astro.config.mjs` tem uma
+integração, `garantir-que-as-ttf-nao-saem`, que corre no `astro:build:done`,
+varre o `dist` à procura de `.ttf`, `.otf` e `.eot`, e **falha o build** nomeando
+o ficheiro. Testado a plantar uma TTF em `public/fonts/`: o build parou com a
+mensagem certa.
 
 ## Meta tags por página
 
@@ -192,7 +209,7 @@ competências, para as duas listas não divergirem.
 | 8 | og, twitter, canonical, hreflang, theme-color nas duas páginas | Passa, listadas acima |
 | 9 | `sitemap-index.xml` e `robots.txt` com as duas línguas | Passa |
 | 10 | JSON-LD válido | Passa, `JSON.parse` OK, 12/12 campos exigidos |
-| 11 | Nenhum ficheiro acima de 500 KB | Passa. `dist/` com 1,04 MB em 31 ficheiros |
+| 11 | Nenhum ficheiro acima de 500 KB | Passa. `dist/` com 1,04 MB em 31 ficheiros. **Zero `.ttf`/`.otf`/`.eot` no output** e zero referências a `.ttf`; as fontes servidas são as 8 WOFF2. Protegido por integração que falha o build se alguma lá chegar |
 | 12 | Layout a 1440/900/375 sem scroll horizontal | Passa. Zero elementos a transbordar nas três larguras; dois problemas encontrados e corrigidos, descritos acima |
 
 ### Nota sobre um aviso de consola
