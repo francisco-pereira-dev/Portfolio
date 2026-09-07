@@ -28,21 +28,38 @@ const titleId = `title-${p.slug}`;
   }
   <button class="modal-close">&times;</button>
   <div class="modal-content">
-    <ProjectImage project={p} variant="modal" alt={t(p.imageAlt, lang)} class="modal-img" />
-
+    <ProjectImage
+      project={p}
+      variant="modal"
+      lang={lang}
+      alt={p.imageAlt ? t(p.imageAlt, lang) : undefined}
+      class="modal-img"
+    />
     <h3 class="modal-title" id={titleId}>{t(p.title, lang)}</h3>
     <p class="modal-desc">{t(p.description, lang)}</p>
     <ul class="modal-features">
       {p.features.map((feature) => <li>{t(feature, lang)}</li>)}
     </ul>
     <div class="modal-actions">
+      {/* O estado do projeto decide o botão de demonstração:
+          live            -> link normal
+          in-development  -> rótulo inerte, sem href, com aria-disabled
+          no-demo         -> não há botão nenhum */}
       {
-        p.demoUrl && (
+        p.status === 'live' && p.demoUrl && (
           <a href={p.demoUrl} target="_blank" rel="noopener noreferrer" class="btn-modal">
             {ui['modal-btn-project']}
           </a>
         )
       }
+      {
+        p.status === 'in-development' && (
+          <span class="btn-modal btn-modal-disabled" aria-disabled="true">
+            {ui['project-status-in-development']}
+          </span>
+        )
+      }
+      {/* Sem repositório não há botão: um link para um repo privado dava 404. */}
       {
         p.repoUrl && (
           <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="btn-modal">

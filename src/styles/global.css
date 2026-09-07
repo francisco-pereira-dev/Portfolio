@@ -1175,6 +1175,89 @@ main {
     user-select: none;
 }
 
+/* --- PROJETOS: TAGLINE, SUB-SECCAO, RECURSO DE IMAGEM --- */
+.project-tagline {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-top: -0.6rem;
+    margin-bottom: 1rem;
+}
+
+/* Sub-seccao Design -> Codigo, separada por uma regua para nao se ler como
+   continuacao dos projetos de engenharia. */
+.projects-subsection {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.projects-subsection-heading {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.projects-subsection-text {
+    max-width: 62ch;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+/* Projetos ainda sem screenshot. Ocupa a mesma caixa que a imagem real teria,
+   para a grelha nao mexer quando as fotografias chegarem. */
+.project-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem;
+    text-align: center;
+    background:
+        radial-gradient(circle at 30% 25%, var(--shadow-glow), transparent 60%),
+        linear-gradient(135deg, var(--surface-hover), var(--surface-color));
+    border-bottom: 1px solid var(--border-color);
+}
+
+.project-thumb .project-fallback {
+    height: 100%;
+}
+
+.project-fallback-initials {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-color);
+    letter-spacing: 0.02em;
+}
+
+.project-fallback-tech {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 32ch;
+}
+
+/* Estado in-development: nao e link, e nao deve parecer um. */
+.btn-modal-disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    user-select: none;
+}
+
+.btn-modal.btn-modal-disabled:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    transform: none;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .hero-content-wrapper {

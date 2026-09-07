@@ -1,13 +1,17 @@
 {
   "slug": "mr-pizza",
-  "order": 1,
+  "order": 8,
   "title": {
     "pt": "Mr. Pizza - Plataforma E-commerce",
     "en": "Mr. Pizza - E-commerce Platform"
   },
+  "tagline": {
+    "pt": "Design → Código",
+    "en": "Design → Code"
+  },
   "description": {
-    "pt": "Plataforma de e-commerce desenvolvida para a cadeia Mr. Pizza. O website permite aos clientes explorar o menu completo (pizzas, bebidas e sobremesas), realizar encomendas online com opção de entrega ao domicílio e proporciona uma experiência de navegação fluida e intuitiva.",
-    "en": "E-commerce platform developed for the Mr. Pizza chain. The website allows customers to explore the full menu (pizzas, drinks, and desserts), place online orders with home delivery options, and provides a fluid and intuitive browsing experience."
+    "pt": "Plataforma de encomenda e entrega ao domicílio, construída a partir de um design meu no Figma. O protótipo inicial foi gerado com Figma Make; o meu trabalho está na modelação dos dados e no conteúdo — catálogo de produtos com preços e alergénios, e as lojas com moradas, contactos e localizações reais.",
+    "en": "An ordering and delivery platform built from a design of mine in Figma. The initial prototype was generated with Figma Make; my own work is in the data modelling and content — a product catalogue with prices and allergens, and the stores with real addresses, contacts and locations."
   },
   "features": [
     {
@@ -25,16 +29,12 @@
   ],
   "tech": [
     {
-      "pt": "HTML",
-      "en": "HTML"
+      "pt": "React",
+      "en": "React"
     },
     {
-      "pt": "CSS",
-      "en": "CSS"
-    },
-    {
-      "pt": "JavaScript",
-      "en": "JavaScript"
+      "pt": "TypeScript",
+      "en": "TypeScript"
     },
     {
       "pt": "Figma",
@@ -44,6 +44,7 @@
   "repoUrl": "https://github.com/francisco-pereira-dev/MR.PIZZA",
   "demoUrl": "https://www.figma.com/make/57gTE2ImwjuWhgp7xvIOt0/Mr.Pizza?t=ozhxbP5UJsBfrlE4-20&fullscreen=1",
   "status": "live",
+  "group": "design",
   "coldStart": false,
   "image": "../../../assets/images/mrpizza.webp",
   "imageAlt": {

@@ -1,4 +1,11 @@
 ---
+/**
+ * Secção de projetos, em dois blocos.
+ *
+ * Os projetos de engenharia vêm primeiro. Os dois exercícios de tradução de
+ * design ficam numa sub-secção própria, com cabeçalho e nota a explicar em que
+ * se distinguem — para não serem lidos como se fossem do mesmo tipo.
+ */
 import type { CollectionEntry } from 'astro:content';
 import type { Lang, Ui } from '../i18n';
 import ProjectCard from './ProjectCard.astro';
@@ -10,11 +17,30 @@ interface Props {
 }
 
 const { projects, lang, ui } = Astro.props;
+
+const principais = projects.filter((p) => p.data.group !== 'design');
+const design = projects.filter((p) => p.data.group === 'design');
 ---
 
 <section id="projects" class="projects-section">
   <h2 class="section-heading reveal">{ui['projects-heading']}</h2>
+
   <div class="projects-grid">
-    {projects.map((project) => <ProjectCard project={project} lang={lang} ui={ui} />)}
+    {principais.map((project) => <ProjectCard project={project} lang={lang} ui={ui} />)}
   </div>
+
+  {
+    design.length > 0 && (
+      <div class="projects-subsection">
+        <h3 class="projects-subsection-heading reveal">{ui['projects-design-heading']}</h3>
+        <p class="projects-subsection-text reveal">{ui['projects-design-text']}</p>
+
+        <div class="projects-grid">
+          {design.map((project) => (
+            <ProjectCard project={project} lang={lang} ui={ui} />
+          ))}
+        </div>
+      </div>
+    )
+  }
 </section>

@@ -1,0 +1,55 @@
+{
+  "slug": "3d-analyzer",
+  "order": 4,
+  "title": {
+    "pt": "3D Analyzer — Motor C++ com dashboard Vue",
+    "en": "3D Analyzer — C++ engine with a Vue dashboard"
+  },
+  "tagline": {
+    "pt": "Projeto pessoal · Arquitetura híbrida",
+    "en": "Personal project · Hybrid architecture"
+  },
+  "description": {
+    "pt": "Dashboard de orçamentação de peças 3D com arquitetura híbrida: um motor nativo em C++ faz o processamento geométrico pesado — bounding box, vértices, polígonos — e uma interface em Vue 3 com Three.js renderiza o modelo em WebGL. Dois processos, duas linguagens, uma camada de comunicação entre eles.",
+    "en": "A 3D part quoting dashboard with a hybrid architecture: a native C++ engine handles the heavy geometry work — bounding box, vertices, polygons — while a Vue 3 interface renders the model in WebGL through Three.js. Two processes, two languages, one communication layer between them."
+  },
+  "features": [
+    {
+      "pt": "Motor de geometria em C++ nativo, para processar malhas que bloqueariam a interface se corressem no browser.",
+      "en": "Native C++ geometry engine, for meshes that would freeze the interface if processed in the browser."
+    },
+    {
+      "pt": "Visualização em WebGL com Three.js, num dashboard Vue 3.",
+      "en": "WebGL visualisation with Three.js inside a Vue 3 dashboard."
+    },
+    {
+      "pt": "Gestão explícita de memória gráfica: as malhas e materiais antigos são destruídos antes de cada novo modelo ser carregado.",
+      "en": "Explicit GPU memory management: old meshes and materials are disposed before each new model loads."
+    },
+    {
+      "pt": "Exportação de orçamentos para PDF e Excel.",
+      "en": "Quote export to PDF and Excel."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "C++",
+      "en": "C++"
+    },
+    {
+      "pt": "Vue 3",
+      "en": "Vue 3"
+    },
+    {
+      "pt": "Three.js",
+      "en": "Three.js"
+    },
+    {
+      "pt": "WebGL",
+      "en": "WebGL"
+    }
+  ],
+  "repoUrl": "https://github.com/francisco-pereira-dev/3D-Analyzer",
+  "status": "no-demo",
+  "coldStart": false
+}

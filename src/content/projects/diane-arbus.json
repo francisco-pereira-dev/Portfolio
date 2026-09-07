@@ -1,13 +1,17 @@
 {
   "slug": "diane-arbus",
-  "order": 2,
+  "order": 9,
   "title": {
     "pt": "Catálogo Digital - Diane Arbus",
     "en": "Diane Arbus - Digital Catalog"
   },
+  "tagline": {
+    "pt": "Design → Código",
+    "en": "Design → Code"
+  },
   "description": {
-    "pt": "Um catálogo digital interativo dedicado à obra da fotógrafa Diane Arbus. O projeto apresenta uma galeria com os seus trabalhos fotográficos, incluindo autorretratos, acompanhados de descrições detalhadas que contextualizam cada obra.",
-    "en": "An interactive digital catalog dedicated to the work of photographer Diane Arbus. The project features a gallery of her photographic works, including self-portraits, accompanied by detailed descriptions that contextualize each piece."
+    "pt": "Catálogo digital da obra da fotógrafa Diane Arbus, com um efeito de paginação em flipbook. O protótipo inicial foi gerado com Figma Make; o componente de flipbook — orquestração da animação e pré-carregamento das imagens — e as 37 obras com os respetivos textos de contexto são trabalho meu.",
+    "en": "A digital catalogue of photographer Diane Arbus's work, with a flipbook pagination effect. The initial prototype was generated with Figma Make; the flipbook component — animation orchestration and image preloading — and the 37 works with their context texts are my own work."
   },
   "features": [
     {
@@ -25,12 +29,12 @@
   ],
   "tech": [
     {
-      "pt": "HTML",
-      "en": "HTML"
+      "pt": "React",
+      "en": "React"
     },
     {
-      "pt": "CSS",
-      "en": "CSS"
+      "pt": "TypeScript",
+      "en": "TypeScript"
     },
     {
       "pt": "Figma",
@@ -40,6 +44,7 @@
   "repoUrl": "https://github.com/francisco-pereira-dev/Catalogo-Diane-Arbus",
   "demoUrl": "https://www.figma.com/make/6iWnse0T44fvjOiNlQpPvj/Catalogo-Diane-Arbus?t=ozhxbP5UJsBfrlE4-20&fullscreen=1",
   "status": "live",
+  "group": "design",
   "coldStart": false,
   "image": "../../../assets/images/dianearbus.webp",
   "imageAlt": {

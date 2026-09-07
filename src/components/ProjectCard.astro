@@ -15,10 +15,16 @@ const p = project.data;
 
 <div class="project-card reveal">
   <div class="project-thumb">
-    <ProjectImage project={p} variant="card" alt={t(p.imageAlt, lang)} />
+    <ProjectImage
+      project={p}
+      variant="card"
+      lang={lang}
+      alt={p.imageAlt ? t(p.imageAlt, lang) : undefined}
+    />
   </div>
   <div class="project-info">
     <h3 class="project-title">{t(p.title, lang)}</h3>
+    {p.tagline && <p class="project-tagline">{t(p.tagline, lang)}</p>}
     <div class="project-tech-icons">
       {p.tech.map((tech) => <span class="tech-badge">{t(tech, lang)}</span>)}
     </div>

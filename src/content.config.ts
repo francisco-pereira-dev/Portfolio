@@ -31,13 +31,18 @@ const projects = defineCollection({
         demoUrl: z.string().url().optional(),
         status: z.enum(['live', 'in-development', 'no-demo']),
 
+        // Onde o projeto aparece na pagina. Os "design" vao para a sub-seccao
+        // Design -> Codigo, depois dos restantes.
+        group: z.enum(['main', 'design']).default('main'),
+
         // Projeto alojado em servidor gratuito que precisa de aviso de arranque a frio.
         coldStart: z.boolean(),
 
-        // Ficheiro local em assets/images/. Nao ha alternativa remota: as fotografias
-        // de stock do Unsplash sairam. Se o ficheiro faltar, o build falha de proposito.
-        image: image(),
-        imageAlt: localized,
+        // Ficheiro local em assets/images/, quando existe. Nem todos os projetos tem
+        // screenshot ainda; esses caem no bloco de recurso do ProjectImage. O que o
+        // superRefine garante e que nao ha imagem sem alt.
+        image: image().optional(),
+        imageAlt: localized.optional(),
       })
       .superRefine((data, ctx) => {
         if (data.status === 'no-demo' && data.demoUrl) {
@@ -50,6 +55,25 @@ const projects = defineCollection({
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: 'status "live" exige demoUrl.',
+          });
+        }
+        if (data.status === 'in-development' && data.demoUrl) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'status "in-development" nao pode ter demoUrl: nao ha nada para mostrar.',
+          });
+        }
+        // Uma imagem sem alt e um defeito de acessibilidade; um alt sem imagem e lixo.
+        if (data.image && !data.imageAlt) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'com "image" definida, "imageAlt" passa a ser obrigatorio.',
+          });
+        }
+        if (!data.image && data.imageAlt) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: '"imageAlt" sem "image" correspondente.',
           });
         }
       }),

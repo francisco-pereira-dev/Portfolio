@@ -1,13 +1,17 @@
 {
   "slug": "gest",
-  "order": 3,
+  "order": 7,
   "title": {
     "pt": "Gest - E-commerce e Gestão de Stock",
     "en": "Gest - E-commerce & Stock Management"
   },
+  "tagline": {
+    "pt": "Estágio ITGlee · Prova de Aptidão Profissional",
+    "en": "ITGlee internship · Secondary-school final project"
+  },
   "description": {
-    "pt": "Prova de Aptidão Profissional desenvolvida em ambiente empresarial utilizando a plataforma Low-Code OutSystems. O projeto \"Gest\" consiste num ecossistema integrado que inclui uma plataforma de e-commerce direcionada ao consumidor final e uma infraestrutura robusta de backoffice para a gestão de inventário.",
-    "en": "Professional Aptitude Project developed in a corporate environment using the OutSystems Low-Code platform. The 'Gest' project consists of an integrated ecosystem that includes an e-commerce platform targeting the final consumer and a robust backoffice infrastructure for inventory management."
+    "pt": "Loja online de informática com gestão de armazém, construída em OutSystems durante o estágio na ITGlee e depois alargada como Prova de Aptidão Profissional. Catálogo e checkout para o cliente final, aplicação de stock para quem gere o inventário. O primeiro projeto em que tive de pensar em dois utilizadores ao mesmo tempo — quem compra e quem gere.",
+    "en": "An online computer-hardware store with warehouse management, built in OutSystems during my internship at ITGlee and later extended as my secondary-school final project. Catalogue and checkout for the customer, a stock application for whoever runs the inventory. The first project where I had to design for two users at once — the buyer and the manager."
   },
   "features": [
     {

@@ -1,0 +1,58 @@
+{
+  "slug": "licas",
+  "order": 1,
+  "title": {
+    "pt": "Licas — Plataforma de encomendas online",
+    "en": "Licas — Online ordering platform"
+  },
+  "tagline": {
+    "pt": "Cliente real · Em desenvolvimento",
+    "en": "Real client · In development"
+  },
+  "description": {
+    "pt": "Plataforma de encomendas online para uma pastelaria artesanal, desenvolvida de raiz como developer contratado. Loja para o cliente final e back-office completo para o negócio: catálogo com alergénios, encomendas e pedidos de orçamento, cupões, contas de cliente com níveis de permissão e notificações automáticas para a gestão.",
+    "en": "An online ordering platform for an artisan pastry shop, built from scratch as the contracted developer. Customer-facing storefront plus a full back-office: allergen-aware catalogue, orders and quote requests, coupons, customer accounts with permission levels, and automated notifications for the business."
+  },
+  "features": [
+    {
+      "pt": "Controlo de acessos por níveis, validado na base de dados e não apenas na interface.",
+      "en": "Role-based access enforced at the database level, not just in the interface."
+    },
+    {
+      "pt": "Dois fluxos de compra no mesmo sistema: catálogo com preço fixo e pedidos de orçamento.",
+      "en": "Two purchase flows in one system: fixed-price catalogue and quote requests."
+    },
+    {
+      "pt": "Sistema de cupões com resgate atómico, à prova de utilização duplicada.",
+      "en": "Coupon system with atomic redemption, safe against double use."
+    },
+    {
+      "pt": "Gestão de 14 alergénios, com distinção entre \"não declarado\" e \"declarado sem alergénios\".",
+      "en": "14-allergen management, distinguishing \"undeclared\" from \"declared with none\"."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "React",
+      "en": "React"
+    },
+    {
+      "pt": "TypeScript",
+      "en": "TypeScript"
+    },
+    {
+      "pt": "Supabase",
+      "en": "Supabase"
+    },
+    {
+      "pt": "PostgreSQL",
+      "en": "PostgreSQL"
+    },
+    {
+      "pt": "Vite",
+      "en": "Vite"
+    }
+  ],
+  "status": "in-development",
+  "coldStart": false
+}
