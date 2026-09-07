@@ -1216,7 +1216,6 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
     padding: 1rem;
     text-align: center;
     background:
@@ -1237,12 +1236,6 @@ main {
     letter-spacing: 0.02em;
 }
 
-.project-fallback-tech {
-    font-size: 0.78rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    max-width: 32ch;
-}
 
 /* Estado in-development: nao e link, e nao deve parecer um. */
 .btn-modal-disabled {

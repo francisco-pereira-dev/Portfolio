@@ -94,16 +94,12 @@ Composição:
 - **Iniciais** grandes na cor de acento, derivadas do nome curto do projeto — a
   parte antes do travessão, até duas palavras: `Licas` → **L**,
   `3D Analyzer` → **3A**, `CadflowBankSystem` → **C**.
-- **Tecnologias** por baixo, em texto secundário, separadas por `·`.
+
+É só isso. As tecnologias saíram do bloco: no cartão já aparecem nas badges logo
+abaixo, e repeti-las era ler a mesma lista duas vezes com 100px de intervalo.
 
 Para leitores de ecrã é um `role="img"` com `aria-label` igual ao título do
-projeto; as iniciais e a lista de tecnologias vão `aria-hidden`, para não serem
-lidas duas vezes.
-
-**Uma redundância que deixo assinalada:** no cartão, as tecnologias aparecem
-duas vezes — no bloco de recurso e nas badges logo abaixo. O enunciado pedia as
-tecnologias no bloco, por isso mantive-as, mas é visível. Na modal não há
-redundância, porque a modal não tem badges. Se preferires, tiro-as do bloco.
+projeto; as iniciais vão `aria-hidden`, para não serem soletradas.
 
 ## Sub-secção Design → Código
 
@@ -157,13 +153,16 @@ gerado com Figma Make.
 
 ### Sobre o critério 6
 
-Testei os 22 links externos distintos. Três deram erro sem estarem partidos:
+Testei os 22 hrefs externos distintos com User-Agent de browser, para não apanhar
+falsos positivos. Resultado: **19 a 200, 1 a 999 e 2 a 404**.
 
-| URL | Código | Explicação |
+| URL | Código | Leitura |
 |---|---|---|
-| `linkedin.com/in/francisco-pereira-dev/` | **999** | Código anti-scraping do LinkedIn. Mantém-se 999 mesmo com User-Agent de browser; o link funciona |
-| Figma Make — Mr. Pizza | **404 → 200** | O Figma bloqueia agentes não-browser. Com User-Agent de Chrome devolve 200 e 763 KB de HTML |
-| Figma Make — Diane Arbus | **404 → 200** | Idem, 765 KB |
+| `linkedin.com/in/francisco-pereira-dev/` | **999** | Código anti-scraping do LinkedIn. Mantém-se com User-Agent de Chrome; o link funciona no browser |
+| Figma Make — Mr. Pizza | **200** | Com User-Agent de browser passa. Sem ele dava 404 |
+| Figma Make — Diane Arbus | **200** | Idem |
+| `github.com/francisco-pereira-dev/TI` | **404** | Partido a sério |
+| `github.com/francisco-pereira-dev/TI.git` | **404** | Partido a sério |
 
-Os restantes 19 devolveram 200, **exceto os dois URLs do `TI`**, que são um 404
-genuíno.
+Os restantes 17 devolveram 200. Sem contar com os dois do `TI`, os únicos hrefs
+que não são 200 são o do LinkedIn, e esse funciona.
