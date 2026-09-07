@@ -6,24 +6,28 @@
  * quirks mode. Isto passa o site para standards mode.
  */
 import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import type { Lang, Ui } from '../i18n';
 
 interface Props {
-  title: string;
-  description: string;
-  lang?: string;
+  lang: Lang;
+  ui: Ui;
 }
 
-const { title, description, lang = Astro.currentLocale ?? 'pt' } = Astro.props;
+const { lang, ui } = Astro.props;
+
+// pt-PT para o atributo do documento; o "pt" simples é o código da rota.
+const langDocumento = lang === 'pt' ? 'pt-PT' : 'en';
 ---
 
 <!DOCTYPE html>
-<html lang={lang} class="light-mode">
+<html lang={langDocumento} class="light-mode">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
     <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon" />
+
+    <Seo lang={lang} ui={ui} />
 
     {/* Poppins auto-alojada: sem pedidos a terceiros nem ligacao a dois dominios.
         O peso 400 e o do corpo de texto, o mais usado, por isso vem em preload. */}

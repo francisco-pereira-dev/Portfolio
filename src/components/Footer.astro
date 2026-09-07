@@ -1,15 +1,27 @@
 ---
 import type { Ui } from '../i18n';
+import site from '../data/site.json';
 
 interface Props {
   ui: Ui;
 }
 
 const { ui } = Astro.props;
+
+// Gerado no build, não escrito à mão.
+const ano = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="footer-content">
-    <p>{ui['footer-text']}</p>
+    <p>
+      <span class="footer-copy">&copy; {ano} {site.name}</span>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href={site.githubUrl} target="_blank" rel="noopener noreferrer">{ui['footer-github']}</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer">{ui['footer-linkedin']}</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href={site.sourceRepoUrl} target="_blank" rel="noopener noreferrer">{ui['footer-source']}</a>
+    </p>
   </div>
 </footer>

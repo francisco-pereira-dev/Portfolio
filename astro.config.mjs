@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 /**
  * Falha o build, cedo e de uma vez, se faltar alguma imagem de projeto.
@@ -100,7 +101,21 @@ export default defineConfig({
   site: 'https://franciscopereira.dev',
   base: '/',
 
-  integrations: [verificarImagensDosProjetos(), podarAssetsNaoReferenciados()],
+  integrations: [
+    verificarImagensDosProjetos(),
+    // Gera sitemap-index.xml e sitemap-0.xml com as duas linguas ligadas por
+    // xhtml:link, para os motores saberem que sao a mesma pagina em idiomas diferentes.
+    sitemap({
+      i18n: {
+        defaultLocale: 'pt',
+        locales: {
+          pt: 'pt-PT',
+          en: 'en',
+        },
+      },
+    }),
+    podarAssetsNaoReferenciados(),
+  ],
 
   i18n: {
     defaultLocale: 'pt',

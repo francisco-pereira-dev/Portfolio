@@ -12,6 +12,8 @@ const { ui } = Astro.props;
 
 <section id="contacts" class="contacts-section">
   <h2 class="section-heading reveal">{ui['contacts-heading']}</h2>
+  <p class="contacts-text reveal">{ui['contacts-text']}</p>
+
   <div class="contacts-row">
     <a href={`mailto:${site.email}`} class="contact-card-link reveal">
       <div class="contact-icon-circle">

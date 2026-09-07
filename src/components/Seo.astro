@@ -1,0 +1,96 @@
+---
+/**
+ * Toda a camada de SEO e de partilha social.
+ *
+ * Antes disto o site não tinha nada: sem Open Graph, sem Twitter cards, sem
+ * canonical, sem hreflang, sem JSON-LD, sem theme-color. Partilhar o link no
+ * LinkedIn não produzia pré-visualização nenhuma.
+ */
+import site from '../data/site.json';
+import grupos from '../data/skills.json';
+import { localeHref, otherLang, type Lang, type Ui } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  ui: Ui;
+}
+
+const { lang, ui } = Astro.props;
+
+const base = Astro.site ?? new URL('https://franciscopereira.dev/');
+const absoluto = (caminho: string) => new URL(caminho, base).href;
+
+const urlPagina = absoluto(localeHref[lang]);
+const urlOutra = absoluto(localeHref[otherLang(lang)]);
+const urlImagem = absoluto('/og-image.png');
+
+const titulo = ui['meta-title'];
+const descricao = ui['meta-description'];
+
+// pt_PT / en_GB, conforme pedido.
+const localeOg: Record<Lang, string> = { pt: 'pt_PT', en: 'en_GB' };
+
+// As tecnologias do JSON-LD saem da mesma fonte que a secção de competências,
+// para não haver duas listas a divergir.
+const tecnologias = grupos.flatMap((g) => g.items.map((i) => i.name));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: 'Full-Stack Developer',
+  description: descricao,
+  url: absoluto('/'),
+  image: urlImagem,
+  email: `mailto:${site.email}`,
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Instituto Politécnico de Leiria',
+  },
+  knowsAbout: tecnologias,
+  sameAs: [site.githubUrl, site.linkedinUrl],
+  nationality: {
+    '@type': 'Country',
+    name: 'PT',
+  },
+};
+---
+
+<title>{titulo}</title>
+<meta name="description" content={descricao} />
+
+{/* Canonical e alternativas de idioma */}
+<link rel="canonical" href={urlPagina} />
+<link rel="alternate" hreflang="pt-PT" href={absoluto('/')} />
+<link rel="alternate" hreflang="en" href={absoluto('/en/')} />
+<link rel="alternate" hreflang="x-default" href={absoluto('/')} />
+
+{/* Open Graph */}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={titulo} />
+<meta property="og:description" content={descricao} />
+<meta property="og:url" content={urlPagina} />
+<meta property="og:image" content={urlImagem} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={titulo} />
+<meta property="og:locale" content={localeOg[lang]} />
+<meta property="og:locale:alternate" content={localeOg[otherLang(lang)]} />
+
+{/* Twitter */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={titulo} />
+<meta name="twitter:description" content={descricao} />
+<meta name="twitter:image" content={urlImagem} />
+
+{/* Cor da barra do browser, uma por esquema — os valores são os --bg-color reais. */}
+<meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)" />
+
+{/* Dados estruturados só na página portuguesa, que é a canónica do site. */}
+{
+  lang === 'pt' && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  )
+}

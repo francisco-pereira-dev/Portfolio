@@ -6,11 +6,13 @@ interface Props {
 }
 
 const { ui } = Astro.props;
+
+const paragrafos = ['about-p1', 'about-p2', 'about-p3', 'about-p4', 'about-p5'] as const;
 ---
 
 <section id="about" class="about-section">
   <h2 class="section-heading reveal">{ui['about-heading']}</h2>
   <div class="about-content reveal">
-    <p>{ui['about-text']}</p>
+    {paragrafos.map((chave) => <p>{ui[chave]}</p>)}
   </div>
 </section>

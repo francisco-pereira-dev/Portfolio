@@ -1,82 +1,98 @@
 [
   {
-    "name": "HTML5",
-    "icon": "html5-plain",
-    "kind": "devicon"
+    "id": "languages",
+    "items": [
+      {
+        "name": "TypeScript",
+        "proofs": [{ "repo": "Licas", "private": true }, { "repo": "MR.PIZZA" }, { "repo": "Catalogo-Diane-Arbus" }]
+      },
+      {
+        "name": "JavaScript",
+        "proofs": [{ "repo": "3D-Analyzer" }, { "repo": "Portfolio" }, { "repo": "TI" }]
+      },
+      {
+        "name": "C++",
+        "proofs": [{ "repo": "3D-Analyzer" }, { "repo": "CadflowBankSystem" }]
+      },
+      {
+        "name": "Java",
+        "proofs": [{ "repo": "DAE" }]
+      },
+      {
+        "name": "PHP",
+        "proofs": [{ "repo": "Ainet2425" }, { "repo": "TI" }]
+      },
+      {
+        "name": "HTML5, CSS3",
+        "proofs": [{ "repo": "Portfolio" }, { "repo": "MR.PIZZA" }, { "repo": "Catalogo-Diane-Arbus" }]
+      }
+    ]
   },
   {
-    "name": "CSS3",
-    "icon": "css3-plain",
-    "kind": "devicon"
+    "id": "frameworks",
+    "items": [
+      {
+        "name": "React",
+        "proofs": [{ "repo": "Licas", "private": true }, { "repo": "MR.PIZZA" }, { "repo": "Catalogo-Diane-Arbus" }]
+      },
+      {
+        "name": "Vue 3",
+        "proofs": [{ "repo": "3D-Analyzer" }]
+      },
+      {
+        "name": "Astro",
+        "proofs": [{ "repo": "Portfolio" }]
+      },
+      {
+        "name": "Laravel",
+        "proofs": [{ "repo": "Ainet2425" }]
+      },
+      {
+        "name": "Three.js / WebGL",
+        "proofs": [{ "repo": "3D-Analyzer" }]
+      },
+      {
+        "name": "MFC",
+        "proofs": [{ "repo": "CadflowBankSystem" }]
+      }
+    ]
   },
   {
-    "name": "JavaScript",
-    "icon": "javascript-plain",
-    "kind": "devicon"
+    "id": "data",
+    "items": [
+      {
+        "name": "PostgreSQL / Supabase",
+        "proofs": [{ "repo": "Licas", "private": true }]
+      },
+      {
+        "name": "MySQL",
+        "proofs": [{ "repo": "Ainet2425" }]
+      },
+      {
+        "name": "REST APIs",
+        "proofs": [{ "repo": "DAE" }, { "repo": "Ainet2425" }, { "repo": "TI" }]
+      }
+    ]
   },
   {
-    "name": "TypeScript",
-    "icon": "typescript-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "Tailwind CSS",
-    "icon": "tailwindcss-original",
-    "kind": "devicon"
-  },
-  {
-    "name": "Node.js",
-    "icon": "nodejs-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "PHP",
-    "icon": "php-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "MySQL",
-    "icon": "mysql-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "Docker",
-    "icon": "docker-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "Python",
-    "icon": "python-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "C#",
-    "icon": "csharp-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "Java",
-    "icon": "java-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "Linux",
-    "icon": "linux-plain",
-    "kind": "devicon"
-  },
-  {
-    "name": "Git/GitHub",
-    "icon": "github-original",
-    "kind": "devicon"
-  },
-  {
-    "name": "REST APIs",
-    "icon": "{API}",
-    "kind": "text"
-  },
-  {
-    "name": "OutSystems",
-    "icon": "OS",
-    "kind": "text"
+    "id": "tools",
+    "items": [
+      {
+        "name": "Docker",
+        "proofs": [{ "repo": "DAE" }]
+      },
+      {
+        "name": "Vite",
+        "proofs": [{ "repo": "Licas", "private": true }, { "repo": "Ainet2425" }, { "repo": "DAE" }]
+      },
+      {
+        "name": "Git",
+        "proofs": [{ "allRepos": true }]
+      },
+      {
+        "name": "OutSystems",
+        "proofs": [{ "repo": "PAP" }]
+      }
+    ]
   }
 ]

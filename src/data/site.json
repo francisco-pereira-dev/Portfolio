@@ -1,8 +1,11 @@
 {
+  "name": "Francisco Pereira",
+  "githubUser": "francisco-pereira-dev",
   "email": "franciscojrp1004@gmail.com",
   "linkedinHandle": "@francisco-pereira-dev",
   "linkedinUrl": "https://www.linkedin.com/in/francisco-pereira-dev/",
   "githubHandle": "@francisco-pereira-dev",
   "githubUrl": "https://github.com/francisco-pereira-dev",
-  "cvPath": "assets/docs/CV.pdf"
+  "cvPath": "assets/docs/CV.pdf",
+  "sourceRepoUrl": "https://github.com/francisco-pereira-dev/Portfolio"
 }

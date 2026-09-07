@@ -31,7 +31,7 @@ const ui = translations[lang];
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title={ui['meta-title']} description={ui['meta-description']} lang={lang}>
+<BaseLayout lang={lang} ui={ui}>
   <OverlayMenu ui={ui} />
 
   <Navbar ui={ui} lang={lang} />

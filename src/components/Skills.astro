@@ -1,27 +1,68 @@
 ---
+/**
+ * Competências, agrupadas e com prova.
+ *
+ * Cada tecnologia liga ao repositório que a demonstra. É o que distingue esta
+ * secção de uma lista de palavras: o link é verificável, não é uma afirmação.
+ * O Licas tem repositório privado, por isso aparece como texto sem link — a
+ * alternativa seria um 404.
+ */
 import type { Ui } from '../i18n';
-import skills from '../data/skills.json';
-import Icon from './Icon.astro';
+import site from '../data/site.json';
+import grupos from '../data/skills.json';
 
 interface Props {
   ui: Ui;
 }
 
 const { ui } = Astro.props;
+
+const urlRepo = (repo: string) => `${site.githubUrl}/${repo}`;
 ---
 
 <section id="skills" class="skills-section">
   <h2 class="section-heading reveal">{ui['skills-heading']}</h2>
+
   <div class="skills-grid" id="skills-grid-container">
     {
-      skills.map((skill) => (
-        <div class="skill-card">
-          {skill.kind === 'devicon' ? (
-            <Icon name={skill.icon} class="skill-icon" />
-          ) : (
-            <div class="skill-icon text-icon">{skill.icon}</div>
-          )}
-          <span class="skill-name">{skill.name}</span>
+      grupos.map((grupo) => (
+        <div class="skill-card skill-group">
+          <h3 class="skill-group-title">
+            {ui[`skills-group-${grupo.id}` as keyof Ui]}
+          </h3>
+
+          <ul class="skill-list">
+            {grupo.items.map((item) => (
+              <li class="skill-row">
+                <span class="skill-tech">{item.name}</span>
+                <span class="skill-proofs">
+                  {item.proofs.map((prova) =>
+                    'allRepos' in prova && prova.allRepos ? (
+                      <a
+                        class="proof-link"
+                        href={site.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {ui['skills-proof-all']}
+                      </a>
+                    ) : 'private' in prova && prova.private ? (
+                      <span class="proof-private">{prova.repo}</span>
+                    ) : (
+                      <a
+                        class="proof-link"
+                        href={urlRepo(prova.repo!)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {prova.repo}
+                      </a>
+                    )
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       ))
     }
