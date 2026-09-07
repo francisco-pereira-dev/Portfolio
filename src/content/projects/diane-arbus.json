@@ -41,7 +41,7 @@
   "demoUrl": "https://www.figma.com/make/6iWnse0T44fvjOiNlQpPvj/Catalogo-Diane-Arbus?t=ozhxbP5UJsBfrlE4-20&fullscreen=1",
   "status": "live",
   "coldStart": false,
-  "image": "../../../assets/images/dianearbus.png",
+  "image": "../../../assets/images/dianearbus.webp",
   "imageAlt": {
     "pt": "Catálogo Digital - Diane Arbus",
     "en": "Diane Arbus - Digital Catalog"
