@@ -1,36 +1,47 @@
-# 🌐 Portefólio Pessoal - Francisco Pereira
-
-Este repositório contém o código-fonte do meu portefólio digital. Foi desenhado e desenvolvido de raiz para agregar o meu percurso como estudante finalista de Engenharia Informática no Politécnico de Leiria, a minha experiência profissional em ambientes Low-Code e os meus projetos de destaque em Web Development e Bases de Dados.
-
-O objetivo técnico deste desenvolvimento foi criar uma aplicação web de alto desempenho, aplicando boas práticas de UI/UX, marcação semântica e responsividade absoluta. Serve como prova prática de que é possível construir interfaces modernas, interativas e fluidas recorrendo inteiramente a tecnologias web nativas.
-
-
-
-## 🛠️ Tecnologias e Boas Práticas
-
-
-* **Linguagens Core:** HTML5 Semântico, CSS3, Vanilla JavaScript (ES6+).
-* **Styling & Theming:** Uso intensivo de CSS Grid/Flexbox e *CSS Custom Properties* (variáveis) para implementação de um sistema de temas dinâmico (Dark/Light Mode) com persistência de estado.
-* **Performance:** Manipulação limpa do DOM e otimização de animações de scroll através da Web API `IntersectionObserver`, garantindo renderização eficiente sem sobrecarregar a *main thread*.
-
-
-
-## 🚀 Como executar o projeto
-
-Por se tratar de uma aplicação web estática (sem dependência de *build tools* complexas ou runtime de backend), a execução é direta. Basta clonar o repositório e iniciar:
-
+# franciscopereira.dev
+ 
+Source of my personal site. One page, two languages, fully static. Everything is
+generated at build time and served from GitHub Pages.
+ 
+**Live:** https://franciscopereira.dev
+ 
+## Stack
+ 
+Astro 7, TypeScript, plain CSS. No framework, no UI library, two runtime dependencies.
+ 
+## How it works
+ 
+Each project is a JSON file validated with a Zod schema. A project marked as live without
+a demo URL, or an image without alt text, breaks the build instead of reaching the page.
+ 
+Portuguese sits at the root, English at `/en/`. Interface text is in two dictionaries;
+project text lives inside each project's JSON as `pt`/`en` pairs, so a project cannot
+exist in only one language.
+ 
+Icons are SVG files inlined at build time. That replaced Devicon, which cost 11.7 MB of
+font files to draw fifteen glyphs. Poppins is self hosted in WOFF2, subset by
+`unicode-range`, around 52 KB in total.
+ 
+The build config carries three hooks I wrote: one lists every missing project image at
+once instead of stopping at the first, one prunes unreferenced files from the output, and
+one fails the build if any font format other than WOFF2 reaches `dist/`.
+ 
+## Running it
+ 
 ```bash
-git clone https://github.com/francisco-pereira-dev/Portfolio.git
-cd Portfolio
-
-# Podes abrir o ficheiro index.html diretamente no teu browser, 
-# ou utilizar a extensão "Live Server" do VS Code para Hot Reload.
+npm install
+npm run dev      # localhost:4321
+npm run build    # static output in dist/
 ```
-
-
-## 📫 Contactos e Networking
-
-Estou ativamente à procura de integrar projetos e equipas onde possa aplicar os meus conhecimentos de Backend e Frontend, resolver desafios lógicos e continuar a evoluir como Engenheiro de Software.
-
-* **LinkedIn:** [francisco-pereira-dev](https://www.linkedin.com/in/francisco-pereira-dev/)
-* **Email:** franciscojrp1004@gmail.com
+ 
+Node 22.12 or newer.
+ 
+## Known gaps
+ 
+No 404 page, no `prefers-reduced-motion`, and no tests or linter in the pipeline.
+ 
+## Contact
+ 
+- Email: franciscojrp1004@gmail.com
+- LinkedIn: [francisco-pereira-dev](https://www.linkedin.com/in/francisco-pereira-dev)
+ 
