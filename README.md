@@ -1,36 +1,33 @@
-# 🌐 Portefólio Pessoal - Francisco Pereira
+# franciscopereira.dev
 
-Este repositório contém o código-fonte do meu portefólio digital. Foi desenhado e desenvolvido de raiz para agregar o meu percurso como estudante finalista de Engenharia Informática no Politécnico de Leiria, a minha experiência profissional em ambientes Low-Code e os meus projetos de destaque em Web Development e Bases de Dados.
+My personal portfolio. Static site built with Astro, bilingual (PT/EN), deployed to
+GitHub Pages on every push to `main`.
 
-O objetivo técnico deste desenvolvimento foi criar uma aplicação web de alto desempenho, aplicando boas práticas de UI/UX, marcação semântica e responsividade absoluta. Serve como prova prática de que é possível construir interfaces modernas, interativas e fluidas recorrendo inteiramente a tecnologias web nativas.
+**Live:** https://franciscopereira.dev
 
+<!-- TODO: screenshot -->
 
+## The part worth reading
 
-## 🛠️ Tecnologias e Boas Práticas
+Astro does not fail loudly when a project image is missing, and it ships the original
+of every collection image even when only the optimised variants get used. So the build
+config carries three hooks of my own:
 
+| Hook | When | What it does |
+|---|---|---|
+| `verificarImagensDosProjetos` | `astro:config:setup` | Lists *every* missing project image at once and fails the build. Astro alone stops at the first one. |
+| `podarAssetsNaoReferenciados` | `astro:build:done` | Scans the emitted HTML/CSS/JS/JSON/XML/TXT and deletes anything in `dist/_astro/` that nothing references. |
+| `garantirQueAsTTFnaoSaem` | `astro:build:done` | Fails the build if a `.ttf`, `.otf` or `.eot` reaches `dist/`. Only WOFF2 is allowed to ship. |
 
-* **Linguagens Core:** HTML5 Semântico, CSS3, Vanilla JavaScript (ES6+).
-* **Styling & Theming:** Uso intensivo de CSS Grid/Flexbox e *CSS Custom Properties* (variáveis) para implementação de um sistema de temas dinâmico (Dark/Light Mode) com persistência de estado.
-* **Performance:** Manipulação limpa do DOM e otimização de animações de scroll através da Web API `IntersectionObserver`, garantindo renderização eficiente sem sobrecarregar a *main thread*.
+The project content model is validated with Zod, and five `superRefine` rules make
+invalid states unbuildable: a `live` project without a demo URL fails, an `in-development`
+one *with* a demo URL fails, and an image without alt text fails.
 
+## Stack
 
+- **Astro 7.2.10**, static output, no adapter. Requires Node >= 22.12.
+- **TypeScript** in Astro's `strict` config. Every component has a typed `Props` interface.
+- **One CSS file**, 1317 lines, 31 custom properties. No Tailwind, no CSS framework.
+- Two runtime dependencies: `astro` and `@astrojs/sitemap`.
 
-## 🚀 Como executar o projeto
-
-Por se tratar de uma aplicação web estática (sem dependência de *build tools* complexas ou runtime de backend), a execução é direta. Basta clonar o repositório e iniciar:
-
-```bash
-git clone https://github.com/francisco-pereira-dev/Portfolio.git
-cd Portfolio
-
-# Podes abrir o ficheiro index.html diretamente no teu browser, 
-# ou utilizar a extensão "Live Server" do VS Code para Hot Reload.
-```
-
-
-## 📫 Contactos e Networking
-
-Estou ativamente à procura de integrar projetos e equipas onde possa aplicar os meus conhecimentos de Backend e Frontend, resolver desafios lógicos e continuar a evoluir como Engenheiro de Software.
-
-* **LinkedIn:** [francisco-pereira-dev](https://www.linkedin.com/in/francisco-pereira-dev/)
-* **Email:** franciscojrp1004@gmail.com
+## Structure
