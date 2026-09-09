@@ -2,33 +2,37 @@
   "slug": "3d-analyzer",
   "order": 4,
   "title": {
-    "pt": "3D Analyzer — Motor C++ com dashboard Vue",
-    "en": "3D Analyzer — C++ engine with a Vue dashboard"
+    "pt": "3D Analyzer — Inspetor de malhas com motor C++",
+    "en": "3D Analyzer — Mesh inspector with a C++ engine"
   },
   "tagline": {
-    "pt": "Projeto pessoal · Arquitetura híbrida",
-    "en": "Personal project · Hybrid architecture"
+    "pt": "Projeto pessoal · C++ e WebGL",
+    "en": "Personal project · C++ and WebGL"
   },
   "description": {
-    "pt": "Dashboard de orçamentação de peças 3D com arquitetura híbrida: um motor nativo em C++ faz o processamento geométrico pesado — bounding box, vértices, polígonos — e uma interface em Vue 3 com Three.js renderiza o modelo em WebGL. Dois processos, duas linguagens, uma camada de comunicação entre eles.",
-    "en": "A 3D part quoting dashboard with a hybrid architecture: a native C++ engine handles the heavy geometry work — bounding box, vertices, polygons — while a Vue 3 interface renders the model in WebGL through Three.js. Two processes, two languages, one communication layer between them."
+    "pt": "Inspetor de malhas 3D com arquitetura híbrida: um motor nativo em C++ lê ficheiros STL e OBJ em streaming e calcula a geometria — volume, área e contagem de triângulos — enquanto uma interface em Vue 3 com Three.js mostra o modelo em WebGL e produz a estimativa de material.",
+    "en": "A 3D mesh inspector with a hybrid architecture: a native C++ engine streams STL and OBJ files and computes the geometry — volume, area and triangle count — while a Vue 3 interface renders the model in WebGL through Three.js and produces the material estimate."
   },
   "features": [
     {
-      "pt": "Motor de geometria em C++ nativo, para processar malhas que bloqueariam a interface se corressem no browser.",
-      "en": "Native C++ geometry engine, for meshes that would freeze the interface if processed in the browser."
+      "pt": "Volume calculado pelo teorema da divergência sobre os triângulos da malha, em vez da caixa envolvente: uma esfera deixou de custar como o cubo que a contém.",
+      "en": "Volume computed with the divergence theorem over the mesh triangles instead of the bounding box: a sphere no longer costs the same as the cube around it."
     },
     {
-      "pt": "Visualização em WebGL com Three.js, num dashboard Vue 3.",
-      "en": "WebGL visualisation with Three.js inside a Vue 3 dashboard."
+      "pt": "Resíduo de fecho calculado no mesmo passo, para dizer se o volume é de confiança — uma malha com buracos pode dar o valor certo por acidente.",
+      "en": "Mesh closure residual computed in the same pass, to say whether the volume can be trusted — a mesh with holes can produce the right number by accident."
     },
     {
-      "pt": "Gestão explícita de memória gráfica: as malhas e materiais antigos são destruídos antes de cada novo modelo ser carregado.",
-      "en": "Explicit GPU memory management: old meshes and materials are disposed before each new model loads."
+      "pt": "Leitura de STL em streaming, com memória constante independentemente do tamanho do ficheiro.",
+      "en": "Streaming STL parsing, with constant memory regardless of file size."
     },
     {
-      "pt": "Exportação de orçamentos para PDF e Excel.",
-      "en": "Quote export to PDF and Excel."
+      "pt": "Visualização em WebGL com Three.js, com gestão explícita da memória gráfica entre modelos.",
+      "en": "WebGL visualisation with Three.js, with explicit GPU memory management between models."
+    },
+    {
+      "pt": "34 testes compilados contra o motor real, dois deles a provar que o volume varia com a translação e o resíduo não.",
+      "en": "34 tests compiled against the real engine — two of them exist to prove that volume changes under translation while the residual does not."
     }
   ],
   "tech": [
