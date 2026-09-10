@@ -149,24 +149,37 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     const modal = iModal < 0 ? '' : html.slice(iModal, fimModal < 0 ? undefined : fimModal);
     const c = `projetos.${slug}`;
 
-    if (p.title) {
-      exigir(um(cartao, /<h3 class="project-title">([\s\S]*?)<\/h3>/) === p.title[lang], lang, `${c}.title (cartão)`, p.title[lang], um(cartao, /<h3 class="project-title">([\s\S]*?)<\/h3>/) ?? '(cartão em falta)');
-      exigir(um(modal, /<h3 class="modal-title"[^>]*>([\s\S]*?)<\/h3>/) === p.title[lang], lang, `${c}.title (modal)`, p.title[lang], um(modal, /<h3 class="modal-title"[^>]*>([\s\S]*?)<\/h3>/) ?? '(modal em falta)');
+    // Cada campo só é verificado nas línguas que o canónico fixa.
+    if (p.title?.[lang] !== undefined) {
+      const tc = um(cartao, /<h3 class="project-title">([\s\S]*?)<\/h3>/);
+      const tm = um(modal, /<h3 class="modal-title"[^>]*>([\s\S]*?)<\/h3>/);
+      exigir(tc === p.title[lang], lang, `${c}.title (cartão)`, p.title[lang], tc ?? '(cartão em falta)');
+      exigir(tm === p.title[lang], lang, `${c}.title (modal)`, p.title[lang], tm ?? '(modal em falta)');
     }
-    if (p.tagline) {
+    if (p.tagline?.[lang] !== undefined) {
       const t = um(cartao, /<p class="project-tagline">([\s\S]*?)<\/p>/);
       exigir(t === p.tagline[lang], lang, `${c}.tagline`, p.tagline[lang], t ?? '(sem tagline)');
     }
-    if (p.tech) {
+    // tech: lista comum às duas línguas, ou { pt: [...], en: [...] } quando diferem.
+    const tech = Array.isArray(p.tech) ? p.tech : p.tech?.[lang];
+    if (tech) {
       const t = todos(cartao, /<span class="tech-badge">([\s\S]*?)<\/span>/g);
-      exigir(JSON.stringify(t) === JSON.stringify(p.tech), lang, `${c}.tech`, fmtLista(p.tech), fmtLista(t));
+      exigir(JSON.stringify(t) === JSON.stringify(tech), lang, `${c}.tech`, fmtLista(tech), fmtLista(t));
     }
-    if (p.description) {
+    if (p.imageAlt?.[lang] !== undefined) {
+      const alt = (frag) => {
+        const m = frag.match(/<img\b[^>]*\balt="([^"]*)"/);
+        return m ? norm(m[1]) : null;
+      };
+      exigir(alt(cartao) === p.imageAlt[lang], lang, `${c}.imageAlt (cartão)`, p.imageAlt[lang], alt(cartao) ?? '(sem imagem)');
+      exigir(alt(modal) === p.imageAlt[lang], lang, `${c}.imageAlt (modal)`, p.imageAlt[lang], alt(modal) ?? '(sem imagem)');
+    }
+    if (p.description?.[lang] !== undefined) {
       const t = um(modal, /<p class="modal-desc">([\s\S]*?)<\/p>/);
       exigir(t === p.description[lang], lang, `${c}.description`, p.description[lang], t ?? '(sem descrição)');
     }
     if (p.features) {
-      const ul = um.call(null, modal, /<ul class="modal-features">([\s\S]*?)<\/ul>/) === null ? '' : modal.match(/<ul class="modal-features">([\s\S]*?)<\/ul>/)[1];
+      const ul = (modal.match(/<ul class="modal-features">([\s\S]*?)<\/ul>/) || ['', ''])[1];
       const t = todos(ul, /<li>([\s\S]*?)<\/li>/g);
       exigir(t.length === p.features.length, lang, `${c}.features (quantidade)`, String(p.features.length), String(t.length));
       p.features.forEach((f, i) => exigir(t[i] === f[lang], lang, `${c}.features[${i}]`, f[lang], t[i] ?? '(em falta)'));
@@ -194,7 +207,7 @@ console.log(`  pt: ${contagem.pt} verificações em ${PAGINAS.pt}`);
 console.log(`  en: ${contagem.en} verificações em ${PAGINAS.en}`);
 console.log('');
 console.log(`Não coberto pelo canónico (informativo, não falha): ${fora.interface.length} chave(s) de i18n e campos de ${foraProj.length} projeto(s)`);
-console.log(`  i18n: ${fora.interface.join(', ')}`);
+console.log(`  i18n: ${fora.interface.join(', ') || '(nenhuma)'}`);
 for (const [slug, campos] of foraProj) console.log(`  ${slug}: ${campos.join(', ')}`);
 console.log('');
 
