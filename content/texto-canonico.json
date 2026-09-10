@@ -1,0 +1,629 @@
+{
+  "_sobre": {
+    "descricao": "Texto aprovado do portefólio, tal como foi entregue nos enunciados. É a fonte de verdade de npm run check:texto, que o compara com o HTML gerado. Não se edita à mão: uma mudança de texto do site entra aqui primeiro, copiada do enunciado que a aprova, e só depois nos ficheiros de dados.",
+    "fontes": {
+      "3.1": "mensagem de 2026-09-07T17:22:49.725Z no registo da sessão de migração",
+      "3.2": "mensagem de 2026-09-07T18:02:23.721Z no registo da sessão de migração",
+      "3.3": "mensagem de 2026-09-09T22:52:02.877Z no registo da sessão de migração"
+    },
+    "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true."
+  },
+  "interface": {
+    "hero": {
+      "hero-title": {
+        "pt": "Francisco Pereira"
+      },
+      "hero-subtitle": {
+        "pt": "Construo aplicações web full-stack — do esquema da base de dados à interface que o utilizador vê.",
+        "en": "I build full-stack web applications — from the database schema to the interface the user sees."
+      },
+      "hero-paragraph": {
+        "pt": "Finalista de Engenharia Informática no Politécnico de Leiria, em horário pós-laboral — as aulas são à noite e os dias estão livres para trabalhar. Estagiei na ITGlee e sou hoje o developer responsável por uma plataforma de encomendas online a entrar em produção para um cliente real.",
+        "en": "Final-year Computer Engineering student at the Polytechnic of Leiria, on the evening programme — classes are at night and my days are free to work. Former intern at ITGlee, currently the developer behind an online ordering platform going live for a real client."
+      },
+      "hero-badge": {
+        "pt": "Disponível imediatamente para trabalhar a tempo inteiro",
+        "en": "Available immediately for full-time work"
+      },
+      "hero-btn-projects": {
+        "pt": "Ver projetos",
+        "en": "View projects"
+      },
+      "hero-btn-cv": {
+        "pt": "Descarregar CV",
+        "en": "Download CV"
+      },
+      "hero-btn-contact": {
+        "pt": "Falar comigo",
+        "en": "Get in touch"
+      }
+    },
+    "sobre": {
+      "about-p1": {
+        "pt": "Comecei a programar no 10.º ano e nunca mais parei. O que era curiosidade — perceber o que acontecia do outro lado do ecrã — tornou-se a forma como resolvo problemas.",
+        "en": "I started programming in the 10th grade and never stopped. What began as curiosity — figuring out what happened on the other side of the screen — became how I solve problems."
+      },
+      "about-p2": {
+        "pt": "No secundário aprendi as bases de várias linguagens e estagiei na ITGlee, onde construí em OutSystems uma loja online de informática com gestão de armazém: catálogo e checkout para o cliente, aplicação de stock para quem gere o inventário. Foi o primeiro código meu a resolver o problema de uma empresa a sério, e foi a base sobre a qual construí a minha Prova de Aptidão Profissional.",
+        "en": "In secondary school I learned the fundamentals of several languages and interned at ITGlee, where I built an online computer-hardware store with warehouse management in OutSystems: catalogue and checkout for the customer, a stock application for whoever runs the inventory. It was the first code of mine to solve a real company's problem, and the foundation I built my secondary-school final project on."
+      },
+      "about-p3": {
+        "pt": "Na licenciatura em Engenharia Informática no Politécnico de Leiria aprofundei isso em Bases de Dados, Algoritmos e Estruturas de Dados, Programação Avançada, Engenharia de Software e Desenvolvimento de Aplicações Distribuídas — e apliquei-o em projetos de equipa com prazos reais, requisitos que mudavam a meio e código que outras pessoas tinham de conseguir ler.",
+        "en": "My Computer Engineering degree at the Polytechnic of Leiria took that further — Databases, Data Structures & Algorithms, Advanced Programming, Software Engineering and Distributed Applications — applied in team projects with real deadlines, shifting requirements, and code other people had to read."
+      },
+      "about-p4": {
+        "pt": "Hoje sou o developer responsável pelo Licas, uma plataforma de encomendas online para uma pastelaria artesanal: React, TypeScript e Supabase, com controlo de acessos por níveis, gestão de encomendas e orçamentos, cupões e notificações automáticas. É o meu primeiro projeto com utilizadores reais e consequências reais — e onde aprendi mais em menos tempo.",
+        "en": "Today I'm the developer behind Licas, an online ordering platform for an artisan pastry shop: React, TypeScript and Supabase, with role-based access, order and quote management, coupons and automated notifications. It's my first project with real users and real consequences — and where I've learned the most in the least time."
+      },
+      "about-p5": {
+        "pt": "Procuro o meu primeiro emprego a tempo inteiro como developer. Como as aulas são em horário pós-laboral, posso começar já. Interessa-me trabalho onde o backend importa: arquitetura, modelo de dados e segurança.",
+        "en": "I'm looking for my first full-time developer role. Because my classes run in the evening, I can start now. I'm drawn to work where the backend matters: architecture, data modelling and security."
+      }
+    },
+    "competencias": {
+      "skills-group-languages": {
+        "pt": "Linguagens",
+        "en": "Languages"
+      },
+      "skills-group-frameworks": {
+        "pt": "Frameworks e bibliotecas",
+        "en": "Frameworks & libraries"
+      },
+      "skills-group-data": {
+        "pt": "Dados",
+        "en": "Data"
+      },
+      "skills-group-tools": {
+        "pt": "Ferramentas e plataformas",
+        "en": "Tools & platforms"
+      },
+      "skills-proof-all": {
+        "pt": "todos"
+      }
+    },
+    "projetos": {
+      "projects-design-heading": {
+        "pt": "Design → Código",
+        "en": "Design → Code"
+      },
+      "projects-design-text": {
+        "pt": "Dois exercícios de tradução: do protótipo em Figma até à interface funcional. O foco aqui é fidelidade visual e comportamento, não arquitetura.",
+        "en": "Two translation exercises: from Figma prototype to working interface. The focus here is visual fidelity and behaviour, not architecture."
+      },
+      "project-status-in-development": {
+        "pt": "Em desenvolvimento",
+        "en": "In development"
+      }
+    },
+    "contactos": {
+      "contacts-heading": {
+        "pt": "Vamos falar",
+        "en": "Let's talk"
+      },
+      "contacts-text": {
+        "pt": "Estou à procura do meu primeiro emprego a tempo inteiro como developer. Se tens uma vaga, um projeto, ou só uma pergunta sobre algum destes trabalhos — escreve.",
+        "en": "I'm looking for my first full-time developer role. If you have an opening, a project, or just a question about any of this work — get in touch."
+      }
+    },
+    "rodape": {
+      "footer-github": {
+        "pt": "GitHub",
+        "en": "GitHub"
+      },
+      "footer-linkedin": {
+        "pt": "LinkedIn",
+        "en": "LinkedIn"
+      },
+      "footer-source": {
+        "pt": "Código deste site",
+        "en": "Source code"
+      },
+      "_linha": {
+        "pt": "© 2026 Francisco Pereira · GitHub · LinkedIn · Código deste site",
+        "en": "© 2026 Francisco Pereira · GitHub · LinkedIn · Source code",
+        "nota": "O ano é gerado no build; o check:texto aceita qualquer ano de 4 dígitos no lugar de 2026."
+      }
+    },
+    "seo": {
+      "meta-title": {
+        "pt": "Francisco Pereira — Full-Stack Developer | Portefólio",
+        "en": "Francisco Pereira — Full-Stack Developer | Portfolio"
+      },
+      "meta-description": {
+        "pt": "Developer full-stack e finalista de Engenharia Informática no Politécnico de Leiria. React, TypeScript, Laravel, Java e Docker. Plataforma de encomendas online em produção para cliente real. Disponível para primeiro emprego.",
+        "en": "Full-stack developer and final-year Computer Engineering student at the Polytechnic of Leiria. React, TypeScript, Laravel, Java and Docker. Online ordering platform in production for a real client. Available for a first full-time role."
+      }
+    }
+  },
+  "competencias": {
+    "_origem": "3.1",
+    "itens": [
+      {
+        "grupo": "languages",
+        "name": "TypeScript",
+        "proofs": [
+          {
+            "repo": "Licas",
+            "private": true
+          },
+          {
+            "repo": "MR.PIZZA"
+          },
+          {
+            "repo": "Catalogo-Diane-Arbus"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "JavaScript",
+        "proofs": [
+          {
+            "repo": "3D-Analyzer"
+          },
+          {
+            "repo": "Portfolio"
+          },
+          {
+            "repo": "TI"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "C++",
+        "proofs": [
+          {
+            "repo": "3D-Analyzer"
+          },
+          {
+            "repo": "CadflowBankSystem"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "Java",
+        "proofs": [
+          {
+            "repo": "DAE"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "PHP",
+        "proofs": [
+          {
+            "repo": "Ainet2425"
+          },
+          {
+            "repo": "TI"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "HTML5, CSS3",
+        "proofs": [
+          {
+            "repo": "Portfolio"
+          },
+          {
+            "repo": "MR.PIZZA"
+          },
+          {
+            "repo": "Catalogo-Diane-Arbus"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "React",
+        "proofs": [
+          {
+            "repo": "Licas",
+            "private": true
+          },
+          {
+            "repo": "MR.PIZZA"
+          },
+          {
+            "repo": "Catalogo-Diane-Arbus"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "Vue 3",
+        "proofs": [
+          {
+            "repo": "3D-Analyzer"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "Astro",
+        "proofs": [
+          {
+            "repo": "Portfolio"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "Laravel",
+        "proofs": [
+          {
+            "repo": "Ainet2425"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "Three.js / WebGL",
+        "proofs": [
+          {
+            "repo": "3D-Analyzer"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "MFC",
+        "proofs": [
+          {
+            "repo": "CadflowBankSystem"
+          }
+        ]
+      },
+      {
+        "grupo": "data",
+        "name": "PostgreSQL / Supabase",
+        "proofs": [
+          {
+            "repo": "Licas",
+            "private": true
+          }
+        ]
+      },
+      {
+        "grupo": "data",
+        "name": "MySQL",
+        "proofs": [
+          {
+            "repo": "Ainet2425"
+          }
+        ]
+      },
+      {
+        "grupo": "data",
+        "name": "REST APIs",
+        "proofs": [
+          {
+            "repo": "DAE"
+          },
+          {
+            "repo": "Ainet2425"
+          },
+          {
+            "repo": "TI"
+          }
+        ]
+      },
+      {
+        "grupo": "tools",
+        "name": "Docker",
+        "proofs": [
+          {
+            "repo": "DAE"
+          }
+        ]
+      },
+      {
+        "grupo": "tools",
+        "name": "Vite",
+        "proofs": [
+          {
+            "repo": "Licas",
+            "private": true
+          },
+          {
+            "repo": "Ainet2425"
+          },
+          {
+            "repo": "DAE"
+          }
+        ]
+      },
+      {
+        "grupo": "tools",
+        "name": "Git",
+        "proofs": [
+          {
+            "allRepos": true
+          }
+        ]
+      },
+      {
+        "grupo": "tools",
+        "name": "OutSystems",
+        "proofs": [
+          {
+            "repo": "PAP"
+          }
+        ]
+      }
+    ],
+    "removidas": [
+      "C#",
+      "Python",
+      "Node.js",
+      "Tailwind CSS",
+      "Linux"
+    ]
+  },
+  "projetos": {
+    "ordem": {
+      "_origem": "3.2",
+      "slugs": [
+        "licas",
+        "dae",
+        "ainet",
+        "3d-analyzer",
+        "cadflow-bank-system",
+        "hotel-inteligente",
+        "gest",
+        "mr-pizza",
+        "diane-arbus"
+      ]
+    },
+    "licas": {
+      "_origem": "3.2",
+      "order": 1,
+      "status": "in-development",
+      "coldStart": false,
+      "tech": [
+        "React",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "Vite"
+      ],
+      "repoUrl": null,
+      "demoUrl": null,
+      "tagline": {
+        "pt": "Cliente real · Em desenvolvimento",
+        "en": "Real client · In development"
+      },
+      "title": {
+        "pt": "Licas — Plataforma de encomendas online",
+        "en": "Licas — Online ordering platform"
+      },
+      "description": {
+        "pt": "Plataforma de encomendas online para uma pastelaria artesanal, desenvolvida de raiz como developer contratado. Loja para o cliente final e back-office completo para o negócio: catálogo com alergénios, encomendas e pedidos de orçamento, cupões, contas de cliente com níveis de permissão e notificações automáticas para a gestão.",
+        "en": "An online ordering platform for an artisan pastry shop, built from scratch as the contracted developer. Customer-facing storefront plus a full back-office: allergen-aware catalogue, orders and quote requests, coupons, customer accounts with permission levels, and automated notifications for the business."
+      },
+      "features": [
+        {
+          "pt": "Controlo de acessos por níveis, validado na base de dados e não apenas na interface.",
+          "en": "Role-based access enforced at the database level, not just in the interface."
+        },
+        {
+          "pt": "Dois fluxos de compra no mesmo sistema: catálogo com preço fixo e pedidos de orçamento.",
+          "en": "Two purchase flows in one system: fixed-price catalogue and quote requests."
+        },
+        {
+          "pt": "Sistema de cupões com resgate atómico, à prova de utilização duplicada.",
+          "en": "Coupon system with atomic redemption, safe against double use."
+        },
+        {
+          "pt": "Gestão de 14 alergénios, com distinção entre \"não declarado\" e \"declarado sem alergénios\".",
+          "en": "14-allergen management, distinguishing \"undeclared\" from \"declared with none\"."
+        }
+      ]
+    },
+    "3d-analyzer": {
+      "_origem": "3.2 (campos estruturais) + 3.3 (texto)",
+      "order": 4,
+      "status": "no-demo",
+      "coldStart": false,
+      "tech": [
+        "C++",
+        "Vue 3",
+        "Three.js",
+        "WebGL"
+      ],
+      "repoUrl": "https://github.com/francisco-pereira-dev/3D-Analyzer",
+      "demoUrl": null,
+      "tagline": {
+        "pt": "Projeto pessoal · C++ e WebGL",
+        "en": "Personal project · C++ and WebGL"
+      },
+      "title": {
+        "pt": "3D Analyzer — Inspetor de malhas com motor C++",
+        "en": "3D Analyzer — Mesh inspector with a C++ engine"
+      },
+      "description": {
+        "pt": "Inspetor de malhas 3D com arquitetura híbrida: um motor nativo em C++ lê ficheiros STL e OBJ em streaming e calcula a geometria — volume, área e contagem de triângulos — enquanto uma interface em Vue 3 com Three.js mostra o modelo em WebGL e produz a estimativa de material.",
+        "en": "A 3D mesh inspector with a hybrid architecture: a native C++ engine streams STL and OBJ files and computes the geometry — volume, area and triangle count — while a Vue 3 interface renders the model in WebGL through Three.js and produces the material estimate."
+      },
+      "features": [
+        {
+          "pt": "Volume calculado pelo teorema da divergência sobre os triângulos da malha, em vez da caixa envolvente: uma esfera deixou de custar como o cubo que a contém.",
+          "en": "Volume computed with the divergence theorem over the mesh triangles instead of the bounding box: a sphere no longer costs the same as the cube around it."
+        },
+        {
+          "pt": "Resíduo de fecho calculado no mesmo passo, para dizer se o volume é de confiança — uma malha com buracos pode dar o valor certo por acidente.",
+          "en": "Mesh closure residual computed in the same pass, to say whether the volume can be trusted — a mesh with holes can produce the right number by accident."
+        },
+        {
+          "pt": "Leitura de STL em streaming, com memória constante independentemente do tamanho do ficheiro.",
+          "en": "Streaming STL parsing, with constant memory regardless of file size."
+        },
+        {
+          "pt": "Visualização em WebGL com Three.js, com gestão explícita da memória gráfica entre modelos.",
+          "en": "WebGL visualisation with Three.js, with explicit GPU memory management between models."
+        },
+        {
+          "pt": "34 testes compilados contra o motor real, dois deles a provar que o volume varia com a translação e o resíduo não.",
+          "en": "34 tests compiled against the real engine — two of them exist to prove that volume changes under translation while the residual does not."
+        }
+      ]
+    },
+    "cadflow-bank-system": {
+      "_origem": "3.2",
+      "order": 5,
+      "status": "no-demo",
+      "coldStart": false,
+      "tech": [
+        "C++",
+        "MFC",
+        "Windows"
+      ],
+      "repoUrl": "https://github.com/francisco-pereira-dev/CadflowBankSystem",
+      "demoUrl": null,
+      "tagline": {
+        "pt": "Desafio técnico de empresa · Desktop",
+        "en": "Company technical challenge · Desktop"
+      },
+      "title": {
+        "pt": "CadflowBankSystem — Sistema bancário em C++/MFC",
+        "en": "CadflowBankSystem — Banking system in C++/MFC"
+      },
+      "description": {
+        "pt": "Desafio técnico proposto por uma empresa, resolvido em C++ nativo com MFC: gestão de contas, movimentos e transferências numa aplicação Windows de secretária. Sem framework web e sem rede de segurança — memória, estado e interface tratados à mão.",
+        "en": "A technical challenge set by a company, solved in native C++ with MFC: account, transaction and transfer management in a Windows desktop application. No web framework, no safety net — memory, state and UI handled by hand."
+      },
+      "features": [
+        {
+          "pt": "Modelo de domínio separado da interface: as classes Account, Transaction e BankManager não importam MFC.",
+          "en": "Domain model kept separate from the UI: the Account, Transaction and BankManager classes import no MFC."
+        },
+        {
+          "pt": "Gestão de contas, movimentos, transferências e consulta de saldos.",
+          "en": "Account, transaction, transfer and balance management."
+        },
+        {
+          "pt": "C++ sem coletor de lixo: o tempo de vida de cada objeto é uma decisão explícita.",
+          "en": "C++ with no garbage collector: every object's lifetime is an explicit decision."
+        }
+      ]
+    },
+    "gest": {
+      "_origem": "3.2",
+      "order": 7,
+      "tagline": {
+        "pt": "Estágio ITGlee · Prova de Aptidão Profissional",
+        "en": "ITGlee internship · Secondary-school final project"
+      },
+      "description": {
+        "pt": "Loja online de informática com gestão de armazém, construída em OutSystems durante o estágio na ITGlee e depois alargada como Prova de Aptidão Profissional. Catálogo e checkout para o cliente final, aplicação de stock para quem gere o inventário. O primeiro projeto em que tive de pensar em dois utilizadores ao mesmo tempo — quem compra e quem gere.",
+        "en": "An online computer-hardware store with warehouse management, built in OutSystems during my internship at ITGlee and later extended as my secondary-school final project. Catalogue and checkout for the customer, a stock application for whoever runs the inventory. The first project where I had to design for two users at once — the buyer and the manager."
+      }
+    },
+    "mr-pizza": {
+      "_origem": "3.2",
+      "order": 8,
+      "tech": [
+        "React",
+        "TypeScript",
+        "Figma"
+      ],
+      "tagline": {
+        "pt": "Design → Código",
+        "en": "Design → Code"
+      },
+      "description": {
+        "pt": "Plataforma de encomenda e entrega ao domicílio, construída a partir de um design meu no Figma. O protótipo inicial foi gerado com Figma Make; o meu trabalho está na modelação dos dados e no conteúdo — catálogo de produtos com preços e alergénios, e as lojas com moradas, contactos e localizações reais.",
+        "en": "An ordering and delivery platform built from a design of mine in Figma. The initial prototype was generated with Figma Make; my own work is in the data modelling and content — a product catalogue with prices and allergens, and the stores with real addresses, contacts and locations."
+      }
+    },
+    "diane-arbus": {
+      "_origem": "3.2",
+      "order": 9,
+      "tech": [
+        "React",
+        "TypeScript",
+        "Figma"
+      ],
+      "tagline": {
+        "pt": "Design → Código",
+        "en": "Design → Code"
+      },
+      "description": {
+        "pt": "Catálogo digital da obra da fotógrafa Diane Arbus, com um efeito de paginação em flipbook. O protótipo inicial foi gerado com Figma Make; o componente de flipbook — orquestração da animação e pré-carregamento das imagens — e as 37 obras com os respetivos textos de contexto são trabalho meu.",
+        "en": "A digital catalogue of photographer Diane Arbus's work, with a flipbook pagination effect. The initial prototype was generated with Figma Make; the flipbook component — animation orchestration and image preloading — and the 37 works with their context texts are my own work."
+      }
+    }
+  },
+  "_fora_do_canonico": {
+    "motivo": "Texto que nenhum dos três enunciados definiu: vem do site original, extraído na fase 2.2, ou foi mantido por instrução expressa (\"Mantém as features atuais\"). O check:texto não o verifica e lista-o como não coberto, para a lacuna ficar à vista.",
+    "interface": [
+      "overlay-about",
+      "overlay-skills",
+      "overlay-projects",
+      "overlay-contacts",
+      "hero-title [en]",
+      "about-heading",
+      "skills-heading",
+      "skills-proof-all [en]",
+      "projects-heading",
+      "project-btn-view-more",
+      "contact-title-email",
+      "contact-title-linkedin",
+      "contact-title-github",
+      "modal-btn-project",
+      "modal-btn-repo",
+      "modal-tooltip-note",
+      "nav-brand",
+      "a11y-menu-toggle",
+      "a11y-theme-toggle",
+      "a11y-lang-toggle",
+      "a11y-social-linkedin",
+      "a11y-social-github",
+      "a11y-social-email",
+      "a11y-avatar-alt"
+    ],
+    "projetos": {
+      "ainet": [
+        "title",
+        "description",
+        "imageAlt",
+        "features",
+        "tech"
+      ],
+      "dae": [
+        "title",
+        "description",
+        "imageAlt",
+        "features",
+        "tech"
+      ],
+      "diane-arbus": [
+        "title",
+        "imageAlt",
+        "features"
+      ],
+      "gest": [
+        "title",
+        "imageAlt",
+        "features",
+        "tech"
+      ],
+      "hotel-inteligente": [
+        "title",
+        "description",
+        "imageAlt",
+        "features",
+        "tech"
+      ],
+      "mr-pizza": [
+        "title",
+        "imageAlt",
+        "features"
+      ]
+    }
+  }
+}

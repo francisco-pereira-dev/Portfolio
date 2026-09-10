@@ -10,6 +10,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check:i18n": "node scripts/check-i18n.mjs",
+    "check:texto": "node scripts/check-texto.mjs",
     "og": "node scripts/gerar-og.mjs"
   },
   "dependencies": {
