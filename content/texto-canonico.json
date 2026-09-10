@@ -4,14 +4,47 @@
     "fontes": {
       "3.1": "mensagem de 2026-09-07T17:22:49.725Z no registo da sessão de migração",
       "3.2": "mensagem de 2026-09-07T18:02:23.721Z no registo da sessão de migração",
-      "3.3": "mensagem de 2026-09-09T22:52:02.877Z no registo da sessão de migração"
+      "3.3": "mensagem de 2026-09-09T22:52:02.877Z no registo da sessão de migração",
+      "legado": "index.html e js/script.js no commit e0a67bc: o site original, de onde o texto foi extraído na fase 2.2",
+      "instrucao-2026-09-10": "hero-title e skills-proof-all em inglês, definidos pelo Francisco"
     },
-    "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true."
+    "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true.",
+    "extracao_legado": "Do e0a67bc: PT do conteúdo dos elementos com data-translate (e do data-tooltip), EN do objeto translations.en; aria-label do menu e do tema do setLanguage do script.js. Texto e atributos que o site nunca traduzia ficam com o mesmo valor nas duas línguas, como eram servidos. Só entrou o que coincide com os dados de hoje; a única alteração aplicada foi a autorizada (\"and\" -> \"e\" na primeira feature PT do Diane Arbus)."
   },
   "interface": {
+    "navegacao": {
+      "overlay-about": {
+        "_origem": "legado e0a67bc",
+        "pt": "Sobre",
+        "en": "About"
+      },
+      "overlay-skills": {
+        "_origem": "legado e0a67bc",
+        "pt": "Competências",
+        "en": "Skills"
+      },
+      "overlay-projects": {
+        "_origem": "legado e0a67bc",
+        "pt": "Projetos",
+        "en": "Projects"
+      },
+      "overlay-contacts": {
+        "_origem": "legado e0a67bc",
+        "pt": "Contactos",
+        "en": "Contacts"
+      },
+      "nav-brand": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "Portfolio",
+        "en": "Portfolio"
+      }
+    },
     "hero": {
       "hero-title": {
-        "pt": "Francisco Pereira"
+        "pt": "Francisco Pereira",
+        "en": "Francisco Pereira",
+        "_origem": "enunciado; EN: instrução de 2026-09-10"
       },
       "hero-subtitle": {
         "pt": "Construo aplicações web full-stack — do esquema da base de dados à interface que o utilizador vê.",
@@ -58,6 +91,11 @@
       "about-p5": {
         "pt": "Procuro o meu primeiro emprego a tempo inteiro como developer. Como as aulas são em horário pós-laboral, posso começar já. Interessa-me trabalho onde o backend importa: arquitetura, modelo de dados e segurança.",
         "en": "I'm looking for my first full-time developer role. Because my classes run in the evening, I can start now. I'm drawn to work where the backend matters: architecture, data modelling and security."
+      },
+      "about-heading": {
+        "_origem": "legado e0a67bc",
+        "pt": "Sobre mim",
+        "en": "About me"
       }
     },
     "competencias": {
@@ -78,7 +116,14 @@
         "en": "Tools & platforms"
       },
       "skills-proof-all": {
-        "pt": "todos"
+        "pt": "todos",
+        "en": "all",
+        "_origem": "enunciado; EN: instrução de 2026-09-10"
+      },
+      "skills-heading": {
+        "_origem": "legado e0a67bc",
+        "pt": "Competências",
+        "en": "Skills"
       }
     },
     "projetos": {
@@ -93,6 +138,31 @@
       "project-status-in-development": {
         "pt": "Em desenvolvimento",
         "en": "In development"
+      },
+      "projects-heading": {
+        "_origem": "legado e0a67bc",
+        "pt": "Projetos",
+        "en": "Projects"
+      },
+      "project-btn-view-more": {
+        "_origem": "legado e0a67bc",
+        "pt": "Ver Mais",
+        "en": "View More"
+      },
+      "modal-btn-project": {
+        "_origem": "legado e0a67bc",
+        "pt": "Ver Projeto",
+        "en": "View Project"
+      },
+      "modal-btn-repo": {
+        "_origem": "legado e0a67bc",
+        "pt": "Ver Repositório",
+        "en": "View Repository"
+      },
+      "modal-tooltip-note": {
+        "_origem": "legado e0a67bc",
+        "pt": "Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!",
+        "en": "Note: This project is hosted on a free server. If there have been no recent accesses, the server may take 1 to 2 minutes to start up on the first click. Thank you for your patience!"
       }
     },
     "contactos": {
@@ -103,6 +173,21 @@
       "contacts-text": {
         "pt": "Estou à procura do meu primeiro emprego a tempo inteiro como developer. Se tens uma vaga, um projeto, ou só uma pergunta sobre algum destes trabalhos — escreve.",
         "en": "I'm looking for my first full-time developer role. If you have an opening, a project, or just a question about any of this work — get in touch."
+      },
+      "contact-title-email": {
+        "_origem": "legado e0a67bc",
+        "pt": "E-mail",
+        "en": "E-mail"
+      },
+      "contact-title-linkedin": {
+        "_origem": "legado e0a67bc",
+        "pt": "Linkedin",
+        "en": "Linkedin"
+      },
+      "contact-title-github": {
+        "_origem": "legado e0a67bc",
+        "pt": "Github",
+        "en": "Github"
       }
     },
     "rodape": {
@@ -132,6 +217,48 @@
       "meta-description": {
         "pt": "Developer full-stack e finalista de Engenharia Informática no Politécnico de Leiria. React, TypeScript, Laravel, Java e Docker. Plataforma de encomendas online em produção para cliente real. Disponível para primeiro emprego.",
         "en": "Full-stack developer and final-year Computer Engineering student at the Polytechnic of Leiria. React, TypeScript, Laravel, Java and Docker. Online ordering platform in production for a real client. Available for a first full-time role."
+      }
+    },
+    "acessibilidade": {
+      "a11y-menu-toggle": {
+        "_origem": "legado e0a67bc",
+        "pt": "Alternar Menu",
+        "en": "Toggle Menu"
+      },
+      "a11y-theme-toggle": {
+        "_origem": "legado e0a67bc",
+        "pt": "Alternar Modo Escuro/Claro",
+        "en": "Toggle Dark/Light Mode"
+      },
+      "a11y-lang-toggle": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "Alterar idioma / Switch language",
+        "en": "Alterar idioma / Switch language"
+      },
+      "a11y-social-linkedin": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "LinkedIn",
+        "en": "LinkedIn"
+      },
+      "a11y-social-github": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "GitHub",
+        "en": "GitHub"
+      },
+      "a11y-social-email": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "E-mail",
+        "en": "E-mail"
+      },
+      "a11y-avatar-alt": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "Francisco Pereira Avatar",
+        "en": "Francisco Pereira Avatar"
       }
     }
   },
@@ -424,6 +551,77 @@
         }
       ]
     },
+    "dae": {
+      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech [pt])",
+      "tech": {
+        "pt": [
+          "Docker",
+          "LLaMA 3 (IA)",
+          "Full-Stack",
+          "Vite"
+        ]
+      },
+      "title": {
+        "pt": "DAE - Arquitetura Full-Stack & IA",
+        "en": "DAE - Full-Stack Architecture & AI"
+      },
+      "imageAlt": {
+        "pt": "DAE - Arquitetura Full-Stack & IA"
+      },
+      "description": {
+        "pt": "Projeto de Engenharia Informática focado na criação de uma arquitetura full-stack robusta e escalável, com forte separação de responsabilidades (SoC). O ecossistema destaca-se pela contentorização completa da infraestrutura e pela integração nativa de um modelo de Inteligência Artificial a correr localmente.",
+        "en": "Computer Engineering project focused on creating a robust and scalable full-stack architecture, with strong Separation of Concerns (SoC). The ecosystem stands out for its fully containerized infrastructure and the native integration of a locally running Artificial Intelligence model."
+      },
+      "features": [
+        {
+          "pt": "Infraestrutura 100% contentorizada via Docker (serviços móveis, bases de dados e backend isolados).",
+          "en": "100% containerized infrastructure via Docker (isolated mobile services, databases, and backend)."
+        },
+        {
+          "pt": "Integração de IA local (LLaMA 3) no ecossistema utilizando o Ollama.",
+          "en": "Integration of local AI (LLaMA 3) into the ecosystem using Ollama."
+        },
+        {
+          "pt": "Sistema de permissões RBAC com diferentes níveis de acesso e ambiente de testes seguro com interceção de emails (MailHog).",
+          "en": "RBAC permission system with different access levels and a secure test environment with email interception (MailHog)."
+        }
+      ]
+    },
+    "ainet": {
+      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech)",
+      "tech": [
+        "Laravel",
+        "PHP",
+        "MVC",
+        "MySQL",
+        "Vite"
+      ],
+      "title": {
+        "pt": "AINET - Plataforma Full-Stack Laravel",
+        "en": "AINET - Laravel Full-Stack Platform"
+      },
+      "imageAlt": {
+        "pt": "AINET - Plataforma Full-Stack Laravel"
+      },
+      "description": {
+        "pt": "Projeto Full-Stack desenvolvido em equipa no âmbito universitário, funcionando como uma plataforma híbrida de Associação e E-commerce. Construído sob a framework Laravel utilizando o padrão arquitetural MVC e Vite no frontend. O grande foco técnico é a segurança e gestão de base de dados relacional.",
+        "en": "Full-Stack project developed in a team as part of a university course, functioning as a hybrid Association and E-commerce platform. Built with the Laravel framework using the MVC architectural pattern and Vite on the frontend. The main technical focus is on relational database management and security."
+      },
+      "features": [
+        {
+          "pt": "Implementação de sistema RBAC com 3 níveis de acesso estritos: Board (Direção), Employee (Funcionários) e Member (Sócios).",
+          "en": "Implementation of RBAC system with 3 strict access levels: Board, Employee, and Member."
+        },
+        {
+          "pt": "Proteção e segurança avançada de rotas consoante o tipo e privilégios do utilizador autenticado.",
+          "en": "Advanced protection and security of routes based on the authenticated user's type and privileges."
+        },
+        {
+          "pt": "Gestão relacional complexa de Produtos, Categorias, Encomendas, Custos de Envio e Carrinho de Compras.",
+          "en": "Complex relational management of Products, Categories, Orders, Shipping Costs, and Shopping Cart."
+        }
+      ]
+    },
     "3d-analyzer": {
       "_origem": "3.2 (campos estruturais) + 3.3 (texto)",
       "order": 4,
@@ -511,20 +709,85 @@
         }
       ]
     },
+    "hotel-inteligente": {
+      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech)",
+      "tech": [
+        "PHP (Vanilla)",
+        "IoT",
+        "AJAX",
+        "Hardware"
+      ],
+      "title": {
+        "pt": "Hotel Inteligente - Plataforma IoT",
+        "en": "Smart Hotel - IoT Platform"
+      },
+      "imageAlt": {
+        "pt": "Hotel Inteligente - Plataforma IoT"
+      },
+      "description": {
+        "pt": "Plataforma web de Internet of Things (IoT) focada na monitorização de sensores e hardware (Arduino/ESP32). Diferencia-se por arquitetar uma API \"Flat-File\" em PHP puro, sem recurso a bases de dados SQL, garantindo uma comunicação leve, segura e resiliente com dispositivos físicos.",
+        "en": "Web platform for the Internet of Things (IoT) focused on monitoring sensors and hardware (Arduino/ESP32). It differentiates itself by architecting a 'Flat-File' API in pure PHP, without using SQL databases, ensuring lightweight, secure, and resilient communication with physical devices."
+      },
+      "features": [
+        {
+          "pt": "Integração direta com hardware (sensores e webcam) via sistema de ficheiros com proteção contra Path Traversal e injeções.",
+          "en": "Direct integration with hardware (sensors and webcam) via file system with protection against Path Traversal and injections."
+        },
+        {
+          "pt": "Dashboard dinâmica com atualização assíncrona (Fetch API/AJAX) sem necessidade de refresh.",
+          "en": "Dynamic dashboard with asynchronous updates (Fetch API/AJAX) without needing to refresh."
+        },
+        {
+          "pt": "Arquitetura otimizada com Princípio DRY e sistema de paginação nativa em ficheiros de log.",
+          "en": "Optimized architecture with DRY Principle and native pagination in log files."
+        },
+        {
+          "pt": "Segurança reforçada com sanitização de dados (htmlspecialchars) e autenticação robusta (password_hash).",
+          "en": "Reinforced security with data sanitization (htmlspecialchars) and robust authentication (password_hash)."
+        }
+      ]
+    },
     "gest": {
-      "_origem": "3.2",
+      "_origem": "3.2 + legado e0a67bc (title, imageAlt [pt], features, tech [pt])",
       "order": 7,
+      "tech": {
+        "pt": [
+          "OutSystems",
+          "Base de Dados"
+        ]
+      },
       "tagline": {
         "pt": "Estágio ITGlee · Prova de Aptidão Profissional",
         "en": "ITGlee internship · Secondary-school final project"
       },
+      "title": {
+        "pt": "Gest - E-commerce e Gestão de Stock",
+        "en": "Gest - E-commerce & Stock Management"
+      },
+      "imageAlt": {
+        "pt": "Gest - E-commerce e Gestão de Stock"
+      },
       "description": {
         "pt": "Loja online de informática com gestão de armazém, construída em OutSystems durante o estágio na ITGlee e depois alargada como Prova de Aptidão Profissional. Catálogo e checkout para o cliente final, aplicação de stock para quem gere o inventário. O primeiro projeto em que tive de pensar em dois utilizadores ao mesmo tempo — quem compra e quem gere.",
         "en": "An online computer-hardware store with warehouse management, built in OutSystems during my internship at ITGlee and later extended as my secondary-school final project. Catalogue and checkout for the customer, a stock application for whoever runs the inventory. The first project where I had to design for two users at once — the buyer and the manager."
-      }
+      },
+      "features": [
+        {
+          "pt": "Desenvolvimento Full-Stack em plataforma Low-Code.",
+          "en": "Full-stack development on a Low-Code platform."
+        },
+        {
+          "pt": "Loja online com catálogo de produtos e sistema de carrinho de compras.",
+          "en": "Online store with product catalog and shopping cart system."
+        },
+        {
+          "pt": "Sincronização de base de dados e gestão de stock em tempo real.",
+          "en": "Real-time database synchronization and stock management."
+        }
+      ]
     },
     "mr-pizza": {
-      "_origem": "3.2",
+      "_origem": "3.2 + legado e0a67bc (title, imageAlt [pt], features)",
       "order": 8,
       "tech": [
         "React",
@@ -535,13 +798,34 @@
         "pt": "Design → Código",
         "en": "Design → Code"
       },
+      "title": {
+        "pt": "Mr. Pizza - Plataforma E-commerce",
+        "en": "Mr. Pizza - E-commerce Platform"
+      },
+      "imageAlt": {
+        "pt": "Mr. Pizza - Plataforma E-commerce"
+      },
       "description": {
         "pt": "Plataforma de encomenda e entrega ao domicílio, construída a partir de um design meu no Figma. O protótipo inicial foi gerado com Figma Make; o meu trabalho está na modelação dos dados e no conteúdo — catálogo de produtos com preços e alergénios, e as lojas com moradas, contactos e localizações reais.",
         "en": "An ordering and delivery platform built from a design of mine in Figma. The initial prototype was generated with Figma Make; my own work is in the data modelling and content — a product catalogue with prices and allergens, and the stores with real addresses, contacts and locations."
-      }
+      },
+      "features": [
+        {
+          "pt": "Catálogo completo de produtos (pizzas, bebidas e sobremesas).",
+          "en": "Full product catalog (pizzas, drinks, and desserts)."
+        },
+        {
+          "pt": "Sistema de carrinho de compras e encomendas online.",
+          "en": "Shopping cart and online ordering system."
+        },
+        {
+          "pt": "Opção de entrega ao domicílio integrada.",
+          "en": "Integrated home delivery option."
+        }
+      ]
     },
     "diane-arbus": {
-      "_origem": "3.2",
+      "_origem": "3.2 + legado e0a67bc (title, imageAlt [pt], features)",
       "order": 9,
       "tech": [
         "React",
@@ -552,77 +836,57 @@
         "pt": "Design → Código",
         "en": "Design → Code"
       },
+      "title": {
+        "pt": "Catálogo Digital - Diane Arbus",
+        "en": "Diane Arbus - Digital Catalog"
+      },
+      "imageAlt": {
+        "pt": "Catálogo Digital - Diane Arbus"
+      },
       "description": {
         "pt": "Catálogo digital da obra da fotógrafa Diane Arbus, com um efeito de paginação em flipbook. O protótipo inicial foi gerado com Figma Make; o componente de flipbook — orquestração da animação e pré-carregamento das imagens — e as 37 obras com os respetivos textos de contexto são trabalho meu.",
         "en": "A digital catalogue of photographer Diane Arbus's work, with a flipbook pagination effect. The initial prototype was generated with Figma Make; the flipbook component — animation orchestration and image preloading — and the 37 works with their context texts are my own work."
-      }
+      },
+      "features": [
+        {
+          "pt": "Galeria interativa de fotografias e autorretratos.",
+          "en": "Interactive gallery of photographs and self-portraits.",
+          "_nota": "PT: \"and\" do legado passou a \"e\" — a única alteração autorizada desde o e0a67bc"
+        },
+        {
+          "pt": "Secções informativas com detalhes e contexto histórico de cada obra.",
+          "en": "Informative sections with details and historical context of each work."
+        },
+        {
+          "pt": "Design minimalista focado na experiência de visualização artística.",
+          "en": "Minimalist design focused on the artistic viewing experience."
+        }
+      ]
     }
   },
   "_fora_do_canonico": {
-    "motivo": "Texto que nenhum dos três enunciados definiu: vem do site original, extraído na fase 2.2, ou foi mantido por instrução expressa (\"Mantém as features atuais\"). O check:texto não o verifica e lista-o como não coberto, para a lacuna ficar à vista.",
-    "interface": [
-      "overlay-about",
-      "overlay-skills",
-      "overlay-projects",
-      "overlay-contacts",
-      "hero-title [en]",
-      "about-heading",
-      "skills-heading",
-      "skills-proof-all [en]",
-      "projects-heading",
-      "project-btn-view-more",
-      "contact-title-email",
-      "contact-title-linkedin",
-      "contact-title-github",
-      "modal-btn-project",
-      "modal-btn-repo",
-      "modal-tooltip-note",
-      "nav-brand",
-      "a11y-menu-toggle",
-      "a11y-theme-toggle",
-      "a11y-lang-toggle",
-      "a11y-social-linkedin",
-      "a11y-social-github",
-      "a11y-social-email",
-      "a11y-avatar-alt"
-    ],
+    "motivo": "Valores em que o e0a67bc e os ficheiros de dados de hoje não coincidem. Ficam fora do canónico até decisão; o check:texto lista-os como não cobertos.",
+    "interface": [],
     "projetos": {
       "ainet": [
-        "title",
-        "description",
-        "imageAlt",
-        "features",
-        "tech"
+        "imageAlt [en]"
       ],
       "dae": [
-        "title",
-        "description",
-        "imageAlt",
-        "features",
-        "tech"
+        "imageAlt [en]",
+        "tech [en]"
       ],
       "diane-arbus": [
-        "title",
-        "imageAlt",
-        "features"
+        "imageAlt [en]"
       ],
       "gest": [
-        "title",
-        "imageAlt",
-        "features",
-        "tech"
+        "imageAlt [en]",
+        "tech [en]"
       ],
       "hotel-inteligente": [
-        "title",
-        "description",
-        "imageAlt",
-        "features",
-        "tech"
+        "imageAlt [en]"
       ],
       "mr-pizza": [
-        "title",
-        "imageAlt",
-        "features"
+        "imageAlt [en]"
       ]
     }
   }
