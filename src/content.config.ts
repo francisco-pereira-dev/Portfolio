@@ -10,6 +10,25 @@ const localized = z.object({
   en: z.string().min(1),
 });
 
+/**
+ * Case study de um projeto. Opcional: sem ele, não há página nem botão.
+ * A ordem das secções é fixa e vive na página, não aqui. Um campo com vários
+ * parágrafos separa-os por uma linha em branco. .strict() rejeita campos com
+ * nome errado, para uma gralha não fazer desaparecer uma secção em silêncio.
+ */
+const caseStudy = z
+  .object({
+    umaFrase: localized,
+    contexto: localized,
+    problema: localized,
+    minhaParte: localized,
+    decisoes: z.array(z.object({ titulo: localized, texto: localized }).strict()).min(1),
+    correuMal: localized,
+    resultado: localized,
+    fariaDiferente: localized,
+  })
+  .strict();
+
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/projects' }),
   schema: ({ image }) =>
@@ -43,6 +62,9 @@ const projects = defineCollection({
         // superRefine garante e que nao ha imagem sem alt.
         image: image().optional(),
         imageAlt: localized.optional(),
+
+        // Página de case study. Sem este campo o projeto não gera página nem mostra o botão.
+        caseStudy: caseStudy.optional(),
       })
       .superRefine((data, ctx) => {
         if (data.status === 'no-demo' && data.demoUrl) {

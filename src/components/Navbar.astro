@@ -4,13 +4,15 @@ import { localeHref, otherLang, type Lang, type Ui } from '../i18n';
 interface Props {
   ui: Ui;
   lang: Lang;
+  /** A mesma página na outra língua. Por omissão, a página inicial dessa língua. */
+  hrefOutra?: string;
 }
 
-const { ui, lang } = Astro.props;
+const { ui, lang, hrefOutra } = Astro.props;
 
 // O seletor de idioma deixou de trocar innerHTML: é um link para a outra língua.
 // A âncora da secção atual é acrescentada em runtime por src/scripts/main.js.
-const href = localeHref[otherLang(lang)];
+const href = hrefOutra ?? localeHref[otherLang(lang)];
 ---
 
 <nav class="navbar">

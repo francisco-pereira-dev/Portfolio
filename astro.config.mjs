@@ -152,6 +152,19 @@ export default defineConfig({
           en: 'en',
         },
       },
+      // Os case studies tem caminhos diferentes em cada lingua (/projetos/<slug>/ e
+      // /en/projects/<slug>/), por isso a ligacao automatica por prefixo nao os junta.
+      // Liga-os aqui. Os padroes sao os de src/lib/caseStudy.ts.
+      serialize(item) {
+        const m = item.url.match(/^(https?:\/\/[^/]+)\/(?:projetos|en\/projects)\/([^/]+)\/$/);
+        if (m) {
+          item.links = [
+            { lang: 'pt-PT', url: m[1] + '/projetos/' + m[2] + '/' },
+            { lang: 'en', url: m[1] + '/en/projects/' + m[2] + '/' },
+          ];
+        }
+        return item;
+      },
     }),
     podarAssetsNaoReferenciados(),
     garantirQueAsTTFnaoSaem(),

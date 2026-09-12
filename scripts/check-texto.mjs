@@ -12,10 +12,14 @@
  *   - o texto de cada projeto é procurado dentro do cartão e da modal desse
  *     projeto, não em qualquer sítio da página;
  *   - cada competência é verificada no seu grupo, pela ordem, com as provas
- *     e os links que a acompanham.
+ *     e os links que a acompanham;
+ *   - cada case study é verificado na sua própria página, secção a secção e
+ *     parágrafo a parágrafo, com o title e a meta description; os projetos sem
+ *     case study não podem ter nem página nem botão.
  *
- * O texto que nenhum enunciado definiu fica em _fora_do_canonico e é listado
- * como não coberto, para a lacuna ficar à vista em vez de passar em silêncio.
+ * O texto sem aprovação é listado como não coberto, para a lacuna ficar à vista
+ * em vez de passar em silêncio. A cobertura do i18n é calculada aqui: uma chave
+ * nova sem texto aprovado aparece sozinha.
  *
  * Corre depois do build. Sai com código 1 se houver divergências.
  */
@@ -40,7 +44,7 @@ const canon = JSON.parse(ler(CANONICO));
 
 // --- HTML -> texto ---------------------------------------------------------
 
-const ENTIDADES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', copy: '©', times: '×' };
+const ENTIDADES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', copy: '©', times: '×' };
 const decode = (s) =>
   s
     .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n))
@@ -60,6 +64,38 @@ const um = (frag, re) => {
 };
 const todos = (frag, re) => [...frag.matchAll(re)].map((m) => norm(m[1].replace(/<[^>]*>/g, '')));
 const fmtLista = (l) => (l.length ? l.map((s) => JSON.stringify(s)).join(', ') : '(nada)');
+/** Links de um fragmento, com href, classes e texto. */
+const ancoras = (frag) =>
+  [...frag.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].map((m) => ({
+    href: decode((m[1].match(/\bhref="([^"]*)"/) || ['', ''])[1]),
+    classes: (m[1].match(/\bclass="([^"]*)"/) || ['', ''])[1].split(/\s+/),
+    texto: norm(m[2].replace(/<[^>]*>/g, '')),
+  }));
+
+// --- case studies ------------------------------------------------------------
+
+/** Onde vive cada página. Repete src/lib/caseStudy.ts de propósito: o check não importa código do site. */
+const rotaCase = (slug, lang) => (lang === 'pt' ? `/projetos/${slug}/` : `/en/projects/${slug}/`);
+/** Ordem fixa das secções, e o id de cada uma na página. */
+const CASE_SECOES = [
+  { id: 'contexto', campo: 'contexto' },
+  { id: 'problema', campo: 'problema' },
+  { id: 'minha-parte', campo: 'minhaParte' },
+  { id: 'decisoes', campo: 'decisoes' },
+  { id: 'correu-mal', campo: 'correuMal' },
+  { id: 'resultado', campo: 'resultado' },
+  { id: 'faria-diferente', campo: 'fariaDiferente' },
+];
+/** Um campo com vários parágrafos separa-os por uma linha em branco. */
+const paragrafos = (s) => s.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
+/** A meta description é a umaFrase inteira, ou cortada numa palavra inteira e com reticências, até 155 caracteres. */
+const resumoValido = (d, frase) => {
+  if (d.length > 155) return false;
+  if (d === frase) return true;
+  if (!d.endsWith('…')) return false;
+  const base = d.slice(0, -1);
+  return base.length > 0 && frase.startsWith(base) && !/[\p{L}\p{N}]/u.test(frase[base.length] ?? '');
+};
 
 // --- verificação -----------------------------------------------------------
 
@@ -143,7 +179,10 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     if (slug === 'ordem') continue;
     const iBotao = html.indexOf(`data-modal="modal-${slug}"`);
     const iCartao = iBotao < 0 ? -1 : html.lastIndexOf('<div class="project-card', iBotao);
-    const cartao = iCartao < 0 ? '' : html.slice(iCartao, iBotao);
+    // O cartão acaba onde começa o seguinte, ou no fim da secção de projetos.
+    const iSeguinte = iBotao < 0 ? -1 : html.indexOf('<div class="project-card', iBotao);
+    const fimCartao = iSeguinte > 0 ? iSeguinte : html.indexOf('</section>', iBotao);
+    const cartao = iCartao < 0 ? '' : html.slice(iCartao, fimCartao);
     const iModal = html.indexOf(`<div class="modal" id="modal-${slug}"`);
     const fimModal = iModal < 0 ? -1 : html.indexOf('<div class="modal" id="modal-', iModal + 1);
     const modal = iModal < 0 ? '' : html.slice(iModal, fimModal < 0 ? undefined : fimModal);
@@ -195,19 +234,93 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       const t = um(modal, /<span class="btn-modal btn-modal-disabled"[^>]*>([\s\S]*?)<\/span>/);
       exigir(t === rotulo, lang, `${c} (estado em desenvolvimento)`, rotulo, t ?? '(sem rótulo inerte)');
     }
+
+    // 5. Case study: botão no cartão e na modal, e página própria — ou nada disso.
+    const cs = p.caseStudy;
+    const hrefCase = rotaCase(slug, lang);
+    const ficheiroCase = path.join(root, 'dist', hrefCase, 'index.html');
+    const noCartao = ancoras(cartao).filter((a) => a.classes.includes('btn-case-study'));
+    const naModal = ancoras(modal).filter((a) => a.classes.includes('btn-modal-case'));
+    if (!cs) {
+      exigir(noCartao.length + naModal.length === 0, lang, `${c} (sem case study: sem botão)`, 'nenhum botão', `${noCartao.length} no cartão, ${naModal.length} na modal`);
+      exigir(!fs.existsSync(ficheiroCase), lang, `${c} (sem case study: sem página)`, 'sem página', `existe dist${hrefCase}index.html`);
+      continue;
+    }
+    const rotuloCase = canon.interface.projetos['project-btn-case-study'][lang];
+    for (const [onde, lista] of [['cartão', noCartao], ['modal', naModal]]) {
+      const a = lista[0];
+      exigir(
+        lista.length === 1 && a.href === hrefCase && a.texto === rotuloCase,
+        lang, `${c} (botão de case study, ${onde})`, `${rotuloCase} -> ${hrefCase}`, a ? `${a.texto} -> ${a.href}` : '(sem botão)',
+      );
+    }
+    if (!fs.existsSync(ficheiroCase)) {
+      exigir(false, lang, `${c}.caseStudy (página)`, `dist${hrefCase}index.html`, '(não existe)');
+      continue;
+    }
+    const pag = fs.readFileSync(ficheiroCase, 'utf8');
+    const cc = `${c}.caseStudy`;
+    const tituloEsperado = `${p.title[lang]} — Francisco Pereira`;
+    const tituloPag = um(pag, /<title>([\s\S]*?)<\/title>/);
+    exigir(tituloPag === tituloEsperado, lang, `${cc} (title)`, tituloEsperado, tituloPag ?? '(sem title)');
+    const desc = norm((pag.match(/<meta name="description" content="([^"]*)"/) || ['', ''])[1]);
+    exigir(resumoValido(desc, cs.umaFrase[lang]), lang, `${cc} (meta description)`, 'a umaFrase, inteira ou cortada numa palavra, até 155 caracteres', `${desc} (${desc.length} caracteres)`);
+    const h1 = um(pag, /<h1 class="case-title">([\s\S]*?)<\/h1>/);
+    exigir(h1 === p.title[lang], lang, `${cc} (h1)`, p.title[lang], h1 ?? '(sem h1)');
+    const lede = um(pag, /<p class="case-lede">([\s\S]*?)<\/p>/);
+    exigir(lede === cs.umaFrase[lang], lang, `${cc}.umaFrase`, cs.umaFrase[lang], lede ?? '(em falta)');
+    const ids = [...pag.matchAll(/<section id="([^"]+)" class="case-section"/g)].map((m) => m[1]);
+    const idsEsperados = CASE_SECOES.map((s) => s.id);
+    exigir(JSON.stringify(ids) === JSON.stringify(idsEsperados), lang, `${cc} (secções e ordem)`, idsEsperados.join(', '), ids.join(', ') || '(nenhuma)');
+    const cmpParagrafos = (chave, texto, frag) => {
+      const esperado = paragrafos(texto);
+      const achado = todos(frag, /<p>([\s\S]*?)<\/p>/g);
+      exigir(achado.length === esperado.length, lang, `${chave} (parágrafos)`, String(esperado.length), String(achado.length));
+      esperado.forEach((e, i) => exigir(achado[i] === e, lang, `${chave} ¶${i + 1}`, e, achado[i] ?? '(em falta)'));
+    };
+    for (const { id, campo } of CASE_SECOES) {
+      const sec = (pag.match(new RegExp(`<section id="${id}" class="case-section"[\\s\\S]*?</section>`)) || [''])[0];
+      if (campo !== 'decisoes') {
+        cmpParagrafos(`${cc}.${campo}`, cs[campo][lang], sec);
+        continue;
+      }
+      const itens = sec.split('<li class="case-decision"').slice(1);
+      exigir(itens.length === cs.decisoes.length, lang, `${cc}.decisoes (quantidade)`, String(cs.decisoes.length), String(itens.length));
+      cs.decisoes.forEach((d, i) => {
+        const li = itens[i] ?? '';
+        const h3 = um(li, /<h3>([\s\S]*?)<\/h3>/);
+        exigir(h3 === d.titulo[lang], lang, `${cc}.decisoes[${i}].titulo`, d.titulo[lang], h3 ?? '(em falta)');
+        cmpParagrafos(`${cc}.decisoes[${i}].texto`, d.texto[lang], li);
+      });
+    }
   }
+
+  // 6. Nem páginas de case study a mais, nem a menos.
+  const pastaCase = path.join(root, 'dist', lang === 'pt' ? 'projetos' : 'en/projects');
+  const geradas = fs.existsSync(pastaCase) ? fs.readdirSync(pastaCase).sort() : [];
+  const comCase = canon.projetos.ordem.slugs.filter((s) => canon.projetos[s]?.caseStudy).sort();
+  exigir(JSON.stringify(geradas) === JSON.stringify(comCase), lang, 'case studies (páginas geradas)', comCase.join(', ') || '(nenhuma)', geradas.join(', ') || '(nenhuma)');
 }
 
 // --- relatório -------------------------------------------------------------
 
 const fora = canon._fora_do_canonico ?? { interface: [], projetos: {} };
 const foraProj = Object.entries(fora.projetos);
+const cobertas = {};
+for (const sec of Object.values(canon.interface)) for (const [k, v] of Object.entries(sec)) if (!k.startsWith('_')) cobertas[k] = v;
+const foraI18n = Object.keys(JSON.parse(ler('src/i18n/pt.json'))).flatMap((k) => {
+  const f = ['pt', 'en'].filter((l) => cobertas[k]?.[l] === undefined);
+  return f.length === 2 ? [k] : f.length === 1 ? [`${k} [${f[0]}]`] : [];
+});
+const casesVerificados = canon.projetos.ordem.slugs.filter((s) => canon.projetos[s]?.caseStudy);
+
 console.log(`check:texto — ${CANONICO} vs dist/`);
-console.log(`  pt: ${contagem.pt} verificações em ${PAGINAS.pt}`);
-console.log(`  en: ${contagem.en} verificações em ${PAGINAS.en}`);
+console.log(`  pt: ${contagem.pt} verificações (página inicial e case studies)`);
+console.log(`  en: ${contagem.en} verificações (página inicial e case studies)`);
+console.log(`  case studies: ${casesVerificados.join(', ') || '(nenhum)'}`);
 console.log('');
-console.log(`Não coberto pelo canónico (informativo, não falha): ${fora.interface.length} chave(s) de i18n e campos de ${foraProj.length} projeto(s)`);
-console.log(`  i18n: ${fora.interface.join(', ') || '(nenhuma)'}`);
+console.log(`Não coberto pelo canónico (informativo, não falha): ${foraI18n.length} chave(s) de i18n e campos de ${foraProj.length} projeto(s)`);
+console.log(`  i18n: ${foraI18n.join(', ') || '(nenhuma)'}`);
 for (const [slug, campos] of foraProj) console.log(`  ${slug}: ${campos.join(', ')}`);
 console.log('');
 

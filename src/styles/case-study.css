@@ -1,0 +1,131 @@
+/* Página de case study: texto para ler, numa coluna.
+   A largura da coluna foi medida no browser para dar 60-75 caracteres por
+   linha em 1440px (ver FASE-3.3a.md). Só é carregado nestas páginas. */
+
+.case-page {
+    padding: 8rem 1.5rem 5rem;
+}
+
+.case-article {
+    max-width: 38rem;
+    margin: 0 auto;
+}
+
+.case-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--accent-color);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.case-back:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+.case-header {
+    margin: 2.5rem 0 1rem;
+}
+
+.case-tagline {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-bottom: 0.6rem;
+}
+
+.case-title {
+    font-size: clamp(1.9rem, 1.4rem + 2vw, 2.6rem);
+    line-height: 1.2;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+}
+
+.case-lede {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.case-tech {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.case-section {
+    margin-top: 3.25rem;
+}
+
+.case-section h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.case-section p {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+}
+
+.case-section p + p {
+    margin-top: 1.1rem;
+}
+
+/* As decisões são uma lista numerada; a numeração vem de um contador para
+   ficar à cor de acento, e o <ol> mantém a semântica. */
+.case-decisions {
+    list-style: none;
+    counter-reset: decisao;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.case-decision {
+    counter-increment: decisao;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent-color);
+}
+
+.case-decision h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.case-decision h3::before {
+    content: counter(decisao) ". ";
+    color: var(--accent-color);
+}
+
+.case-end {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 600px) {
+    .case-page {
+        padding: 6.5rem 1.25rem 4rem;
+    }
+
+    .case-lede {
+        font-size: 1.125rem;
+    }
+
+    .case-section p {
+        font-size: 1rem;
+    }
+}

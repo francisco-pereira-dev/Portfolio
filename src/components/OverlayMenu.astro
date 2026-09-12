@@ -5,15 +5,17 @@ import Icon from './Icon.astro';
 
 interface Props {
   ui: Ui;
+  /** Fora da página inicial, as âncoras apontam para ela ("/" ou "/en/"). */
+  prefixo?: string;
 }
 
-const { ui } = Astro.props;
+const { ui, prefixo = '' } = Astro.props;
 
 const links = [
-  { href: '#about', label: ui['overlay-about'] },
-  { href: '#skills', label: ui['overlay-skills'] },
-  { href: '#projects', label: ui['overlay-projects'] },
-  { href: '#contacts', label: ui['overlay-contacts'] },
+  { href: prefixo + '#about', label: ui['overlay-about'] },
+  { href: prefixo + '#skills', label: ui['overlay-skills'] },
+  { href: prefixo + '#projects', label: ui['overlay-projects'] },
+  { href: prefixo + '#contacts', label: ui['overlay-contacts'] },
 ];
 ---
 

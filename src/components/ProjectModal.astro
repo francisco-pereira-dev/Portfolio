@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { t, type Lang, type Ui } from '../i18n';
+import { caseStudyHref } from '../lib/caseStudy';
 import ProjectImage from './ProjectImage.astro';
 
 interface Props {
@@ -16,6 +17,9 @@ const p = project.data;
 // markup estático e o restauro de foco depende de os nós já existirem.
 const modalId = `modal-${p.slug}`;
 const titleId = `title-${p.slug}`;
+
+// Só os projetos com case study têm página, e só esses mostram o botão.
+const caseHref = p.caseStudy ? caseStudyHref(p.slug, lang) : null;
 ---
 
 <div class="modal" id={modalId} role="dialog" aria-modal="true" aria-labelledby={titleId}>
@@ -64,6 +68,13 @@ const titleId = `title-${p.slug}`;
         p.repoUrl && (
           <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="btn-modal">
             {ui['modal-btn-repo']}
+          </a>
+        )
+      }
+      {
+        caseHref && (
+          <a href={caseHref} class="btn-modal btn-modal-case">
+            {ui['project-btn-case-study']}
           </a>
         )
       }

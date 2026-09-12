@@ -8,13 +8,16 @@
 import '../styles/global.css';
 import Seo from '../components/Seo.astro';
 import type { Lang, Ui } from '../i18n';
+import type { PaginaSeo } from '../lib/seo';
 
 interface Props {
   lang: Lang;
   ui: Ui;
+  /** SEO de uma página que não é a inicial (case studies). */
+  seo?: PaginaSeo;
 }
 
-const { lang, ui } = Astro.props;
+const { lang, ui, seo } = Astro.props;
 
 // pt-PT para o atributo do documento; o "pt" simples é o código da rota.
 const langDocumento = lang === 'pt' ? 'pt-PT' : 'en';
@@ -27,7 +30,7 @@ const langDocumento = lang === 'pt' ? 'pt-PT' : 'en';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon" />
 
-    <Seo lang={lang} ui={ui} />
+    <Seo lang={lang} ui={ui} pagina={seo} />
 
     {/* Poppins auto-alojada: sem pedidos a terceiros nem ligacao a dois dominios.
         O peso 400 e o do corpo de texto, o mais usado, por isso vem em preload. */}
