@@ -55,5 +55,87 @@
   ],
   "repoUrl": "https://github.com/francisco-pereira-dev/3D-Analyzer",
   "status": "no-demo",
-  "coldStart": false
+  "coldStart": false,
+  "caseStudy": {
+    "umaFrase": {
+      "pt": "Orçamentar uma peça para fabrico exige medi-la. Construí uma ferramenta que lê o ficheiro 3D, calcula o volume real da malha e estima o material necessário.",
+      "en": "Quoting a part for manufacturing means measuring it. I built a tool that reads the 3D file, computes the mesh's real volume and estimates the material needed."
+    },
+    "contexto": {
+      "pt": "Projeto pessoal, individual. Motor de cálculo em C++ nativo, interface em Vue 3 com Three.js.",
+      "en": "A personal project, built alone. Computation engine in native C++, interface in Vue 3 with Three.js."
+    },
+    "problema": {
+      "pt": "Um ficheiro STL ou OBJ de uma peça real tem dezenas ou centenas de milhares de triângulos. Processar isso em JavaScript, na thread principal do browser, congela a interface — e uma interface congelada durante o cálculo parece avariada.\n\nMas o problema maior não era a velocidade. Era o número estar errado.",
+      "en": "An STL or OBJ file of a real part has tens or hundreds of thousands of triangles. Processing that in JavaScript, on the browser's main thread, freezes the interface — and an interface frozen during a calculation looks broken.\n\nBut the bigger problem was not speed. It was that the number was wrong."
+    },
+    "minhaParte": {
+      "pt": "Tudo: o motor em C++, o frontend, a camada que os liga e a exportação dos resultados.",
+      "en": "All of it: the C++ engine, the frontend, the layer connecting them, and the result export."
+    },
+    "decisoes": [
+      {
+        "titulo": {
+          "pt": "Dois processos, duas linguagens",
+          "en": "Two processes, two languages"
+        },
+        "texto": {
+          "pt": "O motor em C++ trata da geometria — carrega a malha, percorre os triângulos, calcula volume e área. O Vue trata daquilo em que o browser é bom: interface reativa e renderização em WebGL através do Three.js. Cada lado faz o que faz melhor. O custo é honesto e grande: a aplicação deixa de ser portável, deixa de correr só num browser, e passa a exigir compilação antes de arrancar. Para distribuir a utilizadores seria a decisão errada. Para uma ferramenta local de análise, é a certa — e foi a que me ensinou mais.",
+          "en": "The C++ engine handles geometry — it loads the mesh, walks the triangles, computes volume and area. Vue handles what the browser is good at: a reactive interface and WebGL rendering through Three.js. Each side does what it does best. The cost is real and large: the application stops being portable, stops running in a browser alone, and requires compilation before it starts. To ship it to users this would be the wrong call. For a local analysis tool it is the right one — and it is the one that taught me the most."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Volume pelo teorema da divergência, não pela caixa envolvente",
+          "en": "Volume by the divergence theorem, not the bounding box"
+        },
+        "texto": {
+          "pt": "A primeira versão calculava o volume multiplicando as três dimensões da caixa que envolve a peça. É simples, é rápido e está errado para tudo o que não seja um paralelepípedo: uma esfera pagava como o cubo que a contém. Substituí-o pelo teorema da divergência aplicado aos triângulos da malha, acumulado no mesmo passo de leitura que já percorria o ficheiro. O cálculo passou a dar o volume do sólido em vez do volume do espaço que ele ocupa.",
+          "en": "The first version computed volume by multiplying the three dimensions of the box around the part. It is simple, it is fast, and it is wrong for anything that is not a cuboid: a sphere cost the same as the cube containing it. I replaced it with the divergence theorem applied to the mesh triangles, accumulated in the same pass that was already reading the file. The calculation went from the volume of the space the part occupies to the volume of the part itself."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Um número que diz se o outro é de confiança",
+          "en": "A number that tells you whether the other one can be trusted"
+        },
+        "texto": {
+          "pt": "O teorema da divergência assume que a malha é fechada. Uma malha com buracos devolve um valor à mesma, e esse valor pode até estar certo por acidente. Passei a acumular também o somatório dos vetores de área — o resíduo de fecho — no mesmo passo. Se a malha for estanque, o resíduo é praticamente zero; se não for, o resíduo denuncia-a. A ferramenta deixou de dar só um número e passou a dizer se pode confiar nele.",
+          "en": "The divergence theorem assumes a closed mesh. A mesh with holes still returns a value, and that value can even be correct by accident. I began accumulating the sum of the area vectors as well — the closure residual — in the same pass. If the mesh is watertight the residual is effectively zero; if it is not, the residual gives it away. The tool stopped returning just a number and started saying whether that number can be trusted."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Leitura em streaming, com memória constante",
+          "en": "Streaming parsing, with constant memory"
+        },
+        "texto": {
+          "pt": "O ficheiro é percorrido triângulo a triângulo, acumulando os resultados à medida que avança, em vez de ser carregado inteiro para memória. O consumo deixa de depender do tamanho do ficheiro. Uma peça de duzentos megabytes usa a mesma memória que uma de dois.",
+          "en": "The file is walked triangle by triangle, accumulating results as it goes, instead of being loaded into memory whole. Consumption stops depending on file size. A two-hundred-megabyte part uses the same memory as a two-megabyte one."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Gestão explícita da memória gráfica",
+          "en": "Explicit GPU memory management"
+        },
+        "texto": {
+          "pt": "O Three.js não liberta automaticamente a memória do GPU das malhas e materiais que saem de cena — o coletor de lixo do JavaScript não sabe nada sobre VRAM. Uma aplicação que carrega modelos em sequência sem destruir os anteriores acumula memória até ficar lenta e morrer, e o erro aparece longe da causa. Destruo explicitamente as malhas e os materiais antigos antes de cada modelo novo.",
+          "en": "Three.js does not automatically free the GPU memory of meshes and materials that leave the scene — the JavaScript garbage collector knows nothing about VRAM. An application that loads models in sequence without disposing of the previous ones accumulates memory until it slows down and dies, and the error surfaces far from its cause. I explicitly dispose of the old meshes and materials before each new model."
+        }
+      }
+    ],
+    "correuMal": {
+      "pt": "O volume estava errado desde o início e ninguém o teria notado a olhar para a interface. A caixa envolvente dá sempre um número plausível — só é o número certo quando a peça é um paralelepípedo. Numa esfera, o erro é de quase metade, sempre a mais.\n\nSó percebi ao comparar o resultado com uma peça cujo volume eu conhecia. E depois de o corrigir, percebi que tinha um segundo problema por baixo: a fórmula nova assume uma malha fechada, e nada no programa verificava isso. Uma peça com um buraco continuaria a devolver um número de aparência normal.\n\nA solução dos dois problemas acabou por ser a mesma passagem pelo ficheiro: o volume e o resíduo de fecho são acumulados lado a lado, e o segundo qualifica o primeiro.\n\nEscrevi dois testes que existem só para isto: provam que o volume varia quando a peça é deslocada no espaço, e que o resíduo não. Se algum dia alguém trocar a fórmula por uma que dependa da posição, os testes apanham.",
+      "en": "The volume was wrong from the start, and nobody would have noticed by looking at the interface. A bounding box always gives a plausible number — it is only the right number when the part is a cuboid. For a sphere the error is nearly half, always on the high side.\n\nI only caught it by comparing the result against a part whose volume I already knew. And once I had fixed it, I realised there was a second problem underneath: the new formula assumes a closed mesh, and nothing in the program checked for that. A part with a hole would still return a normal-looking number.\n\nThe fix for both turned out to be the same pass over the file: volume and closure residual are accumulated side by side, and the second qualifies the first.\n\nI wrote two tests that exist only for this: they prove that volume changes when the part is moved through space, and that the residual does not. If anyone ever swaps the formula for one that depends on position, the tests catch it."
+    },
+    "resultado": {
+      "pt": "Ferramenta funcional, com 34 testes compilados contra o motor real. Lê STL e OBJ, calcula volume, área e contagem de triângulos, mostra o modelo em WebGL e exporta para PDF e Excel.",
+      "en": "A working tool, with 34 tests compiled against the real engine. It reads STL and OBJ, computes volume, area and triangle count, renders the model in WebGL and exports to PDF and Excel."
+    },
+    "fariaDiferente": {
+      "pt": "Partiria o App.vue mais cedo. Tem mil setecentas linhas e cresceu por acumulação, porque cada funcionalidade nova era mais rápida de acrescentar ali do que de separar. Hoje é o ficheiro que mais custa a alterar — e o custo de o ter deixado crescer é maior do que teria sido o de o dividir a meio do caminho.",
+      "en": "I would have split App.vue much earlier. It runs to one thousand seven hundred lines and grew by accumulation, because every new feature was faster to add there than to separate out. Today it is the file that costs the most to change — and the price of letting it grow is higher than splitting it halfway would have been."
+    }
+  }
 }

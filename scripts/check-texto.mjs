@@ -14,8 +14,9 @@
  *   - cada competência é verificada no seu grupo, pela ordem, com as provas
  *     e os links que a acompanham;
  *   - cada case study é verificado na sua própria página, secção a secção e
- *     parágrafo a parágrafo, com o title e a meta description; os projetos sem
- *     case study não podem ter nem página nem botão.
+ *     parágrafo a parágrafo, com o título de cada secção, os links de volta, o
+ *     title e a meta description; os projetos sem case study não podem ter nem
+ *     página nem botão.
  *
  * O texto sem aprovação é listado como não coberto, para a lacuna ficar à vista
  * em vez de passar em silêncio. A cobertura do i18n é calculada aqui: uma chave
@@ -76,15 +77,15 @@ const ancoras = (frag) =>
 
 /** Onde vive cada página. Repete src/lib/caseStudy.ts de propósito: o check não importa código do site. */
 const rotaCase = (slug, lang) => (lang === 'pt' ? `/projetos/${slug}/` : `/en/projects/${slug}/`);
-/** Ordem fixa das secções, e o id de cada uma na página. */
+/** Ordem fixa das secções: o id na página, o campo no caseStudy e a chave do título. */
 const CASE_SECOES = [
-  { id: 'contexto', campo: 'contexto' },
-  { id: 'problema', campo: 'problema' },
-  { id: 'minha-parte', campo: 'minhaParte' },
-  { id: 'decisoes', campo: 'decisoes' },
-  { id: 'correu-mal', campo: 'correuMal' },
-  { id: 'resultado', campo: 'resultado' },
-  { id: 'faria-diferente', campo: 'fariaDiferente' },
+  { id: 'contexto', campo: 'contexto', titulo: 'case-heading-context' },
+  { id: 'problema', campo: 'problema', titulo: 'case-heading-problem' },
+  { id: 'minha-parte', campo: 'minhaParte', titulo: 'case-heading-my-part' },
+  { id: 'decisoes', campo: 'decisoes', titulo: 'case-heading-decisions' },
+  { id: 'correu-mal', campo: 'correuMal', titulo: 'case-heading-went-wrong' },
+  { id: 'resultado', campo: 'resultado', titulo: 'case-heading-outcome' },
+  { id: 'faria-diferente', campo: 'fariaDiferente', titulo: 'case-heading-differently' },
 ];
 /** Um campo com vários parágrafos separa-os por uma linha em branco. */
 const paragrafos = (s) => s.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
@@ -112,6 +113,8 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
 
   // 1. Textos de interface: cada um tem de existir como nó ou atributo inteiro.
   for (const [secao, chaves] of Object.entries(canon.interface)) {
+    // Os textos da página de case study só existem nessa página: verificam-se lá, no ponto 5.
+    if (secao === 'caseStudy') continue;
     for (const [chave, valor] of Object.entries(chaves)) {
       if (chave.startsWith('_') || valor[lang] === undefined) continue;
       exigir(nos.has(valor[lang]), lang, `interface.${secao}.${chave}`, valor[lang], 'não aparece como texto nem como atributo inteiro');
@@ -260,6 +263,7 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     }
     const pag = fs.readFileSync(ficheiroCase, 'utf8');
     const cc = `${c}.caseStudy`;
+    const rotulos = canon.interface.caseStudy ?? {};
     const tituloEsperado = `${p.title[lang]} — Francisco Pereira`;
     const tituloPag = um(pag, /<title>([\s\S]*?)<\/title>/);
     exigir(tituloPag === tituloEsperado, lang, `${cc} (title)`, tituloEsperado, tituloPag ?? '(sem title)');
@@ -269,6 +273,15 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     exigir(h1 === p.title[lang], lang, `${cc} (h1)`, p.title[lang], h1 ?? '(sem h1)');
     const lede = um(pag, /<p class="case-lede">([\s\S]*?)<\/p>/);
     exigir(lede === cs.umaFrase[lang], lang, `${cc}.umaFrase`, cs.umaFrase[lang], lede ?? '(em falta)');
+    const voltarRotulo = rotulos['case-back']?.[lang];
+    if (voltarRotulo !== undefined) {
+      const voltar = ancoras(pag).filter((a) => a.classes.includes('case-back'));
+      const destino = `${lang === 'pt' ? '/' : '/en/'}#projects`;
+      exigir(
+        voltar.length === 2 && voltar.every((a) => a.href === destino && a.texto.replace(/^←\s*/, '') === voltarRotulo),
+        lang, `${cc} (links de volta, topo e fim)`, `2 × ${voltarRotulo} -> ${destino}`, voltar.map((a) => `${a.texto} -> ${a.href}`).join(' | ') || '(nenhum)',
+      );
+    }
     const ids = [...pag.matchAll(/<section id="([^"]+)" class="case-section"/g)].map((m) => m[1]);
     const idsEsperados = CASE_SECOES.map((s) => s.id);
     exigir(JSON.stringify(ids) === JSON.stringify(idsEsperados), lang, `${cc} (secções e ordem)`, idsEsperados.join(', '), ids.join(', ') || '(nenhuma)');
@@ -278,8 +291,13 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       exigir(achado.length === esperado.length, lang, `${chave} (parágrafos)`, String(esperado.length), String(achado.length));
       esperado.forEach((e, i) => exigir(achado[i] === e, lang, `${chave} ¶${i + 1}`, e, achado[i] ?? '(em falta)'));
     };
-    for (const { id, campo } of CASE_SECOES) {
+    for (const { id, campo, titulo } of CASE_SECOES) {
       const sec = (pag.match(new RegExp(`<section id="${id}" class="case-section"[\\s\\S]*?</section>`)) || [''])[0];
+      const tituloSec = rotulos[titulo]?.[lang];
+      if (tituloSec !== undefined) {
+        const h2 = um(sec, /<h2[^>]*>([\s\S]*?)<\/h2>/);
+        exigir(h2 === tituloSec, lang, `${cc} (título da secção ${id})`, tituloSec, h2 ?? '(sem título)');
+      }
       if (campo !== 'decisoes') {
         cmpParagrafos(`${cc}.${campo}`, cs[campo][lang], sec);
         continue;
