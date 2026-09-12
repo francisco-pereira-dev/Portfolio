@@ -1,0 +1,14 @@
+---
+// Rota PT: /projetos/<slug>/. Só existe para os projetos com caseStudy.
+import { getCollection } from 'astro:content';
+import CaseStudyPage from '../../layouts/CaseStudyPage.astro';
+
+export async function getStaticPaths() {
+  const comCaseStudy = await getCollection('projects', ({ data }) => data.caseStudy !== undefined);
+  return comCaseStudy.map((project) => ({ params: { slug: project.data.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+---
+
+<CaseStudyPage project={project} lang="pt" />

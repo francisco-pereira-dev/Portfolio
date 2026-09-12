@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { t, type Lang, type Ui } from '../i18n';
+import { caseStudyHref } from '../lib/caseStudy';
 import ProjectImage from './ProjectImage.astro';
 
 interface Props {
@@ -11,6 +12,9 @@ interface Props {
 
 const { project, lang, ui } = Astro.props;
 const p = project.data;
+
+// Só os projetos com case study têm página, e só esses mostram o botão.
+const caseHref = p.caseStudy ? caseStudyHref(p.slug, lang) : null;
 ---
 
 <div class="project-card reveal">
@@ -31,5 +35,12 @@ const p = project.data;
     <button class="btn-view-more" data-modal={`modal-${p.slug}`}>
       {ui['project-btn-view-more']}
     </button>
+    {
+      caseHref && (
+        <a class="btn-case-study" href={caseHref}>
+          {ui['project-btn-case-study']}
+        </a>
+      )
+    }
   </div>
 </div>

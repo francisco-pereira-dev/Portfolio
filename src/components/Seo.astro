@@ -5,27 +5,39 @@
  * Antes disto o site não tinha nada: sem Open Graph, sem Twitter cards, sem
  * canonical, sem hreflang, sem JSON-LD, sem theme-color. Partilhar o link no
  * LinkedIn não produzia pré-visualização nenhuma.
+ *
+ * Sem `pagina`, produz a página inicial exatamente como antes. As páginas de
+ * case study passam o seu título, descrição, caminhos e imagem.
  */
 import site from '../data/site.json';
 import grupos from '../data/skills.json';
 import { localeHref, otherLang, type Lang, type Ui } from '../i18n';
+import type { PaginaSeo } from '../lib/seo';
 
 interface Props {
   lang: Lang;
   ui: Ui;
+  pagina?: PaginaSeo;
 }
 
-const { lang, ui } = Astro.props;
+const { lang, ui, pagina } = Astro.props;
 
 const base = Astro.site ?? new URL('https://franciscopereira.dev/');
 const absoluto = (caminho: string) => new URL(caminho, base).href;
 
-const urlPagina = absoluto(localeHref[lang]);
-const urlOutra = absoluto(localeHref[otherLang(lang)]);
-const urlImagem = absoluto('/og-image.png');
+const titulo = pagina?.titulo ?? ui['meta-title'];
+const descricao = pagina?.descricao ?? ui['meta-description'];
 
-const titulo = ui['meta-title'];
-const descricao = ui['meta-description'];
+// Caminho desta página e da mesma página em cada língua, para o hreflang.
+const caminho = pagina?.caminho ?? localeHref[lang];
+const caminhoOutra = pagina?.caminhoOutra ?? localeHref[otherLang(lang)];
+const caminhoPt = lang === 'pt' ? caminho : caminhoOutra;
+const caminhoEn = lang === 'en' ? caminho : caminhoOutra;
+
+const urlPagina = absoluto(caminho);
+const imagem = pagina?.imagem ?? { src: '/og-image.png', width: 1200, height: 630, alt: titulo };
+const urlImagem = absoluto(imagem.src);
+const tipo = pagina?.tipo ?? 'website';
 
 // pt_PT / en_GB, conforme pedido.
 const localeOg: Record<Lang, string> = { pt: 'pt_PT', en: 'en_GB' };
@@ -61,20 +73,20 @@ const jsonLd = {
 
 {/* Canonical e alternativas de idioma */}
 <link rel="canonical" href={urlPagina} />
-<link rel="alternate" hreflang="pt-PT" href={absoluto('/')} />
-<link rel="alternate" hreflang="en" href={absoluto('/en/')} />
-<link rel="alternate" hreflang="x-default" href={absoluto('/')} />
+<link rel="alternate" hreflang="pt-PT" href={absoluto(caminhoPt)} />
+<link rel="alternate" hreflang="en" href={absoluto(caminhoEn)} />
+<link rel="alternate" hreflang="x-default" href={absoluto(caminhoPt)} />
 
 {/* Open Graph */}
-<meta property="og:type" content="website" />
+<meta property="og:type" content={tipo} />
 <meta property="og:site_name" content={site.name} />
 <meta property="og:title" content={titulo} />
 <meta property="og:description" content={descricao} />
 <meta property="og:url" content={urlPagina} />
 <meta property="og:image" content={urlImagem} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={titulo} />
+{imagem.width && <meta property="og:image:width" content={String(imagem.width)} />}
+{imagem.height && <meta property="og:image:height" content={String(imagem.height)} />}
+<meta property="og:image:alt" content={imagem.alt} />
 <meta property="og:locale" content={localeOg[lang]} />
 <meta property="og:locale:alternate" content={localeOg[otherLang(lang)]} />
 
@@ -88,9 +100,9 @@ const jsonLd = {
 <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)" />
 
-{/* Dados estruturados só na página portuguesa, que é a canónica do site. */}
+{/* Dados estruturados só na página inicial portuguesa, que é a canónica do site. */}
 {
-  lang === 'pt' && (
+  lang === 'pt' && !pagina && (
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   )
 }

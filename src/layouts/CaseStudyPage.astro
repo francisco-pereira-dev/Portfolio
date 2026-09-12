@@ -1,0 +1,116 @@
+---
+/**
+ * Página de case study de um projeto, numa língua.
+ *
+ * É texto para ler, não uma grelha: uma coluna com largura de leitura e as
+ * secções sempre pela mesma ordem. Menu, cabeçalho e rodapé são os do resto
+ * do site; o seletor de idioma leva à mesma página na outra língua.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import OverlayMenu from '../components/OverlayMenu.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+import { translations, localeHref, otherLang, t, type Lang } from '../i18n';
+import { caseStudyHref, paragrafos, resumir } from '../lib/caseStudy';
+import type { PaginaSeo } from '../lib/seo';
+import '../styles/case-study.css';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+}
+
+const { project, lang } = Astro.props;
+const ui = translations[lang];
+const p = project.data;
+const cs = p.caseStudy;
+if (!cs) throw new Error(`${p.slug}: página de case study sem caseStudy`);
+
+const titulo = t(p.title, lang);
+const voltar = `${localeHref[lang]}#projects`;
+
+// A imagem do projeto é a da pré-visualização social, quando existe.
+let imagem: PaginaSeo['imagem'];
+if (p.image) {
+  const img = await getImage({ src: p.image, width: 1200, format: 'jpg' });
+  imagem = {
+    src: img.src,
+    width: Number(img.attributes.width) || undefined,
+    height: Number(img.attributes.height) || undefined,
+    alt: p.imageAlt ? t(p.imageAlt, lang) : titulo,
+  };
+}
+
+const seo: PaginaSeo = {
+  titulo: `${titulo} — ${site.name}`,
+  descricao: resumir(t(cs.umaFrase, lang)),
+  caminho: caseStudyHref(p.slug, lang),
+  caminhoOutra: caseStudyHref(p.slug, otherLang(lang)),
+  tipo: 'article',
+  imagem,
+};
+
+// Ordem fixa. O id é igual nas duas línguas para o seletor de idioma poder levar
+// a âncora e cair na mesma secção.
+const secoes = [
+  { id: 'contexto', titulo: ui['case-heading-context'], texto: cs.contexto },
+  { id: 'problema', titulo: ui['case-heading-problem'], texto: cs.problema },
+  { id: 'minha-parte', titulo: ui['case-heading-my-part'], texto: cs.minhaParte },
+  { id: 'decisoes', titulo: ui['case-heading-decisions'], decisoes: cs.decisoes },
+  { id: 'correu-mal', titulo: ui['case-heading-went-wrong'], texto: cs.correuMal },
+  { id: 'resultado', titulo: ui['case-heading-outcome'], texto: cs.resultado },
+  { id: 'faria-diferente', titulo: ui['case-heading-differently'], texto: cs.fariaDiferente },
+];
+---
+
+<BaseLayout lang={lang} ui={ui} seo={seo}>
+  <OverlayMenu ui={ui} prefixo={localeHref[lang]} />
+
+  <Navbar ui={ui} lang={lang} hrefOutra={caseStudyHref(p.slug, otherLang(lang))} />
+
+  <main class="case-page">
+    <article class="case-article">
+      <a class="case-back" href={voltar}><span aria-hidden="true">←</span> {ui['case-back']}</a>
+
+      <header class="case-header">
+        {p.tagline && <p class="case-tagline">{t(p.tagline, lang)}</p>}
+        <h1 class="case-title">{titulo}</h1>
+        <p class="case-lede">{t(cs.umaFrase, lang)}</p>
+        <ul class="case-tech">
+          {p.tech.map((tech) => <li class="tech-badge">{t(tech, lang)}</li>)}
+        </ul>
+      </header>
+
+      {
+        secoes.map((s) => (
+          <section id={s.id} class="case-section" aria-labelledby={`h-${s.id}`}>
+            <h2 id={`h-${s.id}`}>{s.titulo}</h2>
+            {s.decisoes ? (
+              <ol class="case-decisions">
+                {s.decisoes.map((d) => (
+                  <li class="case-decision">
+                    <h3>{t(d.titulo, lang)}</h3>
+                    {paragrafos(t(d.texto, lang)).map((par) => (
+                      <p>{par}</p>
+                    ))}
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              paragrafos(t(s.texto!, lang)).map((par) => <p>{par}</p>)
+            )}
+          </section>
+        ))
+      }
+
+      <p class="case-end">
+        <a class="case-back" href={voltar}><span aria-hidden="true">←</span> {ui['case-back']}</a>
+      </p>
+    </article>
+  </main>
+
+  <Footer ui={ui} />
+</BaseLayout>

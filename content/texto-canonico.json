@@ -6,7 +6,8 @@
       "3.2": "mensagem de 2026-09-07T18:02:23.721Z no registo da sessão de migração",
       "3.3": "mensagem de 2026-09-09T22:52:02.877Z no registo da sessão de migração",
       "legado": "index.html e js/script.js no commit e0a67bc: o site original, de onde o texto foi extraído na fase 2.2",
-      "instrucao-2026-09-10": "hero-title e skills-proof-all em inglês, definidos pelo Francisco"
+      "instrucao-2026-09-10": "hero-title e skills-proof-all em inglês, definidos pelo Francisco",
+      "3.3a": "enunciado da fase 3.3a (2026-09-10): case study do Licas e rótulo do botão de case study"
     },
     "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true.",
     "extracao_legado": "Do e0a67bc: PT do conteúdo dos elementos com data-translate (e do data-tooltip), EN do objeto translations.en; aria-label do menu e do tema do setLanguage do script.js. Texto e atributos que o site nunca traduzia ficam com o mesmo valor nas duas línguas, como eram servidos. Só entrou o que coincide com os dados de hoje; a única alteração aplicada foi a autorizada (\"and\" -> \"e\" na primeira feature PT do Diane Arbus)."
@@ -163,6 +164,11 @@
         "_origem": "legado e0a67bc",
         "pt": "Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!",
         "en": "Note: This project is hosted on a free server. If there have been no recent accesses, the server may take 1 to 2 minutes to start up on the first click. Thank you for your patience!"
+      },
+      "project-btn-case-study": {
+        "pt": "Ver case study",
+        "en": "Read case study",
+        "_origem": "enunciado 3.3a"
       }
     },
     "contactos": {
@@ -507,7 +513,7 @@
       ]
     },
     "licas": {
-      "_origem": "3.2",
+      "_origem": "3.2 + 3.3a (caseStudy)",
       "order": 1,
       "status": "in-development",
       "coldStart": false,
@@ -549,7 +555,79 @@
           "pt": "Gestão de 14 alergénios, com distinção entre \"não declarado\" e \"declarado sem alergénios\".",
           "en": "14-allergen management, distinguishing \"undeclared\" from \"declared with none\"."
         }
-      ]
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "Uma pastelaria artesanal recebia encomendas por telefone e mensagem. Construí-lhe uma plataforma onde o cliente encomenda sozinho e o negócio gere tudo a partir de um back-office.",
+          "en": "An artisan pastry shop was taking orders by phone and text message. I built them a platform where customers order on their own and the business runs everything from a back-office."
+        },
+        "contexto": {
+          "pt": "Projeto profissional, como developer contratado. Trabalhei sozinho: arquitetura, modelo de dados, backend, frontend, documentos legais e preparação para produção.",
+          "en": "A professional project, as the contracted developer. I worked alone: architecture, data model, backend, frontend, legal documents and production readiness."
+        },
+        "problema": {
+          "pt": "Uma encomenda de pastelaria artesanal não é uma compra de supermercado. Parte dos pedidos são bolos personalizados, que precisam de orçamento antes de existir preço; os restantes são produtos de catálogo com preço fixo. Há alergénios que têm de ser declarados. Há épocas em que o volume dispara e períodos em que a loja fecha. E há uma pessoa a gerir isto tudo, que não é técnica e não pode ter medo de carregar num botão.\n\nO sistema tinha de suportar dois fluxos de compra diferentes sem se transformar em duas aplicações separadas.",
+          "en": "Ordering from an artisan pastry shop is not the same as buying at a supermarket. Some orders are custom cakes that need a quote before a price exists; the rest are catalogue products with fixed prices. Allergens have to be declared. There are peak seasons and periods when the shop closes. And there is one person running all of it, who is not technical and cannot be afraid of pressing a button.\n\nThe system had to support two different purchase flows without turning into two separate applications."
+        },
+        "minhaParte": {
+          "pt": "Tudo. Desde o esquema da base de dados até ao texto dos botões.",
+          "en": "All of it. From the database schema to the wording on the buttons."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Supabase em vez de um backend próprio",
+              "en": "Supabase instead of a backend of my own"
+            },
+            "texto": {
+              "pt": "Escolhi Postgres gerido, com autenticação e políticas de acesso incluídas, em vez de escrever uma API de raiz. O ganho foi tempo: sozinho, um backend próprio significava semanas em autenticação, permissões e infraestrutura antes da primeira funcionalidade útil. O custo é dependência de um fornecedor e ter de pensar em segurança dentro do modelo do Postgres em vez de em código de aplicação — menos familiar e menos perdoador.",
+              "en": "I chose managed Postgres, with authentication and access policies included, over writing an API from scratch. The gain was time: working alone, a custom backend meant weeks on authentication, permissions and infrastructure before the first useful feature. The cost is vendor dependency, and having to think about security inside the Postgres model rather than in application code — less familiar, and less forgiving."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Permissões validadas na base de dados, não na interface",
+              "en": "Permissions enforced in the database, not the interface"
+            },
+            "texto": {
+              "pt": "Esconder um botão não é segurança. Todas as regras de acesso são aplicadas ao nível da base de dados, e a interface limita-se a refletir o que o servidor já decidiu. Um utilizador que manipule o frontend não ganha nada com isso. O custo é que cada funcionalidade nova obriga a pensar em permissões antes de pensar em ecrãs, o que abranda o desenvolvimento. Compensa: um erro de permissões numa loja com dados de clientes reais não é um bug, é um incidente.",
+              "en": "Hiding a button is not security. Every access rule is enforced at the database level, and the interface merely reflects what the server has already decided. A user who tampers with the frontend gains nothing. The cost is that every new feature forces you to think about permissions before thinking about screens, which slows development down. It is worth it: a permissions mistake in a shop holding real customer data is not a bug, it is an incident."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Cupões com resgate atómico",
+              "en": "Coupons with atomic redemption"
+            },
+            "texto": {
+              "pt": "A primeira versão do sistema de cupões tinha um problema que só aparece com azar. Resolvi-o com uma restrição de unicidade ao nível da base de dados, em vez de uma verificação em código. A diferença é fundamental: uma verificação em código pode ser contornada por dois pedidos simultâneos; uma restrição na base de dados não pode ser contornada por nada.",
+              "en": "The first version of the coupon system had a problem that only shows up with bad luck. I solved it with a uniqueness constraint at the database level rather than a check in code. The difference matters: a check in code can be defeated by two simultaneous requests; a database constraint cannot be defeated by anything."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Alergénios com três estados, não dois",
+              "en": "Allergens with three states, not two"
+            },
+            "texto": {
+              "pt": "Havia uma distinção que o modelo inicial não conseguia representar. Um produto sem alergénios declarados não é a mesma coisa que um produto que ninguém verificou: o primeiro é informação, o segundo é ausência de informação. Separei os dois estados no modelo de dados. Parece um detalhe, mas num negócio alimentar é a diferença entre \"este bolo não tem frutos secos\" e \"não sabemos se este bolo tem frutos secos\".",
+              "en": "There was a distinction the initial model could not represent. A product with no declared allergens is not the same as a product nobody has checked: the first is information, the second is the absence of it. I separated the two states in the data model. It looks like a detail, but in a food business it is the difference between \"this cake contains no nuts\" and \"we don't know whether this cake contains nuts\"."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "O sistema de cupões deixava reutilizar um cupão de uso único. Bastava cancelar a encomenda e criar outra: a verificação em código via o cupão como disponível outra vez.\n\nA tentação foi acrescentar mais uma condição ao código. Não resolvia — duas operações em simultâneo continuariam a passar as duas pela verificação antes de qualquer uma escrever. Fechei-o com uma restrição de unicidade na própria base de dados, que torna o segundo resgate impossível independentemente de quantos pedidos cheguem ao mesmo tempo.\n\nFoi a primeira vez que percebi, a sério, a diferença entre validar e garantir.",
+          "en": "The coupon system allowed a single-use coupon to be used again. All it took was cancelling the order and creating another: the check in code saw the coupon as available once more.\n\nThe temptation was to add one more condition to the code. It would not have solved it — two simultaneous operations would still both pass the check before either one wrote anything. I closed it with a uniqueness constraint in the database itself, which makes a second redemption impossible no matter how many requests arrive at the same time.\n\nIt was the first time I properly understood the difference between validating and guaranteeing."
+        },
+        "resultado": {
+          "pt": "Em fase final de preparação para lançamento. O sistema está construído e a passar por auditoria de segurança da base de dados, testes de cenários e uma lista de verificação de produção antes de abrir ao público.",
+          "en": "In the final stretch before launch. The system is built and going through a database security audit, scenario testing and a production checklist before it opens to the public."
+        },
+        "fariaDiferente": {
+          "pt": "Pensaria no modelo de permissões antes de escrever o primeiro ecrã, e não à medida que as funcionalidades apareciam. Voltar atrás para acrescentar regras de acesso a um sistema já construído custou-me várias reescritas que uma tarde de desenho à frente teria evitado.",
+          "en": "I would design the permission model before writing the first screen, instead of growing it as features appeared. Going back to add access rules to an already-built system cost me several rewrites that an afternoon of design up front would have avoided."
+        }
+      }
     },
     "dae": {
       "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech [pt])",
@@ -865,8 +943,17 @@
     }
   },
   "_fora_do_canonico": {
-    "motivo": "Valores em que o e0a67bc e os ficheiros de dados de hoje não coincidem. Ficam fora do canónico até decisão; o check:texto lista-os como não cobertos.",
-    "interface": [],
+    "motivo": "Valores sem texto aprovado: divergências entre o e0a67bc e os dados de hoje, por decidir; e texto de interface da página de case study escrito na 3.3a, que o enunciado não definia, por aprovar. O check:texto lista-os como não cobertos.",
+    "interface": [
+      "case-back",
+      "case-heading-context",
+      "case-heading-problem",
+      "case-heading-my-part",
+      "case-heading-decisions",
+      "case-heading-went-wrong",
+      "case-heading-outcome",
+      "case-heading-differently"
+    ],
     "projetos": {
       "ainet": [
         "imageAlt [en]"
