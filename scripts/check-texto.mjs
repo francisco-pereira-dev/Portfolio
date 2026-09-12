@@ -318,6 +318,13 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
   const geradas = fs.existsSync(pastaCase) ? fs.readdirSync(pastaCase).sort() : [];
   const comCase = canon.projetos.ordem.slugs.filter((s) => canon.projetos[s]?.caseStudy).sort();
   exigir(JSON.stringify(geradas) === JSON.stringify(comCase), lang, 'case studies (páginas geradas)', comCase.join(', ') || '(nenhuma)', geradas.join(', ') || '(nenhuma)');
+  // A decisão sobre quem tem case study está registada no canónico; o texto e as páginas têm de bater com ela.
+  if (canon.caseStudies) {
+    const decididos = [...canon.caseStudies.com].sort();
+    exigir(JSON.stringify(comCase) === JSON.stringify(decididos), lang, 'case studies (decisão registada: com página)', decididos.join(', '), comCase.join(', ') || '(nenhum)');
+    const semMasComTexto = canon.caseStudies.sem.filter((s) => canon.projetos[s]?.caseStudy || geradas.includes(s));
+    exigir(semMasComTexto.length === 0, lang, 'case studies (decisão registada: sem página)', `${canon.caseStudies.sem.join(', ')} sem case study`, semMasComTexto.join(', ') || '(nenhum)');
+  }
 }
 
 // --- relatório -------------------------------------------------------------
