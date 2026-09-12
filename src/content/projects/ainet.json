@@ -53,5 +53,67 @@
   "imageAlt": {
     "pt": "AINET - Plataforma Full-Stack Laravel",
     "en": "AINET - Laravel Full-Stack Platform"
+  },
+  "caseStudy": {
+    "umaFrase": {
+      "pt": "Uma plataforma que junta a gestão de sócios de uma associação e uma loja online, com três níveis de acesso sobre os mesmos utilizadores.",
+      "en": "A platform combining an association's membership management and an online store, with three access levels over the same users."
+    },
+    "contexto": {
+      "pt": "Projeto da unidade curricular de Aplicações para a Internet, ano letivo 2024/25. Equipa de quatro. Fiquei responsável pelo frontend e acabei por cobrir também parte do backend.",
+      "en": "A project for the Internet Applications course, academic year 2024/25. A team of four. I was responsible for the frontend and ended up covering part of the backend as well."
+    },
+    "problema": {
+      "pt": "Dois sistemas com regras diferentes a partilhar as mesmas pessoas. Um sócio da associação não é um cliente da loja, mas pode ser as duas coisas ao mesmo tempo — e o que cada um pode ver e fazer muda conforme o papel. Modelar isso sem duplicar utilizadores nem encher o código de condições era o verdadeiro problema. A loja, em si, é trabalho conhecido.",
+      "en": "Two systems with different rules sharing the same people. An association member is not a store customer, but can be both at once — and what each one may see and do changes with the role. Modelling that without duplicating users or filling the code with conditions was the real problem. The store itself is familiar work."
+    },
+    "minhaParte": {
+      "pt": "O frontend completo: as vistas, os formulários, o fluxo de compra e os ecrãs de gestão. No backend, corrigi o que era preciso para o frontend se comportar como devia — sobretudo na aplicação de permissões e nas relações entre entidades.",
+      "en": "The complete frontend: the views, the forms, the purchase flow and the management screens. In the backend, I fixed what was needed for the frontend to behave correctly — mostly around permission enforcement and the relationships between entities."
+    },
+    "decisoes": [
+      {
+        "titulo": {
+          "pt": "Permissões aplicadas no servidor, refletidas no cliente",
+          "en": "Permissions enforced on the server, reflected on the client"
+        },
+        "texto": {
+          "pt": "Os três níveis de acesso são verificados no backend, em todos os pedidos. O frontend esconde o que o utilizador não pode usar, mas esconder é conveniência, não segurança. Construí as vistas a partir do princípio de que o servidor é a autoridade: o cliente pergunta o que pode mostrar, não decide.",
+          "en": "The three access levels are checked in the backend, on every request. The frontend hides what the user cannot use, but hiding is convenience, not security. I built the views on the principle that the server is the authority: the client asks what it may show, it does not decide."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Lógica de negócio fora dos controladores",
+          "en": "Business logic outside the controllers"
+        },
+        "texto": {
+          "pt": "A framework torna fácil enfiar as regras dentro dos controladores e resolver o problema num dia. Funciona até ao momento em que duas partes da aplicação precisam da mesma regra e ela existe em dois sítios ligeiramente diferentes. Manter a lógica fora custou mais no início e evitou esse tipo de divergência.",
+          "en": "The framework makes it easy to push rules into the controllers and solve the problem in a day. That works right up until two parts of the application need the same rule and it exists in two slightly different places. Keeping the logic out cost more up front and avoided that kind of divergence."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Um só modelo de utilizador, com papéis",
+          "en": "One user model, with roles"
+        },
+        "texto": {
+          "pt": "A alternativa óbvia era ter sócios e clientes como entidades separadas. Teria sido mais rápido de construir e garantia de problemas assim que a mesma pessoa fosse as duas coisas. Um só utilizador, com papéis atribuídos, mantém a identidade única e põe a complexidade onde ela pertence: nas permissões, não na duplicação de dados.",
+          "en": "The obvious alternative was to keep members and customers as separate entities. It would have been faster to build and guaranteed trouble the moment the same person was both. A single user, with assigned roles, keeps identity unique and puts the complexity where it belongs: in permissions, not in duplicated data."
+        }
+      }
+    ],
+    "correuMal": {
+      "pt": "A equipa não se organizou. Não combinámos ao início quem fazia o quê nem o que cada parte esperava da outra, e o resultado apareceu todo de uma vez, no fim, quando foi preciso juntar as peças.\n\nAcabei a fazer a minha parte e uma parte do que faltava. Não por escolha — porque à medida que o prazo se aproximava, as peças que não encaixavam eram as que impediam a aplicação de funcionar, e alguém tinha de as fazer encaixar.\n\nAprendi que a organização de uma equipa não é burocracia que se acrescenta a um projeto técnico. É parte do projeto técnico. Duas frases combinadas no primeiro dia — quem faz o quê, e o que é que a tua parte me vai devolver — teriam poupado semanas.",
+      "en": "The team did not organise itself. We did not agree up front on who was doing what, or on what each part expected from the others, and the result all arrived at once, at the end, when the pieces had to fit together.\n\nI ended up doing my part and some of what was missing. Not by choice — because as the deadline approached, the pieces that did not fit were the ones stopping the application from working, and somebody had to make them fit.\n\nI learned that organising a team is not bureaucracy added on top of a technical project. It is part of the technical project. Two sentences agreed on day one — who does what, and what your part hands back to mine — would have saved weeks."
+    },
+    "resultado": {
+      "pt": "Aplicação funcional, com demonstração publicada, entregue dentro do prazo.",
+      "en": "A working application, with a published demo, delivered on time."
+    },
+    "fariaDiferente": {
+      "pt": "Combinaria as interfaces entre as partes antes de alguém escrever código, e integraria desde o primeiro dia em vez de deixar para o fim. Conflitos que aparecem cedo são pequenos e resolvem-se numa tarde; os mesmos conflitos no fim aparecem todos ao mesmo tempo e já não há onde os pôr.",
+      "en": "I would agree the interfaces between the parts before anyone wrote code, and integrate from day one instead of leaving it to the end. Conflicts that surface early are small and resolve in an afternoon; the same conflicts at the end arrive all together, with nowhere left to put them."
+    }
   }
 }
