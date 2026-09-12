@@ -6,8 +6,8 @@
     "en": "Smart Hotel - IoT Platform"
   },
   "description": {
-    "pt": "Plataforma web de Internet of Things (IoT) focada na monitorização de sensores e hardware (Arduino/ESP32). Diferencia-se por arquitetar uma API \"Flat-File\" em PHP puro, sem recurso a bases de dados SQL, garantindo uma comunicação leve, segura e resiliente com dispositivos físicos.",
-    "en": "Web platform for the Internet of Things (IoT) focused on monitoring sensors and hardware (Arduino/ESP32). It differentiates itself by architecting a 'Flat-File' API in pure PHP, without using SQL databases, ensuring lightweight, secure, and resilient communication with physical devices."
+    "pt": "Plataforma web de monitorização de sensores e hardware (Arduino/ESP32), construída em PHP puro, sem framework e sem base de dados: as leituras dos sensores são guardadas em ficheiros. Foi o primeiro projeto da licenciatura, feito com as ferramentas que tínhamos na altura — PHP, HTML, CSS e JavaScript.",
+    "en": "A web platform for monitoring sensors and hardware (Arduino/ESP32), built in plain PHP with no framework and no database: sensor readings are stored in files. It was the first project of my degree, built with the tools we had at the time — PHP, HTML, CSS and JavaScript."
   },
   "features": [
     {
