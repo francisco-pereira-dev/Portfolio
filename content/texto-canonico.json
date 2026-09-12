@@ -8,7 +8,8 @@
       "legado": "index.html e js/script.js no commit e0a67bc: o site original, de onde o texto foi extraído na fase 2.2",
       "instrucao-2026-09-10": "hero-title e skills-proof-all em inglês, definidos pelo Francisco",
       "3.3a": "enunciado da fase 3.3a (2026-09-10): case study do Licas e rótulo do botão de case study",
-      "3.3b": "enunciado da fase 3.3b (2026-09-12): títulos de secção do case study, regra para o alt e as tecnologias em inglês, case study do 3D Analyzer"
+      "3.3b": "enunciado da fase 3.3b (2026-09-12): títulos de secção do case study, regra para o alt e as tecnologias em inglês, case study do 3D Analyzer",
+      "3.3-final": "enunciado da fase 3.3-final (2026-09-12): descrição do Hotel Inteligente, case studies do DAE, AINET, Gest e Hotel Inteligente, e a decisão de quem tem case study"
     },
     "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true.",
     "extracao_legado": "Do e0a67bc: PT do conteúdo dos elementos com data-translate (e do data-tooltip), EN do objeto translations.en; aria-label do menu e do tema do setLanguage do script.js. Texto e atributos que o site nunca traduzia ficam com o mesmo valor nas duas línguas, como eram servidos. Só entrou o que coincide com os dados de hoje; a única alteração aplicada foi a autorizada (\"and\" -> \"e\" na primeira feature PT do Diane Arbus)."
@@ -924,7 +925,7 @@
       ]
     },
     "hotel-inteligente": {
-      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech)",
+      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech) + 3.3-final (description)",
       "tech": [
         "PHP (Vanilla)",
         "IoT",
@@ -941,8 +942,9 @@
         "_en": "enunciado 3.3b: já era a tradução direta do PT; mantido"
       },
       "description": {
-        "pt": "Plataforma web de Internet of Things (IoT) focada na monitorização de sensores e hardware (Arduino/ESP32). Diferencia-se por arquitetar uma API \"Flat-File\" em PHP puro, sem recurso a bases de dados SQL, garantindo uma comunicação leve, segura e resiliente com dispositivos físicos.",
-        "en": "Web platform for the Internet of Things (IoT) focused on monitoring sensors and hardware (Arduino/ESP32). It differentiates itself by architecting a 'Flat-File' API in pure PHP, without using SQL databases, ensuring lightweight, secure, and resilient communication with physical devices."
+        "pt": "Plataforma web de monitorização de sensores e hardware (Arduino/ESP32), construída em PHP puro, sem framework e sem base de dados: as leituras dos sensores são guardadas em ficheiros. Foi o primeiro projeto da licenciatura, feito com as ferramentas que tínhamos na altura — PHP, HTML, CSS e JavaScript.",
+        "en": "A web platform for monitoring sensors and hardware (Arduino/ESP32), built in plain PHP with no framework and no database: sensor readings are stored in files. It was the first project of my degree, built with the tools we had at the time — PHP, HTML, CSS and JavaScript.",
+        "_origem": "enunciado 3.3-final: substitui a descrição do site original, que apresentava como decisão de arquitetura uma coisa que não foi"
       },
       "features": [
         {
