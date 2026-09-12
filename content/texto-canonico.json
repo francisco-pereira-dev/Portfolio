@@ -1355,5 +1355,21 @@
     "motivo": "Texto do site sem aprovação. O check:texto calcula a cobertura do i18n por si e lista aqui o que ficar de fora.",
     "interface": [],
     "projetos": {}
+  },
+  "caseStudies": {
+    "_origem": "enunciado 3.3-final: CadflowBankSystem, Mr. Pizza e Catálogo Diane Arbus não vão ter case study; ficam em cartão e modal",
+    "com": [
+      "licas",
+      "3d-analyzer",
+      "dae",
+      "ainet",
+      "gest",
+      "hotel-inteligente"
+    ],
+    "sem": [
+      "cadflow-bank-system",
+      "mr-pizza",
+      "diane-arbus"
+    ]
   }
 }
