@@ -1059,7 +1059,7 @@
       ]
     },
     "hotel-inteligente": {
-      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech) + 3.3-final (description)",
+      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech) + 3.3-final (description) + 3.3-final (caseStudy)",
       "tech": [
         "PHP (Vanilla)",
         "IoT",
@@ -1097,7 +1097,69 @@
           "pt": "Segurança reforçada com sanitização de dados (htmlspecialchars) e autenticação robusta (password_hash).",
           "en": "Reinforced security with data sanitization (htmlspecialchars) and robust authentication (password_hash)."
         }
-      ]
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "Sensores instalados em quartos a enviar leituras para uma aplicação web que as mostra num painel que se atualiza sozinho.",
+          "en": "Sensors installed in rooms sending readings to a web application that displays them on a dashboard that updates by itself."
+        },
+        "contexto": {
+          "pt": "Primeiro projeto da licenciatura, em equipa de dois. Fiquei responsável pela aplicação web e o meu colega pela parte do Arduino — mas acabámos os dois a aprender as duas coisas. Feito com o que sabíamos na altura: PHP, HTML, CSS e JavaScript, sem framework e sem base de dados.",
+          "en": "The first project of my degree, in a team of two. I was responsible for the web application and my teammate for the Arduino side — but we both ended up learning both. Built with what we knew at the time: PHP, HTML, CSS and JavaScript, with no framework and no database."
+        },
+        "problema": {
+          "pt": "Hardware a escrever de um lado, um browser a ler do outro, e no meio nada que soubéssemos usar. Ainda não tínhamos dado bases de dados. As leituras dos sensores tinham de ir para algum sítio, e esse sítio acabou por ser um ficheiro de texto — não por opção de arquitetura, mas porque era a ferramenta que tínhamos.",
+          "en": "Hardware writing on one side, a browser reading on the other, and nothing in between that we knew how to use. We had not covered databases yet. The sensor readings had to go somewhere, and that somewhere turned out to be a text file — not as an architectural choice, but because it was the tool we had."
+        },
+        "minhaParte": {
+          "pt": "A aplicação web inteira: a API em PHP que recebe as leituras, a camada que as guarda e lê dos ficheiros, o painel de monitorização e a autenticação. O meu colega ficou com o Arduino e os sensores. Na prática acabámos ambos a perceber os dois lados, porque quase todos os problemas apareciam na fronteira entre eles.",
+          "en": "The entire web application: the PHP API that receives the readings, the layer that stores and reads them from files, the monitoring dashboard and the authentication. My teammate took the Arduino and the sensors. In practice we both ended up understanding both sides, because nearly every problem appeared on the boundary between them."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Guardar em ficheiros, e assumi-lo",
+              "en": "Storing in files, and owning it"
+            },
+            "texto": {
+              "pt": "Sem base de dados, cada leitura vai para ficheiro. Uma base de dados resolve por ti a escrita simultânea, a consistência e a pesquisa; com ficheiros, esses problemas passam a ser teus. Não foi uma escolha de engenharia — foi o que sabíamos fazer. Prefiro dizê-lo assim do que chamar-lhe arquitetura, porque a diferença entre as duas coisas é exatamente o que eu não sabia na altura.",
+              "en": "With no database, every reading goes to a file. A database solves concurrent writes, consistency and lookup for you; with files, those problems become yours. It was not an engineering choice — it was what we knew how to do. I would rather say it that way than call it architecture, because the difference between the two is exactly what I did not understand at the time."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Atualizar o painel sem recarregar a página",
+              "en": "Updating the dashboard without reloading the page"
+            },
+            "texto": {
+              "pt": "O painel pede dados novos periodicamente e atualiza só o que mudou. Num ecrã de monitorização que fica aberto horas, recarregar a página inteira desperdiça largura de banda e faz perder o contexto visual — quem está a olhar perde o sítio onde estava.",
+              "en": "The dashboard requests new data periodically and updates only what changed. On a monitoring screen left open for hours, reloading the whole page wastes bandwidth and loses visual context — whoever is watching loses their place."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Tratar o hardware como uma fonte não confiável",
+              "en": "Treating the hardware as an untrusted source"
+            },
+            "texto": {
+              "pt": "Os dados vinham de um dispositivo na rede, e o que chega pela rede pode chegar mal formado, de propósito ou por acidente. Validámos os caminhos de ficheiro contra travessia de diretórios e sanitizámos tudo o que era escrito ou mostrado. Um sensor não é um atacante, mas o código não tem como saber a diferença.",
+              "en": "The data came from a device on the network, and what arrives over a network can arrive malformed, deliberately or by accident. We validated file paths against directory traversal and sanitised everything written or displayed. A sensor is not an attacker, but the code has no way of telling the difference."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "Houve bastantes erros, e a maior parte não estava em nenhum dos dois lados — estava na costura entre eles.\n\nLeituras que chegavam mal formadas. Ficheiros que ficavam num estado estranho quando o sensor escrevia ao mesmo tempo que o painel lia. Dados que desapareciam sem deixar rasto do que tinha acontecido. E como não tínhamos registo de erros, cada problema começava por uma pergunta a que não sabíamos responder: o problema está no Arduino, na rede, ou no PHP?\n\nPassámos mais tempo a descobrir de que lado estava o problema do que a resolvê-lo. No fim organizámos tudo e entregámos a funcionar.\n\nA lição ficou: num sistema feito por duas pessoas em duas metades, a parte que falha quase nunca é uma das metades. É a costura — e ninguém é dono dela a menos que alguém decida ser.",
+          "en": "There were plenty of problems, and most of them were not on either side — they were in the seam between them.\n\nReadings that arrived malformed. Files left in an odd state when the sensor wrote at the same moment the dashboard read. Data that disappeared leaving no trace of what had happened. And since we had no error logging, every problem started with a question we could not answer: is this the Arduino, the network, or the PHP?\n\nWe spent more time working out which side the problem was on than fixing it. In the end we got it organised and delivered it working.\n\nThe lesson stuck: in a system built by two people in two halves, the part that fails is almost never one of the halves. It is the seam — and nobody owns it unless somebody decides to."
+        },
+        "resultado": {
+          "pt": "Entregue a funcionar, com os sensores a alimentar o painel em tempo real.",
+          "en": "Delivered and working, with the sensors feeding the dashboard in real time."
+        },
+        "fariaDiferente": {
+          "pt": "Duas coisas. Usaria uma base de dados: hoje sei que aquilo que estávamos a resolver à mão — escritas em simultâneo, consistência, não perder leituras — é precisamente o problema que uma base de dados existe para resolver, e resolvê-lo mal é muito mais trabalho do que usá-la.\n\nE registaria erros desde o primeiro dia. Não teria evitado os problemas, mas teria transformado horas de adivinha em minutos de leitura.",
+          "en": "Two things. I would use a database: I now know that what we were solving by hand — concurrent writes, consistency, not losing readings — is precisely the problem a database exists to solve, and solving it badly is far more work than using one.\n\nAnd I would log errors from day one. It would not have prevented the problems, but it would have turned hours of guessing into minutes of reading."
+        }
+      }
     },
     "gest": {
       "_origem": "3.2 + legado e0a67bc (title, imageAlt [pt], features, tech [pt]) + 3.3-final (caseStudy)",
