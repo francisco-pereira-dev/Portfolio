@@ -49,5 +49,77 @@
   "imageAlt": {
     "pt": "DAE - Arquitetura Full-Stack & IA",
     "en": "DAE - Full-Stack Architecture & AI"
+  },
+  "caseStudy": {
+    "umaFrase": {
+      "pt": "Uma aplicação empresarial em que cada serviço corre no seu contentor e o modelo de inteligência artificial corre na própria máquina, sem que os dados saiam para fora.",
+      "en": "A business application where every service runs in its own container and the AI model runs on the machine itself, without data ever leaving the infrastructure."
+    },
+    "contexto": {
+      "pt": "Projeto da unidade curricular de Desenvolvimento de Aplicações Empresariais, no 3.º ano da licenciatura. Equipa de quatro. O modelo de dados foi dado pelo docente; o resto foi construído por nós. Acabei por assumir a maior parte do desenvolvimento.",
+      "en": "A project for the Enterprise Application Development course, in the third year of my degree. A team of four. The data model was given by the lecturer; everything else we built. I ended up taking on most of the development."
+    },
+    "problema": {
+      "pt": "Construir uma aplicação empresarial em Java com controlo de acessos por papéis e funcionalidades de inteligência artificial, com uma exigência que moldou tudo o resto: o ambiente tinha de ser reproduzível por qualquer pessoa, em qualquer máquina, sem depender de instalações locais e sem \"no meu computador funciona\".",
+      "en": "Building a business application in Java with role-based access control and AI features, under one requirement that shaped everything else: the environment had to be reproducible by anyone, on any machine, without local installs and without \"it works on my computer\"."
+    },
+    "minhaParte": {
+      "pt": "A maior parte do desenvolvimento: a containerização de toda a infraestrutura, a integração do modelo de inteligência artificial, o sistema de permissões e a reconstrução de parte do backend.",
+      "en": "Most of the development: containerising the whole infrastructure, integrating the AI model, the permission system, and rebuilding part of the backend."
+    },
+    "decisoes": [
+      {
+        "titulo": {
+          "pt": "Containerização total, sem exceções",
+          "en": "Full containerisation, no exceptions"
+        },
+        "texto": {
+          "pt": "Backend, base de dados, frontend e o modelo de inteligência artificial — cada um no seu contentor, ligados por rede interna. A alternativa era instalar dependências localmente e documentar o processo num ficheiro de instruções. Escolhi contentores porque um ficheiro de instruções desatualiza-se em duas semanas e um comando único não. O custo é um primeiro arranque lento e mais uma camada para depurar quando alguma coisa falha.",
+          "en": "Backend, database, frontend and the AI model — each in its own container, connected over an internal network. The alternative was installing dependencies locally and documenting the process in an instructions file. I chose containers because an instructions file goes stale in two weeks and a single command does not. The cost is a slow first start and one more layer to debug when something fails."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Modelo de IA local em vez de uma API externa",
+          "en": "A local AI model instead of an external API"
+        },
+        "texto": {
+          "pt": "Chamar uma API comercial teria sido mais rápido de integrar, mais barato em hardware e teria produzido melhores respostas. Corri o modelo localmente à mesma, por três razões: os dados nunca saem da infraestrutura, o que num contexto empresarial é frequentemente um requisito e não uma preferência; o custo por pedido é zero, o que muda a economia de qualquer funcionalidade usada com frequência; e a aplicação funciona sem ligação à internet. O custo é real e não o escondo — respostas mais lentas, qualidade inferior a um modelo comercial, e uma exigência de hardware que uma chamada HTTP não tem. Numa aplicação virada para o consumidor teria escolhido a API. Numa aplicação empresarial que lida com dados de clientes, repetiria esta escolha.",
+          "en": "Calling a commercial API would have been faster to integrate, cheaper in hardware, and would have produced better answers. I ran the model locally anyway, for three reasons: the data never leaves the infrastructure, which in a business context is often a requirement rather than a preference; the cost per request is zero, which changes the economics of any frequently used feature; and the application works with no internet connection. The cost is real and I do not hide it — slower answers, lower quality than a commercial model, and a hardware requirement an HTTP call does not have. In a consumer-facing application I would have chosen the API. In a business application handling customer data, I would make this choice again."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Emails intercetados em ambiente de testes",
+          "en": "Emails intercepted in the test environment"
+        },
+        "texto": {
+          "pt": "A aplicação envia notificações por email. Em desenvolvimento, esses emails são capturados por um servidor de testes em vez de saírem para o mundo. É uma precaução pequena com uma consequência grande: nenhum endereço real recebe um email de teste, e continua a ser possível verificar exatamente o que teria sido enviado.",
+          "en": "The application sends notifications by email. In development, those emails are captured by a test server instead of going out into the world. It is a small precaution with a large consequence: no real address ever receives a test email, and it remains possible to check exactly what would have been sent."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Aproveitar parte do backend e reescrever o resto",
+          "en": "Keeping part of the backend and rewriting the rest"
+        },
+        "texto": {
+          "pt": "Parte do backend já estava construída quando percebi que não servia — decisões de estrutura que não aguentavam os requisitos de permissões. Com prazo em cima, a escolha era entre deitar tudo fora e recomeçar, ou avaliar peça a peça. Escolhi a segunda: mantive o que estava correto e reconstruí o que não estava. Deitar tudo fora é mais rápido de decidir e desperdiça trabalho que servia; salvar tudo é mais confortável e arrasta os problemas até ao fim. O meio-termo custou mais tempo a decidir e foi o que permitiu entregar.",
+          "en": "Part of the backend was already built when I realised it would not do — structural decisions that could not carry the permission requirements. With a deadline running, the choice was between throwing it all away and starting over, or judging it piece by piece. I chose the second: I kept what was correct and rebuilt what was not. Throwing everything away is quicker to decide and wastes work that was fine; keeping everything is more comfortable and drags the problems to the end. The middle path cost more to decide, and it is what made delivery possible."
+        }
+      }
+    ],
+    "correuMal": {
+      "pt": "Descobri tarde de mais que parte do backend não estava a servir. Não porque alguém o escondesse, mas porque eu só fui olhar quando precisei de o usar — assumi que estava a andar porque ninguém tinha dito o contrário.\n\nQuando abri o código, encontrei estrutura que não suportava o que o sistema de permissões precisava, e já não havia tempo para recomeçar do zero. Tive de julgar cada parte separadamente e decidir o que salvava e o que refazia, com o prazo a correr.\n\nA lição não é sobre código. É que num trabalho de equipa o progresso presume-se até se ver, e ver custa pouco quando é cedo. Se eu tivesse olhado para aquele código duas semanas antes, a decisão teria sido a mesma e o custo teria sido metade.",
+      "en": "I found out too late that part of the backend was not going to work. Not because anyone hid it, but because I only looked when I needed to use it — I assumed it was progressing because nobody had said otherwise.\n\nWhen I opened the code, I found structure that could not support what the permission system needed, and there was no longer time to start over. I had to judge each part separately and decide what to save and what to redo, with the clock running.\n\nThe lesson is not about code. It is that on a team, progress is assumed until it is seen, and seeing costs little when it is early. Had I looked at that code two weeks sooner, the decision would have been the same and the cost would have been half."
+    },
+    "resultado": {
+      "pt": "Aplicação funcional, com demonstração publicada e o ambiente inteiro a arrancar por um comando único.",
+      "en": "A working application, with a published demo and the entire environment starting from a single command."
+    },
+    "fariaDiferente": {
+      "pt": "Rever o trabalho de todas as partes cedo e com regularidade, em vez de esperar pelo momento em que preciso delas. Não por desconfiança — porque descobrir um problema cedo custa uma conversa e descobri-lo tarde custa um fim de semana.",
+      "en": "Review everyone's work early and regularly, instead of waiting for the moment I need it. Not out of distrust — because finding a problem early costs a conversation, and finding it late costs a weekend."
+    }
   }
 }
