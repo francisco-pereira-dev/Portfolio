@@ -44,5 +44,67 @@
   "imageAlt": {
     "pt": "Gest - E-commerce e Gestão de Stock",
     "en": "Gest - E-commerce & Stock Management"
+  },
+  "caseStudy": {
+    "umaFrase": {
+      "pt": "Uma loja online de informática com gestão de armazém, construída numa empresa durante o estágio e continuada até ao dia da apresentação.",
+      "en": "An online computer-hardware store with warehouse management, built inside a company during my internship and carried on until the day I presented it."
+    },
+    "contexto": {
+      "pt": "Estágio curricular na ITGlee, em 2021, continuado como Prova de Aptidão Profissional do ensino secundário até ao dia da apresentação. Construída em OutSystems.",
+      "en": "A curricular internship at ITGlee in 2021, continued as my secondary-school final project until presentation day. Built in OutSystems."
+    },
+    "problema": {
+      "pt": "Uma loja de informática tem dois utilizadores com necessidades opostas. O cliente quer procurar, comparar e comprar depressa, e não quer saber do que se passa por trás. Quem gere o armazém quer saber o que há, o que falta e o que está a sair, e não quer navegar numa loja para descobrir isso.\n\nServir os dois a partir da mesma informação, sem construir duas aplicações desligadas que teriam de ser mantidas em sincronia, era o problema real. A loja em si é a parte fácil.",
+      "en": "A hardware store has two users with opposite needs. The customer wants to search, compare and buy quickly, and does not care what happens behind the scenes. Whoever runs the warehouse wants to know what is in stock, what is missing and what is moving, and does not want to browse a shop to find out.\n\nServing both from the same information, without building two disconnected applications that would have to be kept in sync, was the real problem. The store itself is the easy part."
+    },
+    "minhaParte": {
+      "pt": "O desenvolvimento da aplicação, do catálogo e do checkout até ao back-office de gestão de stock.",
+      "en": "Building the application, from the catalogue and checkout through to the stock-management back-office."
+    },
+    "decisoes": [
+      {
+        "titulo": {
+          "pt": "Uma só fonte de informação para os dois lados",
+          "en": "One source of information for both sides"
+        },
+        "texto": {
+          "pt": "O stock que o gestor vê e a disponibilidade que o cliente vê são a mesma informação apresentada de duas maneiras, não dois sistemas a tentar manter-se sincronizados. Duplicar teria sido mais rápido de construir e era garantia de divergência à primeira alteração — o momento em que a loja mostra um produto que o armazém já sabe que acabou.",
+          "en": "The stock the manager sees and the availability the customer sees are the same information presented two ways, not two systems trying to stay in sync. Duplicating would have been faster to build and guaranteed divergence at the first change — the moment the shop shows a product the warehouse already knows has run out."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Back-office desenhado para quem não é técnico",
+          "en": "A back-office designed for someone who is not technical"
+        },
+        "texto": {
+          "pt": "Quem gere o inventário não é programador e não vai ler instruções. As operações que se fazem todos os dias — entrada de stock, correção de quantidades, ver o que está a acabar — tinham de estar à vista e ser difíceis de fazer por engano. Isso muda o desenho: não é a funcionalidade que decide o ecrã, é a frequência com que é usada.",
+          "en": "The person running the inventory is not a programmer and is not going to read instructions. The operations done every day — receiving stock, correcting quantities, seeing what is running low — had to be in plain sight and hard to trigger by accident. That changes the design: the screen is not decided by the feature, it is decided by how often the feature is used."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "OutSystems, com o que isso traz e tira",
+          "en": "OutSystems, with what that gives and takes"
+        },
+        "texto": {
+          "pt": "A plataforma foi o contexto em que o projeto nasceu. Acelera muito a construção de ecrãs e formulários, e tira liberdade assim que é preciso sair do caminho previsto. Foi a primeira vez que percebi que uma ferramenta que resolve noventa por cento do trabalho em metade do tempo pode transformar os últimos dez por cento na parte mais difícil de todas.",
+          "en": "The platform was the context the project was born in. It speeds up building screens and forms enormously, and takes away freedom the moment you need to step off the expected path. It was the first time I understood that a tool which solves ninety per cent of the work in half the time can turn the last ten per cent into the hardest part of all."
+        }
+      }
+    ],
+    "correuMal": {
+      "pt": "Estava a aprender a ferramenta ao mesmo tempo que tinha de entregar com ela.\n\nNão houve uma parte mais difícil que as outras — foi tudo difícil, porque cada decisão de estrutura vinha antes de eu ter experiência suficiente para a tomar. Escolhia uma forma de organizar os dados, avançava, e duas semanas depois percebia porque é que não servia. Repeti isso vezes suficientes para deixar de ser azar e passar a ser aprendizagem.\n\nFoi o projeto que me ensinou que escrever código é a parte fácil. A parte difícil é decidir a estrutura que o sustenta — e essa decisão toma-se antes de existir código para a julgar.",
+      "en": "I was learning the tool at the same time as I had to deliver with it.\n\nThere was no part harder than the rest — all of it was hard, because every structural decision came before I had the experience to make it. I would choose a way to organise the data, move forward, and two weeks later understand why it did not work. I repeated that enough times for it to stop being bad luck and start being learning.\n\nIt was the project that taught me writing code is the easy part. The hard part is deciding the structure that holds it up — and that decision is made before there is any code to judge it by."
+    },
+    "resultado": {
+      "pt": "Entregue e apresentada em 2021, com a loja e o back-office a funcionar sobre o mesmo modelo de dados.",
+      "en": "Delivered and presented in 2021, with the store and the back-office running on the same data model."
+    },
+    "fariaDiferente": {
+      "pt": "Desenharia o modelo de dados no papel antes de abrir a ferramenta. Em 2021 comecei pelos ecrãs, porque eram a parte que eu conseguia ver — e cada vez que a estrutura por baixo estava errada, tinha de refazer os ecrãs também.",
+      "en": "I would design the data model on paper before opening the tool. In 2021 I started with the screens, because they were the part I could see — and every time the structure underneath was wrong, I had to redo the screens as well."
+    }
   }
 }
