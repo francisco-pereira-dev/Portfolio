@@ -108,8 +108,8 @@
       "en": "The team did not organise itself. We did not agree up front on who was doing what, or on what each part expected from the others, and the result all arrived at once, at the end, when the pieces had to fit together.\n\nI ended up doing my part and some of what was missing. Not by choice — because as the deadline approached, the pieces that did not fit were the ones stopping the application from working, and somebody had to make them fit.\n\nI learned that organising a team is not bureaucracy added on top of a technical project. It is part of the technical project. Two sentences agreed on day one — who does what, and what your part hands back to mine — would have saved weeks."
     },
     "resultado": {
-      "pt": "Aplicação funcional, com demonstração publicada, entregue dentro do prazo.",
-      "en": "A working application, with a published demo, delivered on time."
+      "pt": "Aplicação funcional, com demonstração publicada.",
+      "en": "A working application, with a published demo."
     },
     "fariaDiferente": {
       "pt": "Combinaria as interfaces entre as partes antes de alguém escrever código, e integraria desde o primeiro dia em vez de deixar para o fim. Conflitos que aparecem cedo são pequenos e resolvem-se numa tarde; os mesmos conflitos no fim aparecem todos ao mesmo tempo e já não há onde os pôr.",
