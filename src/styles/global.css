@@ -83,6 +83,10 @@
 
 /* ==========================================================================
    PORTFÓLIO DE FRANCISCO PEREIRA - FOLHA DE ESTILOS PRINCIPAL (CSS)
+
+   Direção editorial (fase 4): o valor do site é o texto, e o design existe para
+   que alguém o leia. Tipografia e espaço em vez de caixas, sombras e animação.
+   Os tamanhos de letra e os espaçamentos saem só das escalas declaradas em :root.
    ========================================================================== */
 
 /* --- VARIÁVEIS DE TEMA E DESIGN SYSTEM --- */
@@ -90,7 +94,7 @@
     --accent-color: #8B5CF6;
     --font-main: 'Poppins', sans-serif;
     --transition: all 0.3s ease;
-    
+
     /* Dark Theme Default */
     --bg-color: #0F172A;
     --surface-color: #1E293B;
@@ -103,11 +107,52 @@
     --nav-bg: rgba(15, 23, 42, 0.8);
     --nav-color: #fff;
     --footer-bg: rgba(15, 23, 42, 0.8);
-    
+
     /* Menu Overlay (Dark Theme) */
     --overlay-bg: rgba(15, 23, 42, 0.95);
     --overlay-text: #CBD5E1;
     --overlay-border: rgba(255, 255, 255, 0.1);
+
+    /* Texto a cor (fase 4). Como texto, o #8B5CF6 fica entre 3,45 e 4,23:1 em
+       todos os fundos do site, abaixo dos 4,5:1. O texto a roxo e a âmbar usa
+       estes tons; o #8B5CF6 continua a ser o acento nos preenchimentos, nas
+       linhas, nos pontos e nas réguas. */
+    --accent-text: #A78BFA;   /* 6,56:1 sobre #0F172A · 5,38:1 sobre #1E293B */
+    --warning-text: #F59E0B;  /* 8,31:1 sobre #0F172A · 6,81:1 sobre #1E293B */
+
+    /* Escala tipográfica (rem, base 16px). */
+    --fs-display: 3.5rem;
+    --fs-h1: 2.75rem;
+    --fs-h2: 2rem;
+    --fs-h3: 1.375rem;
+    --fs-lead: 1.3125rem;
+    --fs-body: 1.03125rem;
+    --fs-small: 0.9375rem;
+    --fs-meta: 0.8125rem;
+    --fs-micro: 0.75rem;
+
+    /* Alturas de linha. */
+    --lh-display: 1.14;
+    --lh-heading: 1.2;
+    --lh-lead: 1.6;
+    --lh-body: 1.78;
+
+    /* Espaçamento, em múltiplos de 4px. */
+    --sp-1: 0.25rem;
+    --sp-2: 0.5rem;
+    --sp-3: 0.75rem;
+    --sp-4: 1rem;
+    --sp-6: 1.5rem;
+    --sp-8: 2rem;
+    --sp-12: 3rem;
+    --sp-16: 4rem;
+    --sp-24: 6rem;
+    --sp-32: 8rem;
+
+    /* Largura de leitura: a mesma coluna das páginas de case study (fase 3.3). */
+    --measure: 37.5rem;
+    /* Altura mínima de um alvo de toque. */
+    --touch: 44px;
 }
 
 html.light-mode {
@@ -122,11 +167,23 @@ html.light-mode {
     --nav-bg: rgba(255, 255, 255, 0.85);
     --nav-color: #0F172A;
     --footer-bg: rgba(255, 255, 255, 0.85);
-    
+
     /* Menu Overlay (Light Theme) */
     --overlay-bg: rgba(248, 250, 252, 0.96);
     --overlay-text: #475569;
     --overlay-border: rgba(0, 0, 0, 0.08);
+
+    --accent-text: #7C3AED;   /* 5,45:1 sobre #F8FAFC · 5,70:1 sobre #FFFFFF */
+    --warning-text: #B45309;  /* 4,80:1 sobre #F8FAFC · 5,02:1 sobre #FFFFFF */
+}
+
+/* No telemóvel os dois tamanhos maiores descem um degrau, dentro da própria
+   escala. O corpo fica nos 16,5px: nunca abaixo de 16px. */
+@media (max-width: 768px) {
+    :root {
+        --fs-display: 2.75rem;
+        --fs-h1: 2rem;
+    }
 }
 
 * {
@@ -143,14 +200,20 @@ body {
     background-color: var(--bg-color);
     color: var(--text-primary);
     font-family: var(--font-main);
-    line-height: 1.6;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
     transition: background-color 0.3s, color 0.3s;
     overflow-x: hidden;
 }
 
+/* Foco visível em tudo o que se ativa pelo teclado. */
+:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: var(--sp-1);
+}
+
 /* --- ICONES SVG INLINE (substituem a fonte devicon) --- */
-/* O dimensionamento continua a vir do font-size do contexto: .skill-icon (3.5rem),
-   .contact-icon-circle (2.5rem) e .overlay-social-icon (1.8rem) nao mudaram de valor. */
+/* O dimensionamento vem do font-size do contexto (.overlay-social-icon). */
 .icon {
     width: 1em;
     height: 1em;
@@ -181,7 +244,10 @@ body {
     background-color: #A78BFA;
 }
 
-/* Navbar */
+/* ========================================== */
+/* NAVBAR                                     */
+/* ========================================== */
+
 .navbar {
     position: fixed;
     top: 0;
@@ -190,7 +256,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 3rem;
+    padding: var(--sp-3) var(--sp-12);
     background: var(--nav-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -198,7 +264,6 @@ body {
     transition: background 0.3s;
 }
 
-/* Hamburger button */
 .hamburger-btn {
     background: none;
     border: none;
@@ -207,9 +272,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
-    width: 40px;
-    height: 40px;
+    gap: var(--sp-1);
+    width: var(--touch);
+    height: var(--touch);
     border-radius: 50%;
     transition: var(--transition);
     position: relative;
@@ -255,7 +320,7 @@ body {
     flex: 1;
     display: flex;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: var(--fs-body);
     font-weight: 600;
     color: var(--nav-color);
     transition: color 0.3s;
@@ -266,31 +331,31 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 1.5rem;
+    gap: var(--sp-4);
 }
 
 .lang-switch {
     background: transparent;
     border: none;
     cursor: pointer;
-    /* Passou de <button> para <a> de navegacao. As duas declaracoes seguintes
-       repoem o que o UA stylesheet dava ao <button> e o <a> nao da: sem
-       line-height: normal o seletor fica 2px mais alto, por herdar o 1.6 do body. */
+    /* Passou de <button> para <a> de navegacao: sem sublinhado, e line-height
+       normal para a altura vir do min-height do alvo de toque e não do body. */
     text-decoration: none;
     line-height: normal;
     font-family: var(--font-main);
-    font-size: 0.9rem;
+    font-size: var(--fs-small);
     font-weight: 500;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    transition: transform 0.3s ease, color 0.3s ease;
-    padding: 0.2rem 0.5rem;
+    gap: var(--sp-1);
+    min-height: var(--touch);
+    padding: 0 var(--sp-2);
+    transition: color 0.3s ease;
 }
 
 .lang-switch:hover {
-    transform: scale(1.05);
+    color: var(--text-primary);
 }
 
 .lang-switch span {
@@ -298,12 +363,13 @@ body {
 }
 
 .lang-switch .active-lang {
-    color: var(--accent-color);
+    color: var(--accent-text);
     font-weight: 700;
 }
 
+/* Era --border-color, a 1,3:1: o separador é texto e tem de se ler. */
 .lang-sep {
-    color: var(--border-color);
+    color: var(--text-secondary);
     cursor: default;
     user-select: none;
 }
@@ -313,15 +379,12 @@ body {
     border: none;
     cursor: pointer;
     color: var(--nav-color);
-    font-size: 20px;
+    font-size: var(--fs-h3);
+    width: var(--touch);
+    height: var(--touch);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease;
-}
-
-.theme-switch:hover {
-    transform: scale(1.15);
 }
 
 html.dark-mode .icon-moon {
@@ -374,141 +437,132 @@ html.light-mode .icon-moon {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 6rem 2rem 4rem;
+    padding: var(--sp-24) var(--sp-8) var(--sp-16);
     width: 100%;
 }
 
-/* Lista ordenada verticalmente contendo as ligações. */
 .overlay-links {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--sp-6);
     flex-grow: 1;
     justify-content: center;
     align-items: center;
 }
 
-/* Ligações de navegação do menu overlay. */
 .overlay-link {
     text-decoration: none;
     color: var(--overlay-text);
-    font-size: 2.5rem;
+    font-size: var(--fs-h1);
+    line-height: var(--lh-heading);
     font-weight: 600;
     transition: color 0.2s;
 }
 
-/* Destaque ao passar o rato (hover) nas ligações. */
-.overlay-link:hover {
-    color: var(--accent-color);
-}
-
-/* Destaque da ligação correspondente à secção activa (Scrollspy). */
+/* Hover e secção ativa (scrollspy): só a cor muda. */
+.overlay-link:hover,
 .overlay-link.active-link {
-    color: var(--accent-color);
-    text-shadow: 0 0 8px var(--shadow-glow), 0 0 15px rgba(139, 92, 246, 0.3);
+    color: var(--accent-text);
 }
 
-/* Rodapé social no fundo do menu overlay para preenchimento estético do espaço negativo. */
+/* Rodapé social no fundo do menu overlay. */
 .overlay-footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2.5rem;
-    margin-top: 3rem;
-    padding-top: 2rem;
+    gap: var(--sp-8);
+    margin-top: var(--sp-12);
+    padding-top: var(--sp-8);
     border-top: 1px solid var(--overlay-border);
     width: 100%;
     max-width: 300px;
 }
 
-/* Ícone de rede social individual. */
 .overlay-social-icon {
     color: var(--overlay-text);
-    font-size: 1.8rem;
+    font-size: var(--fs-h2);
+    width: var(--touch);
+    height: var(--touch);
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color 0.3s ease;
 }
 
-/* Efeito dinâmico de hover para elevar ligeiramente os ícones e destacar com a cor principal. */
 .overlay-social-icon:hover {
-    color: var(--accent-color);
-    transform: translateY(-4px);
+    color: var(--accent-text);
 }
 
-/* Força compatibilidade de proporções em elementos gráficos SVG. */
 .overlay-social-icon svg {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1em;
+    height: 1em;
     stroke: currentColor;
 }
 
-/* Layout Containers */
+/* ========================================== */
+/* ESTRUTURA E SECÇÕES                        */
+/* ========================================== */
+
 main {
-    max-width: 1000px;
+    max-width: 72rem;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 var(--sp-24);
 }
 
-/* Hero Section */
-.hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 80px;
-}
-
-.hero-content-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 4rem;
-}
-
-.hero-text-area {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 600px;
-}
-
-.main-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.section-heading {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--text-primary);
-    line-height: 1.2;
+    margin-bottom: var(--sp-12);
 }
 
-.hero-subtitle {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
+/* Secções separadas por espaço e uma régua fina, sem fundos. */
+.about-section, .skills-section, .projects-section, .contacts-section {
+    padding: var(--sp-24) 0;
+    border-top: 1px solid var(--border-color);
 }
 
-.hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
+/* Link de texto: sem caixa, com sublinhado fino. */
+.text-link {
+    display: inline-flex;
     align-items: center;
-    gap: 1rem;
+    min-height: var(--touch);
+    color: var(--text-primary);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    text-decoration-color: var(--accent-color);
+    transition: color 0.2s ease;
+}
+
+.text-link:hover {
+    color: var(--accent-text);
 }
 
 .btn {
-    white-space: nowrap;
-    padding: 0.8rem 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    min-height: var(--touch);
+    padding: var(--sp-3) var(--sp-8);
     border-radius: 50px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
     font-family: var(--font-main);
-    display: inline-block;
+    font-size: var(--fs-body);
+    font-weight: 600;
+    line-height: var(--lh-heading);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, filter 0.2s ease;
 }
 
+/* Exceção ao contraste, aprovada na fase 4: nenhuma cor de texto chega a 4,5:1
+   sobre #8B5CF6, e o branco dá 4,23:1. É o único botão preenchido do site. */
 .btn-primary {
     background-color: var(--accent-color);
     color: #fff;
@@ -516,283 +570,471 @@ main {
 }
 
 .btn-primary:hover {
-    background-color: transparent;
-    color: var(--accent-color);
+    filter: brightness(0.9);
 }
 
 .btn-outline {
     background-color: transparent;
-    color: var(--accent-color);
+    color: var(--accent-text);
     border: 2px solid var(--accent-color);
 }
 
 .btn-outline:hover {
-    background-color: var(--accent-color);
-    color: #fff;
+    background-color: rgba(139, 92, 246, 0.12);
 }
 
-.hero-image-area {
+/* ========================================== */
+/* HERO                                       */
+/* ========================================== */
+
+.hero-section {
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
+    padding: var(--sp-32) 0 var(--sp-16);
 }
 
-.avatar-container {
-    width: 380px;
-    height: 380px;
+/* Disponibilidade: o primeiro elemento, mas discreto — ponto verde e texto. */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-6);
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+}
+
+.hero-badge-dot {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    padding: 10px;
-    background: linear-gradient(135deg, var(--accent-color), transparent);
-    box-shadow: 0 0 40px var(--shadow-glow);
-    animation: float 6s ease-in-out infinite;
+    background-color: #22C55E;
     flex-shrink: 0;
 }
 
-.avatar-img {
-    display: block; /* standards mode: remove o descenso da linha de base */
-    width: 100%;
-    height: 100%;
+.main-title {
+    font-size: var(--fs-display);
+    line-height: var(--lh-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-8);
+}
+
+/* O ponto final a roxo. É CSS para o texto do título continuar a ser o do
+   canónico; a segunda declaração esconde-o dos leitores de ecrã onde é suportada. */
+.main-title::after {
+    content: '.';
+    content: '.' / '';
+    color: var(--accent-text);
+}
+
+.hero-subtitle {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-heading);
+    font-weight: 500;
+    color: var(--text-primary);
+    max-width: 36ch;
+    margin-bottom: var(--sp-6);
+}
+
+.hero-paragraph {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+    max-width: 62ch;
+    margin-bottom: var(--sp-12);
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-4) var(--sp-8);
+}
+
+/* ========================================== */
+/* SOBRE                                      */
+/* ========================================== */
+
+.about-layout {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, var(--measure));
+    gap: var(--sp-12);
+    align-items: start;
+}
+
+.about-avatar {
+    display: block;
+    width: 8rem;
+    height: 8rem;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--bg-color);
 }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
-}
-
-/* Common Section Styles */
-.section-heading {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 3rem;
-    color: var(--text-primary);
-    text-align: center;
-}
-
-.about-section, .skills-section, .projects-section, .contacts-section {
-    padding: 6rem 0;
-}
-
-/* About Section */
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 1.15rem;
-    line-height: 1.8;
+.about-content p {
     color: var(--text-secondary);
 }
 
-/* Skills Section */
+.about-content p + p {
+    margin-top: var(--sp-4);
+}
+
+/* ========================================== */
+/* COMPETÊNCIAS                               */
+/* ========================================== */
+
+/* Informação, não exibição: quatro listas em duas colunas, sem cartões. */
 .skills-grid {
     display: grid;
-    /* Quatro grupos: a 400px de minimo ficam 2x2 no desktop em vez de 3+1,
-       e uma coluna no telemovel. */
-    /* O min() e essencial: sem ele, um minimo de 400px nao encolhe abaixo disso
-       e o cartao transborda o contentor de 311px do telemovel. */
-    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-12) var(--sp-16);
 }
 
-.skill-card {
-    background-color: var(--surface-color);
-    border-radius: 24px 8px 8px 8px;
-    border-bottom: 4px solid var(--accent-color);
-    padding: 2rem 1rem;
+.skill-group-title {
+    font-size: var(--fs-body);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+    color: var(--text-primary);
+    padding-bottom: var(--sp-3);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.skill-list {
+    list-style: none;
+}
+
+.skill-row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    transition: var(--transition), opacity 0.8s ease, transform 0.8s ease;
-    border-top: 1px solid var(--border-color);
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
-    /* Initial state for stagger animation */
-    opacity: 0;
-    transform: translateY(20px);
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-1) var(--sp-4);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.skill-card.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.skill-card:hover {
-    transform: translateY(-8px) !important;
-    background-color: var(--surface-hover);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.skill-icon {
-    font-size: 3.5rem;
+.skill-tech {
+    font-size: var(--fs-small);
+    font-weight: 500;
     color: var(--text-primary);
 }
 
-.text-icon {
-    font-size: 1.5rem;
-    font-weight: 700;
-    height: 3.5rem;
+.skill-proofs {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-1) var(--sp-3);
 }
 
-.skill-name {
-    font-size: 0.9rem;
+/* O link de prova é o ponto da secção: visível e clicável, nunca escondido. */
+.proof-link,
+.proof-private {
+    font-size: var(--fs-meta);
+    line-height: var(--lh-lead);
+    white-space: nowrap;
+}
+
+.proof-link {
+    color: var(--accent-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition: color 0.2s ease;
+}
+
+.proof-link:hover {
+    color: var(--text-primary);
+}
+
+/* Repositório privado: o mesmo peso, sem afordância de clique. */
+.proof-private {
+    color: var(--text-secondary);
+    cursor: default;
+}
+
+/* ========================================== */
+/* PROJETOS — lista, sem cartões (fase 4)     */
+/* ========================================== */
+
+/* Destaque: a largura toda, separado do resto por espaço e não por uma caixa. */
+.project-featured {
+    padding-bottom: var(--sp-16);
+}
+
+.project-featured .project-title {
+    font-size: var(--fs-h2);
+}
+
+.project-featured-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-4) var(--sp-6);
+    margin-top: var(--sp-8);
+}
+
+/* Estado in-development: não é link, e não deve parecer um. */
+.project-status-disabled {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    padding: 0 var(--sp-6);
+    border: 1px dashed var(--border-color);
+    border-radius: 50px;
+    font-size: var(--fs-small);
     font-weight: 500;
     color: var(--text-secondary);
+    cursor: not-allowed;
+    user-select: none;
 }
 
-/* Projects Section */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    background-color: var(--surface-color);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
+.project-head {
     display: flex;
-    flex-direction: column;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    border-color: var(--accent-color);
-}
-
-.project-thumb {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.project-thumb img {
-    display: block; /* standards mode: remove o descenso da linha de base */
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.project-card:hover .project-thumb img {
-    transform: scale(1.05);
-}
-
-.project-info {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-2) var(--sp-3);
 }
 
 .project-title {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-size: var(--fs-h3);
+    line-height: var(--lh-heading);
     font-weight: 600;
+    color: var(--text-primary);
 }
 
-.project-tech-icons {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.tech-badge {
-    background-color: rgba(139, 92, 246, 0.15);
-    color: var(--accent-color);
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
+.project-tagline {
+    font-size: var(--fs-micro);
+    line-height: var(--lh-lead);
     font-weight: 500;
-}
-
-.btn-view-more {
-    margin-top: auto;
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
-    font-family: var(--font-main);
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    width: 100%;
-    text-align: center;
-}
-
-.btn-view-more:hover {
-    background: var(--accent-color);
-    color: #fff;
-}
-
-/* Contacts Section */
-.contacts-row {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-}
-
-.contact-card-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
-
-.contact-card-link:hover {
-    transform: translateY(-8px);
-}
-
-.contact-card-link:hover .contact-icon-circle {
-    background-color: var(--accent-color);
-    color: #fff;
-    box-shadow: 0 10px 20px var(--shadow-glow);
-}
-
-.contact-icon-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: var(--surface-color);
-    color: var(--accent-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    transition: var(--transition);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    padding: 0 var(--sp-2);
     border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.project-desc {
+    margin-top: var(--sp-3);
+    max-width: 76ch;
+    color: var(--text-secondary);
+}
+
+.project-stack {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: var(--sp-3);
+    font-size: var(--fs-meta);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+}
+
+.project-tech + .project-tech::before {
+    content: '·';
+    content: '·' / '';
+    margin: 0 var(--sp-2);
+}
+
+.project-list {
+    list-style: none;
+    border-top: 1px solid var(--border-color);
+}
+
+.project-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    grid-template-areas:
+        "num head  action"
+        ".   desc  action"
+        ".   stack action";
+    align-items: baseline;
+    column-gap: var(--sp-6);
+    padding: var(--sp-8) var(--sp-4);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+/* Hover subtil: um fundo quase impercetível e a ação muda de cor. */
+.project-row:hover,
+.project-row:has(:focus-visible) {
+    background-color: rgba(139, 92, 246, 0.05);
+}
+
+.project-num {
+    grid-area: num;
+    font-size: var(--fs-meta);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-secondary);
+}
+
+.project-row .project-head {
+    grid-area: head;
+}
+
+.project-row .project-desc {
+    grid-area: desc;
+}
+
+.project-row .project-stack {
+    grid-area: stack;
+}
+
+.project-action {
+    grid-area: action;
+}
+
+.project-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-height: var(--touch);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.project-row:hover .project-action-link,
+.project-action-link:hover {
+    color: var(--accent-text);
+}
+
+/* A linha inteira é o alvo: o link do case study, ou o botão que abre a modal,
+   estende-se por cima dela. O link do repositório fica acima do botão. */
+.project-row .project-case-link::after,
+.project-open::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+.project-repo-link {
+    position: relative;
+    z-index: 1;
+}
+
+.project-open {
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.projects-subsection {
+    margin-top: var(--sp-16);
+}
+
+.projects-subsection-heading {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-3);
+}
+
+.projects-subsection-text {
+    max-width: 62ch;
+    margin-bottom: var(--sp-8);
+    color: var(--text-secondary);
+}
+
+/* ========================================== */
+/* CONTACTOS                                  */
+/* ========================================== */
+
+.contacts-text {
+    max-width: var(--measure);
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+    margin-bottom: var(--sp-12);
+}
+
+.contact-list {
+    max-width: var(--measure);
+    border-top: 1px solid var(--border-color);
+}
+
+.contact-item {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: var(--sp-4);
+    align-items: center;
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .contact-title {
-    color: var(--text-primary);
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.contact-value-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2) var(--sp-4);
 }
 
 .contact-value {
-    color: var(--text-secondary);
-    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    text-decoration-color: var(--accent-color);
+    overflow-wrap: anywhere;
+    transition: color 0.2s ease;
 }
 
-/* Footer Section */
+.contact-value:hover {
+    color: var(--accent-text);
+}
+
+.copy-email {
+    min-height: var(--touch);
+    padding: 0 var(--sp-4);
+    font-family: var(--font-main);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--accent-text);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.copy-email:hover {
+    border-color: var(--accent-color);
+}
+
+.copy-status {
+    font-size: var(--fs-meta);
+    color: var(--text-secondary);
+}
+
+/* ========================================== */
+/* RODAPÉ                                     */
+/* ========================================== */
+
 .site-footer {
-    padding: 1.5rem 0;
+    padding: var(--sp-6);
     text-align: center;
     background: var(--footer-bg);
     backdrop-filter: blur(12px);
@@ -802,12 +1044,37 @@ main {
 }
 
 .footer-content p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: var(--fs-meta);
     font-weight: 400;
 }
 
-/* Modal System */
+.footer-content a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+    color: var(--accent-text);
+    text-decoration: underline;
+}
+
+/* Era --border-color, a 1,3:1: o separador é texto e tem de se ler. */
+.footer-sep {
+    color: var(--text-secondary);
+    user-select: none;
+}
+
+/* ========================================== */
+/* MODAIS (os três projetos sem case study)   */
+/* ========================================== */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -828,7 +1095,7 @@ main {
     left: 50%;
     transform: translate(-50%, -50%) scale(0.95);
     background-color: var(--modal-bg);
-    border-radius: 16px;
+    border-radius: 12px;
     width: 90%;
     max-width: 800px;
     max-height: 90vh;
@@ -854,14 +1121,15 @@ main {
 
 .modal-close {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: var(--sp-4);
+    right: var(--sp-4);
     background: rgba(0,0,0,0.5);
     color: #fff;
     border: none;
-    font-size: 2rem;
-    width: 40px;
-    height: 40px;
+    font-size: var(--fs-h2);
+    line-height: 1;
+    width: var(--touch);
+    height: var(--touch);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -875,142 +1143,88 @@ main {
     background: rgba(0,0,0,0.8);
 }
 
-/* Tooltip Button (?) */
-.modal-info-btn {
-    position: absolute;
-    top: 15px;
-    right: 70px;
-    background-color: var(--surface-color);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-    font-size: 1.2rem;
-    font-weight: bold;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: help;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    transition: var(--transition);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-
-@media (hover: hover) {
-    .modal-info-btn:hover {
-        background-color: var(--accent-color);
-        color: #fff;
-        border-color: var(--accent-color);
-        box-shadow: 0 0 15px var(--shadow-glow);
-    }
-
-    .modal-info-btn:hover::after {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-}
-
-.modal-info-btn.active-tooltip {
-    background-color: var(--accent-color);
-    color: #fff;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 15px var(--shadow-glow);
-}
-
-/* Tooltip Balão (Tooltip) */
-.modal-info-btn::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    top: 50px; 
-    right: 0;
-    width: max-content;
-    max-width: 280px;
-    background-color: var(--surface-color);
-    color: var(--text-primary);
-    text-align: left;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    font-size: 0.9rem;
-    font-weight: 400;
-    font-family: var(--font-main);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 100;
-    pointer-events: none;
-    line-height: 1.5;
-}
-
-.modal-info-btn.active-tooltip::after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
 .modal-content {
     display: flex;
     flex-direction: column;
 }
 
 .modal-img {
-    display: block; /* standards mode: remove o descenso da linha de base */
+    display: block;
     width: 100%;
     height: 350px;
     object-fit: cover;
 }
 
 .modal-title {
-    font-size: 2rem;
-    padding: 2rem 2rem 1rem;
+    font-size: var(--fs-h2);
+    line-height: var(--lh-heading);
+    padding: var(--sp-8) var(--sp-8) var(--sp-4);
     color: var(--text-primary);
 }
 
 .modal-desc {
-    padding: 0 2rem 1rem;
-    font-size: 1.1rem;
+    padding: 0 var(--sp-8) var(--sp-4);
     color: var(--text-secondary);
 }
 
 .modal-features {
-    padding: 0 2rem 2rem 3rem;
+    padding: 0 var(--sp-8) var(--sp-6) var(--sp-12);
     color: var(--text-secondary);
 }
 
-.modal-features li {
-    margin-bottom: 0.5rem;
+.modal-features li + li {
+    margin-top: var(--sp-2);
+}
+
+.modal-note {
+    padding: 0 var(--sp-8) var(--sp-6);
+    font-size: var(--fs-meta);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
 }
 
 .modal-actions {
-    padding: 0 2rem 2rem;
+    padding: 0 var(--sp-8) var(--sp-8);
     display: flex;
-    gap: 1rem;
+    gap: var(--sp-4);
     flex-wrap: wrap;
 }
 
 .btn-modal {
-    background-color: var(--surface-hover);
-    color: var(--text-primary);
-    padding: 0.8rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    padding: 0 var(--sp-6);
     border-radius: 8px;
-    text-decoration: none;
+    font-size: var(--fs-small);
     font-weight: 500;
-    transition: var(--transition);
+    color: var(--text-primary);
+    background-color: var(--surface-hover);
     border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
 }
 
 .btn-modal:hover {
-    background-color: var(--accent-color);
     border-color: var(--accent-color);
-    color: #fff;
-    transform: translateY(-2px);
 }
 
-/* Animations */
+/* Estado in-development: não é link, e não deve parecer um. */
+.btn-modal-disabled {
+    color: var(--text-secondary);
+    border-style: dashed;
+    cursor: not-allowed;
+    user-select: none;
+}
+
+.btn-modal.btn-modal-disabled:hover {
+    border-color: var(--border-color);
+}
+
+/* ========================================== */
+/* ANIMAÇÕES                                  */
+/* ========================================== */
+
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -1022,323 +1236,104 @@ main {
     transform: translateY(0);
 }
 
-/* --- BADGE DE DISPONIBILIDADE --- */
-/* Primeiro elemento do hero: e a informacao com maior retorno da pagina. */
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 1.25rem;
-    padding: 0.45rem 1rem;
-    border-radius: 50px;
-    background-color: rgba(34, 197, 94, 0.12);
-    border: 1px solid rgba(34, 197, 94, 0.35);
-    color: var(--text-primary);
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.4;
-}
+/* ========================================== */
+/* RESPONSIVO (desktop-first, 900 e 768px)    */
+/* ========================================== */
 
-.hero-badge-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background-color: #22C55E;
-    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
-    flex-shrink: 0;
-}
-
-.hero-paragraph {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    max-width: 58ch;
-}
-
-/* CTA terciario: sem caixa, so texto sublinhado no hover. */
-.btn-text {
-    padding: 0.8rem 0.5rem;
-    color: var(--text-secondary);
-    background: transparent;
-    border: 2px solid transparent;
-}
-
-.btn-text:hover {
-    color: var(--accent-color);
-    text-decoration: underline;
-}
-
-/* --- COMPETENCIAS COM PROVA --- */
-.skill-group {
-    align-items: stretch;
-    justify-content: flex-start;
-    text-align: left;
-    padding: 1.75rem 1.5rem;
-    gap: 1.25rem;
-}
-
-.skill-group-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.skill-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.skill-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-}
-
-.skill-tech {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--text-primary);
-}
-
-.skill-proofs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-/* O link de prova e o ponto da seccao: visivel e clicavel, nunca escondido. */
-.proof-link,
-.proof-private {
-    font-size: 0.78rem;
-    line-height: 1.3;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.proof-link {
-    background-color: rgba(139, 92, 246, 0.15);
-    color: var(--accent-color);
-    border-color: transparent;
-    transition: var(--transition);
-}
-
-.proof-link:hover {
-    background-color: var(--accent-color);
-    color: #fff;
-}
-
-/* Repositorio privado: mesmo peso visual, sem afordancia de clique. */
-.proof-private {
-    background-color: transparent;
-    color: var(--text-secondary);
-    cursor: default;
-}
-
-/* --- CONTACTOS --- */
-.contacts-text {
-    max-width: 65ch;
-    margin: -1.5rem auto 0;
-    text-align: center;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-}
-
-/* --- RODAPE --- */
-.footer-content p {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.footer-content a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-content a:hover {
-    color: var(--accent-color);
-    text-decoration: underline;
-}
-
-.footer-sep {
-    color: var(--border-color);
-    user-select: none;
-}
-
-/* --- PROJETOS: TAGLINE, SUB-SECCAO, RECURSO DE IMAGEM --- */
-.project-tagline {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--accent-color);
-    margin-top: -0.6rem;
-    margin-bottom: 1rem;
-}
-
-/* Sub-seccao Design -> Codigo, separada por uma regua para nao se ler como
-   continuacao dos projetos de engenharia. */
-.projects-subsection {
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.projects-subsection-heading {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    text-align: center;
-    margin-bottom: 0.75rem;
-}
-
-.projects-subsection-text {
-    max-width: 62ch;
-    margin: 0 auto 2.5rem;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-}
-
-/* Projetos ainda sem screenshot. Ocupa a mesma caixa que a imagem real teria,
-   para a grelha nao mexer quando as fotografias chegarem. */
-.project-fallback {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    text-align: center;
-    background:
-        radial-gradient(circle at 30% 25%, var(--shadow-glow), transparent 60%),
-        linear-gradient(135deg, var(--surface-hover), var(--surface-color));
-    border-bottom: 1px solid var(--border-color);
-}
-
-.project-thumb .project-fallback {
-    height: 100%;
-}
-
-.project-fallback-initials {
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1;
-    color: var(--accent-color);
-    letter-spacing: 0.02em;
-}
-
-
-/* Estado in-development: nao e link, e nao deve parecer um. */
-.btn-modal-disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-    user-select: none;
-}
-
-.btn-modal.btn-modal-disabled:hover {
-    background-color: var(--surface-hover);
-    border-color: var(--border-color);
-    color: var(--text-primary);
-    transform: none;
-}
-
-/* Botão de case study, no cartão e na modal. Só aparece nos projetos que têm
-   página; vai cheio para se distinguir do "Ver Mais", que só abre a modal. */
-.btn-case-study {
-    display: block;
-    margin-top: 0.6rem;
-    background: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    color: #fff;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
-    font-weight: 500;
-    text-align: center;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.btn-case-study:hover {
-    box-shadow: 0 6px 18px var(--shadow-glow);
-    transform: translateY(-2px);
-}
-
-.btn-modal.btn-modal-case {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
-    color: #fff;
-}
-
-/* Responsive */
 @media (max-width: 900px) {
-    .hero-content-wrapper {
-        flex-direction: column-reverse;
-        text-align: center;
-        gap: 2rem;
-    }
-
-    .hero-text-area {
-        align-items: center;
-    }
-
-    .main-title {
-        font-size: 2.5rem;
-    }
-
-    .avatar-container {
-        width: 250px;
-        height: 250px;
+    main {
+        padding: 0 var(--sp-12);
     }
 
     .navbar {
-        padding: 1rem;
+        padding: var(--sp-3) var(--sp-4);
     }
 }
 
-/* --- Correções para a Modal em Mobile --- */
 @media (max-width: 768px) {
-    /* 1. Ajustar a altura da imagem para ser mais proporcional num ecrã pequeno */
+    /* Margens laterais reduzidas, sem nunca colar ao bordo. */
+    main {
+        padding: 0 var(--sp-6);
+    }
+
+    .hero-section {
+        min-height: auto;
+        padding: var(--sp-32) 0 var(--sp-16);
+    }
+
+    .about-section, .skills-section, .projects-section, .contacts-section {
+        padding: var(--sp-16) 0;
+    }
+
+    .about-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--sp-6);
+    }
+
+    .about-avatar {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--sp-12);
+    }
+
+    /* Alvos de toque com 44px de altura. */
+    .proof-link,
+    .footer-content a {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--touch);
+    }
+
+    /* A linha empilha: número e título em cima, depois a descrição, a stack e a
+       ação, alinhada à esquerda. */
+    .project-row {
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas:
+            "num    head"
+            "desc   desc"
+            "stack  stack"
+            "action action";
+        column-gap: var(--sp-3);
+        padding: var(--sp-6) 0;
+    }
+
+    .project-action {
+        margin-top: var(--sp-2);
+    }
+
+    .contact-item {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        padding-top: var(--sp-4);
+    }
+
     .modal-img {
-        height: 200px; 
+        height: 200px;
     }
 
-    /* 2. Reduzir os paddings interiores para libertar espaço para o texto e botões */
     .modal-title {
-        font-size: 1.5rem;
-        padding: 1.5rem 1.5rem 0.5rem;
-    }
-    
-    .modal-desc {
-        font-size: 1rem;
-        padding: 0 1.5rem 1rem;
-    }
-    
-    .modal-features {
-        padding: 0 1.5rem 1.5rem 2.5rem;
-    }
-    
-    .modal-actions {
-        padding: 0 1.5rem 1.5rem;
+        padding: var(--sp-6) var(--sp-6) var(--sp-2);
     }
 
-    /* 3. Aproveitar melhor o ecra do telemovel */
-    .modal {
-        width: 95%; /* Aproveita melhor a largura do telemóvel */
-        max-height: 85vh; /* Dá um pequeno respiro no topo e em baixo */
+    .modal-desc,
+    .modal-note {
+        padding: 0 var(--sp-6) var(--sp-4);
     }
-    
-    /* 4. Ajustar posição do balão de informação para não sair do ecrã à esquerda */
-    .modal-info-btn::after {
-        right: -45px;
-        width: 260px;
+
+    .modal-features {
+        padding: 0 var(--sp-6) var(--sp-6) var(--sp-12);
+    }
+
+    .modal-actions {
+        padding: 0 var(--sp-6) var(--sp-6);
+    }
+
+    .modal {
+        width: 95%;
+        max-height: 85vh;
     }
 }

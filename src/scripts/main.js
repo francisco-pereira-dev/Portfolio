@@ -9,6 +9,10 @@
  *    para não haver flash. Aqui fica só a alternância por clique.
  *  - O bloco de deteção de reload também está inline no <head>, para manter o
  *    momento de execução original (fora do DOMContentLoaded).
+ *
+ * Fase 4: a cascata das competências e os balões "?" das modais saíram (as
+ * competências deixaram de ser cartões e a nota de arranque a frio passou para a
+ * página de case study). Entrou o botão de copiar o email.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -59,8 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Modais dos projetos ---
-  const btnsViewMore = document.querySelectorAll('.btn-view-more');
+  // --- Modais dos projetos sem case study ---
+  // Abre-as o título da linha, um botão com data-modal. Os projetos com case
+  // study ligam à sua página e não têm modal.
+  const modalTriggers = document.querySelectorAll('[data-modal]');
   const modals = document.querySelectorAll('.modal');
   const overlay = document.getElementById('modal-overlay');
   const closeBtns = document.querySelectorAll('.modal-close');
@@ -84,13 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeModal() {
+    // Sem modal aberta não há nada a fazer. Nas páginas de case study não existe
+    // fundo de modal, e o Escape dava um TypeError na consola.
+    if (!document.querySelector('.modal.active')) return;
+
     modals.forEach((m) => m.classList.remove('active'));
     overlay.classList.remove('active');
     document.body.style.overflow = '';
-
-    document.querySelectorAll('.modal-info-btn').forEach((btn) => {
-      btn.classList.remove('active-tooltip');
-    });
 
     if (lastFocusedElement) {
       lastFocusedElement.focus();
@@ -98,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  btnsViewMore.forEach((btn) => {
+  modalTriggers.forEach((btn) => {
     btn.addEventListener('click', () => {
       openModal(btn.getAttribute('data-modal'));
     });
@@ -134,44 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, observerOptions);
 
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-  // --- Cascata da grelha de competências ---
-  const skillsGrid = document.getElementById('skills-grid-container');
-  const skillCards = document.querySelectorAll('.skill-card');
-
-  if (skillsGrid) {
-    const skillsObserver = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          skillCards.forEach((card, index) => {
-            setTimeout(() => {
-              card.classList.add('is-visible');
-            }, index * 100);
-          });
-          skillsObserver.unobserve(skillsGrid);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    skillsObserver.observe(skillsGrid);
-  }
-
-  // --- Balões informativos das modais (toque em mobile) ---
-  const infoBtns = document.querySelectorAll('.modal-info-btn');
-
-  infoBtns.forEach((btn) => {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      this.classList.toggle('active-tooltip');
-    });
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.modal-info-btn')) {
-      infoBtns.forEach((btn) => btn.classList.remove('active-tooltip'));
-    }
-  });
 
   // --- Scrollspy do menu overlay ---
   const sections = document.querySelectorAll('section[id]');
@@ -214,4 +182,51 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(sincronizarAncora, 0);
     }));
   }
+
+  // --- Copiar o email ---
+  // Um mailto: num computador sem cliente de email configurado não faz nada.
+  // O botão copia o endereço e confirma durante 2 segundos numa região
+  // aria-live, para o leitor de ecrã também ouvir a confirmação.
+  document.querySelectorAll('.copy-email').forEach((btn) => {
+    const estado = btn.parentElement.querySelector('.copy-status');
+    let temporizador;
+    btn.addEventListener('click', async () => {
+      const copiado = await copiar(btn.getAttribute('data-email'));
+      if (!copiado || !estado) return;
+      estado.textContent = btn.getAttribute('data-feito');
+      clearTimeout(temporizador);
+      temporizador = setTimeout(() => {
+        estado.textContent = '';
+      }, 2000);
+    });
+  });
 });
+
+/**
+ * Copia texto para a área de transferência. A Clipboard API precisa de HTTPS
+ * (ou localhost); sem ela, recorre ao método antigo com uma área de texto
+ * temporária. Devolve se conseguiu.
+ */
+async function copiar(texto) {
+  try {
+    await navigator.clipboard.writeText(texto);
+    return true;
+  } catch (e) {
+    /* sem Clipboard API ou sem permissão: tenta o método antigo */
+  }
+  const campo = document.createElement('textarea');
+  campo.value = texto;
+  campo.setAttribute('readonly', '');
+  campo.style.position = 'fixed';
+  campo.style.opacity = '0';
+  document.body.appendChild(campo);
+  campo.select();
+  let copiado = false;
+  try {
+    copiado = document.execCommand('copy');
+  } catch (e) {
+    copiado = false;
+  }
+  campo.remove();
+  return copiado;
+}

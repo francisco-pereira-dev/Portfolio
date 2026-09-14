@@ -6,6 +6,9 @@
  * secção de uma lista de palavras: o link é verificável, não é uma afirmação.
  * O Licas tem repositório privado, por isso aparece como texto sem link — a
  * alternativa seria um 404.
+ *
+ * Desde a fase 4 é informação e não exibição: sem cartões, sem ícones e sem
+ * entrada em cascata.
  */
 import type { Ui } from '../i18n';
 import site from '../data/site.json';
@@ -23,10 +26,10 @@ const urlRepo = (repo: string) => `${site.githubUrl}/${repo}`;
 <section id="skills" class="skills-section">
   <h2 class="section-heading reveal">{ui['skills-heading']}</h2>
 
-  <div class="skills-grid" id="skills-grid-container">
+  <div class="skills-grid">
     {
       grupos.map((grupo) => (
-        <div class="skill-card skill-group">
+        <div class="skill-group">
           <h3 class="skill-group-title">
             {ui[`skills-group-${grupo.id}` as keyof Ui]}
           </h3>

@@ -9,8 +9,9 @@
  * A comparação é exata e, sempre que possível, posicional:
  *   - cada texto de interface tem de ser um nó de texto ou um valor de atributo
  *     inteiro — "Dados" não passa por aparecer a meio de outra frase;
- *   - o texto de cada projeto é procurado dentro do cartão e da modal desse
- *     projeto, não em qualquer sítio da página;
+ *   - o texto de cada projeto é procurado dentro do bloco desse projeto na
+ *     lista (destaque ou linha) e, nos que não têm case study, na sua modal —
+ *     não em qualquer sítio da página;
  *   - cada competência é verificada no seu grupo, pela ordem, com as provas
  *     e os links que a acompanham;
  *   - cada case study é verificado na sua própria página, secção a secção e
@@ -134,7 +135,7 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
 
   // 3. Competências: grupo a grupo, pela ordem, com provas e links.
   const secSkills = (html.match(/<section id="skills"[\s\S]*?<\/section>/) || [''])[0];
-  const cartoes = secSkills.split('<div class="skill-card').slice(1);
+  const cartoes = secSkills.split('<div class="skill-group"').slice(1);
   const rotuloTodos = canon.interface.competencias?.['skills-proof-all']?.[lang];
   const grupos = [...new Set(canon.competencias.itens.map((i) => i.grupo))];
   grupos.forEach((grupo, gi) => {
@@ -172,91 +173,122 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     exigir(onde.length === 0, lang, `competencias: "${r}" continua fora`, 'ausente', fmtLista(onde));
   }
 
-  // 4. Projetos: ordem, e o texto de cada um dentro do seu cartão e da sua modal.
-  const ordemDist = [...html.matchAll(/data-modal="modal-([^"]+)"/g)].map((m) => m[1]);
+  // 4. Projetos (fase 4: lista, sem cartões). A ordem, e o texto de cada projeto
+  //    no seu bloco — o destaque ou a linha — e, nos que não têm case study, na modal.
+  const ordemDist = [...html.matchAll(/data-project="([^"]+)"/g)].map((m) => m[1]);
   exigir(
     JSON.stringify(ordemDist) === JSON.stringify(canon.projetos.ordem.slugs),
     lang, 'projetos.ordem', canon.projetos.ordem.slugs.join(', '), ordemDist.join(', '),
   );
+  // A lista não mostra imagens: os screenshots vivem nas páginas de case study.
+  const secProjetos = (html.match(/<section id="projects"[\s\S]*?<\/section>/) || [''])[0];
+  const imagensLista = (secProjetos.match(/<img\b/g) || []).length;
+  exigir(imagensLista === 0, lang, 'projetos (lista sem imagens)', '0 imagens', `${imagensLista} imagem(ns)`);
+  // Só os projetos sem case study têm modal.
+  const semCase = canon.projetos.ordem.slugs.filter((s) => !canon.projetos[s]?.caseStudy);
+  const modaisDist = [...html.matchAll(/<div class="modal" id="modal-([^"]+)"/g)].map((m) => m[1]);
+  exigir(JSON.stringify(modaisDist) === JSON.stringify(semCase), lang, 'modais (só os projetos sem case study)', semCase.join(', '), modaisDist.join(', ') || '(nenhuma)');
+
+  const rotuloCase = canon.interface.projetos['project-btn-case-study'][lang];
+  const rotuloRepo = canon.interface.projetos['modal-btn-repo'][lang];
+  const rotuloDemo = canon.interface.projetos['modal-btn-project'][lang];
+  const rotuloDev = canon.interface.projetos['project-status-in-development'][lang];
+  /** Texto de um link de ação, sem a seta decorativa. */
+  const semSeta = (s) => s.replace(/\s*→$/, '');
+  const fmtLinks = (l) => l.map((a) => `${a.texto} -> ${a.href}`).join(' | ') || '(nenhum)';
+
   for (const [slug, p] of Object.entries(canon.projetos)) {
     if (slug === 'ordem') continue;
-    const iBotao = html.indexOf(`data-modal="modal-${slug}"`);
-    const iCartao = iBotao < 0 ? -1 : html.lastIndexOf('<div class="project-card', iBotao);
-    // O cartão acaba onde começa o seguinte, ou no fim da secção de projetos.
-    const iSeguinte = iBotao < 0 ? -1 : html.indexOf('<div class="project-card', iBotao);
-    const fimCartao = iSeguinte > 0 ? iSeguinte : html.indexOf('</section>', iBotao);
-    const cartao = iCartao < 0 ? '' : html.slice(iCartao, fimCartao);
+    const iAttr = html.indexOf(`data-project="${slug}"`);
+    const iBloco = iAttr < 0 ? -1 : html.lastIndexOf('<', iAttr);
+    // O bloco acaba onde começa o seguinte, ou no fim da secção de projetos.
+    const iSeguinte = iAttr < 0 ? -1 : html.indexOf('data-project="', iAttr + 1);
+    const fimBloco = iSeguinte > 0 ? html.lastIndexOf('<', iSeguinte) : html.indexOf('</section>', iAttr);
+    const bloco = iBloco < 0 ? '' : html.slice(iBloco, fimBloco);
     const iModal = html.indexOf(`<div class="modal" id="modal-${slug}"`);
     const fimModal = iModal < 0 ? -1 : html.indexOf('<div class="modal" id="modal-', iModal + 1);
     const modal = iModal < 0 ? '' : html.slice(iModal, fimModal < 0 ? undefined : fimModal);
     const c = `projetos.${slug}`;
+    const cs = p.caseStudy;
 
     // Cada campo só é verificado nas línguas que o canónico fixa.
     if (p.title?.[lang] !== undefined) {
-      const tc = um(cartao, /<h3 class="project-title">([\s\S]*?)<\/h3>/);
-      const tm = um(modal, /<h3 class="modal-title"[^>]*>([\s\S]*?)<\/h3>/);
-      exigir(tc === p.title[lang], lang, `${c}.title (cartão)`, p.title[lang], tc ?? '(cartão em falta)');
-      exigir(tm === p.title[lang], lang, `${c}.title (modal)`, p.title[lang], tm ?? '(modal em falta)');
+      const tb = um(bloco, /<h[34] class="project-title">([\s\S]*?)<\/h[34]>/);
+      exigir(tb === p.title[lang], lang, `${c}.title (lista)`, p.title[lang], tb ?? '(bloco em falta)');
+      if (!cs) {
+        const tm = um(modal, /<h3 class="modal-title"[^>]*>([\s\S]*?)<\/h3>/);
+        exigir(tm === p.title[lang], lang, `${c}.title (modal)`, p.title[lang], tm ?? '(modal em falta)');
+      }
     }
     if (p.tagline?.[lang] !== undefined) {
-      const t = um(cartao, /<p class="project-tagline">([\s\S]*?)<\/p>/);
+      const t = um(bloco, /<span class="project-tagline">([\s\S]*?)<\/span>/);
       exigir(t === p.tagline[lang], lang, `${c}.tagline`, p.tagline[lang], t ?? '(sem tagline)');
     }
     // tech: lista comum às duas línguas, ou { pt: [...], en: [...] } quando diferem.
     const tech = Array.isArray(p.tech) ? p.tech : p.tech?.[lang];
     if (tech) {
-      const t = todos(cartao, /<span class="tech-badge">([\s\S]*?)<\/span>/g);
+      const t = todos(bloco, /<li class="project-tech">([\s\S]*?)<\/li>/g);
       exigir(JSON.stringify(t) === JSON.stringify(tech), lang, `${c}.tech`, fmtLista(tech), fmtLista(t));
     }
-    if (p.imageAlt?.[lang] !== undefined) {
-      const alt = (frag) => {
-        const m = frag.match(/<img\b[^>]*\balt="([^"]*)"/);
-        return m ? norm(m[1]) : null;
-      };
-      exigir(alt(cartao) === p.imageAlt[lang], lang, `${c}.imageAlt (cartão)`, p.imageAlt[lang], alt(cartao) ?? '(sem imagem)');
-      exigir(alt(modal) === p.imageAlt[lang], lang, `${c}.imageAlt (modal)`, p.imageAlt[lang], alt(modal) ?? '(sem imagem)');
+    // O alt dos projetos com case study verifica-se na página deles (ponto 5).
+    if (!cs && p.imageAlt?.[lang] !== undefined) {
+      const m = modal.match(/<img\b[^>]*\balt="([^"]*)"/);
+      const alt = m ? norm(m[1]) : null;
+      exigir(alt === p.imageAlt[lang], lang, `${c}.imageAlt (modal)`, p.imageAlt[lang], alt ?? '(sem imagem)');
     }
     if (p.description?.[lang] !== undefined) {
-      const t = um(modal, /<p class="modal-desc">([\s\S]*?)<\/p>/);
-      exigir(t === p.description[lang], lang, `${c}.description`, p.description[lang], t ?? '(sem descrição)');
+      const t = um(bloco, /<p class="project-desc">([\s\S]*?)<\/p>/);
+      exigir(t === p.description[lang], lang, `${c}.description (lista)`, p.description[lang], t ?? '(sem descrição)');
+      if (!cs) {
+        const tm = um(modal, /<p class="modal-desc">([\s\S]*?)<\/p>/);
+        exigir(tm === p.description[lang], lang, `${c}.description (modal)`, p.description[lang], tm ?? '(sem descrição)');
+      }
     }
-    if (p.features) {
+    // As features só aparecem na modal. Os projetos com case study já não a têm,
+    // e as features deles ficam no canónico sem aparecer (caseStudies._fase4).
+    if (p.features && !cs) {
       const ul = (modal.match(/<ul class="modal-features">([\s\S]*?)<\/ul>/) || ['', ''])[1];
       const t = todos(ul, /<li>([\s\S]*?)<\/li>/g);
       exigir(t.length === p.features.length, lang, `${c}.features (quantidade)`, String(p.features.length), String(t.length));
       p.features.forEach((f, i) => exigir(t[i] === f[lang], lang, `${c}.features[${i}]`, f[lang], t[i] ?? '(em falta)'));
     }
     // Botões da modal: só quando o enunciado fixou os dois URLs.
-    if (p.repoUrl !== undefined && p.demoUrl !== undefined) {
+    if (!cs && p.repoUrl !== undefined && p.demoUrl !== undefined) {
       const hrefs = [...modal.matchAll(/<a href="([^"]*)"[^>]*class="btn-modal"/g)].map((m) => decode(m[1]));
       const esperado = [p.demoUrl, p.repoUrl].filter(Boolean);
       exigir(JSON.stringify(hrefs) === JSON.stringify(esperado), lang, `${c} (links da modal)`, fmtLista(esperado), fmtLista(hrefs));
     }
     if (p.status === 'in-development') {
-      const rotulo = canon.interface.projetos['project-status-in-development'][lang];
-      const t = um(modal, /<span class="btn-modal btn-modal-disabled"[^>]*>([\s\S]*?)<\/span>/);
-      exigir(t === rotulo, lang, `${c} (estado em desenvolvimento)`, rotulo, t ?? '(sem rótulo inerte)');
+      const t = um(bloco, /<span class="project-status-disabled"[^>]*>([\s\S]*?)<\/span>/);
+      exigir(t === rotuloDev, lang, `${c} (estado em desenvolvimento)`, rotuloDev, t ?? '(sem rótulo inerte)');
     }
 
-    // 5. Case study: botão no cartão e na modal, e página própria — ou nada disso.
-    const cs = p.caseStudy;
+    // 5. A ação da linha: o case study, com página própria — ou a modal e o
+    //    repositório, sem página.
     const hrefCase = rotaCase(slug, lang);
     const ficheiroCase = path.join(root, 'dist', hrefCase, 'index.html');
-    const noCartao = ancoras(cartao).filter((a) => a.classes.includes('btn-case-study'));
-    const naModal = ancoras(modal).filter((a) => a.classes.includes('btn-modal-case'));
+    const acoesCase = ancoras(bloco).filter((a) => a.classes.includes('project-case-link'));
+    const gatilhos = bloco.match(/data-modal="[^"]*"/g) || [];
     if (!cs) {
-      exigir(noCartao.length + naModal.length === 0, lang, `${c} (sem case study: sem botão)`, 'nenhum botão', `${noCartao.length} no cartão, ${naModal.length} na modal`);
+      exigir(acoesCase.length === 0, lang, `${c} (sem case study: sem link)`, 'nenhum link de case study', fmtLinks(acoesCase));
+      exigir(
+        gatilhos.length === 1 && gatilhos[0] === `data-modal="modal-${slug}"` && modal !== '',
+        lang, `${c} (sem case study: abre a modal)`, `data-modal="modal-${slug}" e a modal`, `${gatilhos.join(' ') || '(sem botão)'}${modal ? '' : ', sem modal'}`,
+      );
+      const repo = ancoras(bloco).filter((a) => a.classes.includes('project-repo-link'));
+      const hrefRepo = p.repoUrl ?? repo[0]?.href;
+      exigir(
+        repo.length === 1 && repo[0].href === hrefRepo && hrefRepo?.startsWith(GITHUB) && semSeta(repo[0].texto) === rotuloRepo,
+        lang, `${c} (ação: repositório)`, `${rotuloRepo} -> ${p.repoUrl ?? `${GITHUB}/…`}`, fmtLinks(repo),
+      );
       exigir(!fs.existsSync(ficheiroCase), lang, `${c} (sem case study: sem página)`, 'sem página', `existe dist${hrefCase}index.html`);
       continue;
     }
-    const rotuloCase = canon.interface.projetos['project-btn-case-study'][lang];
-    for (const [onde, lista] of [['cartão', noCartao], ['modal', naModal]]) {
-      const a = lista[0];
-      exigir(
-        lista.length === 1 && a.href === hrefCase && a.texto === rotuloCase,
-        lang, `${c} (botão de case study, ${onde})`, `${rotuloCase} -> ${hrefCase}`, a ? `${a.texto} -> ${a.href}` : '(sem botão)',
-      );
-    }
+    exigir(modal === '' && gatilhos.length === 0, lang, `${c} (com case study: sem modal)`, 'sem modal nem botão de modal', `${modal ? 'modal presente, ' : ''}${gatilhos.length} botão(ões)`);
+    exigir(
+      acoesCase.length === 1 && acoesCase[0].href === hrefCase && semSeta(acoesCase[0].texto) === rotuloCase,
+      lang, `${c} (ação: case study)`, `${rotuloCase} -> ${hrefCase}`, fmtLinks(acoesCase),
+    );
     if (!fs.existsSync(ficheiroCase)) {
       exigir(false, lang, `${c}.caseStudy (página)`, `dist${hrefCase}index.html`, '(não existe)');
       continue;
@@ -273,6 +305,48 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     exigir(h1 === p.title[lang], lang, `${cc} (h1)`, p.title[lang], h1 ?? '(sem h1)');
     const lede = um(pag, /<p class="case-lede">([\s\S]*?)<\/p>/);
     exigir(lede === cs.umaFrase[lang], lang, `${cc}.umaFrase`, cs.umaFrase[lang], lede ?? '(em falta)');
+
+    // Screenshot: os projetos com imagem mostram-na logo depois da umaFrase, com o
+    // alt do canónico; os outros não mostram imagem nenhuma, nem recurso.
+    const imgsPag = pag.match(/<img\b[^>]*>/g) || [];
+    if (p.imageAlt?.[lang] !== undefined) {
+      const fig = (pag.match(/<figure class="case-figure">([\s\S]*?)<\/figure>/) || ['', ''])[1];
+      const altFig = (fig.match(/<img\b[^>]*\balt="([^"]*)"/) || [])[1];
+      exigir(
+        imgsPag.length === 1 && altFig !== undefined && norm(altFig) === p.imageAlt[lang],
+        lang, `${cc} (screenshot)`, `1 imagem, alt "${p.imageAlt[lang]}"`, `${imgsPag.length} imagem(ns), alt ${altFig === undefined ? '(sem figura)' : `"${norm(altFig)}"`}`,
+      );
+      const iLede = pag.indexOf('<p class="case-lede">');
+      const iFig = pag.indexOf('<figure class="case-figure">');
+      const iSec = pag.indexOf('class="case-section"');
+      exigir(iLede > 0 && iFig > iLede && iFig < iSec, lang, `${cc} (screenshot depois da umaFrase)`, 'umaFrase, figura, secções', iFig < 0 ? '(sem figura)' : 'fora de ordem');
+    } else {
+      exigir(imgsPag.length === 0 && !pag.includes('<figure'), lang, `${cc} (sem screenshot: nada no lugar)`, 'nenhuma imagem nem figura', `${imgsPag.length} imagem(ns)`);
+    }
+
+    // Links que saíram da modal: demonstração e repositório, com os rótulos de
+    // sempre — a lista exata quando o enunciado fixou os dois URLs.
+    const blocoLinks = (pag.match(/<div class="case-links">([\s\S]*?)<\/div>/) || ['', ''])[1];
+    const links = ancoras(blocoLinks);
+    if (p.repoUrl !== undefined && p.demoUrl !== undefined) {
+      const esperado = [p.demoUrl && `${rotuloDemo} -> ${p.demoUrl}`, p.repoUrl && `${rotuloRepo} -> ${p.repoUrl}`].filter(Boolean);
+      const achado = links.map((a) => `${a.texto} -> ${a.href}`);
+      exigir(JSON.stringify(achado) === JSON.stringify(esperado), lang, `${cc} (links)`, fmtLista(esperado), fmtLista(achado));
+    } else {
+      exigir(links.length > 0 && links.every((a) => a.texto === rotuloDemo || a.texto === rotuloRepo), lang, `${cc} (links)`, `${rotuloDemo} e/ou ${rotuloRepo}`, fmtLinks(links));
+    }
+    if (p.status === 'in-development') {
+      const t = um(pag, /<span class="case-status"[^>]*>([\s\S]*?)<\/span>/);
+      exigir(t === rotuloDev, lang, `${cc} (estado em desenvolvimento)`, rotuloDev, t ?? '(sem rótulo inerte)');
+    }
+    // A nota de arranque a frio aparece nos projetos marcados com coldStart nos dados.
+    const frio = JSON.parse(ler(`src/content/projects/${slug}.json`)).coldStart === true;
+    const rotuloFrio = rotulos['modal-tooltip-note']?.[lang];
+    const notas = todos(pag, /<p class="case-note">([\s\S]*?)<\/p>/g);
+    exigir(
+      frio ? notas.length === 1 && notas[0] === rotuloFrio : notas.length === 0,
+      lang, `${cc} (nota de arranque a frio)`, frio ? rotuloFrio : '(nenhuma)', fmtLista(notas),
+    );
     const voltarRotulo = rotulos['case-back']?.[lang];
     if (voltarRotulo !== undefined) {
       const voltar = ancoras(pag).filter((a) => a.classes.includes('case-back'));

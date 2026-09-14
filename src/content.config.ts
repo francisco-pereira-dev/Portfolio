@@ -58,8 +58,8 @@ const projects = defineCollection({
         coldStart: z.boolean(),
 
         // Ficheiro local em assets/images/, quando existe. Nem todos os projetos tem
-        // screenshot ainda; esses caem no bloco de recurso do ProjectImage. O que o
-        // superRefine garante e que nao ha imagem sem alt.
+        // screenshot; esses nao mostram imagem nenhuma (fase 4: sem bloco de
+        // recurso). O que o superRefine garante e que nao ha imagem sem alt.
         image: image().optional(),
         imageAlt: localized.optional(),
 
