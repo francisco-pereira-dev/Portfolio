@@ -6,15 +6,16 @@
  * secções sempre pela mesma ordem. Menu, cabeçalho e rodapé são os do resto
  * do site; o seletor de idioma leva à mesma página na outra língua.
  */
+import fs from 'node:fs';
+import path from 'node:path';
 import type { CollectionEntry } from 'astro:content';
-import { getImage } from 'astro:assets';
 import BaseLayout from './BaseLayout.astro';
 import OverlayMenu from '../components/OverlayMenu.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import site from '../data/site.json';
 import { translations, localeHref, otherLang, t, type Lang } from '../i18n';
-import { caseStudyHref, paragrafos, resumir } from '../lib/caseStudy';
+import { caseStudyHref, ogImagemCaseStudy, paragrafos, resumir } from '../lib/caseStudy';
 import type { PaginaSeo } from '../lib/seo';
 import '../styles/case-study.css';
 
@@ -32,16 +33,16 @@ if (!cs) throw new Error(`${p.slug}: página de case study sem caseStudy`);
 const titulo = t(p.title, lang);
 const voltar = `${localeHref[lang]}#projects`;
 
-// A imagem do projeto é a da pré-visualização social, quando existe.
+// Um projeto com screenshot tem imagem de partilha própria, composta a 1200x630
+// pelo npm run og; sem screenshot, fica a geral (a omissão do Seo). O build falha
+// se a imagem não tiver sido gerada, em vez de publicar um og:image partido.
 let imagem: PaginaSeo['imagem'];
 if (p.image) {
-  const img = await getImage({ src: p.image, width: 1200, format: 'jpg' });
-  imagem = {
-    src: img.src,
-    width: Number(img.attributes.width) || undefined,
-    height: Number(img.attributes.height) || undefined,
-    alt: p.imageAlt ? t(p.imageAlt, lang) : titulo,
-  };
+  const src = ogImagemCaseStudy(p.slug, lang);
+  if (!fs.existsSync(path.join(process.cwd(), 'public', src))) {
+    throw new Error(`${p.slug}: falta public${src} — corre npm run og`);
+  }
+  imagem = { src, width: 1200, height: 630, alt: p.imageAlt ? t(p.imageAlt, lang) : titulo };
 }
 
 const seo: PaginaSeo = {
