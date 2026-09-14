@@ -1,8 +1,11 @@
 ---
+/**
+ * Modal de um projeto sem página de case study (fase 4: são três). Os projetos
+ * com case study ligam à página e não têm modal.
+ */
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { t, type Lang, type Ui } from '../i18n';
-import { caseStudyHref } from '../lib/caseStudy';
-import ProjectImage from './ProjectImage.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -13,37 +16,35 @@ interface Props {
 const { project, lang, ui } = Astro.props;
 const p = project.data;
 
-// As 6 modais ficam no HTML desde o início: openModal() faz getElementById sobre
+// As modais ficam no HTML desde o início: openModal() faz getElementById sobre
 // markup estático e o restauro de foco depende de os nós já existirem.
 const modalId = `modal-${p.slug}`;
 const titleId = `title-${p.slug}`;
-
-// Só os projetos com case study têm página, e só esses mostram o botão.
-const caseHref = p.caseStudy ? caseStudyHref(p.slug, lang) : null;
 ---
 
 <div class="modal" id={modalId} role="dialog" aria-modal="true" aria-labelledby={titleId}>
-  {
-    p.coldStart && (
-      <div class="modal-info-btn" data-tooltip={ui['modal-tooltip-note']}>
-        ?
-      </div>
-    )
-  }
   <button class="modal-close">&times;</button>
   <div class="modal-content">
-    <ProjectImage
-      project={p}
-      variant="modal"
-      lang={lang}
-      alt={p.imageAlt ? t(p.imageAlt, lang) : undefined}
-      class="modal-img"
-    />
+    {/* Sem screenshot não há imagem nem bloco de recurso. A modal mostra no máximo
+        ~800px; pedimos até 1400 para ecrãs de alta densidade, sem ampliar. */}
+    {
+      p.image && p.imageAlt && (
+        <Image
+          src={p.image}
+          alt={t(p.imageAlt, lang)}
+          class="modal-img"
+          width={Math.min(1400, p.image.width)}
+          loading="lazy"
+          decoding="async"
+        />
+      )
+    }
     <h3 class="modal-title" id={titleId}>{t(p.title, lang)}</h3>
     <p class="modal-desc">{t(p.description, lang)}</p>
     <ul class="modal-features">
       {p.features.map((feature) => <li>{t(feature, lang)}</li>)}
     </ul>
+    {p.coldStart && <p class="modal-note">{ui['modal-tooltip-note']}</p>}
     <div class="modal-actions">
       {/* O estado do projeto decide o botão de demonstração:
           live            -> link normal
@@ -68,13 +69,6 @@ const caseHref = p.caseStudy ? caseStudyHref(p.slug, lang) : null;
         p.repoUrl && (
           <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="btn-modal">
             {ui['modal-btn-repo']}
-          </a>
-        )
-      }
-      {
-        caseHref && (
-          <a href={caseHref} class="btn-modal btn-modal-case">
-            {ui['project-btn-case-study']}
           </a>
         )
       }

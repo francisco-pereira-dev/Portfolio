@@ -1,9 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import type { Ui } from '../i18n';
 import site from '../data/site.json';
-// O avatar continua em assets/ na raiz; o Vite importa-o e o Astro otimiza-o.
-import avatar from '../../assets/images/avatar.jpg';
 
 interface Props {
   ui: Ui;
@@ -13,42 +10,26 @@ const { ui } = Astro.props;
 ---
 
 <section id="hero" class="hero-section">
-  <div class="hero-content-wrapper">
-    <div class="hero-text-area reveal">
-      {/* Primeiro elemento do hero de propósito: quem recruta precisa de saber
-          isto antes de qualquer outra coisa. */}
-      <p class="hero-badge">
-        <span class="hero-badge-dot" aria-hidden="true"></span>{ui['hero-badge']}
-      </p>
+  <div class="hero-content reveal">
+    {/* Primeiro elemento do hero de propósito: quem recruta precisa de saber
+        isto antes de qualquer outra coisa. */}
+    <p class="hero-badge">
+      <span class="hero-badge-dot" aria-hidden="true"></span>{ui['hero-badge']}
+    </p>
 
-      <h1 class="main-title">{ui['hero-title']}</h1>
-      <p class="hero-subtitle">{ui['hero-subtitle']}</p>
-      <p class="hero-paragraph">{ui['hero-paragraph']}</p>
+    {/* O ponto final a roxo é desenhado em CSS (::after), para o título ficar
+        exatamente o texto do canónico. */}
+    <h1 class="main-title">{ui['hero-title']}</h1>
+    <p class="hero-subtitle">{ui['hero-subtitle']}</p>
+    <p class="hero-paragraph">{ui['hero-paragraph']}</p>
 
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">{ui['hero-btn-projects']}</a>
-        <a
-          href={`/${site.cvPath}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          download
-          class="btn btn-outline">{ui['hero-btn-cv']}</a
-        >
-        <a href="#contacts" class="btn btn-text">{ui['hero-btn-contact']}</a>
-      </div>
-    </div>
-    <div class="hero-image-area reveal">
-      <div class="avatar-container">
-        {/* Acima da dobra: nunca lazy, e com prioridade de carregamento. */}
-        <Image
-          src={avatar}
-          alt={ui['a11y-avatar-alt']}
-          class="avatar-img"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </div>
+    {/* Um só botão preenchido; os outros dois são links. */}
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-primary">{ui['hero-btn-projects']}</a>
+      <a href={`/${site.cvPath}`} target="_blank" rel="noopener noreferrer" download class="text-link"
+        >{ui['hero-btn-cv']}</a
+      >
+      <a href="#contacts" class="text-link">{ui['hero-btn-contact']}</a>
     </div>
   </div>
 </section>

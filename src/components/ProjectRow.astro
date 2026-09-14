@@ -1,0 +1,80 @@
+---
+/**
+ * Uma linha da lista de projetos.
+ *
+ * Com case study, a linha liga à página: o link da ação estende-se por cima da
+ * linha inteira. Sem case study, o título é um botão que abre a modal, também
+ * estendido; a ação da direita é o repositório e fica por cima dele.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang, type Ui } from '../i18n';
+import { caseStudyHref } from '../lib/caseStudy';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+  ui: Ui;
+  /** Nível do título: 3 na lista principal, 4 dentro da sub-secção Design → Código. */
+  nivel?: 3 | 4;
+}
+
+const { project, lang, ui, nivel = 3 } = Astro.props;
+const p = project.data;
+
+const caseHref = p.caseStudy ? caseStudyHref(p.slug, lang) : null;
+const numero = String(p.order).padStart(2, '0');
+const Titulo = nivel === 4 ? 'h4' : 'h3';
+---
+
+<li class="project-row reveal" data-project={p.slug}>
+  {/* Decorativo: a posição na lista já é anunciada pelo leitor de ecrã. */}
+  <span class="project-num" aria-hidden="true">{numero}</span>
+
+  <div class="project-head">
+    <Titulo class="project-title">
+      {
+        caseHref ? (
+          t(p.title, lang)
+        ) : (
+          <button type="button" class="project-open" data-modal={`modal-${p.slug}`} aria-haspopup="dialog">
+            {t(p.title, lang)}
+          </button>
+        )
+      }
+    </Titulo>
+    {p.tagline && <span class="project-tagline">{t(p.tagline, lang)}</span>}
+  </div>
+
+  <p class="project-desc">{t(p.description, lang)}</p>
+
+  <ul class="project-stack">
+    {p.tech.map((tech) => <li class="project-tech">{t(tech, lang)}</li>)}
+  </ul>
+
+  <div class="project-action">
+    {
+      caseHref ? (
+        <a class="project-action-link project-case-link" href={caseHref}>
+          {ui['project-btn-case-study']}
+          <span class="arrow" aria-hidden="true">
+            →
+          </span>
+        </a>
+      ) : (
+        p.repoUrl && (
+          <a
+            class="project-action-link project-repo-link"
+            href={p.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {ui['modal-btn-repo']}
+            <span class="arrow" aria-hidden="true">
+              →
+            </span>
+          </a>
+        )
+      )
+    }
+  </div>
+</li>

@@ -5,7 +5,8 @@
  * As duas rotas (/ e /en/) são a mesma estrutura com dados diferentes, por isso
  * vivem aqui em vez de duplicadas nos dois ficheiros de página. A ordem dos
  * blocos reproduz a do index.html legado: menu overlay, navbar, main, rodapé,
- * fundo das modais e as 6 modais.
+ * fundo das modais e as modais — desde a fase 4, só as dos projetos sem case
+ * study; os outros ligam à sua página.
  */
 import { getCollection } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
@@ -48,5 +49,9 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
   <div class="modal-overlay" id="modal-overlay"></div>
 
-  {projects.map((project) => <ProjectModal project={project} lang={lang} ui={ui} />)}
+  {
+    projects
+      .filter((project) => !project.data.caseStudy)
+      .map((project) => <ProjectModal project={project} lang={lang} ui={ui} />)
+  }
 </BaseLayout>

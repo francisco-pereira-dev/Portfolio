@@ -10,7 +10,8 @@
       "3.3a": "enunciado da fase 3.3a (2026-09-10): case study do Licas e rótulo do botão de case study",
       "3.3b": "enunciado da fase 3.3b (2026-09-12): títulos de secção do case study, regra para o alt e as tecnologias em inglês, case study do 3D Analyzer",
       "3.3-final": "enunciado da fase 3.3-final (2026-09-12): descrição do Hotel Inteligente, case studies do DAE, AINET, Gest e Hotel Inteligente, e a decisão de quem tem case study",
-      "publicacao-2026-09-14": "enunciado da publicação da Fase 3 (2026-09-14): resultado do AINET, decisão 4 e primeiro parágrafo do correuMal do 3D Analyzer"
+      "publicacao-2026-09-14": "enunciado da publicação da Fase 3 (2026-09-14): resultado do AINET, decisão 4 e primeiro parágrafo do correuMal do 3D Analyzer",
+      "fase-4": "enunciado da fase 4 (2026-09-14) e respostas às colisões: rótulos atuais mantidos; \"Copiar email\" / \"Copy email\" e \"Email copiado\" / \"Email copied\" aprovados; \"Ver Mais\" retirado com as modais dos projetos com case study"
     },
     "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true.",
     "extracao_legado": "Do e0a67bc: PT do conteúdo dos elementos com data-translate (e do data-tooltip), EN do objeto translations.en; aria-label do menu e do tema do setLanguage do script.js. Texto e atributos que o site nunca traduzia ficam com o mesmo valor nas duas línguas, como eram servidos. Só entrou o que coincide com os dados de hoje; a única alteração aplicada foi a autorizada (\"and\" -> \"e\" na primeira feature PT do Diane Arbus)."
@@ -148,11 +149,6 @@
         "pt": "Projetos",
         "en": "Projects"
       },
-      "project-btn-view-more": {
-        "_origem": "legado e0a67bc",
-        "pt": "Ver Mais",
-        "en": "View More"
-      },
       "modal-btn-project": {
         "_origem": "legado e0a67bc",
         "pt": "Ver Projeto",
@@ -162,11 +158,6 @@
         "_origem": "legado e0a67bc",
         "pt": "Ver Repositório",
         "en": "View Repository"
-      },
-      "modal-tooltip-note": {
-        "_origem": "legado e0a67bc",
-        "pt": "Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!",
-        "en": "Note: This project is hosted on a free server. If there have been no recent accesses, the server may take 1 to 2 minutes to start up on the first click. Thank you for your patience!"
       },
       "project-btn-case-study": {
         "pt": "Ver case study",
@@ -197,6 +188,14 @@
         "_origem": "legado e0a67bc",
         "pt": "Github",
         "en": "Github"
+      },
+      "contact-btn-copy-email": {
+        "pt": "Copiar email",
+        "en": "Copy email"
+      },
+      "contact-copy-done": {
+        "pt": "Email copiado",
+        "en": "Email copied"
       }
     },
     "rodape": {
@@ -310,6 +309,11 @@
         "pt": "Voltar aos projetos",
         "en": "Back to projects",
         "_origem": "enunciado 3.3b"
+      },
+      "modal-tooltip-note": {
+        "_origem": "legado e0a67bc",
+        "pt": "Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!",
+        "en": "Note: This project is hosted on a free server. If there have been no recent accesses, the server may take 1 to 2 minutes to start up on the first click. Thank you for your patience!"
       }
     }
   },
@@ -1371,6 +1375,16 @@
       "cadflow-bank-system",
       "mr-pizza",
       "diane-arbus"
-    ]
+    ],
+    "_fase4": "Desde a fase 4 os projetos com case study não têm modal. As features desses seis continuam no canónico como texto aprovado, mas não aparecem no site; os links de demonstração e de repositório, e a nota de arranque a frio, passaram para o cabeçalho da página de case study (decisão do Francisco, 2026-09-14)."
+  },
+  "retirado": {
+    "_sobre": "Texto aprovado que deixou de aparecer no site. Fica aqui para o registo; o check:texto não o procura.",
+    "project-btn-view-more": {
+      "_origem": "legado e0a67bc",
+      "pt": "Ver Mais",
+      "en": "View More",
+      "_motivo": "fase 4: os cartões saíram; a linha de um projeto sem case study abre a modal pelo título e a ação é o repositório"
+    }
   }
 }
