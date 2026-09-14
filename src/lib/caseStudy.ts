@@ -8,6 +8,12 @@ import type { Lang } from '../i18n';
 export const caseStudyHref = (slug: string, lang: Lang): string =>
   lang === 'pt' ? `/projetos/${slug}/` : `/en/projects/${slug}/`;
 
+/**
+ * A imagem de partilha de um case study com screenshot, em public/.
+ * Gerada pelo scripts/gerar-og.mjs (npm run og), que repete este padrão.
+ */
+export const ogImagemCaseStudy = (slug: string, lang: Lang): string => `/og/${slug}-${lang}.jpg`;
+
 /** Um campo com vários parágrafos separa-os por uma linha em branco. */
 export const paragrafos = (texto: string): string[] =>
   texto
