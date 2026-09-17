@@ -1,9 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import type { Ui } from '../i18n';
-// O avatar saiu do hero na fase 4 e vive aqui. Continua em assets/ na raiz; o
-// Vite importa-o e o Astro otimiza-o.
-import avatar from '../../assets/images/avatar.jpg';
+import SectionHeading from './SectionHeading.astro';
 
 interface Props {
   ui: Ui;
@@ -11,23 +8,14 @@ interface Props {
 
 const { ui } = Astro.props;
 
-const paragrafos = ['about-p1', 'about-p2', 'about-p3', 'about-p4', 'about-p5'] as const;
+// Percurso, em dois parágrafos (fase 4.2d). Não descreve projetos: isso vive nas
+// linhas de projeto e nos case studies.
+const paragrafos = ['about-p1', 'about-p2'] as const;
 ---
 
 <section id="about" class="about-section">
-  <h2 class="section-heading reveal">{ui['about-heading']}</h2>
-  <div class="about-layout reveal">
-    {/* Mostrado a 128px; o dobro para ecrãs de alta densidade. */}
-    <Image
-      src={avatar}
-      alt={ui['a11y-avatar-alt']}
-      class="about-avatar"
-      width={Math.min(256, avatar.width)}
-      loading="lazy"
-      decoding="async"
-    />
-    <div class="about-content">
-      {paragrafos.map((chave) => <p>{ui[chave]}</p>)}
-    </div>
+  <SectionHeading titulo={ui['about-heading']} />
+  <div class="about-content reveal">
+    {paragrafos.map((chave) => <p>{ui[chave]}</p>)}
   </div>
 </section>

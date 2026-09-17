@@ -20,6 +20,7 @@ import Skills from '../components/Skills.astro';
 import Projects from '../components/Projects.astro';
 import Contacts from '../components/Contacts.astro';
 import Footer from '../components/Footer.astro';
+import NavSemJs from '../components/NavSemJs.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 
 interface Props {
@@ -37,13 +38,16 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
   <Navbar ui={ui} lang={lang} />
 
-  <main>
+  {/* id e tabindex: destino do link "Saltar para o conteúdo" (fase 5). */}
+  <main id="conteudo" tabindex="-1">
     <Hero ui={ui} />
     <About ui={ui} />
-    <Skills ui={ui} />
+    <Skills ui={ui} lang={lang} />
     <Projects projects={projects} lang={lang} ui={ui} />
     <Contacts ui={ui} />
   </main>
+
+  <NavSemJs ui={ui} posicao="fundo" />
 
   <Footer ui={ui} />
 

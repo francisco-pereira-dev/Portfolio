@@ -1,13 +1,14 @@
 ---
 /**
- * Contactos, como lista de informação (fase 4).
+ * Contactos: o email visível e as redes, em cartões com ícone.
  *
- * O email fica visível e ao lado vai um botão que o copia: um mailto: num
- * computador sem cliente de email configurado não faz nada. O comportamento
- * está em src/scripts/main.js; a mensagem de confirmação vem de data-feito.
+ * Fase 4.2a: o botão "Copiar email" foi revertido e voltaram os cartões de antes
+ * da fase 4, com o mesmo markup.
  */
 import type { Ui } from '../i18n';
 import site from '../data/site.json';
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
 
 interface Props {
   ui: Ui;
@@ -17,40 +18,54 @@ const { ui } = Astro.props;
 ---
 
 <section id="contacts" class="contacts-section">
-  <h2 class="section-heading reveal">{ui['contacts-heading']}</h2>
-  <p class="contacts-text reveal">{ui['contacts-text']}</p>
+  <SectionHeading titulo={ui['contacts-heading']} />
 
-  <dl class="contact-list reveal">
-    <div class="contact-item">
-      <dt class="contact-title">{ui['contact-title-email']}</dt>
-      <dd class="contact-value-row">
-        <a href={`mailto:${site.email}`} class="contact-value">{site.email}</a>
-        <button
-          type="button"
-          class="copy-email"
-          data-email={site.email}
-          data-feito={ui['contact-copy-done']}>{ui['contact-btn-copy-email']}</button
+  <div class="contacts-row">
+    <a href={`mailto:${site.email}`} class="contact-card-link reveal">
+      <div class="contact-icon-circle" aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-        <span class="copy-status" role="status" aria-live="polite"></span>
-      </dd>
-    </div>
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </div>
+      <span class="contact-title">{ui['contact-title-email']}</span>
+      <span class="contact-value">{site.email}</span>
+    </a>
 
-    <div class="contact-item">
-      <dt class="contact-title">{ui['contact-title-linkedin']}</dt>
-      <dd class="contact-value-row">
-        <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" class="contact-value"
-          >{site.linkedinHandle}</a
-        >
-      </dd>
-    </div>
+    <a
+      href={site.linkedinUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="contact-card-link reveal"
+    >
+      <div class="contact-icon-circle" aria-hidden="true">
+        <Icon name="linkedin-plain" />
+      </div>
+      <span class="contact-title">{ui['contact-title-linkedin']}</span>
+      <span class="contact-value">{site.linkedinHandle}</span>
+    </a>
 
-    <div class="contact-item">
-      <dt class="contact-title">{ui['contact-title-github']}</dt>
-      <dd class="contact-value-row">
-        <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" class="contact-value"
-          >{site.githubHandle}</a
-        >
-      </dd>
-    </div>
-  </dl>
+    <a
+      href={site.githubUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="contact-card-link reveal"
+    >
+      <div class="contact-icon-circle" aria-hidden="true">
+        <Icon name="github-original" />
+      </div>
+      <span class="contact-title">{ui['contact-title-github']}</span>
+      <span class="contact-value">{site.githubHandle}</span>
+    </a>
+  </div>
 </section>

@@ -12,7 +12,9 @@
  *
  * Fase 4: a cascata das competências e os balões "?" das modais saíram (as
  * competências deixaram de ser cartões e a nota de arranque a frio passou para a
- * página de case study). Entrou o botão de copiar o email.
+ * página de case study).
+ *
+ * Fase 4.2a: o botão de copiar o email, acrescentado na fase 4, foi revertido.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,21 +25,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const overlayLinks = document.querySelectorAll('.overlay-link');
 
-  function toggleMenu() {
-    overlayMenu.classList.toggle('active');
-    hamburgerBtn.classList.toggle('active');
-
-    if (overlayMenu.classList.contains('active')) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+  // Fase 5: com o menu aberto, tudo o que fica por trás dele é inert (sai da
+  // ordem de tabulação e dos leitores de ecrã), exceto o cabeçalho, onde está o
+  // botão que o fecha. O foco entra no primeiro link; Escape fecha e devolve o
+  // foco ao botão (ver o keydown mais abaixo).
+  const definirMenu = (aberto) => {
+    overlayMenu.classList.toggle('active', aberto);
+    hamburgerBtn.classList.toggle('active', aberto);
+    hamburgerBtn.setAttribute('aria-expanded', String(aberto));
+    document.body.style.overflow = aberto ? 'hidden' : '';
+    for (const el of document.body.children) {
+      if (el === overlayMenu || el.contains(hamburgerBtn) || el.tagName === 'SCRIPT') continue;
+      el.inert = aberto;
     }
+  };
+
+  function toggleMenu() {
+    const abrir = !overlayMenu.classList.contains('active');
+    definirMenu(abrir);
+    if (abrir) overlayMenu.querySelector('a')?.focus();
   }
 
   function closeMenu() {
-    overlayMenu.classList.remove('active');
-    hamburgerBtn.classList.remove('active');
-    document.body.style.overflow = '';
+    definirMenu(false);
   }
 
   if (hamburgerBtn && overlayMenu) {
@@ -81,6 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.classList.add('active');
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
+      // Fase 5: o resto da página fica inert enquanto a modal está aberta, para o
+      // foco não sair dela. Escape e o fundo continuam a fechá-la.
+      for (const el of document.body.children) {
+        if (el === modal || el === overlay || el.tagName === 'SCRIPT') continue;
+        el.inert = true;
+      }
 
       const closeBtn = modal.querySelector('.modal-close');
       if (closeBtn) {
@@ -97,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modals.forEach((m) => m.classList.remove('active'));
     overlay.classList.remove('active');
     document.body.style.overflow = '';
+    for (const el of document.body.children) el.inert = false;
 
     if (lastFocusedElement) {
       lastFocusedElement.focus();
@@ -117,7 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+    if (e.key !== 'Escape') return;
+    // Fase 5: o Escape também fecha o menu, e o foco volta ao botão que o abriu.
+    if (overlayMenu?.classList.contains('active')) {
+      closeMenu();
+      hamburgerBtn.focus();
+      return;
+    }
+    closeModal();
   });
 
   // --- Animações de revelação no scroll ---
@@ -154,10 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
         overlayLinks.forEach((link) => {
+          // Fase 5: a secção atual também fica marcada para tecnologia de apoio.
           if (link.getAttribute('href') === '#' + id) {
             link.classList.add('active-link');
+            link.setAttribute('aria-current', 'true');
           } else {
             link.classList.remove('active-link');
+            link.removeAttribute('aria-current');
           }
         });
       }
@@ -183,50 +210,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   }
 
-  // --- Copiar o email ---
-  // Um mailto: num computador sem cliente de email configurado não faz nada.
-  // O botão copia o endereço e confirma durante 2 segundos numa região
-  // aria-live, para o leitor de ecrã também ouvir a confirmação.
-  document.querySelectorAll('.copy-email').forEach((btn) => {
-    const estado = btn.parentElement.querySelector('.copy-status');
-    let temporizador;
-    btn.addEventListener('click', async () => {
-      const copiado = await copiar(btn.getAttribute('data-email'));
-      if (!copiado || !estado) return;
-      estado.textContent = btn.getAttribute('data-feito');
-      clearTimeout(temporizador);
-      temporizador = setTimeout(() => {
-        estado.textContent = '';
-      }, 2000);
+  // --- Voltar ao topo (fase 4.2b) ---
+  // Aparece depois de o visitante passar a altura do hero. Nas páginas sem hero
+  // (case studies), depois de uma altura de ecrã. Escondido, o CSS dá-lhe
+  // visibility: hidden, e por isso sai da ordem de tabulação.
+  const botaoTopo = document.getElementById('back-to-top');
+  if (botaoTopo) {
+    const hero = document.getElementById('hero');
+    const reduzirMovimento = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const atualizarTopo = () => {
+      const limite = hero ? hero.offsetTop + hero.offsetHeight : window.innerHeight;
+      botaoTopo.classList.toggle('is-visible', window.scrollY > limite);
+    };
+    window.addEventListener('scroll', atualizarTopo, { passive: true });
+    window.addEventListener('resize', atualizarTopo);
+    atualizarTopo();
+
+    botaoTopo.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reduzirMovimento.matches ? 'auto' : 'smooth' });
+      // No topo o botão desaparece; o foco passa ao primeiro controlo da página
+      // em vez de se perder no documento.
+      const primeiro = document.getElementById('hamburger-btn');
+      if (primeiro) primeiro.focus({ preventScroll: true });
+    });
+  }
+
+  // --- Botões de informação "?" nas linhas de projeto (fase 4.2d) ---
+  // Um botão com aria-expanded e aria-controls abre e fecha o texto por baixo da
+  // etiqueta. Fecha com Escape (e o foco volta ao botão), com clique fora, ou
+  // ao clicar outra vez. Só um fica aberto de cada vez.
+  const infoBtns = document.querySelectorAll('.info-btn');
+  const fecharInfos = (exceto) => {
+    infoBtns.forEach((btn) => {
+      if (btn === exceto) return;
+      btn.setAttribute('aria-expanded', 'false');
+      const balao = document.getElementById(btn.getAttribute('aria-controls'));
+      if (balao) balao.hidden = true;
+    });
+  };
+  infoBtns.forEach((btn) => {
+    const balao = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.addEventListener('click', () => {
+      const abrir = btn.getAttribute('aria-expanded') !== 'true';
+      fecharInfos(btn);
+      btn.setAttribute('aria-expanded', String(abrir));
+      if (balao) balao.hidden = !abrir;
     });
   });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const aberto = [...infoBtns].find((btn) => btn.getAttribute('aria-expanded') === 'true');
+    if (!aberto) return;
+    fecharInfos();
+    aberto.focus();
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.info-btn, .info-balao')) fecharInfos();
+  });
 });
-
-/**
- * Copia texto para a área de transferência. A Clipboard API precisa de HTTPS
- * (ou localhost); sem ela, recorre ao método antigo com uma área de texto
- * temporária. Devolve se conseguiu.
- */
-async function copiar(texto) {
-  try {
-    await navigator.clipboard.writeText(texto);
-    return true;
-  } catch (e) {
-    /* sem Clipboard API ou sem permissão: tenta o método antigo */
-  }
-  const campo = document.createElement('textarea');
-  campo.value = texto;
-  campo.setAttribute('readonly', '');
-  campo.style.position = 'fixed';
-  campo.style.opacity = '0';
-  document.body.appendChild(campo);
-  campo.select();
-  let copiado = false;
-  try {
-    copiado = document.execCommand('copy');
-  } catch (e) {
-    copiado = false;
-  }
-  campo.remove();
-  return copiado;
-}

@@ -9,11 +9,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
 import BaseLayout from './BaseLayout.astro';
 import OverlayMenu from '../components/OverlayMenu.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import NavSemJs from '../components/NavSemJs.astro';
 import site from '../data/site.json';
 import { translations, localeHref, otherLang, t, type Lang } from '../i18n';
 import { caseStudyHref, ogImagemCaseStudy, paragrafos, resumir } from '../lib/caseStudy';
@@ -33,7 +33,6 @@ if (!cs) throw new Error(`${p.slug}: página de case study sem caseStudy`);
 
 const titulo = t(p.title, lang);
 const voltar = `${localeHref[lang]}#projects`;
-const altImagem = p.imageAlt ? t(p.imageAlt, lang) : titulo;
 const temLinks = (p.status === 'live' && p.demoUrl) || p.status === 'in-development' || p.repoUrl;
 
 // Um projeto com screenshot tem imagem de partilha própria, composta a 1200x630
@@ -58,8 +57,9 @@ const seo: PaginaSeo = {
 };
 
 // Ordem fixa. O id é igual nas duas línguas para o seletor de idioma poder levar
-// a âncora e cair na mesma secção.
-const secoes = [
+// a âncora e cair na mesma secção. "A minha parte" é opcional (só projetos de
+// equipa): sem o campo, a secção não aparece.
+const todasAsSecoes = [
   { id: 'contexto', titulo: ui['case-heading-context'], texto: cs.contexto },
   { id: 'problema', titulo: ui['case-heading-problem'], texto: cs.problema },
   { id: 'minha-parte', titulo: ui['case-heading-my-part'], texto: cs.minhaParte },
@@ -68,14 +68,16 @@ const secoes = [
   { id: 'resultado', titulo: ui['case-heading-outcome'], texto: cs.resultado },
   { id: 'faria-diferente', titulo: ui['case-heading-differently'], texto: cs.fariaDiferente },
 ];
+const secoes = todasAsSecoes.filter((s) => s.decisoes || s.texto);
 ---
 
 <BaseLayout lang={lang} ui={ui} seo={seo}>
   <OverlayMenu ui={ui} prefixo={localeHref[lang]} />
 
-  <Navbar ui={ui} lang={lang} hrefOutra={caseStudyHref(p.slug, otherLang(lang))} />
+  <Navbar ui={ui} lang={lang} hrefOutra={caseStudyHref(p.slug, otherLang(lang))} prefixo={localeHref[lang]} />
 
-  <main class="case-page">
+  {/* id e tabindex: destino do link "Saltar para o conteúdo" (fase 5). */}
+  <main id="conteudo" class="case-page" tabindex="-1">
     <article class="case-article">
       <a class="case-back" href={voltar}><span aria-hidden="true">←</span> {ui['case-back']}</a>
 
@@ -85,23 +87,8 @@ const secoes = [
         <p class="case-lede">{t(cs.umaFrase, lang)}</p>
       </header>
 
-      {/* O screenshot, só nos projetos que o têm. A legenda repete o alt, por isso
-          fica escondida dos leitores de ecrã para não ser lida duas vezes. A coluna
-          tem 600px; pedimos até 1200 para ecrãs de alta densidade, sem ampliar. */}
-      {
-        p.image && (
-          <figure class="case-figure">
-            <Image
-              src={p.image}
-              alt={altImagem}
-              width={Math.min(1200, p.image.width)}
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption aria-hidden="true">{altImagem}</figcaption>
-          </figure>
-        )
-      }
+      {/* Sem imagens (fase 4.2a): a página é só texto. O screenshot continua a ser
+          usado na imagem de partilha, gerada pelo npm run og. */}
 
       {/* O que antes estava na modal: tecnologias, links e a nota de arranque a frio. */}
       <div class="case-meta">
@@ -159,6 +146,8 @@ const secoes = [
       </p>
     </article>
   </main>
+
+  <NavSemJs ui={ui} posicao="fundo" prefixo={localeHref[lang]} />
 
   <Footer ui={ui} />
 </BaseLayout>

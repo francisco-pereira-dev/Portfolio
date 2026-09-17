@@ -5,9 +5,17 @@
     "pt": "DAE - Arquitetura Full-Stack & IA",
     "en": "DAE - Full-Stack Architecture & AI"
   },
+  "tagline": {
+    "pt": "Projeto universitário · Equipa de 4",
+    "en": "University project · Team of 4"
+  },
   "description": {
     "pt": "Projeto de Engenharia Informática focado na criação de uma arquitetura full-stack robusta e escalável, com forte separação de responsabilidades (SoC). O ecossistema destaca-se pela contentorização completa da infraestrutura e pela integração nativa de um modelo de Inteligência Artificial a correr localmente.",
     "en": "Computer Engineering project focused on creating a robust and scalable full-stack architecture, with strong Separation of Concerns (SoC). The ecosystem stands out for its fully containerized infrastructure and the native integration of a locally running Artificial Intelligence model."
+  },
+  "resumo": {
+    "pt": "Aplicação empresarial containerizada, com um modelo de inteligência artificial a correr na própria máquina.",
+    "en": "A containerised business application, with an AI model running on the machine itself."
   },
   "features": [
     {
@@ -56,16 +64,16 @@
       "en": "A business application where every service runs in its own container and the AI model runs on the machine itself, without data ever leaving the infrastructure."
     },
     "contexto": {
-      "pt": "Projeto da unidade curricular de Desenvolvimento de Aplicações Empresariais, no 3.º ano da licenciatura. Equipa de quatro. O modelo de dados foi dado pelo docente; o resto foi construído por nós. Acabei por assumir a maior parte do desenvolvimento.",
-      "en": "A project for the Enterprise Application Development course, in the third year of my degree. A team of four. The data model was given by the lecturer; everything else we built. I ended up taking on most of the development."
+      "pt": "Projeto da unidade curricular de Desenvolvimento de Aplicações Empresariais, no 3.º ano da licenciatura. O modelo de dados foi dado pelo docente; o resto foi construído por nós.",
+      "en": "A project for the Enterprise Application Development course, in the third year of my degree. The data model was given by the lecturer; everything else we built."
     },
     "problema": {
       "pt": "Construir uma aplicação empresarial em Java com controlo de acessos por papéis e funcionalidades de inteligência artificial, com uma exigência que moldou tudo o resto: o ambiente tinha de ser reproduzível por qualquer pessoa, em qualquer máquina, sem depender de instalações locais e sem \"no meu computador funciona\".",
       "en": "Building a business application in Java with role-based access control and AI features, under one requirement that shaped everything else: the environment had to be reproducible by anyone, on any machine, without local installs and without \"it works on my computer\"."
     },
     "minhaParte": {
-      "pt": "A maior parte do desenvolvimento: a containerização de toda a infraestrutura, a integração do modelo de inteligência artificial, o sistema de permissões e a reconstrução de parte do backend.",
-      "en": "Most of the development: containerising the whole infrastructure, integrating the AI model, the permission system, and rebuilding part of the backend."
+      "pt": "A minha parte era o frontend. Acabei por fazer e corrigir também grande parte do backend.",
+      "en": "My part was the frontend. I ended up building and fixing much of the backend as well."
     },
     "decisoes": [
       {

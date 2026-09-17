@@ -1,20 +1,19 @@
 ---
 /**
- * Secção de projetos, como lista (fase 4).
+ * Secção de projetos, como lista.
  *
- * O primeiro projeto de engenharia vai à frente, num bloco de destaque com a
- * largura toda e sem imagem. Os restantes são linhas: número, título com as
- * etiquetas, descrição, stack e uma ação. Os dois exercícios de tradução de
- * design ficam numa sub-secção própria, com cabeçalho e nota a explicar em que
- * se distinguem — para não serem lidos como se fossem do mesmo tipo.
+ * Cada projeto é uma linha: número, título, etiqueta por baixo, a frase do
+ * projeto, stack e uma ação. Fase 4.2c: o Licas deixou de ter um bloco de
+ * destaque. Fase 4.2d: acabou a sub-secção "Design → Código" — os nove projetos
+ * estão na mesma lista, pela ordem, e o que a distinguia passou para a etiqueta
+ * e para o botão "?" desses dois projetos.
  *
- * Nenhuma linha mostra imagem: os screenshots vivem nas páginas de case study e
- * nas imagens de partilha.
+ * Nenhuma linha mostra imagem: os screenshots servem só as imagens de partilha.
  */
 import type { CollectionEntry } from 'astro:content';
-import { t, type Lang, type Ui } from '../i18n';
-import { caseStudyHref } from '../lib/caseStudy';
+import type { Lang, Ui } from '../i18n';
 import ProjectRow from './ProjectRow.astro';
+import SectionHeading from './SectionHeading.astro';
 
 interface Props {
   projects: CollectionEntry<'projects'>[];
@@ -23,68 +22,12 @@ interface Props {
 }
 
 const { projects, lang, ui } = Astro.props;
-
-const principais = projects.filter((p) => p.data.group !== 'design');
-const design = projects.filter((p) => p.data.group === 'design');
-
-// O destaque é o primeiro por ordem: o Licas, o projeto com cliente real.
-const [destaque, ...linhas] = principais;
-const d = destaque?.data;
-const destaqueCase = d?.caseStudy ? caseStudyHref(d.slug, lang) : null;
 ---
 
 <section id="projects" class="projects-section">
-  <h2 class="section-heading reveal">{ui['projects-heading']}</h2>
-
-  {
-    d && (
-      <article class="project-featured reveal" data-project={d.slug}>
-        <div class="project-head">
-          <h3 class="project-title">{t(d.title, lang)}</h3>
-          {d.tagline && <span class="project-tagline">{t(d.tagline, lang)}</span>}
-        </div>
-        <p class="project-desc">{t(d.description, lang)}</p>
-        <ul class="project-stack">
-          {d.tech.map((tech) => (
-            <li class="project-tech">{t(tech, lang)}</li>
-          ))}
-        </ul>
-        <div class="project-featured-actions">
-          {destaqueCase && (
-            <a class="btn btn-outline project-case-link" href={destaqueCase}>
-              {ui['project-btn-case-study']}
-              <span class="arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
-          )}
-          {/* Rótulo inerte, sem href: não há nada para abrir. */}
-          {d.status === 'in-development' && (
-            <span class="project-status-disabled" aria-disabled="true">
-              {ui['project-status-in-development']}
-            </span>
-          )}
-        </div>
-      </article>
-    )
-  }
+  <SectionHeading titulo={ui['projects-heading']} />
 
   <ul class="project-list">
-    {linhas.map((project) => <ProjectRow project={project} lang={lang} ui={ui} />)}
+    {projects.map((project) => <ProjectRow project={project} lang={lang} ui={ui} />)}
   </ul>
-
-  {
-    design.length > 0 && (
-      <div class="projects-subsection">
-        <h3 class="projects-subsection-heading reveal">{ui['projects-design-heading']}</h3>
-        <p class="projects-subsection-text reveal">{ui['projects-design-text']}</p>
-
-        <ul class="project-list">
-          {design.map((project) => (
-            <ProjectRow project={project} lang={lang} ui={ui} nivel={4} />
-          ))}
-        </ul>
-      </div>
-    )
-  }
 </section>

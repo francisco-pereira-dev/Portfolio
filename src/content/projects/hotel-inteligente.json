@@ -5,9 +5,17 @@
     "pt": "Hotel Inteligente - Plataforma IoT",
     "en": "Smart Hotel - IoT Platform"
   },
+  "tagline": {
+    "pt": "Projeto universitário · Equipa de 2",
+    "en": "University project · Team of 2"
+  },
   "description": {
     "pt": "Plataforma web de monitorização de sensores e hardware (Arduino/ESP32), construída em PHP puro, sem framework e sem base de dados: as leituras dos sensores são guardadas em ficheiros. Foi o primeiro projeto da licenciatura, feito com as ferramentas que tínhamos na altura — PHP, HTML, CSS e JavaScript.",
     "en": "A web platform for monitoring sensors and hardware (Arduino/ESP32), built in plain PHP with no framework and no database: sensor readings are stored in files. It was the first project of my degree, built with the tools we had at the time — PHP, HTML, CSS and JavaScript."
+  },
+  "resumo": {
+    "pt": "Sensores instalados em quartos a alimentar um painel de monitorização que se atualiza sozinho.",
+    "en": "Sensors installed in rooms feeding a monitoring dashboard that updates by itself."
   },
   "features": [
     {
@@ -60,8 +68,8 @@
       "en": "Sensors installed in rooms sending readings to a web application that displays them on a dashboard that updates by itself."
     },
     "contexto": {
-      "pt": "Primeiro projeto da licenciatura, em equipa de dois. Fiquei responsável pela aplicação web e o meu colega pela parte do Arduino — mas acabámos os dois a aprender as duas coisas. Feito com o que sabíamos na altura: PHP, HTML, CSS e JavaScript, sem framework e sem base de dados.",
-      "en": "The first project of my degree, in a team of two. I was responsible for the web application and my teammate for the Arduino side — but we both ended up learning both. Built with what we knew at the time: PHP, HTML, CSS and JavaScript, with no framework and no database."
+      "pt": "Primeiro projeto da licenciatura. Fiquei responsável pela aplicação web e o meu colega pela parte do Arduino — mas acabámos os dois a aprender as duas coisas. Feito com o que sabíamos na altura: PHP, HTML, CSS e JavaScript, sem framework e sem base de dados.",
+      "en": "The first project of my degree. I was responsible for the web application and my teammate for the Arduino side — but we both ended up learning both. Built with what we knew at the time: PHP, HTML, CSS and JavaScript, with no framework and no database."
     },
     "problema": {
       "pt": "Hardware a escrever de um lado, um browser a ler do outro, e no meio nada que soubéssemos usar. Ainda não tínhamos dado bases de dados. As leituras dos sensores tinham de ir para algum sítio, e esse sítio acabou por ser um ficheiro de texto — não por opção de arquitetura, mas porque era a ferramenta que tínhamos.",

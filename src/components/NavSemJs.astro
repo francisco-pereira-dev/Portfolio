@@ -1,0 +1,40 @@
+---
+/**
+ * Navegação para quem não tem JavaScript (fase 5.1).
+ *
+ * Os links de secção só existem no menu overlay, que só abre com o script. Esta
+ * lista repete-os, com os mesmos textos, e fica escondida por CSS sempre que há
+ * JavaScript (classe "js" no <html>). Aparece em dois sítios: no cabeçalho
+ * ("topo") e antes do rodapé ("fundo"); o CSS mostra um ou outro conforme a
+ * largura.
+ */
+import type { Ui } from '../i18n';
+
+interface Props {
+  ui: Ui;
+  posicao: 'topo' | 'fundo';
+  /** Fora da página inicial, as âncoras apontam para ela ("/" ou "/en/"). */
+  prefixo?: string;
+}
+
+const { ui, posicao, prefixo = '' } = Astro.props;
+
+const links = [
+  { href: prefixo + '#about', label: ui['overlay-about'] },
+  { href: prefixo + '#skills', label: ui['overlay-skills'] },
+  { href: prefixo + '#projects', label: ui['overlay-projects'] },
+  { href: prefixo + '#contacts', label: ui['overlay-contacts'] },
+];
+---
+
+<nav class:list={['nav-sem-js', `nav-sem-js-${posicao}`]}>
+  <ul>
+    {
+      links.map((link) => (
+        <li>
+          <a href={link.href}>{link.label}</a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

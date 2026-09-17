@@ -5,9 +5,17 @@
     "pt": "AINET - Plataforma Full-Stack Laravel",
     "en": "AINET - Laravel Full-Stack Platform"
   },
+  "tagline": {
+    "pt": "Projeto universitário · Equipa de 4",
+    "en": "University project · Team of 4"
+  },
   "description": {
     "pt": "Projeto Full-Stack desenvolvido em equipa no âmbito universitário, funcionando como uma plataforma híbrida de Associação e E-commerce. Construído sob a framework Laravel utilizando o padrão arquitetural MVC e Vite no frontend. O grande foco técnico é a segurança e gestão de base de dados relacional.",
     "en": "Full-Stack project developed in a team as part of a university course, functioning as a hybrid Association and E-commerce platform. Built with the Laravel framework using the MVC architectural pattern and Vite on the frontend. The main technical focus is on relational database management and security."
+  },
+  "resumo": {
+    "pt": "Gestão de sócios de uma associação e loja online no mesmo sistema, com três níveis de acesso.",
+    "en": "An association's membership management and an online store in one system, with three access levels."
   },
   "features": [
     {
@@ -60,8 +68,8 @@
       "en": "A platform combining an association's membership management and an online store, with three access levels over the same users."
     },
     "contexto": {
-      "pt": "Projeto da unidade curricular de Aplicações para a Internet, ano letivo 2024/25. Equipa de quatro. Fiquei responsável pelo frontend e acabei por cobrir também parte do backend.",
-      "en": "A project for the Internet Applications course, academic year 2024/25. A team of four. I was responsible for the frontend and ended up covering part of the backend as well."
+      "pt": "Projeto da unidade curricular de Aplicações para a Internet, ano letivo 2024/25. Fiquei responsável pelo frontend e acabei por cobrir também parte do backend.",
+      "en": "A project for the Internet Applications course, academic year 2024/25. I was responsible for the frontend and ended up covering part of the backend as well."
     },
     "problema": {
       "pt": "Dois sistemas com regras diferentes a partilhar as mesmas pessoas. Um sócio da associação não é um cliente da loja, mas pode ser as duas coisas ao mesmo tempo — e o que cada um pode ver e fazer muda conforme o papel. Modelar isso sem duplicar utilizadores nem encher o código de condições era o verdadeiro problema. A loja, em si, é trabalho conhecido.",

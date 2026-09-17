@@ -1,0 +1,18 @@
+---
+/**
+ * Cabeçalho de uma secção da página inicial, centrado: o título da secção e uma
+ * régua curta a roxo por baixo.
+ *
+ * Fase 4.2c: saiu a linha "01 — SOBRE" que ficava por cima do título.
+ */
+interface Props {
+  titulo: string;
+}
+
+const { titulo } = Astro.props;
+---
+
+<header class="section-header reveal">
+  <h2 class="section-heading">{titulo}</h2>
+  <span class="section-rule" aria-hidden="true"></span>
+</header>

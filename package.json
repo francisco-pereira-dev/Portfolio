@@ -11,13 +11,17 @@
     "astro": "astro",
     "check:i18n": "node scripts/check-i18n.mjs",
     "check:texto": "node scripts/check-texto.mjs",
-    "og": "node scripts/gerar-og.mjs"
+    "og": "node scripts/gerar-og.mjs",
+    "audit:a11y": "node scripts/auditoria/acessibilidade.mjs",
+    "audit:teclado": "node scripts/auditoria/teclado.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.2.10"
   },
   "devDependencies": {
-    "opentype.js": "^2.0.0"
+    "@axe-core/playwright": "^4.13.0",
+    "opentype.js": "^2.0.0",
+    "playwright": "^1.63.0"
   }
 }

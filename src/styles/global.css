@@ -87,6 +87,11 @@
    Direção editorial (fase 4): o valor do site é o texto, e o design existe para
    que alguém o leia. Tipografia e espaço em vez de caixas, sombras e animação.
    Os tamanhos de letra e os espaçamentos saem só das escalas declaradas em :root.
+
+   Fase 4.2b: hero, cabeçalhos de secção e contactos centrados; texto corrido
+   sempre à esquerda (centrado, o olho perde o início de cada linha).
+   Fase 4.2c: um só fundo em todo o site, cabeçalhos sem número, e a separação
+   entre secções feita pelo espaço e pelo cabeçalho.
    ========================================================================== */
 
 /* --- VARIÁVEIS DE TEMA E DESIGN SYSTEM --- */
@@ -106,7 +111,6 @@
     --modal-bg: #1E293B;
     --nav-bg: rgba(15, 23, 42, 0.8);
     --nav-color: #fff;
-    --footer-bg: rgba(15, 23, 42, 0.8);
 
     /* Menu Overlay (Dark Theme) */
     --overlay-bg: rgba(15, 23, 42, 0.95);
@@ -166,7 +170,6 @@ html.light-mode {
     --modal-bg: #FFFFFF;
     --nav-bg: rgba(255, 255, 255, 0.85);
     --nav-color: #0F172A;
-    --footer-bg: rgba(255, 255, 255, 0.85);
 
     /* Menu Overlay (Light Theme) */
     --overlay-bg: rgba(248, 250, 252, 0.96);
@@ -175,6 +178,32 @@ html.light-mode {
 
     --accent-text: #7C3AED;   /* 5,45:1 sobre #F8FAFC · 5,70:1 sobre #FFFFFF */
     --warning-text: #B45309;  /* 4,80:1 sobre #F8FAFC · 5,02:1 sobre #FFFFFF */
+}
+
+/* Fase 5.1: sem JavaScript, o <html> não tem classe de tema e o tema segue o
+   sistema. O escuro é o de :root; o claro repete os valores de html.light-mode,
+   porque o CSS não junta um seletor e uma media query na mesma regra.
+   MUDAR OS DOIS BLOCOS JUNTOS: o npm run audit:a11y compara-os. */
+@media (prefers-color-scheme: light) {
+    html:not(.js) {
+        --bg-color: #F8FAFC;
+        --surface-color: #FFFFFF;
+        --surface-hover: #F1F5F9;
+        --text-primary: #0F172A;
+        --text-secondary: #475569;
+        --border-color: rgba(0, 0, 0, 0.1);
+        --shadow-glow: rgba(139, 92, 246, 0.3);
+        --modal-bg: #FFFFFF;
+        --nav-bg: rgba(255, 255, 255, 0.85);
+        --nav-color: #0F172A;
+
+        --overlay-bg: rgba(248, 250, 252, 0.96);
+        --overlay-text: #475569;
+        --overlay-border: rgba(0, 0, 0, 0.08);
+
+        --accent-text: #7C3AED;
+        --warning-text: #B45309;
+    }
 }
 
 /* No telemóvel os dois tamanhos maiores descem um degrau, dentro da própria
@@ -210,6 +239,35 @@ body {
 :focus-visible {
     outline: 2px solid var(--accent-text);
     outline-offset: var(--sp-1);
+}
+
+/* O <main> recebe foco pelo link "Saltar para o conteúdo" (tabindex="-1"), mas não
+   é um controlo: não leva contorno à volta da página inteira. */
+main:focus {
+    outline: none;
+}
+
+/* Saltar para o conteúdo (fase 5): o primeiro elemento focável da página, fora
+   do ecrã até receber foco pelo teclado. Fica acima da navbar (2000/2100). */
+.skip-link {
+    position: fixed;
+    top: var(--sp-3);
+    left: var(--sp-3);
+    z-index: 2200;
+    padding: var(--sp-3) var(--sp-4);
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    border: 1px solid var(--text-secondary);
+    border-radius: 8px;
+    font-size: var(--fs-small);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: none;
 }
 
 /* --- ICONES SVG INLINE (substituem a fonte devicon) --- */
@@ -276,7 +334,9 @@ body {
     width: var(--touch);
     height: var(--touch);
     border-radius: 50%;
-    transition: var(--transition);
+    /* Fase 5: só o fundo transita. Com "all", o contorno do foco também demorava
+       0,3s a aparecer e ficava quase invisível ao chegar lá com Tab. */
+    transition: background-color 0.3s ease;
     position: relative;
     z-index: 2100;
 }
@@ -421,13 +481,18 @@ html.light-mode .icon-moon {
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease;
+    /* Fase 5: fechado, também fica com visibility: hidden, para os links saírem
+       da ordem de tabulação; a visibilidade só muda no fim da transição. */
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
 }
 
 /* Estado ativo do menu que despoleta a visibilidade. */
 .overlay-menu.active {
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
+    transition: opacity 0.4s ease, visibility 0s linear 0s;
 }
 
 /* Área interior do menu que agrupa as ligações e o rodapé social. */
@@ -511,19 +576,38 @@ main {
     padding: 0 var(--sp-24);
 }
 
+/* Cabeçalho de secção: o título e uma régua curta a roxo. Centrado. */
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: var(--sp-8);
+}
+
 .section-heading {
     font-size: var(--fs-h2);
     line-height: var(--lh-heading);
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--text-primary);
-    margin-bottom: var(--sp-12);
 }
 
-/* Secções separadas por espaço e uma régua fina, sem fundos. */
+/* 48px por 2px é uma medida de desenho da régua, não um espaçamento. */
+.section-rule {
+    display: block;
+    width: 48px;
+    height: 2px;
+    margin-top: var(--sp-4);
+    background-color: var(--accent-color);
+}
+
+/* Um só fundo (fase 4.2c): as secções são transparentes sobre o body
+   (--bg-color), sem faixas nem réguas entre elas. A separação vem do espaço e do
+   cabeçalho, por isso o espaço de cima subiu um degrau (--sp-16 -> --sp-24): de
+   uma secção à seguinte vão 160px em vez de 128px. */
 .about-section, .skills-section, .projects-section, .contacts-section {
-    padding: var(--sp-24) 0;
-    border-top: 1px solid var(--border-color);
+    padding: var(--sp-24) 0 var(--sp-16);
 }
 
 /* Link de texto: sem caixa, com sublinhado fino. */
@@ -561,57 +645,50 @@ main {
     transition: background-color 0.2s ease, filter 0.2s ease;
 }
 
-/* Exceção ao contraste, aprovada na fase 4: nenhuma cor de texto chega a 4,5:1
-   sobre #8B5CF6, e o branco dá 4,23:1. É o único botão preenchido do site. */
+/* O único botão preenchido do site. Sobre o #8B5CF6 o branco ficava a 4,23:1;
+   o fundo passou ao roxo mais escuro da mesma família, #7C3AED (o mesmo tom do
+   --accent-text no tema claro), e o branco fica a 5,70:1 (fase 4.2c). O acento
+   #8B5CF6 continua igual no resto do site. */
 .btn-primary {
-    background-color: var(--accent-color);
+    background-color: #7C3AED;
     color: #fff;
-    border: 2px solid var(--accent-color);
+    border: 2px solid #7C3AED;
 }
 
 .btn-primary:hover {
     filter: brightness(0.9);
 }
 
-.btn-outline {
-    background-color: transparent;
-    color: var(--accent-text);
-    border: 2px solid var(--accent-color);
-}
-
-.btn-outline:hover {
-    background-color: rgba(139, 92, 246, 0.12);
-}
-
 /* ========================================== */
 /* HERO                                       */
 /* ========================================== */
 
+/* Centrado por inteiro (fase 4.2b), com a fotografia por cima do nome. O fundo é
+   o do body, --bg-color. */
 .hero-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: var(--sp-32) 0 var(--sp-16);
+    justify-content: center;
+    text-align: center;
+    padding: var(--sp-24) 0 var(--sp-12);
 }
 
-/* Disponibilidade: o primeiro elemento, mas discreto — ponto verde e texto. */
-.hero-badge {
-    display: inline-flex;
+.hero-content {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: var(--sp-2);
-    margin-bottom: var(--sp-6);
-    font-size: var(--fs-meta);
-    font-weight: 500;
-    line-height: var(--lh-lead);
-    color: var(--text-secondary);
 }
 
-.hero-badge-dot {
-    width: 8px;
-    height: 8px;
+/* 200px de diâmetro (150px no telemóvel): medida de desenho da fotografia. Com
+   ela maior, o espaço até ao nome subiu dois degraus (--sp-4 -> --sp-8). */
+.hero-avatar {
+    display: block;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    background-color: #22C55E;
-    flex-shrink: 0;
+    object-fit: cover;
+    margin-bottom: var(--sp-8);
 }
 
 .main-title {
@@ -621,7 +698,7 @@ main {
     letter-spacing: -0.02em;
     max-width: 16ch;
     color: var(--text-primary);
-    margin-bottom: var(--sp-8);
+    margin-bottom: var(--sp-6);
 }
 
 /* O ponto final a roxo. É CSS para o texto do título continuar a ser o do
@@ -638,7 +715,7 @@ main {
     font-weight: 500;
     color: var(--text-primary);
     max-width: 36ch;
-    margin-bottom: var(--sp-6);
+    margin-bottom: var(--sp-4);
 }
 
 .hero-paragraph {
@@ -646,13 +723,14 @@ main {
     line-height: var(--lh-lead);
     color: var(--text-secondary);
     max-width: 62ch;
-    margin-bottom: var(--sp-12);
+    margin-bottom: var(--sp-8);
 }
 
 .hero-buttons {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: var(--sp-4) var(--sp-8);
 }
 
@@ -660,19 +738,12 @@ main {
 /* SOBRE                                      */
 /* ========================================== */
 
-.about-layout {
-    display: grid;
-    grid-template-columns: 8rem minmax(0, var(--measure));
-    gap: var(--sp-12);
-    align-items: start;
-}
-
-.about-avatar {
-    display: block;
-    width: 8rem;
-    height: 8rem;
-    border-radius: 50%;
-    object-fit: cover;
+/* A coluna de leitura fica centrada debaixo do cabeçalho; o texto dentro dela
+   fica à esquerda, porque é texto corrido. */
+.about-content {
+    max-width: var(--measure);
+    margin: 0 auto;
+    text-align: left;
 }
 
 .about-content p {
@@ -730,8 +801,7 @@ main {
 }
 
 /* O link de prova é o ponto da secção: visível e clicável, nunca escondido. */
-.proof-link,
-.proof-private {
+.proof-link {
     font-size: var(--fs-meta);
     line-height: var(--lh-lead);
     white-space: nowrap;
@@ -749,32 +819,9 @@ main {
     color: var(--text-primary);
 }
 
-/* Repositório privado: o mesmo peso, sem afordância de clique. */
-.proof-private {
-    color: var(--text-secondary);
-    cursor: default;
-}
-
 /* ========================================== */
 /* PROJETOS — lista, sem cartões (fase 4)     */
 /* ========================================== */
-
-/* Destaque: a largura toda, separado do resto por espaço e não por uma caixa. */
-.project-featured {
-    padding-bottom: var(--sp-16);
-}
-
-.project-featured .project-title {
-    font-size: var(--fs-h2);
-}
-
-.project-featured-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--sp-4) var(--sp-6);
-    margin-top: var(--sp-8);
-}
 
 /* Estado in-development: não é link, e não deve parecer um. */
 .project-status-disabled {
@@ -789,13 +836,77 @@ main {
     color: var(--text-secondary);
     cursor: not-allowed;
     user-select: none;
+    white-space: nowrap;
 }
 
+/* O título e, por baixo, numa linha própria, a etiqueta (fase 4.2d). */
 .project-head {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-2);
+}
+
+.project-meta {
+    display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--sp-2) var(--sp-3);
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+/* Botão "?" ao lado da etiqueta (fase 4.2d). Fica acima do botão ou link que
+   se estende pela linha inteira, para poder ser clicado. O alvo de toque é de
+   44px; o círculo desenhado é mais pequeno, para acompanhar a etiqueta. */
+.info-btn {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--touch);
+    height: var(--touch);
+    margin: calc(var(--sp-3) * -1) 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: var(--fs-meta);
+    font-weight: 600;
+}
+
+/* O círculo tem 24px (--sp-6): medida de desenho, dentro do alvo de 44px. */
+.info-btn span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sp-6);
+    height: var(--sp-6);
+    border-radius: 50%;
+    border: 1px solid var(--text-secondary);
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.info-btn:hover span,
+.info-btn[aria-expanded="true"] span {
+    border-color: var(--accent-color);
+    color: var(--accent-text);
+}
+
+/* O texto do botão "?", por baixo da etiqueta. Fica no fluxo da linha, para
+   nunca sair do ecrã, e acima da área clicável da linha. */
+.info-balao {
+    position: relative;
+    z-index: 2;
+    max-width: 62ch;
+    padding: var(--sp-3) var(--sp-4);
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
 }
 
 .project-title {
@@ -847,16 +958,22 @@ main {
 .project-row {
     position: relative;
     display: grid;
-    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    /* A coluna da ação tem largura fixa (fase 4.2c), para todas as linhas terem
+       as mesmas caixas: com largura automática, o rótulo "Ainda não publicado"
+       do Licas alargava a coluna e estreitava a descrição só nessa linha. */
+    grid-template-columns: 3rem minmax(0, 1fr) 13rem;
     grid-template-areas:
         "num head  action"
         ".   desc  action"
         ".   stack action";
     align-items: baseline;
     column-gap: var(--sp-6);
-    padding: var(--sp-8) var(--sp-4);
+    padding: var(--sp-6) var(--sp-4);
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.2s ease;
+    /* As provas das competências ligam a #projeto-<slug>: a linha para abaixo
+       da navbar fixa em vez de ficar escondida por ela. */
+    scroll-margin-top: var(--sp-24);
 }
 
 /* Hover subtil: um fundo quase impercetível e a ação muda de cor. */
@@ -884,8 +1001,13 @@ main {
     grid-area: stack;
 }
 
+/* A ação da linha, e por baixo dela o rótulo inerte quando existe (o Licas). */
 .project-action {
     grid-area: action;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--sp-2);
 }
 
 .project-action-link {
@@ -930,117 +1052,100 @@ main {
     cursor: pointer;
 }
 
-.projects-subsection {
-    margin-top: var(--sp-16);
-}
-
-.projects-subsection-heading {
-    font-size: var(--fs-h3);
-    line-height: var(--lh-heading);
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: var(--sp-3);
-}
-
-.projects-subsection-text {
-    max-width: 62ch;
-    margin-bottom: var(--sp-8);
-    color: var(--text-secondary);
-}
-
 /* ========================================== */
 /* CONTACTOS                                  */
 /* ========================================== */
 
-.contacts-text {
-    max-width: var(--measure);
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    color: var(--text-secondary);
-    margin-bottom: var(--sp-12);
+/* Cartões com ícone: repostos na fase 4.2a como estavam antes da fase 4, com os
+   tamanhos de letra e os espaçamentos passados às escalas. Centrados (fase 4.2b). */
+/* Fase 5.2: três colunas de largura igual. Em flex, cada cartão tinha a largura
+   do seu texto (o do email é o mais largo), e o conjunto dos ícones ficava 9,6px
+   à direita do eixo do título. Com "1fr" numa grelha da largura do conteúdo
+   (fit-content), as três colunas ficam com a largura do cartão mais largo, e a
+   grelha centra-se no eixo do <main>. Entre colunas, --sp-8, para as três
+   caberem a 900px; em altura, o --sp-12 de antes. */
+.contacts-section {
+    container-type: inline-size;
 }
 
-.contact-list {
-    max-width: var(--measure);
-    border-top: 1px solid var(--border-color);
-}
-
-.contact-item {
+.contacts-row {
     display: grid;
-    grid-template-columns: 8rem minmax(0, 1fr);
-    gap: var(--sp-4);
+    grid-template-columns: repeat(3, 1fr);
+    width: fit-content;
+    margin: 0 auto;
+    gap: var(--sp-12) var(--sp-8);
+}
+
+/* Se as três colunas não couberem na largura do conteúdo, empilham numa só
+   (como já acontecia no telemóvel). 50rem = 800px: três cartões de 240px e dois
+   espaços de 32px, com folga. */
+@container (max-width: 50rem) {
+    .contacts-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-card-link {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: var(--sp-3) 0;
-    border-bottom: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.contact-card-link:hover {
+    transform: translateY(-8px);
+}
+
+.contact-card-link:hover .contact-icon-circle {
+    background-color: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 10px 20px var(--shadow-glow);
+}
+
+.contact-icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* O mesmo fundo da página, só com o contorno (fase 4.2c). */
+    background-color: var(--bg-color);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Medida ótica, fora da escala de propósito: os ícones desenham-se a 1em e
+       têm de encher o círculo de 80px como antes. A escala é para texto. */
+    font-size: 2.5rem;
+    margin-bottom: var(--sp-6);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
 }
 
 .contact-title {
-    font-size: var(--fs-meta);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-}
-
-.contact-value-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--sp-2) var(--sp-4);
+    color: var(--text-primary);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    margin-bottom: var(--sp-2);
 }
 
 .contact-value {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--touch);
-    color: var(--text-primary);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.3em;
-    text-decoration-color: var(--accent-color);
-    overflow-wrap: anywhere;
-    transition: color 0.2s ease;
-}
-
-.contact-value:hover {
-    color: var(--accent-text);
-}
-
-.copy-email {
-    min-height: var(--touch);
-    padding: 0 var(--sp-4);
-    font-family: var(--font-main);
-    font-size: var(--fs-small);
-    font-weight: 500;
-    color: var(--accent-text);
-    background: transparent;
-    border: 1px solid var(--border-color);
-    border-radius: 50px;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
-}
-
-.copy-email:hover {
-    border-color: var(--accent-color);
-}
-
-.copy-status {
-    font-size: var(--fs-meta);
     color: var(--text-secondary);
+    font-size: var(--fs-body);
 }
 
 /* ========================================== */
 /* RODAPÉ                                     */
 /* ========================================== */
 
+/* Rodapé simples (fase 4.2c): o fundo da página, só a régua fina por cima e o
+   mesmo espaço em cima e em baixo. Antes tinha fundo próprio (--footer-bg,
+   semitransparente) com desfoque por trás, 24px em cima e 96px em baixo — era
+   isso que o destacava. A seta de voltar ao topo subiu em vez de ocupar espaço
+   no rodapé. */
 .site-footer {
-    padding: var(--sp-6);
+    padding: var(--sp-8) var(--sp-6);
     text-align: center;
-    background: var(--footer-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid var(--border-color);
-    transition: background 0.3s;
 }
 
 .footer-content p {
@@ -1054,9 +1159,13 @@ main {
     font-weight: 400;
 }
 
+/* Fase 5: sublinhados. Têm a mesma cor do texto à volta, por isso sem sublinhado
+   nada os distinguia como links. */
 .footer-content a {
     color: var(--text-secondary);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
     transition: color 0.3s ease;
 }
 
@@ -1119,13 +1228,15 @@ main {
     opacity: 1;
 }
 
+/* Sem a imagem por baixo, o × branco sobre preto a 50% ficava a 3,98:1 no tema
+   claro. Passa às cores do tema. */
 .modal-close {
     position: absolute;
     top: var(--sp-4);
     right: var(--sp-4);
-    background: rgba(0,0,0,0.5);
-    color: #fff;
-    border: none;
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
     font-size: var(--fs-h2);
     line-height: 1;
     width: var(--touch);
@@ -1140,7 +1251,7 @@ main {
 }
 
 .modal-close:hover {
-    background: rgba(0,0,0,0.8);
+    border-color: var(--accent-color);
 }
 
 .modal-content {
@@ -1148,23 +1259,11 @@ main {
     flex-direction: column;
 }
 
-.modal-img {
-    display: block;
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-}
-
 .modal-title {
     font-size: var(--fs-h2);
     line-height: var(--lh-heading);
     padding: var(--sp-8) var(--sp-8) var(--sp-4);
     color: var(--text-primary);
-}
-
-.modal-desc {
-    padding: 0 var(--sp-8) var(--sp-4);
-    color: var(--text-secondary);
 }
 
 .modal-features {
@@ -1222,18 +1321,166 @@ main {
 }
 
 /* ========================================== */
+/* VOLTAR AO TOPO (fase 4.2b)                 */
+/* ========================================== */
+
+/* Escondido, fica com visibility: hidden para sair da ordem de tabulação, e a
+   visibilidade só muda depois de a opacidade acabar de descer. Fica abaixo do
+   menu overlay (1500) e do fundo das modais (2999). */
+/* Fase 4.2c: mais acima (--sp-16 do fundo; mais no telemóvel, onde o rodapé
+   ocupa a largura toda), para nunca ficar por cima dos links do rodapé no fim da
+   página. O contorno passou a --text-secondary: com um só fundo, o preenchimento
+   --surface-color quase não se distingue da página. */
+.back-to-top {
+    position: fixed;
+    right: var(--sp-6);
+    bottom: var(--sp-16);
+    z-index: 1400;
+    width: var(--touch);
+    height: var(--touch);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    border: 1px solid var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s, border-color 0.2s ease;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s linear 0s, border-color 0.2s ease;
+}
+
+.back-to-top:hover {
+    border-color: var(--accent-color);
+}
+
+/* A seta tem o tamanho de desenho de um ícone, não de texto. */
+.back-to-top svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Sem movimento: a seta aparece e desaparece sem transição, e o regresso ao topo
+   (e qualquer âncora) salta em vez de deslizar. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .back-to-top,
+    .back-to-top.is-visible {
+        transition: none;
+    }
+}
+
+/* ========================================== */
 /* ANIMAÇÕES                                  */
 /* ========================================== */
 
-.reveal {
+/* Fase 5.1: o estado inicial escondido só existe com JavaScript (classe "js",
+   posta no <head>). Sem JavaScript ninguém acrescenta is-visible, e o conteúdo
+   tem de estar visível por omissão. */
+html.js .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 
-.reveal.is-visible {
+html.js .reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Fase 5.2: uma linha de projeto que ainda não apareceu está 30px abaixo do sítio
+   (o translateY de cima). Ao saltar para ela (as provas das competências), o
+   browser alinha essa posição e, quando a animação acaba, a linha sobe 30px e
+   ficava 2px por baixo da navbar. Enquanto não aparece, a margem soma esses 30px. */
+html.js .project-row.reveal:not(.is-visible) {
+    scroll-margin-top: calc(var(--sp-24) + 30px);
+}
+
+/* ========================================== */
+/* SEM JAVASCRIPT (fase 5.1)                  */
+/* ========================================== */
+
+/* Controlos que só o script faz funcionar: sem ele, não aparecem. */
+html:not(.js) .hamburger-btn,
+html:not(.js) .theme-switch,
+html:not(.js) .info-btn {
+    display: none;
+}
+
+/* O texto do "?" fica aberto, por baixo da etiqueta. */
+html:not(.js) .info-balao[hidden] {
+    display: block;
+}
+
+/* A navegação vive no menu overlay, que só abre com o script. Sem ele, os mesmos
+   links aparecem no cabeçalho; a 1180px ou menos não cabem numa linha na coluna
+   da esquerda (medido em PT, a língua mais comprida), e passam para antes do
+   rodapé. Com JavaScript, nenhuma das duas cópias aparece. */
+.nav-sem-js {
+    display: none;
+}
+
+html:not(.js) .nav-sem-js-topo {
+    display: block;
+}
+
+.nav-sem-js-topo ul {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.nav-sem-js ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--sp-4);
+}
+
+.nav-sem-js a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    color: var(--text-secondary);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+}
+
+.nav-sem-js a:hover {
+    color: var(--accent-text);
+}
+
+.nav-sem-js-fundo {
+    padding: var(--sp-6);
+    border-top: 1px solid var(--border-color);
+}
+
+.nav-sem-js-fundo ul {
+    justify-content: center;
+}
+
+@media (max-width: 1180px) {
+    html:not(.js) .nav-sem-js-topo {
+        display: none;
+    }
+
+    html:not(.js) .nav-sem-js-fundo {
+        display: block;
+    }
 }
 
 /* ========================================== */
@@ -1258,21 +1505,33 @@ main {
 
     .hero-section {
         min-height: auto;
-        padding: var(--sp-32) 0 var(--sp-16);
+        padding: var(--sp-24) 0 var(--sp-12);
     }
 
     .about-section, .skills-section, .projects-section, .contacts-section {
-        padding: var(--sp-16) 0;
+        padding: var(--sp-16) 0 var(--sp-12);
+        /* Fase 5.2: aqui o espaço de cima (64px) é menor que a navbar (68px). Ao
+           seguir um link para a secção (a prova "todos", o menu), o título ficava
+           4px por baixo dela; assim para 8px mais abaixo. */
+        scroll-margin-top: var(--sp-2);
     }
 
-    .about-layout {
-        grid-template-columns: minmax(0, 1fr);
-        gap: var(--sp-6);
+    .hero-avatar {
+        width: 150px;
+        height: 150px;
+        margin-bottom: var(--sp-6);
     }
 
-    .about-avatar {
-        width: 6rem;
-        height: 6rem;
+    /* O rodapé quebra em três linhas e ocupa a largura toda: a seta sobe acima
+       dele. 192px é a soma de dois degraus da escala (--sp-32 + --sp-16); a
+       escala não tem um valor acima de 128px, que não chegava. */
+    .back-to-top {
+        right: var(--sp-4);
+        bottom: calc(var(--sp-32) + var(--sp-16));
+    }
+
+    .project-action {
+        align-items: flex-start;
     }
 
     .skills-grid {
@@ -1291,35 +1550,25 @@ main {
     /* A linha empilha: número e título em cima, depois a descrição, a stack e a
        ação, alinhada à esquerda. */
     .project-row {
-        grid-template-columns: auto minmax(0, 1fr);
+        /* Número com largura fixa: com auto, "01" era mais estreito que "02". */
+        grid-template-columns: var(--sp-8) minmax(0, 1fr);
         grid-template-areas:
             "num    head"
             "desc   desc"
             "stack  stack"
             "action action";
         column-gap: var(--sp-3);
-        padding: var(--sp-6) 0;
+        padding: var(--sp-4) 0;
     }
 
     .project-action {
         margin-top: var(--sp-2);
     }
 
-    .contact-item {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0;
-        padding-top: var(--sp-4);
-    }
-
-    .modal-img {
-        height: 200px;
-    }
-
     .modal-title {
         padding: var(--sp-6) var(--sp-6) var(--sp-2);
     }
 
-    .modal-desc,
     .modal-note {
         padding: 0 var(--sp-6) var(--sp-4);
     }

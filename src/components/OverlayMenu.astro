@@ -19,7 +19,9 @@ const links = [
 ];
 ---
 
-<div id="overlay-menu" class="overlay-menu">
+{/* Fase 5: é o marco <nav> da página. Fechado, fica com visibility: hidden e sai
+    da ordem de tabulação; o link da secção atual leva aria-current (main.js). */}
+<nav id="overlay-menu" class="overlay-menu">
   <div class="overlay-content reveal">
     <ul class="overlay-links">
       {
@@ -54,6 +56,8 @@ const links = [
       </a>
       <a href={`mailto:${site.email}`} class="overlay-social-icon" aria-label={ui['a11y-social-email']}>
         <svg
+          aria-hidden="true"
+          focusable="false"
           xmlns="http://www.w3.org/2000/svg"
           width="28"
           height="28"
@@ -70,4 +74,4 @@ const links = [
       </a>
     </div>
   </div>
-</div>
+</nav>

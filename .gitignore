@@ -8,6 +8,14 @@ dist/
 # variáveis de ambiente
 .env*
 
+# caches e resultados de ferramentas
+.cache/
+.eslintcache
+*.tsbuildinfo
+test-results/
+playwright-report/
+
 # sistema operativo / logs
 .DS_Store
+Thumbs.db
 *.log

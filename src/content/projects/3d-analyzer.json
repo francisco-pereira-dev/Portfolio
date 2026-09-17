@@ -13,6 +13,10 @@
     "pt": "Inspetor de malhas 3D com arquitetura híbrida: um motor nativo em C++ lê ficheiros STL e OBJ em streaming e calcula a geometria — volume, área e contagem de triângulos — enquanto uma interface em Vue 3 com Three.js mostra o modelo em WebGL e produz a estimativa de material.",
     "en": "A 3D mesh inspector with a hybrid architecture: a native C++ engine streams STL and OBJ files and computes the geometry — volume, area and triangle count — while a Vue 3 interface renders the model in WebGL through Three.js and produces the material estimate."
   },
+  "resumo": {
+    "pt": "Inspetor de malhas 3D com motor de cálculo em C++ nativo e visualização em WebGL.",
+    "en": "A 3D mesh inspector with a native C++ computation engine and WebGL visualisation."
+  },
   "features": [
     {
       "pt": "Volume calculado pelo teorema da divergência sobre os triângulos da malha, em vez da caixa envolvente: uma esfera deixou de custar como o cubo que a contém.",
@@ -68,10 +72,6 @@
     "problema": {
       "pt": "Um ficheiro STL ou OBJ de uma peça real tem dezenas ou centenas de milhares de triângulos. Processar isso em JavaScript, na thread principal do browser, congela a interface — e uma interface congelada durante o cálculo parece avariada.\n\nMas o problema maior não era a velocidade. Era o número estar errado.",
       "en": "An STL or OBJ file of a real part has tens or hundreds of thousands of triangles. Processing that in JavaScript, on the browser's main thread, freezes the interface — and an interface frozen during a calculation looks broken.\n\nBut the bigger problem was not speed. It was that the number was wrong."
-    },
-    "minhaParte": {
-      "pt": "Tudo: o motor em C++, o frontend, a camada que os liga e a exportação dos resultados.",
-      "en": "All of it: the C++ engine, the frontend, the layer connecting them, and the result export."
     },
     "decisoes": [
       {

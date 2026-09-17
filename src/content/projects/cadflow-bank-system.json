@@ -6,12 +6,16 @@
     "en": "CadflowBankSystem — Banking system in C++/MFC"
   },
   "tagline": {
-    "pt": "Desafio técnico de empresa · Desktop",
-    "en": "Company technical challenge · Desktop"
+    "pt": "C++ · Desktop",
+    "en": "C++ · Desktop"
   },
   "description": {
     "pt": "Desafio técnico proposto por uma empresa, resolvido em C++ nativo com MFC: gestão de contas, movimentos e transferências numa aplicação Windows de secretária. Sem framework web e sem rede de segurança — memória, estado e interface tratados à mão.",
     "en": "A technical challenge set by a company, solved in native C++ with MFC: account, transaction and transfer management in a Windows desktop application. No web framework, no safety net — memory, state and UI handled by hand."
+  },
+  "resumo": {
+    "pt": "Sistema bancário de secretária em C++ nativo, resolvido como desafio técnico proposto por uma empresa.",
+    "en": "A native C++ desktop banking system, solved as a technical challenge set by a company."
   },
   "features": [
     {
@@ -43,5 +47,63 @@
   ],
   "repoUrl": "https://github.com/francisco-pereira-dev/CadflowBankSystem",
   "status": "no-demo",
-  "coldStart": false
+  "coldStart": false,
+  "caseStudy": {
+    "umaFrase": {
+      "pt": "Uma empresa propôs-me um desafio técnico: construir um sistema bancário de secretária em C++ nativo, sem frameworks. Este é o resultado.",
+      "en": "A company set me a technical challenge: build a desktop banking system in native C++, with no frameworks. This is the result."
+    },
+    "contexto": {
+      "pt": "Resolvido individualmente em cerca de um mês. C++ com MFC, sobre Windows.",
+      "en": "Solved alone in about a month. C++ with MFC, on Windows."
+    },
+    "problema": {
+      "pt": "Contas, movimentos, transferências e consulta de saldos numa aplicação de secretária. Sem framework web, sem ORM, sem coletor de lixo: a gestão de memória, o estado da interface e a persistência dos dados passam todos a ser responsabilidade de quem escreve o código.",
+      "en": "Accounts, transactions, transfers and balance queries in a desktop application. No web framework, no ORM, no garbage collector: memory management, UI state and data persistence all become the responsibility of whoever writes the code."
+    },
+    "decisoes": [
+      {
+        "titulo": {
+          "pt": "Modelo de domínio separado da interface",
+          "en": "Domain model kept separate from the UI"
+        },
+        "texto": {
+          "pt": "As classes Account, Transaction e BankManager não sabem que existe uma janela. Toda a lógica bancária vive em código que não importa nada do MFC, e os diálogos limitam-se a recolher dados, chamar o modelo e mostrar o resultado. Em MFC o caminho fácil é escrever a lógica dentro do handler do botão, porque é onde os dados já estão. Funciona, e depois a mesma regra existe em três diálogos com três variações.",
+          "en": "The Account, Transaction and BankManager classes do not know a window exists. All the banking logic lives in code that imports nothing from MFC, and the dialogs only collect data, call the model and show the result. In MFC the easy path is writing the logic inside the button's handler, because that is where the data already is. It works, and then the same rule exists in three dialogs with three variations."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Persistência em ficheiro de texto",
+          "en": "Persistence in a text file"
+        },
+        "texto": {
+          "pt": "Os dados são guardados em texto simples. Foi rápido de escrever e deixa ver o conteúdo sem ferramentas, o que ajuda a depurar. O custo é que tudo o que se lê de volta tem de ser validado à mão, e qualquer erro de formato só aparece quando o programa já está a correr.",
+          "en": "Data is stored as plain text. It was quick to write and lets you read the contents without tools, which helps when debugging. The cost is that everything read back has to be validated by hand, and any format error only shows up once the program is already running."
+        }
+      },
+      {
+        "titulo": {
+          "pt": "C++ nativo, com o que isso implica",
+          "en": "Native C++, with what that implies"
+        },
+        "texto": {
+          "pt": "Sem coletor de lixo, o tempo de vida de cada objeto é uma decisão consciente. Foi o projeto que me obrigou a perceber o que as linguagens com gestão automática de memória me tinham deixado ignorar.",
+          "en": "With no garbage collector, every object's lifetime is a conscious decision. It was the project that forced me to understand what languages with automatic memory management had let me ignore."
+        }
+      }
+    ],
+    "correuMal": {
+      "pt": "O MFC foi metade do problema. É uma biblioteca antiga, com convenções próprias, mapas de mensagens e ligações entre controlos e variáveis que não se parecem com nada do que eu tinha usado antes. Passei mais tempo a perceber como se faz do que a escrever a lógica em si.\n\nA outra metade foi decidir o que cada classe devia conter. Quando se começa com Account, Transaction e BankManager numa folha em branco, cada operação pode viver em três sítios diferentes e os três parecem razoáveis à primeira. Escolher mal significa descobrir duas semanas depois que uma regra simples precisa de dados que ficaram do outro lado.\n\nRefiz essa divisão mais do que uma vez, até ela deixar de me atrapalhar. Foi a primeira vez que percebi que desenhar classes é uma decisão sobre quem sabe o quê, e não sobre onde arrumar o código.",
+      "en": "MFC was half the problem. It is an old library, with its own conventions, message maps and bindings between controls and variables that resemble nothing I had used before. I spent more time working out how it is done than writing the logic itself.\n\nThe other half was deciding what each class should hold. When you start with Account, Transaction and BankManager on a blank page, every operation could live in three different places and all three look reasonable at first. Choosing badly means discovering two weeks later that a simple rule needs data that ended up on the other side.\n\nI redid that split more than once, until it stopped getting in my way. It was the first time I understood that designing classes is a decision about who knows what, not about where to file the code."
+    },
+    "resultado": {
+      "pt": "Entregue, com resposta positiva da empresa.",
+      "en": "Delivered, with a positive response from the company."
+    },
+    "fariaDiferente": {
+      "pt": "Trocava o ficheiro de texto por SQLite. Guardar em texto foi rápido de escrever, mas obriga a validar à mão tudo o que se lê de volta, e um ficheiro corrompido só dá sinal quando já é tarde. Uma base de dados embebida resolvia isso sem acrescentar dependências que a aplicação não pudesse levar consigo.",
+      "en": "I would swap the text file for SQLite. Storing as text was quick to write, but it forces you to validate everything read back by hand, and a corrupted file only announces itself when it is already too late. An embedded database solves that without adding a dependency the application could not carry with it."
+    }
+  }
 }

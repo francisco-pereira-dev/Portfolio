@@ -122,6 +122,23 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     }
   }
 
+  // 1b. Cabeçalhos de secção: o título e a régua, sem mais nada (fase 4.2c: saiu
+  //     a linha com o número e o nome da secção).
+  const textoI = Object.assign({}, ...Object.values(canon.interface));
+  [['about', 'about-heading'], ['skills', 'skills-heading'], ['projects', 'projects-heading'], ['contacts', 'contacts-heading']]
+    .forEach(([id, titulo]) => {
+      const sec = (html.match(new RegExp(`<section id="${id}"[\\s\\S]*?</section>`)) || [''])[0];
+      const cab = (sec.match(/<header class="section-header[^"]*">([\s\S]*?)<\/header>/) || ['', ''])[1];
+      const h2 = um(cab, /<h2 class="section-heading">([\s\S]*?)<\/h2>/);
+      const regua = cab.includes('class="section-rule"');
+      const outros = textos(cab).filter((t) => t !== h2);
+      exigir(
+        h2 === textoI[titulo]?.[lang] && regua && outros.length === 0,
+        lang, `cabeçalho da secção ${id}`, `${textoI[titulo]?.[lang]} + régua`,
+        `${h2 ?? '(sem título)'}${regua ? ' + régua' : ' (sem régua)'}${outros.length ? ` + ${fmtLista(outros)}` : ''}`,
+      );
+    });
+
   // 2. Rodapé: a linha composta, segmento a segmento, com o ano gerado no build.
   const linhaRodape = canon.interface.rodape?._linha?.[lang];
   if (linhaRodape) {
@@ -158,9 +175,15 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       const provas = [...li.matchAll(/<(a|span) class="proof-(link|private)"(?: href="([^"]*)")?[^>]*>([\s\S]*?)<\/\1>/g)]
         .map((m) => ({ tipo: m[2], href: m[3] ? decode(m[3]) : null, rotulo: norm(m[4]) }));
       const esperadas = item.proofs.map((p) =>
-        p.allRepos ? { tipo: 'link', href: GITHUB, rotulo: rotuloTodos }
-        : p.private ? { tipo: 'private', href: null, rotulo: p.repo }
-        : { tipo: 'link', href: `${GITHUB}/${p.repo}`, rotulo: p.repo });
+        // Fase 4.2d: as provas apontam para dentro do site. "todos" leva à secção de
+        // projetos; um projeto com case study, à página; sem case study, à linha.
+        // Fase 5.2: nos dados, todas as provas de projeto são "projeto" (a linha).
+        p.allRepos ? { tipo: 'link', href: `${lang === 'pt' ? '/' : '/en/'}#projects`, rotulo: rotuloTodos }
+        // Fase 5: o rótulo é o nome do projeto, por língua (campo "rotulo").
+        : p.caseStudy ? { tipo: 'link', href: rotaCase(p.caseStudy, lang), rotulo: p.rotulo?.[lang] ?? null }
+        : p.projeto ? { tipo: 'link', href: `${lang === 'pt' ? '/' : '/en/'}#projeto-${p.projeto}`, rotulo: p.rotulo?.[lang] ?? null }
+        : p.private ? { tipo: 'private', href: null, rotulo: p.rotulo?.[lang] ?? p.repo }
+        : { tipo: 'link', href: `${GITHUB}/${p.repo}`, rotulo: p.rotulo?.[lang] ?? null });
       const fmt = (l) => l.map((p) => (p.tipo === 'private' ? `${p.rotulo} (sem link)` : `${p.rotulo ?? '*'} -> ${p.href}`)).join(' · ') || '(nada)';
       const ok = provas.length === esperadas.length
         && esperadas.every((e, k) => provas[k].tipo === e.tipo && provas[k].href === e.href && (e.rotulo === undefined || provas[k].rotulo === e.rotulo));
@@ -180,10 +203,15 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     JSON.stringify(ordemDist) === JSON.stringify(canon.projetos.ordem.slugs),
     lang, 'projetos.ordem', canon.projetos.ordem.slugs.join(', '), ordemDist.join(', '),
   );
-  // A lista não mostra imagens: os screenshots vivem nas páginas de case study.
-  const secProjetos = (html.match(/<section id="projects"[\s\S]*?<\/section>/) || [''])[0];
-  const imagensLista = (secProjetos.match(/<img\b/g) || []).length;
-  exigir(imagensLista === 0, lang, 'projetos (lista sem imagens)', '0 imagens', `${imagensLista} imagem(ns)`);
+  // A página inicial não mostra imagens de projetos, nem na lista nem nas modais:
+  // a única imagem é o avatar, na secção Sobre. Os screenshots vivem nas páginas
+  // de case study e nas imagens de partilha.
+  const imgsHome = semScripts(html).match(/<img\b[^>]*>/g) || [];
+  const altAvatar = canon.interface.acessibilidade['a11y-avatar-alt'][lang];
+  exigir(
+    imgsHome.length === 1 && imgsHome[0].includes(`alt="${altAvatar}"`),
+    lang, 'página inicial (só o avatar, sem imagens de projetos)', `1 imagem, alt "${altAvatar}"`, `${imgsHome.length} imagem(ns)`,
+  );
   // Só os projetos sem case study têm modal.
   const semCase = canon.projetos.ordem.slugs.filter((s) => !canon.projetos[s]?.caseStudy);
   const modaisDist = [...html.matchAll(/<div class="modal" id="modal-([^"]+)"/g)].map((m) => m[1]);
@@ -221,8 +249,27 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       }
     }
     if (p.tagline?.[lang] !== undefined) {
-      const t = um(bloco, /<span class="project-tagline">([\s\S]*?)<\/span>/);
+      // Fase 4.2d: a etiqueta fica por baixo do título, na sua própria linha.
+      const meta = (bloco.match(/<\/h[34]>\s*<div class="project-meta">([\s\S]*?)<\/div>/) || ['', ''])[1];
+      const t = um(meta, /<span class="project-tagline">([\s\S]*?)<\/span>/);
       exigir(t === p.tagline[lang], lang, `${c}.tagline`, p.tagline[lang], t ?? '(sem tagline)');
+    }
+    // Fase 4.2d: botão "?" com o texto da nota, só nos projetos que a têm nos dados.
+    {
+      const nota = JSON.parse(ler(`src/content/projects/${slug}.json`)).nota;
+      const botoes = bloco.match(/<button type="button" class="info-btn"[^>]*>/g) || [];
+      if (nota) {
+        const b = botoes[0] ?? '';
+        const aria = decode((b.match(/aria-label="([^"]*)"/) || ['', ''])[1]);
+        const balao = um(bloco, new RegExp(`<p id="nota-${slug}" class="info-balao"[^>]*>([\\s\\S]*?)</p>`));
+        const esperadoAria = textoI['a11y-more-info']?.[lang];
+        exigir(
+          botoes.length === 1 && aria === esperadoAria && b.includes(`aria-controls="nota-${slug}"`) && b.includes('aria-expanded="false"') && balao === textoI[nota]?.[lang],
+          lang, `${c} (botão de informação)`, `"?" [${esperadoAria}] -> ${textoI[nota]?.[lang]}`, `${botoes.length} botão(ões), aria "${aria}", texto ${balao ?? '(em falta)'}`,
+        );
+      } else {
+        exigir(botoes.length === 0, lang, `${c} (sem botão de informação)`, 'nenhum', `${botoes.length} botão(ões)`);
+      }
     }
     // tech: lista comum às duas línguas, ou { pt: [...], en: [...] } quando diferem.
     const tech = Array.isArray(p.tech) ? p.tech : p.tech?.[lang];
@@ -230,19 +277,28 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       const t = todos(bloco, /<li class="project-tech">([\s\S]*?)<\/li>/g);
       exigir(JSON.stringify(t) === JSON.stringify(tech), lang, `${c}.tech`, fmtLista(tech), fmtLista(t));
     }
-    // O alt dos projetos com case study verifica-se na página deles (ponto 5).
-    if (!cs && p.imageAlt?.[lang] !== undefined) {
-      const m = modal.match(/<img\b[^>]*\balt="([^"]*)"/);
-      const alt = m ? norm(m[1]) : null;
-      exigir(alt === p.imageAlt[lang], lang, `${c}.imageAlt (modal)`, p.imageAlt[lang], alt ?? '(sem imagem)');
-    }
-    if (p.description?.[lang] !== undefined) {
+    // O imageAlt só aparece nas páginas de case study (ponto 5): a página inicial
+    // não mostra imagens de projetos, nem na lista nem nas modais.
+    // Fase 4.2a: a lista mostra uma frase por projeto (resumo). A descrição longa
+    // só aparece na modal dos projetos sem case study.
+    {
       const t = um(bloco, /<p class="project-desc">([\s\S]*?)<\/p>/);
-      exigir(t === p.description[lang], lang, `${c}.description (lista)`, p.description[lang], t ?? '(sem descrição)');
-      if (!cs) {
-        const tm = um(modal, /<p class="modal-desc">([\s\S]*?)<\/p>/);
-        exigir(tm === p.description[lang], lang, `${c}.description (modal)`, p.description[lang], tm ?? '(sem descrição)');
-      }
+      exigir(
+        p.resumo?.[lang] !== undefined && t === p.resumo[lang],
+        lang, `${c}.resumo (lista)`, p.resumo?.[lang] ?? '(sem resumo no canónico)', t ?? '(sem frase)',
+      );
+    }
+    // Fase 4.2b: a modal não tem descrição. A frase da linha é a descrição, e
+    // repeti-la na modal seria o mesmo texto duas vezes.
+    if (!cs) {
+      const comDescricao = modal.includes('class="modal-desc"');
+      const semVirgulas = (s) => s.replace(/,/g, '');
+      const repete = p.resumo?.[lang] !== undefined && textos(modal).some((t) => semVirgulas(t).includes(semVirgulas(p.resumo[lang])));
+      exigir(
+        modal !== '' && !comDescricao && !repete,
+        lang, `${c} (modal sem descrição nem a frase da linha)`, 'sem descrição',
+        modal === '' ? '(modal em falta)' : `${comDescricao ? 'com descrição' : 'sem descrição'}${repete ? ', repete a frase da linha' : ''}`,
+      );
     }
     // As features só aparecem na modal. Os projetos com case study já não a têm,
     // e as features deles ficam no canónico sem aparecer (caseStudies._fase4).
@@ -306,23 +362,13 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     const lede = um(pag, /<p class="case-lede">([\s\S]*?)<\/p>/);
     exigir(lede === cs.umaFrase[lang], lang, `${cc}.umaFrase`, cs.umaFrase[lang], lede ?? '(em falta)');
 
-    // Screenshot: os projetos com imagem mostram-na logo depois da umaFrase, com o
-    // alt do canónico; os outros não mostram imagem nenhuma, nem recurso.
+    // Fase 4.2a: as páginas de case study são só texto — nenhuma imagem, nenhuma
+    // figura. O screenshot continua a servir a imagem de partilha (og:image).
     const imgsPag = pag.match(/<img\b[^>]*>/g) || [];
-    if (p.imageAlt?.[lang] !== undefined) {
-      const fig = (pag.match(/<figure class="case-figure">([\s\S]*?)<\/figure>/) || ['', ''])[1];
-      const altFig = (fig.match(/<img\b[^>]*\balt="([^"]*)"/) || [])[1];
-      exigir(
-        imgsPag.length === 1 && altFig !== undefined && norm(altFig) === p.imageAlt[lang],
-        lang, `${cc} (screenshot)`, `1 imagem, alt "${p.imageAlt[lang]}"`, `${imgsPag.length} imagem(ns), alt ${altFig === undefined ? '(sem figura)' : `"${norm(altFig)}"`}`,
-      );
-      const iLede = pag.indexOf('<p class="case-lede">');
-      const iFig = pag.indexOf('<figure class="case-figure">');
-      const iSec = pag.indexOf('class="case-section"');
-      exigir(iLede > 0 && iFig > iLede && iFig < iSec, lang, `${cc} (screenshot depois da umaFrase)`, 'umaFrase, figura, secções', iFig < 0 ? '(sem figura)' : 'fora de ordem');
-    } else {
-      exigir(imgsPag.length === 0 && !pag.includes('<figure'), lang, `${cc} (sem screenshot: nada no lugar)`, 'nenhuma imagem nem figura', `${imgsPag.length} imagem(ns)`);
-    }
+    exigir(
+      imgsPag.length === 0 && !pag.includes('<figure'),
+      lang, `${cc} (sem imagens na página)`, 'nenhuma imagem nem figura', `${imgsPag.length} imagem(ns)${pag.includes('<figure') ? ', com figura' : ''}`,
+    );
 
     // Links que saíram da modal: demonstração e repositório, com os rótulos de
     // sempre — a lista exata quando o enunciado fixou os dois URLs.
@@ -357,7 +403,9 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       );
     }
     const ids = [...pag.matchAll(/<section id="([^"]+)" class="case-section"/g)].map((m) => m[1]);
-    const idsEsperados = CASE_SECOES.map((s) => s.id);
+    // "A minha parte" é opcional (só projetos de equipa): sem o campo, a secção não existe.
+    const secoesEsperadas = CASE_SECOES.filter((s) => cs[s.campo] !== undefined);
+    const idsEsperados = secoesEsperadas.map((s) => s.id);
     exigir(JSON.stringify(ids) === JSON.stringify(idsEsperados), lang, `${cc} (secções e ordem)`, idsEsperados.join(', '), ids.join(', ') || '(nenhuma)');
     const cmpParagrafos = (chave, texto, frag) => {
       const esperado = paragrafos(texto);
@@ -365,7 +413,7 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       exigir(achado.length === esperado.length, lang, `${chave} (parágrafos)`, String(esperado.length), String(achado.length));
       esperado.forEach((e, i) => exigir(achado[i] === e, lang, `${chave} ¶${i + 1}`, e, achado[i] ?? '(em falta)'));
     };
-    for (const { id, campo, titulo } of CASE_SECOES) {
+    for (const { id, campo, titulo } of secoesEsperadas) {
       const sec = (pag.match(new RegExp(`<section id="${id}" class="case-section"[\\s\\S]*?</section>`)) || [''])[0];
       const tituloSec = rotulos[titulo]?.[lang];
       if (tituloSec !== undefined) {

@@ -21,7 +21,8 @@ const caseStudy = z
     umaFrase: localized,
     contexto: localized,
     problema: localized,
-    minhaParte: localized,
+    // Só nos projetos de equipa (fase 4.2a). Sem o campo, a secção não aparece.
+    minhaParte: localized.optional(),
     decisoes: z.array(z.object({ titulo: localized, texto: localized }).strict()).min(1),
     correuMal: localized,
     resultado: localized,
@@ -40,7 +41,10 @@ const projects = defineCollection({
         title: localized,
         // O index.html legado não tem tagline para nenhum projeto: campo previsto, sem dados de origem.
         tagline: localized.optional(),
+        // A descrição longa só aparece nas modais dos projetos sem case study.
         description: localized,
+        // Uma frase: o que o projeto é. É o texto da linha na lista de projetos.
+        resumo: localized,
         features: z.array(localized).min(1),
 
         // Nomes próprios ficam iguais nas duas línguas; rótulos genéricos são traduzidos.
@@ -50,9 +54,10 @@ const projects = defineCollection({
         demoUrl: z.string().url().optional(),
         status: z.enum(['live', 'in-development', 'no-demo']),
 
-        // Onde o projeto aparece na pagina. Os "design" vao para a sub-seccao
-        // Design -> Codigo, depois dos restantes.
-        group: z.enum(['main', 'design']).default('main'),
+        // Texto de interface (chave do i18n) mostrado num botão "?" ao lado da
+        // etiqueta, na lista de projetos. Fase 4.2d: substitui o antigo "group",
+        // que separava os projetos de design numa sub-secção que deixou de existir.
+        nota: z.enum(['projects-design-text']).optional(),
 
         // Projeto alojado em servidor gratuito que precisa de aviso de arranque a frio.
         coldStart: z.boolean(),

@@ -6,12 +6,16 @@
     "en": "Gest - E-commerce & Stock Management"
   },
   "tagline": {
-    "pt": "Estágio ITGlee · Prova de Aptidão Profissional",
-    "en": "ITGlee internship · Secondary-school final project"
+    "pt": "Secundário · 2021",
+    "en": "Secondary school · 2021"
   },
   "description": {
     "pt": "Loja online de informática com gestão de armazém, construída em OutSystems durante o estágio na ITGlee e depois alargada como Prova de Aptidão Profissional. Catálogo e checkout para o cliente final, aplicação de stock para quem gere o inventário. O primeiro projeto em que tive de pensar em dois utilizadores ao mesmo tempo — quem compra e quem gere.",
     "en": "An online computer-hardware store with warehouse management, built in OutSystems during my internship at ITGlee and later extended as my secondary-school final project. Catalogue and checkout for the customer, a stock application for whoever runs the inventory. The first project where I had to design for two users at once — the buyer and the manager."
+  },
+  "resumo": {
+    "pt": "Loja online de informática com gestão de armazém, construída em OutSystems para a Prova de Aptidão Profissional.",
+    "en": "An online computer-hardware store with warehouse management, built in OutSystems for my secondary-school final project."
   },
   "features": [
     {
@@ -47,20 +51,16 @@
   },
   "caseStudy": {
     "umaFrase": {
-      "pt": "Uma loja online de informática com gestão de armazém, construída numa empresa durante o estágio e continuada até ao dia da apresentação.",
-      "en": "An online computer-hardware store with warehouse management, built inside a company during my internship and carried on until the day I presented it."
+      "pt": "O meu primeiro projeto grande, construído em OutSystems no último ano do secundário.",
+      "en": "My first large project, built in OutSystems in my final year of secondary school."
     },
     "contexto": {
-      "pt": "Estágio curricular na ITGlee, em 2021, continuado como Prova de Aptidão Profissional do ensino secundário até ao dia da apresentação. Construída em OutSystems.",
-      "en": "A curricular internship at ITGlee in 2021, continued as my secondary-school final project until presentation day. Built in OutSystems."
+      "pt": "Estágio curricular na ITGlee, em 2021. O projeto foi meu: comecei-o durante o estágio e continuei-o como Prova de Aptidão Profissional do ensino secundário, até ao dia da apresentação. Construído em OutSystems.",
+      "en": "A curricular internship at ITGlee in 2021. The project was my own: I started it during the internship and continued it as my secondary-school final project, right up to presentation day. Built in OutSystems."
     },
     "problema": {
       "pt": "Uma loja de informática tem dois utilizadores com necessidades opostas. O cliente quer procurar, comparar e comprar depressa, e não quer saber do que se passa por trás. Quem gere o armazém quer saber o que há, o que falta e o que está a sair, e não quer navegar numa loja para descobrir isso.\n\nServir os dois a partir da mesma informação, sem construir duas aplicações desligadas que teriam de ser mantidas em sincronia, era o problema real. A loja em si é a parte fácil.",
       "en": "A hardware store has two users with opposite needs. The customer wants to search, compare and buy quickly, and does not care what happens behind the scenes. Whoever runs the warehouse wants to know what is in stock, what is missing and what is moving, and does not want to browse a shop to find out.\n\nServing both from the same information, without building two disconnected applications that would have to be kept in sync, was the real problem. The store itself is the easy part."
-    },
-    "minhaParte": {
-      "pt": "O desenvolvimento da aplicação, do catálogo e do checkout até ao back-office de gestão de stock.",
-      "en": "Building the application, from the catalogue and checkout through to the stock-management back-office."
     },
     "decisoes": [
       {

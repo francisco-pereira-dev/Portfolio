@@ -1,6 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import type { Ui } from '../i18n';
 import site from '../data/site.json';
+// A fotografia voltou ao hero na fase 4.2a, no topo, junto ao nome. Continua em
+// assets/ na raiz; o Vite importa-a e o Astro otimiza-a.
+import avatar from '../../assets/images/avatar.jpg';
 
 interface Props {
   ui: Ui;
@@ -11,11 +15,17 @@ const { ui } = Astro.props;
 
 <section id="hero" class="hero-section">
   <div class="hero-content reveal">
-    {/* Primeiro elemento do hero de propósito: quem recruta precisa de saber
-        isto antes de qualquer outra coisa. */}
-    <p class="hero-badge">
-      <span class="hero-badge-dot" aria-hidden="true"></span>{ui['hero-badge']}
-    </p>
+    {/* Acima da dobra: nunca lazy, e com prioridade de carregamento. Mostrada a
+        200px (fase 4.2c); o dobro para ecrãs de alta densidade. */}
+    <Image
+      src={avatar}
+      alt={ui['a11y-avatar-alt']}
+      class="hero-avatar"
+      width={Math.min(400, avatar.width)}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
 
     {/* O ponto final a roxo é desenhado em CSS (::after), para o título ficar
         exatamente o texto do canónico. */}

@@ -4,27 +4,27 @@
     "items": [
       {
         "name": "TypeScript",
-        "proofs": [{ "repo": "Licas", "private": true }, { "repo": "MR.PIZZA" }, { "repo": "Catalogo-Diane-Arbus" }]
+        "proofs": [{ "rotulo": { "pt": "Licas", "en": "Licas" }, "projeto": "licas" }, { "rotulo": { "pt": "Mr. Pizza", "en": "Mr. Pizza" }, "projeto": "mr-pizza" }, { "rotulo": { "pt": "Diane Arbus", "en": "Diane Arbus" }, "projeto": "diane-arbus" }]
       },
       {
         "name": "JavaScript",
-        "proofs": [{ "repo": "3D-Analyzer" }, { "repo": "Portfolio" }, { "repo": "TI" }]
+        "proofs": [{ "rotulo": { "pt": "3D Analyzer", "en": "3D Analyzer" }, "projeto": "3d-analyzer" }, { "rotulo": { "pt": "Portfolio", "en": "Portfolio" }, "repo": "Portfolio" }, { "rotulo": { "pt": "Hotel Inteligente", "en": "Smart Hotel" }, "projeto": "hotel-inteligente" }]
       },
       {
         "name": "C++",
-        "proofs": [{ "repo": "3D-Analyzer" }, { "repo": "CadflowBankSystem" }]
+        "proofs": [{ "rotulo": { "pt": "3D Analyzer", "en": "3D Analyzer" }, "projeto": "3d-analyzer" }, { "rotulo": { "pt": "CadflowBankSystem", "en": "CadflowBankSystem" }, "projeto": "cadflow-bank-system" }]
       },
       {
         "name": "Java",
-        "proofs": [{ "repo": "DAE" }]
+        "proofs": [{ "rotulo": { "pt": "DAE", "en": "DAE" }, "projeto": "dae" }]
       },
       {
         "name": "PHP",
-        "proofs": [{ "repo": "Ainet2425" }, { "repo": "TI" }]
+        "proofs": [{ "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }, { "rotulo": { "pt": "Hotel Inteligente", "en": "Smart Hotel" }, "projeto": "hotel-inteligente" }]
       },
       {
         "name": "HTML5, CSS3",
-        "proofs": [{ "repo": "Portfolio" }, { "repo": "MR.PIZZA" }, { "repo": "Catalogo-Diane-Arbus" }]
+        "proofs": [{ "rotulo": { "pt": "Portfolio", "en": "Portfolio" }, "repo": "Portfolio" }, { "rotulo": { "pt": "Mr. Pizza", "en": "Mr. Pizza" }, "projeto": "mr-pizza" }, { "rotulo": { "pt": "Diane Arbus", "en": "Diane Arbus" }, "projeto": "diane-arbus" }]
       }
     ]
   },
@@ -33,27 +33,27 @@
     "items": [
       {
         "name": "React",
-        "proofs": [{ "repo": "Licas", "private": true }, { "repo": "MR.PIZZA" }, { "repo": "Catalogo-Diane-Arbus" }]
+        "proofs": [{ "rotulo": { "pt": "Licas", "en": "Licas" }, "projeto": "licas" }, { "rotulo": { "pt": "Mr. Pizza", "en": "Mr. Pizza" }, "projeto": "mr-pizza" }, { "rotulo": { "pt": "Diane Arbus", "en": "Diane Arbus" }, "projeto": "diane-arbus" }]
       },
       {
         "name": "Vue 3",
-        "proofs": [{ "repo": "3D-Analyzer" }]
+        "proofs": [{ "rotulo": { "pt": "3D Analyzer", "en": "3D Analyzer" }, "projeto": "3d-analyzer" }]
       },
       {
         "name": "Astro",
-        "proofs": [{ "repo": "Portfolio" }]
+        "proofs": [{ "rotulo": { "pt": "Portfolio", "en": "Portfolio" }, "repo": "Portfolio" }]
       },
       {
         "name": "Laravel",
-        "proofs": [{ "repo": "Ainet2425" }]
+        "proofs": [{ "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }]
       },
       {
         "name": "Three.js / WebGL",
-        "proofs": [{ "repo": "3D-Analyzer" }]
+        "proofs": [{ "rotulo": { "pt": "3D Analyzer", "en": "3D Analyzer" }, "projeto": "3d-analyzer" }]
       },
       {
         "name": "MFC",
-        "proofs": [{ "repo": "CadflowBankSystem" }]
+        "proofs": [{ "rotulo": { "pt": "CadflowBankSystem", "en": "CadflowBankSystem" }, "projeto": "cadflow-bank-system" }]
       }
     ]
   },
@@ -62,15 +62,15 @@
     "items": [
       {
         "name": "PostgreSQL / Supabase",
-        "proofs": [{ "repo": "Licas", "private": true }]
+        "proofs": [{ "rotulo": { "pt": "Licas", "en": "Licas" }, "projeto": "licas" }]
       },
       {
         "name": "MySQL",
-        "proofs": [{ "repo": "Ainet2425" }]
+        "proofs": [{ "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }]
       },
       {
         "name": "REST APIs",
-        "proofs": [{ "repo": "DAE" }, { "repo": "Ainet2425" }, { "repo": "TI" }]
+        "proofs": [{ "rotulo": { "pt": "DAE", "en": "DAE" }, "projeto": "dae" }, { "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }, { "rotulo": { "pt": "Hotel Inteligente", "en": "Smart Hotel" }, "projeto": "hotel-inteligente" }]
       }
     ]
   },
@@ -79,11 +79,11 @@
     "items": [
       {
         "name": "Docker",
-        "proofs": [{ "repo": "DAE" }]
+        "proofs": [{ "rotulo": { "pt": "DAE", "en": "DAE" }, "projeto": "dae" }]
       },
       {
         "name": "Vite",
-        "proofs": [{ "repo": "Licas", "private": true }, { "repo": "Ainet2425" }, { "repo": "DAE" }]
+        "proofs": [{ "rotulo": { "pt": "Licas", "en": "Licas" }, "projeto": "licas" }, { "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }, { "rotulo": { "pt": "DAE", "en": "DAE" }, "projeto": "dae" }]
       },
       {
         "name": "Git",
@@ -91,7 +91,7 @@
       },
       {
         "name": "OutSystems",
-        "proofs": [{ "repo": "PAP" }]
+        "proofs": [{ "rotulo": { "pt": "Gest", "en": "Gest" }, "projeto": "gest" }]
       }
     ]
   }

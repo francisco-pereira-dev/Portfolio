@@ -6,12 +6,16 @@
     "en": "Licas — Online ordering platform"
   },
   "tagline": {
-    "pt": "Cliente real · Em desenvolvimento",
-    "en": "Real client · In development"
+    "pt": "Cliente real",
+    "en": "Real client"
   },
   "description": {
     "pt": "Plataforma de encomendas online para uma pastelaria artesanal, desenvolvida de raiz como developer contratado. Loja para o cliente final e back-office completo para o negócio: catálogo com alergénios, encomendas e pedidos de orçamento, cupões, contas de cliente com níveis de permissão e notificações automáticas para a gestão.",
     "en": "An online ordering platform for an artisan pastry shop, built from scratch as the contracted developer. Customer-facing storefront plus a full back-office: allergen-aware catalogue, orders and quote requests, coupons, customer accounts with permission levels, and automated notifications for the business."
+  },
+  "resumo": {
+    "pt": "Plataforma de encomendas online para uma pastelaria artesanal, construída de raiz como developer contratado.",
+    "en": "An online ordering platform for an artisan pastry shop, built from scratch as the contracted developer."
   },
   "features": [
     {
@@ -68,10 +72,6 @@
       "pt": "Uma encomenda de pastelaria artesanal não é uma compra de supermercado. Parte dos pedidos são bolos personalizados, que precisam de orçamento antes de existir preço; os restantes são produtos de catálogo com preço fixo. Há alergénios que têm de ser declarados. Há épocas em que o volume dispara e períodos em que a loja fecha. E há uma pessoa a gerir isto tudo, que não é técnica e não pode ter medo de carregar num botão.\n\nO sistema tinha de suportar dois fluxos de compra diferentes sem se transformar em duas aplicações separadas.",
       "en": "Ordering from an artisan pastry shop is not the same as buying at a supermarket. Some orders are custom cakes that need a quote before a price exists; the rest are catalogue products with fixed prices. Allergens have to be declared. There are peak seasons and periods when the shop closes. And there is one person running all of it, who is not technical and cannot be afraid of pressing a button.\n\nThe system had to support two different purchase flows without turning into two separate applications."
     },
-    "minhaParte": {
-      "pt": "Tudo. Desde o esquema da base de dados até ao texto dos botões.",
-      "en": "All of it. From the database schema to the wording on the buttons."
-    },
     "decisoes": [
       {
         "titulo": {
@@ -115,12 +115,12 @@
       }
     ],
     "correuMal": {
-      "pt": "O sistema de cupões deixava reutilizar um cupão de uso único. Bastava cancelar a encomenda e criar outra: a verificação em código via o cupão como disponível outra vez.\n\nA tentação foi acrescentar mais uma condição ao código. Não resolvia — duas operações em simultâneo continuariam a passar as duas pela verificação antes de qualquer uma escrever. Fechei-o com uma restrição de unicidade na própria base de dados, que torna o segundo resgate impossível independentemente de quantos pedidos cheguem ao mesmo tempo.\n\nFoi a primeira vez que percebi, a sério, a diferença entre validar e garantir.",
-      "en": "The coupon system allowed a single-use coupon to be used again. All it took was cancelling the order and creating another: the check in code saw the coupon as available once more.\n\nThe temptation was to add one more condition to the code. It would not have solved it — two simultaneous operations would still both pass the check before either one wrote anything. I closed it with a uniqueness constraint in the database itself, which makes a second redemption impossible no matter how many requests arrive at the same time.\n\nIt was the first time I properly understood the difference between validating and guaranteeing."
+      "pt": "O maior desafio não foi técnico.\n\nAo longo do desenvolvimento, o cliente foi mudando de ideias: coisas que pedia e que depois deixavam de fazer sentido, funcionalidades que queria retirar, outras que apareciam a meio. Muitas vezes tive de ser eu a propor como é que uma ideia podia funcionar — algumas propostas ele aceitava, outras não eram o que tinha em mente.\n\nA parte difícil foi perceber o que o cliente queria quando o que ele descrevia não era bem isso. Aprendi a mostrar em vez de perguntar: montar a coisa depressa, pô-la à frente dele, e deixar que fosse o que estava no ecrã a corrigir o que faltava explicar.\n\nNo fim correu bem e o sistema ficou como ele queria.",
+      "en": "The hardest part was not technical.\n\nThrough the build, the client kept changing his mind: things he had asked for that stopped making sense, features he wanted removed, others that appeared halfway through. Often it fell to me to propose how an idea could work — some proposals he accepted, others were not what he had in mind.\n\nThe difficulty was understanding what the client wanted when what he described was not quite it. I learned to show rather than ask: build the thing quickly, put it in front of him, and let what was on the screen correct what he had not managed to explain.\n\nIt ended well, and the system turned out the way he wanted it."
     },
     "resultado": {
-      "pt": "Em fase final de preparação para lançamento. O sistema está construído e a passar por auditoria de segurança da base de dados, testes de cenários e uma lista de verificação de produção antes de abrir ao público.",
-      "en": "In the final stretch before launch. The system is built and going through a database security audit, scenario testing and a production checklist before it opens to the public."
+      "pt": "Concluído e a aguardar autorização do cliente para publicar. O sistema está pronto; a decisão de abrir ao público é dele.",
+      "en": "Finished and waiting for the client's go-ahead to publish. The system is ready; the decision to open it to the public is his."
     },
     "fariaDiferente": {
       "pt": "Pensaria no modelo de permissões antes de escrever o primeiro ecrã, e não à medida que as funcionalidades apareciam. Voltar atrás para acrescentar regras de acesso a um sistema já construído custou-me várias reescritas que uma tarde de desenho à frente teria evitado.",
