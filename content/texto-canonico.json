@@ -18,7 +18,9 @@
       "fase-4.2d": "enunciado da fase 4.2d (2026-09-17): Sobre com dois parágrafos; Universidade de Leiria e Oeste no hero e na meta descrição; contextos do DAE, AINET e Hotel sem o tamanho da equipa; fim da sub-secção Design → Código. Respostas às colisões: aria-label \"Mais informação\" / \"More information\"; provas \"Portfolio\" continuam no GitHub; rótulos das provas mantêm os nomes dos repositórios.",
       "fase-5": "enunciado da fase 5 (2026-09-17): rótulos das provas das competências; \"Saltar para o conteúdo\" / \"Skip to content\". Resposta às colisões: \"Fechar\" / \"Close\" no botão das modais.",
       "fase-5.1": "enunciado da fase 5.1 (2026-09-17): nome acessível do seletor de idioma, \"Mudar para inglês\" / \"Switch to Portuguese\"; texto alternativo da foto, \"Fotografia de Francisco Pereira\" / \"Photograph of Francisco Pereira\"",
-      "fase-5.2": "enunciado da fase 5.2 (2026-09-17): todas as provas das competências levam à linha do projeto na secção Projetos; \"todos\" à secção; \"Portfolio\" continua no GitHub. Só muda o destino, nenhum texto."
+      "fase-5.2": "enunciado da fase 5.2 (2026-09-17): todas as provas das competências levam à linha do projeto na secção Projetos; \"todos\" à secção; \"Portfolio\" continua no GitHub. Só muda o destino, nenhum texto.",
+      "fase-9": "enunciado da fase 9 (2026-09-18): o CV como página do site (/cv e /en/cv) — todo o texto da secção cv, os títulos das secções do CV e \"Descarregar PDF\" / \"Download PDF\"; o botão do hero passa a \"Ver CV\" / \"View CV\". Nas respostas às colisões: o título da página, \"CV — Francisco Pereira\", nas duas línguas.",
+      "fase-10": "enunciado da fase 10 (2026-09-18): no CV, a última frase do resumo e a linha final dos projetos, nas duas línguas — o CV dizia que todos os projetos estão documentados no site, e o Portfolio não tem linha nem case study, e o Mr. Pizza e o Diane Arbus só têm modal."
     },
     "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true.",
     "extracao_legado": "Do e0a67bc: PT do conteúdo dos elementos com data-translate (e do data-tooltip), EN do objeto translations.en; aria-label do menu e do tema do setLanguage do script.js. Texto e atributos que o site nunca traduzia ficam com o mesmo valor nas duas línguas, como eram servidos. Só entrou o que coincide com os dados de hoje; a única alteração aplicada foi a autorizada (\"and\" -> \"e\" na primeira feature PT do Diane Arbus)."
@@ -71,8 +73,9 @@
         "en": "View projects"
       },
       "hero-btn-cv": {
-        "pt": "Descarregar CV",
-        "en": "Download CV"
+        "_origem": "fase-9",
+        "pt": "Ver CV",
+        "en": "View CV"
       },
       "hero-btn-contact": {
         "pt": "Falar comigo",
@@ -302,6 +305,41 @@
         "_origem": "legado e0a67bc",
         "pt": "Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!",
         "en": "Note: This project is hosted on a free server. If there have been no recent accesses, the server may take 1 to 2 minutes to start up on the first click. Thank you for your patience!"
+      }
+    },
+    "cv": {
+      "_origem": "fase-9 (cv-meta-title: resposta às colisões da fase 9)",
+      "cv-heading-projects": {
+        "pt": "Projetos",
+        "en": "Projects"
+      },
+      "cv-heading-experience": {
+        "pt": "Experiência",
+        "en": "Experience"
+      },
+      "cv-heading-education": {
+        "pt": "Educação",
+        "en": "Education"
+      },
+      "cv-heading-skills": {
+        "pt": "Competências",
+        "en": "Skills"
+      },
+      "cv-heading-languages": {
+        "pt": "Idiomas",
+        "en": "Languages"
+      },
+      "cv-heading-interests": {
+        "pt": "Interesses",
+        "en": "Interests"
+      },
+      "cv-btn-download": {
+        "pt": "Descarregar PDF",
+        "en": "Download PDF"
+      },
+      "cv-meta-title": {
+        "pt": "CV — Francisco Pereira",
+        "en": "CV — Francisco Pereira"
       }
     }
   },
@@ -1586,6 +1624,213 @@
     "_fase4.2a": "Desde a fase 4.2a: o CadflowBankSystem tem case study (7 com página, 2 sem). \"A minha parte\" só existe em projetos de equipa: dae, ainet e hotel-inteligente. As páginas de case study não mostram imagens. Cada projeto tem uma frase (resumo) na lista da página inicial; a descrição longa só aparece nas modais dos 2 projetos sem case study.",
     "_fase4.2b": "Desde a fase 4.2b as modais do Mr. Pizza e do Diane Arbus não mostram a descrição longa: a frase da linha é a descrição. A description continua nos dados de todos os projetos como texto aprovado, mas não aparece no site."
   },
+  "cv": {
+    "_origem": "fase-9; a última frase do resumo e a linha \"Mais seis projetos\": fase-10",
+    "_separadores": "Cada linha do enunciado foi partida nas suas partes, cortando só o \" — \" que as separa (como o \" · \" do rodapé e das tecnologias, na extração original); a página e o PDF voltam a pô-lo. O \" · \" dentro de uma parte (tecnologias, papel, idiomas) faz parte do texto. As linhas partidas a meio de uma frase no enunciado foram juntas com um espaço.",
+    "_nome": "O enunciado dá o nome uma vez, na parte portuguesa; é o mesmo nas duas línguas. O email e os três links não são texto do canónico: vêm do src/data/site.json e do astro.config.mjs (site).",
+    "nome": {
+      "pt": "Francisco Pereira",
+      "en": "Francisco Pereira"
+    },
+    "cargo": {
+      "pt": "Developer full-stack",
+      "en": "Full-stack Developer"
+    },
+    "localidade": {
+      "pt": "Figueira da Foz, Portugal",
+      "en": "Figueira da Foz, Portugal"
+    },
+    "fotoAlt": {
+      "pt": "Fotografia de Francisco Pereira",
+      "en": "Photograph of Francisco Pereira"
+    },
+    "resumo": {
+      "pt": "Comecei a programar no 10.º ano. Sou finalista de Engenharia Informática, em horário pós-laboral, e trabalho em web full-stack — do modelo de dados à interface — e em C++ nativo. O meu trabalho está documentado em franciscopereira.dev, com as decisões técnicas e o que correu mal.",
+      "en": "I started programming at fifteen. I am in the final year of a Computer Engineering degree, taken in evening classes, and I work in full-stack web — from the data model to the interface — and in native C++. My work is documented at franciscopereira.dev, with the technical decisions and what went wrong."
+    },
+    "projetos": [
+      {
+        "titulo": {
+          "pt": "Licas",
+          "en": "Licas"
+        },
+        "descricao": {
+          "pt": "plataforma de encomendas online para uma pastelaria artesanal, com back-office. Sozinho, de ponta a ponta.",
+          "en": "online ordering platform for an artisan pastry shop, with a full back-office. Built alone, end to end."
+        },
+        "tech": {
+          "pt": "React · TypeScript · Supabase · PostgreSQL · Vite",
+          "en": "React · TypeScript · Supabase · PostgreSQL · Vite"
+        },
+        "quando": {
+          "pt": "cliente real, 2026 – em curso",
+          "en": "real client, 2026 – ongoing"
+        }
+      },
+      {
+        "titulo": {
+          "pt": "CadflowBankSystem",
+          "en": "CadflowBankSystem"
+        },
+        "descricao": {
+          "pt": "sistema bancário de secretária, com o domínio separado da interface. Desafio técnico proposto por uma empresa, resolvido sozinho em cerca de um mês.",
+          "en": "desktop banking system with the domain separated from the interface. Technical challenge set by a company, solved alone in about a month."
+        },
+        "tech": {
+          "pt": "C++ · MFC · Windows",
+          "en": "C++ · MFC · Windows"
+        },
+        "quando": {
+          "pt": "2026",
+          "en": "2026"
+        }
+      },
+      {
+        "titulo": {
+          "pt": "3D Analyzer",
+          "en": "3D Analyzer"
+        },
+        "descricao": {
+          "pt": "inspetor de malhas 3D: motor de cálculo em C++ nativo e painel web que mostra o resultado.",
+          "en": "3D mesh inspector: a native C++ computation engine and a web dashboard that shows the result."
+        },
+        "tech": {
+          "pt": "C++ · Vue 3 · Three.js · WebGL",
+          "en": "C++ · Vue 3 · Three.js · WebGL"
+        },
+        "quando": {
+          "pt": "projeto pessoal, junho 2026",
+          "en": "personal project, June 2026"
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Portfolio",
+          "en": "Portfolio"
+        },
+        "descricao": {
+          "pt": "franciscopereira.dev: site estático em duas línguas, com auditorias de acessibilidade e verificação automática do texto publicado.",
+          "en": "franciscopereira.dev: a static site in two languages, with accessibility audits and automated verification of the published text."
+        },
+        "tech": {
+          "pt": "Astro · TypeScript · Playwright",
+          "en": "Astro · TypeScript · Playwright"
+        },
+        "quando": {
+          "pt": "2026",
+          "en": "2026"
+        }
+      }
+    ],
+    "projetosMais": {
+      "pt": "Mais seis projetos em franciscopereira.dev",
+      "en": "Six more projects at franciscopereira.dev"
+    },
+    "experiencia": [
+      {
+        "funcao": {
+          "pt": "Estagiário",
+          "en": "Intern"
+        },
+        "empresa": {
+          "pt": "ITGlee, Figueira da Foz",
+          "en": "ITGlee, Figueira da Foz"
+        },
+        "papel": {
+          "pt": "Programador de aplicações · OutSystems",
+          "en": "Application developer · OutSystems"
+        },
+        "quando": {
+          "pt": "jan. – mai. 2021",
+          "en": "Jan – May 2021"
+        },
+        "descricao": {
+          "pt": "Loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
+          "en": "Online computer-hardware store with warehouse management, presented as my final secondary-school project."
+        }
+      }
+    ],
+    "educacao": [
+      {
+        "curso": {
+          "pt": "Licenciatura em Engenharia Informática",
+          "en": "BSc in Computer Engineering"
+        },
+        "escola": {
+          "pt": "Universidade de Leiria e Oeste",
+          "en": "Universidade de Leiria e Oeste"
+        },
+        "quando": {
+          "pt": "set. 2021 – em curso, conclusão prevista em 2026",
+          "en": "Sep 2021 – in progress, expected 2026"
+        }
+      },
+      {
+        "curso": {
+          "pt": "Curso Profissional de Informática (Sistemas)",
+          "en": "Vocational Course in Computing (Systems)"
+        },
+        "escola": {
+          "pt": "Escola Secundária Dr. Joaquim de Carvalho, Figueira da Foz",
+          "en": "Escola Secundária Dr. Joaquim de Carvalho, Figueira da Foz"
+        },
+        "quando": {
+          "pt": "2018 – 2021",
+          "en": "2018 – 2021"
+        }
+      }
+    ],
+    "competencias": [
+      {
+        "rotulo": {
+          "pt": "Linguagens",
+          "en": "Languages"
+        },
+        "valor": {
+          "pt": "TypeScript, JavaScript, C++, Java, PHP, HTML/CSS",
+          "en": "TypeScript, JavaScript, C++, Java, PHP, HTML/CSS"
+        }
+      },
+      {
+        "rotulo": {
+          "pt": "Frameworks e bibliotecas",
+          "en": "Frameworks and libraries"
+        },
+        "valor": {
+          "pt": "React, Vue 3, Astro, Laravel, Three.js, MFC",
+          "en": "React, Vue 3, Astro, Laravel, Three.js, MFC"
+        }
+      },
+      {
+        "rotulo": {
+          "pt": "Dados",
+          "en": "Data"
+        },
+        "valor": {
+          "pt": "PostgreSQL/Supabase, MySQL, REST APIs",
+          "en": "PostgreSQL/Supabase, MySQL, REST APIs"
+        }
+      },
+      {
+        "rotulo": {
+          "pt": "Ferramentas",
+          "en": "Tools"
+        },
+        "valor": {
+          "pt": "Docker, Vite, Git, OutSystems, Playwright",
+          "en": "Docker, Vite, Git, OutSystems, Playwright"
+        }
+      }
+    ],
+    "idiomas": {
+      "pt": "Português (língua materna) · Inglês (B2)",
+      "en": "Portuguese (native) · English (B2)"
+    },
+    "interesses": {
+      "pt": "Ginásio e kickboxing.",
+      "en": "Gym and kickboxing."
+    }
+  },
   "retirado": {
     "_sobre": "Texto aprovado que deixou de aparecer no site. Fica aqui para o registo; o check:texto não o procura.",
     "project-btn-view-more": {
@@ -1824,6 +2069,25 @@
         "pt": "Francisco Pereira Avatar",
         "en": "Francisco Pereira Avatar",
         "_motivo": "fase 5.1: \"Avatar\" não descreve a imagem a quem não a vê"
+      }
+    },
+    "fase-9": {
+      "hero-btn-cv": {
+        "pt": "Descarregar CV",
+        "en": "Download CV",
+        "_motivo": "fase 9: o CV passou a ser uma página do site; o botão do hero leva a ela (\"Ver CV\"), e descarregar o PDF é o botão dessa página"
+      }
+    },
+    "fase-10": {
+      "cv.resumo (última frase)": {
+        "pt": "Cada projeto abaixo está documentado em franciscopereira.dev, com as decisões técnicas e o que correu mal.",
+        "en": "Every project below is documented at franciscopereira.dev, with the technical decisions and what went wrong.",
+        "_motivo": "fase 10: afirmação falsa — o Portfolio não tem linha nem case study no site, e o Mr. Pizza e o Diane Arbus só têm modal"
+      },
+      "cv.projetosMais": {
+        "pt": "Mais seis projetos, com o contexto e as decisões de cada um, em franciscopereira.dev",
+        "en": "Six more projects, each with its context and decisions, at franciscopereira.dev",
+        "_motivo": "fase 10: afirmação falsa — o Portfolio não tem linha nem case study no site, e o Mr. Pizza e o Diane Arbus só têm modal"
       }
     }
   }
