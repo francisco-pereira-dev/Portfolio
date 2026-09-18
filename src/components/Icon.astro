@@ -5,9 +5,10 @@
  * Substitui a fonte Devicon, que custava 126,6 KB de CSS e 11,7 MB de ficheiros
  * de fonte (sem WOFF2, com font-display: block) para desenhar 15 glifos.
  *
- * Os SVGs em src/icons/ são os oficiais do Devicon (licença MIT), com as
- * cores de marca substituídas por currentColor: a fonte renderizava monocromático,
- * herdando a propriedade `color`, e é essa a aparência a preservar.
+ * Os SVGs em src/icons/ são os oficiais do Devicon (licença MIT — a atribuição e o
+ * texto da licença estão em docs/LICENCAS.md), com as cores de marca substituídas
+ * por currentColor: a fonte renderizava monocromático, herdando a propriedade
+ * `color`, e é essa a aparência a preservar.
  *
  * O dimensionamento continua a vir do `font-size` do contexto, via `width: 1em`
  * no CSS, para que as regras .skill-icon, .overlay-social-icon e
@@ -21,10 +22,9 @@ const ficheiros = import.meta.glob<string>('../icons/*.svg', {
 
 interface Props {
   name: string;
-  class?: string;
 }
 
-const { name, class: className } = Astro.props;
+const { name } = Astro.props;
 
 const chave = `../icons/${name}.svg`;
 const bruto = ficheiros[chave];
@@ -39,12 +39,8 @@ if (!bruto) {
   );
 }
 
-const classes = ['icon', className].filter(Boolean).join(' ');
 // Decorativo: o texto ao lado (ou o aria-label do elemento pai) já nomeia o ícone.
-const svg = bruto.replace(
-  '<svg',
-  `<svg class="${classes}" aria-hidden="true" focusable="false"`
-);
+const svg = bruto.replace('<svg', '<svg class="icon" aria-hidden="true" focusable="false"');
 ---
 
 <Fragment set:html={svg} />

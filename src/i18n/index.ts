@@ -12,8 +12,6 @@ export interface Localized {
   en: string;
 }
 
-export const LANGS: Lang[] = ['pt', 'en'];
-
 /** URL da raiz de cada língua. O PT vive em /, o EN em /en/. */
 export const localeHref: Record<Lang, string> = {
   pt: '/',
