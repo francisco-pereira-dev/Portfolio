@@ -7,7 +7,7 @@
   "hero-subtitle": "Developer full-stack",
   "hero-paragraph": "Finalista de Engenharia Informática na Universidade de Leiria e Oeste.",
   "hero-btn-projects": "Ver projetos",
-  "hero-btn-cv": "Descarregar CV",
+  "hero-btn-cv": "Ver CV",
   "hero-btn-contact": "Falar comigo",
   "about-heading": "Sobre mim",
   "about-p1": "Comecei a programar no 10.º ano e nunca mais parei. O que era curiosidade — perceber o que acontecia do outro lado do ecrã — tornou-se a forma como resolvo problemas.",
@@ -53,5 +53,13 @@
   "a11y-back-to-top": "Voltar ao topo",
   "a11y-more-info": "Mais informação",
   "a11y-skip-to-content": "Saltar para o conteúdo",
-  "a11y-close": "Fechar"
+  "a11y-close": "Fechar",
+  "cv-heading-projects": "Projetos",
+  "cv-heading-experience": "Experiência",
+  "cv-heading-education": "Educação",
+  "cv-heading-skills": "Competências",
+  "cv-heading-languages": "Idiomas",
+  "cv-heading-interests": "Interesses",
+  "cv-btn-download": "Descarregar PDF",
+  "cv-meta-title": "CV — Francisco Pereira"
 }

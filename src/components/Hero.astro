@@ -1,16 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import type { Ui } from '../i18n';
-import site from '../data/site.json';
+import type { Lang, Ui } from '../i18n';
+import { cvHref } from '../lib/cv';
 // A fotografia voltou ao hero na fase 4.2a, no topo, junto ao nome. Continua em
 // assets/ na raiz; o Vite importa-a e o Astro otimiza-a.
 import avatar from '../../assets/images/avatar.jpg';
 
 interface Props {
   ui: Ui;
+  lang: Lang;
 }
 
-const { ui } = Astro.props;
+const { ui, lang } = Astro.props;
 ---
 
 <section id="hero" class="hero-section">
@@ -33,12 +34,11 @@ const { ui } = Astro.props;
     <p class="hero-subtitle">{ui['hero-subtitle']}</p>
     <p class="hero-paragraph">{ui['hero-paragraph']}</p>
 
-    {/* Um só botão preenchido; os outros dois são links. */}
+    {/* Um só botão preenchido; os outros dois são links. Fase 9: o do CV leva à
+        página /cv (ou /en/cv), na mesma língua; é lá que se descarrega o PDF. */}
     <div class="hero-buttons">
       <a href="#projects" class="btn btn-primary">{ui['hero-btn-projects']}</a>
-      <a href={`/${site.cvPath}`} target="_blank" rel="noopener noreferrer" download class="text-link"
-        >{ui['hero-btn-cv']}</a
-      >
+      <a href={cvHref(lang)} class="text-link">{ui['hero-btn-cv']}</a>
       <a href="#contacts" class="text-link">{ui['hero-btn-contact']}</a>
     </div>
   </div>

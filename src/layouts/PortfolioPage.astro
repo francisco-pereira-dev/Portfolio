@@ -40,7 +40,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
   {/* id e tabindex: destino do link "Saltar para o conteúdo" (fase 5). */}
   <main id="conteudo" tabindex="-1">
-    <Hero ui={ui} />
+    <Hero ui={ui} lang={lang} />
     <About ui={ui} />
     <Skills ui={ui} lang={lang} />
     <Projects projects={projects} lang={lang} ui={ui} />

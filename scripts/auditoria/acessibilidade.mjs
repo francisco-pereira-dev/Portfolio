@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * npm run audit:a11y — auditoria de acessibilidade das 16 páginas (as duas línguas).
+ * npm run audit:a11y — auditoria de acessibilidade das 18 páginas (as duas línguas):
+ * as iniciais, os 7 case studies e o CV, lidas do sitemap.
  *
  * Corre depois de `npm run build`. Sai com código 1 se houver alguma falha.
  *
@@ -17,9 +18,15 @@
  *    - o tema é o do sistema, e o claro tem os mesmos valores de html.light-mode;
  *    - a navegação sem JavaScript aparece no cabeçalho (> 1180px) ou antes do
  *      rodapé, sem sobreposições, e os links levam às secções;
- *    - o idioma, "Voltar aos projetos", "Ver mais" e o link de saltar funcionam;
+ *    - o idioma, "Voltar aos projetos", "Ver mais", o link de saltar e o
+ *      "Descarregar PDF" do CV funcionam;
  *    - sem scroll horizontal e contraste do texto (o axe não corre sem
  *      JavaScript na página: fica à espera para sempre).
+ * 3. O CV (fase 9), nos dois temas, a 1440px, a 375px e em impressão:
+ *    - o rótulo mais comprido das competências ("Frameworks e bibliotecas") não
+ *      encosta ao valor: 8px ou mais entre os dois, ou o rótulo por cima;
+ *    - na impressão, o fundo é branco, os elementos do ecrã estão escondidos e o
+ *      texto tem contraste de 4,5:1 ou mais.
  *
  * Opções: --capturas guarda capturas em node_modules/.cache/auditoria.
  */
@@ -192,7 +199,7 @@ for (const tema of ['dark', 'light']) for (const largura of [1440, 900, 375]) {
     if (x.scroll) r.falha(`${onde}: scroll horizontal`);
     const navCerta = x.umaNavVisivel && (navNoTopo ? x.controlos['navegação no cabeçalho'] === 'visível' : x.controlos['navegação antes do rodapé'] === 'visível');
     if (!navCerta) r.falha(`${onde}: navegação sem JavaScript no sítio errado`);
-    controlos[`${inicial(u) ? 'página inicial' : 'case study'}, ${navNoTopo ? 'largo' : 'estreito'}`] = x.controlos;
+    controlos[`${inicial(u) ? 'página inicial' : u.endsWith('/cv/') ? 'CV' : 'case study'}, ${navNoTopo ? 'largo' : 'estreito'}`] = x.controlos;
     // Sem axe: o axe corre dentro da página, e com o JavaScript desligado nunca
     // arranca (fica à espera para sempre). Aqui medem-se a estrutura, o que está
     // visível e o contraste; o axe faz o resto com JavaScript, acima.
@@ -208,7 +215,7 @@ for (const tema of ['dark', 'light']) for (const largura of [1440, 900, 375]) {
   // Navegação por links, sem JavaScript.
   if (largura !== 900) {
     const sel = navNoTopo ? '.nav-sem-js-topo a' : '.nav-sem-js-fundo a';
-    const outraLingua = { '/': '/en/', '/en/': '/', '/projetos/dae/': '/en/projects/dae/', '/en/projects/dae/': '/projetos/dae/' };
+    const outraLingua = { '/': '/en/', '/en/': '/', '/projetos/dae/': '/en/projects/dae/', '/en/projects/dae/': '/projetos/dae/', '/cv/': '/en/cv/', '/en/cv/': '/cv/' };
     for (const casa of Object.keys(outraLingua)) {
       const onde = `sem JS ${tema} ${largura}px ${casa}`;
       for (let i = 0; i < 4; i++) {
@@ -228,12 +235,60 @@ for (const tema of ['dark', 'light']) for (const largura of [1440, 900, 375]) {
         if (primeiro !== 'skip-link') r.falha(`${onde}: o 1.º Tab foi para "${primeiro}"`);
         await Promise.all([page.waitForNavigation(), page.click('#projeto-dae .project-case-link')]);
         if (!new URL(page.url()).pathname.includes('/dae/')) r.falha(`${onde}: "Ver mais" levou a ${page.url()}`);
+      } else if (casa.endsWith('/cv/')) {
+        // Sem JavaScript o PDF descarrega-se na mesma: é um link com download.
+        const pdf = await page.evaluate(() => { const a = document.querySelector('.cv-download'); return a?.hasAttribute('download') ? a.getAttribute('href') : null; });
+        const resposta = pdf ? await page.request.head(BASE + pdf) : null;
+        if (!resposta || resposta.status() !== 200 || !resposta.headers()['content-type']?.includes('pdf')) r.falha(`${onde}: "Descarregar PDF" ${pdf ?? '(sem link com download)'} → ${resposta ? resposta.status() : '—'}`);
       } else {
         await Promise.all([page.waitForNavigation(), page.click('.case-back')]);
         if (new URL(page.url()).hash !== '#projects') r.falha(`${onde}: "Voltar aos projetos" levou a ${page.url()}`);
       }
     }
   }
+  await ctx.close();
+}
+
+// ---------------------------------------------------------------- 3. O CV
+// A grelha das competências: com um rótulo de min-width, "Frameworks e bibliotecas"
+// transbordava e encostava ao valor. Mede-se o texto do rótulo (e não a caixa, que
+// pode ser mais estreita do que ele) até ao início do valor. E a impressão, que tem
+// de ser branca seja qual for o tema, sem nada do ecrã.
+console.log('\n== CV: grelha das competências e impressão (dois temas; 1440px, 375px e impressão)');
+const paginasCv = urls.filter((u) => u.endsWith('/cv/'));
+const medirGrelha = () => [...document.querySelectorAll('.cv-competencias dt')].map((dt) => {
+  const intervalo = document.createRange();
+  intervalo.selectNodeContents(dt);
+  const t = intervalo.getBoundingClientRect(), d = dt.nextElementSibling.getBoundingClientRect();
+  const mesmaLinha = t.top < d.bottom && d.top < t.bottom;
+  return { rotulo: dt.textContent.trim(), espaco: mesmaLinha ? Math.round((d.left - t.right) * 10) / 10 : null, porCima: t.bottom <= d.top + 1 };
+});
+const ESCONDIDOS_NA_IMPRESSAO = ['.skip-link', '.navbar', '.overlay-menu', '.theme-switch', '.nav-sem-js', '.site-footer', '.back-to-top', '.cv-acoes'];
+for (const tema of ['dark', 'light']) for (const [largura, media] of [[1440, 'screen'], [375, 'screen'], [688, 'print']]) {
+  const ctx = await contextoComTema(browser, tema, { viewport: { width: largura, height: 900 }, reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  const espacos = [];
+  let minimo = Infinity;
+  for (const u of paginasCv) {
+    const onde = `CV ${tema} ${media === 'print' ? 'impressão' : `${largura}px`} ${u}`;
+    await page.goto(BASE + u, { waitUntil: 'load' });
+    await page.emulateMedia({ media });
+    await page.evaluate(() => document.fonts.ready);
+    for (const g of await page.evaluate(medirGrelha)) {
+      if (g.espaco === null ? !g.porCima : g.espaco < 8) r.falha(`${onde}: "${g.rotulo}" encosta ao valor (${g.espaco === null ? 'sobreposto' : `${g.espaco}px`})`);
+      if (/^Frameworks/.test(g.rotulo)) espacos.push(g.espaco === null ? 'por cima do valor' : `a ${g.espaco}px do valor`);
+    }
+    if (media === 'print') {
+      const p = await page.evaluate((sels) => ({
+        fundo: [getComputedStyle(document.documentElement).backgroundColor, getComputedStyle(document.body).backgroundColor],
+        visiveis: sels.filter((s) => [...document.querySelectorAll(s)].some((e) => getComputedStyle(e).display !== 'none')),
+      }), ESCONDIDOS_NA_IMPRESSAO);
+      if (!p.fundo.every((c) => c === 'rgb(255, 255, 255)')) r.falha(`${onde}: o fundo da impressão é ${p.fundo.join(' / ')}`);
+      if (p.visiveis.length) r.falha(`${onde}: aparecem na impressão: ${p.visiveis.join(', ')}`);
+      minimo = Math.min(minimo, (await contraste(page, onde)).minimo);
+    }
+  }
+  console.log(`  ${tema} ${media === 'print' ? 'impressão' : `${largura}px`}: "Frameworks…" ${[...new Set(espacos)].join(' / ')}${media === 'print' ? `; fundo branco, contraste mínimo ${minimo}:1` : ''}`);
   await ctx.close();
 }
 

@@ -17,7 +17,11 @@
  *   - cada case study é verificado na sua própria página, secção a secção e
  *     parágrafo a parágrafo, com o título de cada secção, os links de volta, o
  *     title e a meta description; os projetos sem case study não podem ter nem
- *     página nem botão.
+ *     página nem botão;
+ *   - o CV (fase 9) é verificado na sua página, nas duas línguas: o SEO, o nome, o
+ *     bloco pessoal, os links, cada secção e cada item parte a parte, e no fim o
+ *     <main> inteiro pela ordem, sem nenhum texto a mais; e o botão do hero tem de
+ *     levar a essa página, na mesma língua.
  *
  * O texto sem aprovação é listado como não coberto, para a lacuna ficar à vista
  * em vez de passar em silêncio. A cobertura do i18n é calculada aqui: uma chave
@@ -35,6 +39,11 @@ const ler = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 const CANONICO = 'content/texto-canonico.json';
 const PAGINAS = { pt: 'dist/index.html', en: 'dist/en/index.html' };
 const GITHUB = 'https://github.com/francisco-pereira-dev';
+/** O domínio do site, lido do public/CNAME: o check não importa código nem configuração do site. */
+const SITE = `https://${ler('public/CNAME').trim()}`;
+const siteJson = JSON.parse(ler('src/data/site.json'));
+/** Onde vive o CV. Repete src/lib/cv.ts de propósito. */
+const rotaCvDe = (lang) => (lang === 'pt' ? '/cv/' : '/en/cv/');
 
 for (const f of [CANONICO, ...Object.values(PAGINAS)]) {
   if (!fs.existsSync(path.join(root, f))) {
@@ -115,12 +124,40 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
   // 1. Textos de interface: cada um tem de existir como nó ou atributo inteiro.
   for (const [secao, chaves] of Object.entries(canon.interface)) {
     // Os textos da página de case study só existem nessa página: verificam-se lá, no ponto 5.
-    if (secao === 'caseStudy') continue;
+    // Os do CV (fase 9), na página do CV, no ponto 7.
+    if (secao === 'caseStudy' || secao === 'cv') continue;
     for (const [chave, valor] of Object.entries(chaves)) {
       if (chave.startsWith('_') || valor[lang] === undefined) continue;
       exigir(nos.has(valor[lang]), lang, `interface.${secao}.${chave}`, valor[lang], 'não aparece como texto nem como atributo inteiro');
     }
   }
+
+  // 1a. SEO da página inicial, etiqueta a etiqueta.
+  //
+  //     O ponto 1 exige que cada texto de interface exista algures na página, como nó
+  //     ou atributo inteiro. Isso chega para o texto que aparece uma vez, mas não para
+  //     o que aparece repetido: o título vem 4 vezes (title, og:title, twitter:title e
+  //     o cartão de partilha) e a descrição 3 (description, og:description,
+  //     twitter:description). Corrompida uma cópia, as outras tapavam-na e o ponto 1
+  //     continuava a passar — foi assim que uma sabotagem da meta descrição escapou na
+  //     fase 6. Aqui compara-se etiqueta a etiqueta, e cada cópia responde por si.
+  const seoTitulo = canon.interface.seo['meta-title'][lang];
+  const seoDescricao = canon.interface.seo['meta-description'][lang];
+  const etiqueta = (re) => {
+    const m = html.match(re);
+    return m ? norm(m[1]) : null;
+  };
+  [
+    ['<title>', seoTitulo, /<title>([\s\S]*?)<\/title>/],
+    ['meta description', seoDescricao, /<meta name="description" content="([^"]*)"/],
+    ['og:title', seoTitulo, /<meta property="og:title" content="([^"]*)"/],
+    ['og:description', seoDescricao, /<meta property="og:description" content="([^"]*)"/],
+    ['twitter:title', seoTitulo, /<meta name="twitter:title" content="([^"]*)"/],
+    ['twitter:description', seoDescricao, /<meta name="twitter:description" content="([^"]*)"/],
+  ].forEach(([nome, esperado, re]) => {
+    const achado = etiqueta(re);
+    exigir(achado === esperado, lang, `seo.${nome}`, esperado, achado ?? '(a etiqueta não existe)');
+  });
 
   // 1b. Cabeçalhos de secção: o título e a régua, sem mais nada (fase 4.2c: saiu
   //     a linha com o número e o nome da secção).
@@ -447,6 +484,145 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
     const semMasComTexto = canon.caseStudies.sem.filter((s) => canon.projetos[s]?.caseStudy || geradas.includes(s));
     exigir(semMasComTexto.length === 0, lang, 'case studies (decisão registada: sem página)', `${canon.caseStudies.sem.join(', ')} sem case study`, semMasComTexto.join(', ') || '(nenhum)');
   }
+
+  // 7. O CV (fase 9): o botão do hero e a página /cv/ (ou /en/cv/), secção a secção,
+  //    item a item, e no fim a sequência inteira do <main> — nada a mais e nada fora
+  //    de ordem. Os títulos e o botão vêm de interface.cv; o resto, da secção cv.
+  {
+    const rotaCv = rotaCvDe(lang);
+    const rotuloHero = canon.interface.hero['hero-btn-cv'][lang];
+    const heroBotoes = (html.match(/<div class="hero-buttons">([\s\S]*?)<\/div>/) || ['', ''])[1];
+    const paraCv = [...heroBotoes.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].filter((m) => norm(m[2].replace(/<[^>]*>/g, '')) === rotuloHero);
+    const attrs = paraCv[0]?.[1] ?? '';
+    exigir(
+      paraCv.length === 1 && decode((attrs.match(/\bhref="([^"]*)"/) || ['', ''])[1]) === rotaCv && !/\sdownload\b/.test(attrs) && !/\starget=/.test(attrs),
+      lang, 'hero: botão do CV', `${rotuloHero} -> ${rotaCv}, sem download`, paraCv.length ? `${rotuloHero} [${attrs.trim()}]` : '(não existe)',
+    );
+
+    const ficheiroCv = path.join(root, 'dist', rotaCv, 'index.html');
+    if (!fs.existsSync(ficheiroCv)) {
+      exigir(false, lang, 'cv (página)', `dist${rotaCv}index.html`, '(não existe)');
+    } else {
+      const pag = fs.readFileSync(ficheiroCv, 'utf8');
+      const cv = canon.cv;
+      const ui = canon.interface.cv;
+      const L = (o) => o[lang];
+      const SEP = ['·', '—'];
+
+      // SEO, etiqueta a etiqueta, e as duas línguas ligadas por hreflang.
+      const tituloCv = L(ui['cv-meta-title']);
+      const etiquetaCv = (re) => { const m = pag.match(re); return m ? norm(m[1]) : null; };
+      [['<title>', /<title>([\s\S]*?)<\/title>/], ['og:title', /<meta property="og:title" content="([^"]*)"/], ['twitter:title', /<meta name="twitter:title" content="([^"]*)"/]]
+        .forEach(([nome, re]) => { const a = etiquetaCv(re); exigir(a === tituloCv, lang, `cv (${nome})`, tituloCv, a ?? '(a etiqueta não existe)'); });
+      [['meta description', /<meta name="description" content="([^"]*)"/], ['og:description', /<meta property="og:description" content="([^"]*)"/], ['twitter:description', /<meta name="twitter:description" content="([^"]*)"/]]
+        .forEach(([nome, re]) => { const a = etiquetaCv(re) ?? ''; exigir(resumoValido(a, L(cv.resumo)), lang, `cv (${nome})`, 'o resumo, inteiro ou cortado numa palavra, até 155 caracteres', `${a} (${a.length} caracteres)`); });
+      const alternativas = [...pag.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((m) => `${m[1]} ${m[2]}`);
+      const altEsperadas = [`pt-PT ${SITE}/cv/`, `en ${SITE}/en/cv/`, `x-default ${SITE}/cv/`];
+      exigir(JSON.stringify(alternativas) === JSON.stringify(altEsperadas), lang, 'cv (hreflang)', altEsperadas.join(' | '), alternativas.join(' | ') || '(nenhuma)');
+
+      const main = (pag.match(/<main\b[\s\S]*?<\/main>/) || [''])[0];
+
+      // Um só h1, e é o nome.
+      const h1s = todos(pag, /<h1[^>]*>([\s\S]*?)<\/h1>/g);
+      exigir(h1s.length === 1 && h1s[0] === L(cv.nome), lang, 'cv.nome (o único h1)', L(cv.nome), fmtLista(h1s));
+
+      // O bloco do nome: cargo, a linha pessoal e a fotografia, a única imagem da página.
+      const topo = (main.match(/<header class="cv-topo">([\s\S]*?)<\/header>/) || ['', ''])[1];
+      const cargo = um(topo, /<p class="cv-cargo">([\s\S]*?)<\/p>/);
+      exigir(cargo === L(cv.cargo), lang, 'cv.cargo', L(cv.cargo), cargo ?? '(em falta)');
+      const pessoal = textos((topo.match(/<p class="cv-pessoal">([\s\S]*?)<\/p>/) || ['', ''])[1]);
+      const pessoalEsperado = [L(cv.localidade), siteJson.email];
+      exigir(JSON.stringify(pessoal) === JSON.stringify(pessoalEsperado), lang, 'cv.localidade e o email', pessoalEsperado.join(' '), pessoal.join(' ') || '(em falta)');
+      const imgs = semScripts(pag).match(/<img\b[^>]*>/g) || [];
+      exigir(
+        imgs.length === 1 && topo.includes(imgs[0]) && decode((imgs[0].match(/\balt="([^"]*)"/) || ['', ''])[1]) === L(cv.fotoAlt),
+        lang, 'cv.fotoAlt (a única imagem, no bloco do nome)', `1 imagem, alt "${L(cv.fotoAlt)}"`, `${imgs.length} imagem(ns)${imgs[0] ? `, ${imgs[0].match(/\balt="[^"]*"/)?.[0] ?? 'sem alt'}` : ''}`,
+      );
+
+      // Os três links, por extenso, numa linha própria.
+      const links = ancoras((main.match(/<ul class="cv-links">([\s\S]*?)<\/ul>/) || ['', ''])[1]).map((a) => `${a.texto} -> ${a.href}`);
+      const porExtenso = (u) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+      const linksEsperados = [`${porExtenso(SITE)} -> ${SITE}${lang === 'pt' ? '/' : '/en/'}`, `${porExtenso(siteJson.githubUrl)} -> ${siteJson.githubUrl}`, `${porExtenso(siteJson.linkedinUrl)} -> ${siteJson.linkedinUrl}`];
+      exigir(JSON.stringify(links) === JSON.stringify(linksEsperados), lang, 'cv (os três links)', linksEsperados.join(' | '), links.join(' | ') || '(nenhum)');
+
+      const resumo = um(main, /<p class="cv-resumo">([\s\S]*?)<\/p>/);
+      exigir(resumo === L(cv.resumo), lang, 'cv.resumo', L(cv.resumo), resumo ?? '(em falta)');
+
+      // O botão de descarregar: o PDF da mesma língua, que tem de existir no dist.
+      const pdf = `/${lang === 'pt' ? siteJson.cvPath : siteJson.cvPathEn}`;
+      const botoes = ancoras(main).filter((a) => a.classes.includes('cv-download'));
+      const comDownload = /<a class="[^"]*cv-download[^"]*"[^>]*\sdownload\b/.test(main);
+      exigir(
+        botoes.length === 1 && botoes[0].texto === L(ui['cv-btn-download']) && botoes[0].href === pdf && comDownload && fs.existsSync(path.join(root, 'dist', pdf)),
+        lang, 'cv (botão de descarregar)', `${L(ui['cv-btn-download'])} -> ${pdf} (download, e o ficheiro existe no dist)`,
+        botoes.map((a) => `${a.texto} -> ${a.href}`).join(' | ') + (comDownload ? '' : ', sem download') + (fs.existsSync(path.join(root, 'dist', pdf)) ? '' : `, falta dist${pdf}`) || '(nenhum)',
+      );
+
+      // As secções, pela ordem, cada uma com o seu título.
+      const CV_SECOES = [
+        ['projetos', 'cv-heading-projects'], ['experiencia', 'cv-heading-experience'], ['educacao', 'cv-heading-education'],
+        ['competencias', 'cv-heading-skills'], ['idiomas', 'cv-heading-languages'], ['interesses', 'cv-heading-interests'],
+      ];
+      const idsCv = [...main.matchAll(/<section id="([^"]+)" class="cv-secao"/g)].map((m) => m[1]);
+      exigir(JSON.stringify(idsCv) === JSON.stringify(CV_SECOES.map(([id]) => id)), lang, 'cv (secções e ordem)', CV_SECOES.map(([id]) => id).join(', '), idsCv.join(', ') || '(nenhuma)');
+      const secCv = {};
+      for (const [id, chave] of CV_SECOES) {
+        secCv[id] = (main.match(new RegExp(`<section id="${id}" class="cv-secao"[\\s\\S]*?</section>`)) || [''])[0];
+        const h2 = um(secCv[id], /<h2[^>]*>([\s\S]*?)<\/h2>/);
+        exigir(h2 === L(ui[chave]), lang, `interface.cv.${chave}`, L(ui[chave]), h2 ?? '(sem título)');
+      }
+
+      // Cada item, parte a parte: o título e a linha de baixo, com o "—" entre as partes.
+      const itens = (id) => secCv[id].split('<li class="cv-item"').slice(1);
+      const partes = (item, classe) => textos((item.match(new RegExp(`<p class="${classe}">([\\s\\S]*?)</p>`)) || ['', ''])[1]);
+      const cmpItens = (id, lista, campos) => {
+        const achados = itens(id);
+        exigir(achados.length === lista.length, lang, `cv.${id} (quantidade)`, String(lista.length), String(achados.length));
+        lista.forEach((x, i) => {
+          for (const [classe, chaves] of campos) {
+            const esperado = chaves.flatMap((k, j) => (j ? ['—', L(x[k])] : [L(x[k])]));
+            const achado = partes(achados[i] ?? '', classe);
+            exigir(JSON.stringify(achado) === JSON.stringify(esperado), lang, `cv.${id}[${i}].${chaves.join(' + ')}`, esperado.join(' '), achado.join(' ') || '(em falta)');
+          }
+        });
+      };
+      cmpItens('projetos', cv.projetos, [['cv-item-titulo', ['titulo', 'descricao']], ['cv-item-meta', ['tech', 'quando']]]);
+      const mais = um(secCv.projetos, /<p class="cv-mais">([\s\S]*?)<\/p>/);
+      exigir(mais === L(cv.projetosMais), lang, 'cv.projetosMais', L(cv.projetosMais), mais ?? '(em falta)');
+      cmpItens('experiencia', cv.experiencia, [['cv-item-titulo', ['funcao', 'empresa']], ['cv-item-meta', ['papel', 'quando']], ['cv-item-linha', ['descricao']]]);
+      cmpItens('educacao', cv.educacao, [['cv-item-titulo', ['curso']], ['cv-item-meta', ['escola', 'quando']]]);
+
+      // Competências: rótulo e valor, par a par, numa grelha (dl).
+      const dts = todos(secCv.competencias, /<dt>([\s\S]*?)<\/dt>/g);
+      const dds = todos(secCv.competencias, /<dd>([\s\S]*?)<\/dd>/g);
+      const pares = dts.map((d, i) => `${d} — ${dds[i] ?? '(sem valor)'}`);
+      const paresEsperados = cv.competencias.map((c) => `${L(c.rotulo)} — ${L(c.valor)}`);
+      exigir(JSON.stringify(pares) === JSON.stringify(paresEsperados) && dds.length === dts.length, lang, 'cv.competencias (rótulos, valores e ordem)', fmtLista(paresEsperados), fmtLista(pares));
+      for (const id of ['idiomas', 'interesses']) {
+        const t = um(secCv[id], /<p class="cv-simples">([\s\S]*?)<\/p>/);
+        exigir(t === L(cv[id]), lang, `cv.${id}`, L(cv[id]), t ?? '(em falta)');
+      }
+
+      // No fim, o <main> inteiro, pela ordem: nenhum texto a mais, nenhum fora do sítio.
+      const sequencia = textos(main).filter((t) => !SEP.includes(t));
+      const sequenciaEsperada = [
+        L(ui['cv-btn-download']), L(cv.nome), L(cv.cargo), L(cv.localidade), siteJson.email,
+        ...linksEsperados.map((l) => l.split(' -> ')[0]), L(cv.resumo),
+        L(ui['cv-heading-projects']), ...cv.projetos.flatMap((p) => [p.titulo, p.descricao, p.tech, p.quando].map(L)), L(cv.projetosMais),
+        L(ui['cv-heading-experience']), ...cv.experiencia.flatMap((e) => [e.funcao, e.empresa, e.papel, e.quando, e.descricao].map(L)),
+        L(ui['cv-heading-education']), ...cv.educacao.flatMap((e) => [e.curso, e.escola, e.quando].map(L)),
+        L(ui['cv-heading-skills']), ...cv.competencias.flatMap((c) => [c.rotulo, c.valor].map(L)),
+        L(ui['cv-heading-languages']), L(cv.idiomas), L(ui['cv-heading-interests']), L(cv.interesses),
+      ];
+      const primeira = sequenciaEsperada.findIndex((e, i) => sequencia[i] !== e);
+      exigir(
+        primeira < 0 && sequencia.length === sequenciaEsperada.length,
+        lang, `cv (o <main> inteiro: ${sequenciaEsperada.length} textos, pela ordem, e nada a mais)`,
+        primeira < 0 ? `${sequenciaEsperada.length} textos` : `na posição ${primeira + 1}: ${sequenciaEsperada[primeira]}`,
+        primeira < 0 ? `${sequencia.length} textos${sequencia.length > sequenciaEsperada.length ? `, a mais: ${fmtLista(sequencia.slice(sequenciaEsperada.length))}` : ''}` : sequencia[primeira] ?? '(acabou antes)',
+      );
+    }
+  }
 }
 
 // --- relatório -------------------------------------------------------------
@@ -462,8 +638,8 @@ const foraI18n = Object.keys(JSON.parse(ler('src/i18n/pt.json'))).flatMap((k) =>
 const casesVerificados = canon.projetos.ordem.slugs.filter((s) => canon.projetos[s]?.caseStudy);
 
 console.log(`check:texto — ${CANONICO} vs dist/`);
-console.log(`  pt: ${contagem.pt} verificações (página inicial e case studies)`);
-console.log(`  en: ${contagem.en} verificações (página inicial e case studies)`);
+console.log(`  pt: ${contagem.pt} verificações (página inicial, case studies e CV)`);
+console.log(`  en: ${contagem.en} verificações (página inicial, case studies e CV)`);
 console.log(`  case studies: ${casesVerificados.join(', ') || '(nenhum)'}`);
 console.log('');
 console.log(`Não coberto pelo canónico (informativo, não falha): ${foraI18n.length} chave(s) de i18n e campos de ${foraProj.length} projeto(s)`);

@@ -7,7 +7,7 @@
   "hero-subtitle": "Full-stack developer",
   "hero-paragraph": "Final-year Computer Engineering student at Universidade de Leiria e Oeste.",
   "hero-btn-projects": "View projects",
-  "hero-btn-cv": "Download CV",
+  "hero-btn-cv": "View CV",
   "hero-btn-contact": "Get in touch",
   "about-heading": "About me",
   "about-p1": "I started programming in the 10th grade and never stopped. What began as curiosity — figuring out what happened on the other side of the screen — became how I solve problems.",
@@ -53,5 +53,13 @@
   "a11y-back-to-top": "Back to top",
   "a11y-more-info": "More information",
   "a11y-skip-to-content": "Skip to content",
-  "a11y-close": "Close"
+  "a11y-close": "Close",
+  "cv-heading-projects": "Projects",
+  "cv-heading-experience": "Experience",
+  "cv-heading-education": "Education",
+  "cv-heading-skills": "Skills",
+  "cv-heading-languages": "Languages",
+  "cv-heading-interests": "Interests",
+  "cv-btn-download": "Download PDF",
+  "cv-meta-title": "CV — Francisco Pereira"
 }

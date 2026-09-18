@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * npm run audit:teclado — navegação por teclado, com teclas reais, nas 16 páginas
+ * npm run audit:teclado — navegação por teclado, com teclas reais, nas 18 páginas
  * (as duas línguas) e nos dois temas.
  *
  * Corre depois de `npm run build`. Sai com código 1 se houver alguma falha.
@@ -13,16 +13,20 @@
  * Nas páginas iniciais, cada comportamento com o teclado:
  *   - link de saltar; menu (abre, prende o foco, Escape devolve-o); tema; botão "?";
  *     modal (dialog, foco no "Fechar", Tab fica dentro, Escape devolve o foco);
- *     seta de voltar ao topo; idioma; aria-current no menu;
+ *     seta de voltar ao topo; idioma; aria-current no menu; "Ver CV" leva ao CV;
  *   - axe com o menu, o balão, a modal e a seta abertos.
  * Nos case studies: "Voltar aos projetos" com Enter.
+ * No CV: "Descarregar PDF" recebe o foco e aponta para o PDF da mesma língua, que existe.
  *
  * Opções: --capturas guarda capturas em node_modules/.cache/auditoria.
  */
+import fs from 'node:fs';
 import path from 'node:path';
 import {
-  BASE, CAPTURAS, TAGS_AXE, carregarFerramentas, contextoComTema, paginas, relatorio, revelarTudo, servidor,
+  BASE, CAPTURAS, RAIZ, TAGS_AXE, carregarFerramentas, contextoComTema, paginas, relatorio, revelarTudo, servidor,
 } from './comum.mjs';
+
+const site = JSON.parse(fs.readFileSync(path.join(RAIZ, 'src', 'data', 'site.json'), 'utf8'));
 
 const { chromium, AxeBuilder } = await carregarFerramentas();
 const urls = paginas();
@@ -116,6 +120,18 @@ for (const tema of ['dark', 'light']) {
       await Promise.all([page.waitForNavigation(), page.keyboard.press('Enter')]);
       const v = new URL(page.url());
       if (v.pathname !== casa || v.hash !== '#projects') r.falha(`${tema} ${u}: "Voltar aos projetos" levou a ${v.pathname}${v.hash}`);
+    }
+    if (u.endsWith('/cv/')) {
+      // O botão de descarregar: com foco e contorno, e a apontar para o PDF da mesma língua.
+      const pdf = '/' + (u.startsWith('/en/') ? site.cvPathEn : site.cvPath);
+      await page.goto(BASE + u, { waitUntil: 'load' });
+      await page.focus('.cv-download');
+      await cap(page, `cv-foco-${tema}${u.replace(/\//g, '_')}`);
+      const b = await page.evaluate(() => { const a = document.activeElement; return { cls: a.className, href: a.getAttribute('href'), download: a.hasAttribute('download'), contorno: getComputedStyle(a).outlineStyle !== 'none' }; });
+      const resposta = await page.request.head(BASE + b.href);
+      if (!b.cls.includes('cv-download') || b.href !== pdf || !b.download || !b.contorno || resposta.status() !== 200 || !resposta.headers()['content-type']?.includes('pdf')) {
+        r.falha(`${tema} ${u}: "Descarregar PDF" ${JSON.stringify({ ...b, esperado: pdf, estado: resposta.status() })}`);
+      }
     }
   }
 
@@ -215,13 +231,25 @@ for (const tema of ['dark', 'light']) {
     const outra = new URL(page.url()).pathname;
     if (outra !== (lang === 'pt' ? '/en/' : '/')) r.falha(`${onde}: o idioma levou a ${outra}`);
 
+    // Ver CV: com Enter, leva à página do CV na mesma língua.
+    await page.goto(BASE + home, { waitUntil: 'load' });
+    const cvDestino = `${home}cv/`;
+    try {
+      await page.focus(`.hero-buttons a[href="${cvDestino}"]`);
+      await Promise.all([page.waitForNavigation(), page.keyboard.press('Enter')]);
+      const chegou = new URL(page.url()).pathname;
+      if (chegou !== cvDestino) r.falha(`${onde}: "Ver CV" levou a ${chegou}`);
+    } catch (e) {
+      r.falha(`${onde}: "Ver CV": não há link para ${cvDestino} no hero (${e.message.split('\n')[0]})`);
+    }
+
     // aria-current no menu, a meio dos projetos
     await page.goto(BASE + home + '#projects', { waitUntil: 'load' });
     await page.waitForTimeout(800);
     const atual = await page.evaluate(() => [...document.querySelectorAll('.overlay-link[aria-current]')].map((a) => a.getAttribute('href')));
     if (atual.length !== 1 || atual[0] !== '#projects') r.falha(`${onde}: aria-current ${JSON.stringify(atual)}`);
 
-    console.log(`  ${home}: saltar, menu, tema, "?", modal, seta, idioma e aria-current testados`);
+    console.log(`  ${home}: saltar, menu, tema, "?", modal, seta, idioma, "Ver CV" e aria-current testados`);
   }
 
   if (erros.length) r.falha(`${tema}: consola: ${erros.join(' | ')}`);

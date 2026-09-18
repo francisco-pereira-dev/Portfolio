@@ -15,12 +15,14 @@ gerado no build e publicado no GitHub Pages.
 ## Conteúdo
 
 - **Duas línguas em rotas reais:**
-  - português na raiz (`/` e `/projetos/<slug>/`);
-  - inglês em `/en/` (`/en/` e `/en/projects/<slug>/`).
+  - português na raiz (`/`, `/projetos/<slug>/` e `/cv/`);
+  - inglês em `/en/` (`/en/`, `/en/projects/<slug>/` e `/en/cv/`).
 - **9 projetos**, numa só lista na página inicial.
 - **7 case studies** por língua, cada um com página própria. Os 2 projetos sem case
   study abrem numa modal.
-- **16 páginas** no total, todas no sitemap.
+- **O CV como página**, em `/cv/` e `/en/cv/`, com o PDF de cada língua gerado a partir
+  dela.
+- **18 páginas** no total, todas no sitemap.
 
 ## Como está organizado
 
@@ -68,9 +70,19 @@ Arrancam um servidor de pré-visualização sozinhas, se não houver nenhum a re
 `npm run og` regenera as imagens de partilha (1200×630) quando muda o título de um
 projeto ou o seu screenshot.
 
+Outros dois geradores, que correm à mão:
+
+```bash
+npm run cv     # os dois PDF do CV, a partir das páginas /cv/ e /en/cv/
+npm run mapa   # o docs/ESTRUTURA.md, a partir do disco
+```
+
+O `npm run cv` falha, sem escrever nada, se um PDF tiver mais de uma página, se o
+texto não for extraível ou se não bater com o texto canónico.
+
 ## Acessibilidade
 
-O site foi auditado com axe e com navegação por teclado, nas 16 páginas, nas duas
+O site foi auditado com axe e com navegação por teclado, nas 18 páginas, nas duas
 línguas e nos dois temas. Tem link para saltar para o conteúdo, marcos de página e um
 indicador de foco visível. Todo o texto tem contraste de 4,5:1 ou mais. As
 ferramentas de auditoria (Playwright e axe) são só dependências de desenvolvimento e
@@ -85,6 +97,11 @@ esconde o que vai aparecer quando há script. Sem ele, o tema segue o do sistema
 links de navegação aparecem no cabeçalho — ou antes do rodapé, nos ecrãs onde não
 cabem. Perdem-se o menu de ecrã inteiro, a troca manual de tema, a seta de voltar ao
 topo e as duas janelas de projeto.
+
+## Licenças
+
+Os dois ícones vêm do Devicon (MIT) e a Poppins do Google Fonts (SIL OFL 1.1). A
+atribuição e o texto das licenças estão em [docs/LICENCAS.md](docs/LICENCAS.md).
 
 ## Contacto
 
