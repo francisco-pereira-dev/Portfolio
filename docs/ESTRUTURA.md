@@ -19,7 +19,7 @@ entra com as colunas "⚠ por descrever", e o comando falha até alguém as escr
 - `docs/historico/` — os relatórios de cada fase, um técnico e um resumo por fase, e o inventário de limpeza de 2026-09-18. São o registo do que se fez e porquê, e não fazem parte da arquitetura: listá-los seria uma linha por relatório a dizer "um relatório de fase". Nem sequer se contam aqui, para escrever um relatório não desatualizar o mapa (o `npm run mapa` diz quantos são). Estão versionados, e o `docs/ESTADO-ATUAL.md` resume o que deles ficou decidido.
 - `Claude outputs/` — maquetes que a aplicação do Claude guarda aqui quando se trabalha noutro chat. Estão no `.gitignore` e não fazem parte do projeto.
 
-**Total: 102 ficheiros, 3584,0 KB.**
+**Total: 102 ficheiros, 3586,8 KB.**
 
 ## (raiz)
 
@@ -39,7 +39,7 @@ Nenhum destes ficheiros é servido a quem visita o site, com uma exceção indir
 | `.gitattributes` (68 B) | Diz ao Git que normalize os fins de linha dos ficheiros de texto. | o Git, em cada `add` e `checkout` | NÃO — só build | Ficheiros de texto passam a ir para o repositório com os fins de linha do Windows, e cada máquina vê o ficheiro inteiro como alterado. |
 | `.gitignore` (431 B) | Lista o que nunca entra no repositório: `node_modules/`, `dist/`, `.astro/`, `.env*`, caches, logs e a pasta `Claude outputs/`. | o Git, em cada `add` e `status` | NÃO — só build | O `npm install` seguinte mete 200 MB de `node_modules` e o `dist/` inteiro no próximo commit. |
 | `astro.config.mjs` (6,4 KB) | Configuração do Astro: o domínio, as duas línguas em rotas reais, o sitemap e três guardas próprias do build. | o `npm run build` e o `npm run preview` | NÃO — só build | O site perde as rotas `/en/`, o sitemap e o `og:url` absoluto; as três guardas deixam de correr e uma imagem de projeto em falta passa a ser descoberta só no site publicado. |
-| `CLAUDE.md` (36,4 KB) | O contrato de trabalho do projeto: a regra do texto canónico, as decisões já tomadas, os comandos e o estado. | quem trabalha no projeto, incluindo o Claude no início de cada sessão | NÃO — documentação | Uma sessão nova começa sem saber que o texto não se reescreve, e o texto aprovado corre risco de ser "melhorado". |
+| `CLAUDE.md` (37,2 KB) | O contrato de trabalho do projeto: a regra do texto canónico, as decisões já tomadas, os comandos e o estado. | quem trabalha no projeto, incluindo o Claude no início de cada sessão | NÃO — documentação | Uma sessão nova começa sem saber que o texto não se reescreve, e o texto aprovado corre risco de ser "melhorado". |
 | `package-lock.json` (149,0 KB) | Fixa a versão exata de cada dependência, incluindo as transitivas. | o `npm ci`, aqui e no job `verificar` da Action | NÃO — só build | O `npm ci` recusa-se a correr e a Action falha logo no primeiro passo; o build deixa de ser reprodutível. |
 | `package.json` (845 B) | Nome do projeto, os 12 comandos `npm run` e as dependências. | o npm, a Action e todos os comandos do projeto | NÃO — só build | Não há projeto: nenhum comando corre. |
 | `README.md` (4,4 KB) | A porta de entrada do repositório: o que é o site, a stack, como correr e como verificar. | quem abre o repositório no GitHub | NÃO — documentação | Quem chega ao repositório não sabe o que é aquilo nem como o pôr a correr. |
@@ -119,7 +119,7 @@ obriga a distribuir a atribuição com o material.
 
 | Caminho | O que é | Quem o usa | Chega ao visitante? | O que parte sem ele |
 |---|---|---|---|---|
-| `docs/ESTADO-ATUAL.md` (44,7 KB) | O retrato detalhado do projeto: projetos, provas, verificações, o que está publicado e o que falta. | quem trabalha no projeto, e o `CLAUDE.md`, que lhe aponta | NÃO — documentação | Perde-se o estado: o que está no ar, o que cada verificação cobre e as decisões tomadas. |
+| `docs/ESTADO-ATUAL.md` (46,8 KB) | O retrato detalhado do projeto: projetos, provas, verificações, o que está publicado e o que falta. | quem trabalha no projeto, e o `CLAUDE.md`, que lhe aponta | NÃO — documentação | Perde-se o estado: o que está no ar, o que cada verificação cobre e as decisões tomadas. |
 | `docs/ESTRUTURA.md` (47,5 KB) | Este mapa: todos os ficheiros do projeto, fora das exclusões do topo, com o que são, quem os usa e o que parte sem eles. Refeito pelo `npm run mapa`. | quem precise de perceber o projeto sem o ler todo, e o `npm run mapa`, que o lê e reescreve | NÃO — documentação | Perde-se o mapa, e com ele as descrições que o `npm run mapa` guarda; descobrir quem usa cada ficheiro volta a ser trabalho de pesquisa. |
 | `docs/LICENCAS.md` (2,6 KB) | A atribuição do material de terceiros: os dois ícones do Devicon (MIT) e a Poppins (SIL OFL). | quem precise de saber de onde veio o material; o `Icon.astro` e o `README.md` apontam para aqui | NÃO — documentação | O repositório volta a distribuir os ícones do Devicon sem a atribuição que a licença MIT exige. |
 
@@ -451,8 +451,8 @@ nas 14 páginas de case study, e o `cv.css` só nas duas do CV.
 |---|---:|---:|
 | **Chegam ao visitante** (servidos a quem abre o site, ou transformados no que é servido) | 67 | 1326,5 KB |
 | **Só build** (ferramentas, configuração, dados de origem) | 30 | 2121,7 KB |
-| **Documentação** | 5 | 135,7 KB |
-| **Total** | 102 | 3584,0 KB |
+| **Documentação** | 5 | 138,5 KB |
+| **Total** | 102 | 3586,8 KB |
 
 Atenção a uma diferença que os números escondem: os 67 ficheiros que "chegam ao visitante" pesam 1326,5 KB **no repositório**, não na ligação de quem abre o site. O `dist/` do último build tem 45 ficheiros e 1 515 KB, e uma visita à página inicial pede cinco ficheiros: o HTML, o CSS, a fonte 400, o avatar e o favicon.
 

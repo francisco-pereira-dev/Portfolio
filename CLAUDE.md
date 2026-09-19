@@ -483,7 +483,19 @@ O repositório do Licas está fora do âmbito: não se lê para "confirmar" nada
   Cada uma tem os relatórios `docs/historico/FASE-*-tecnico.md` e `docs/historico/FASE-*-resumo.md`.
   Os da fase 11 foram escritos na fase 13, porque o push dela foi bloqueado pelas
   permissões da sessão e feito pelo Francisco à mão.
-- **Publicado:** o site em franciscopereira.dev corresponde ao commit **`cb5e0dd`**
+- **Publicado:** o site em franciscopereira.dev corresponde ao commit **`207ed69`**
+  ("Replace an anglicism in the CV, add the Phase 11 reports, update the docs"),
+  precedido de `1a55793` (o CV reestruturado, fase 12). Os dois commits e o push foram
+  feitos **numa sessão do Claude, com autorização expressa do Francisco** (2026-09-19 às
+  01:00, hora de Lisboa) — desta vez o push passou. A Action correu verde, pela ordem
+  certa: `Verificar` das 00:00:52 às 00:01:05 UTC, `Build` das 00:01:08 às 00:01:25 e
+  `Deploy` das 00:01:28 às 00:01:46. **Verificado contra o site ao vivo a seguir:** as 18
+  páginas a 200; 44 ficheiros byte a byte iguais a um build limpo do `207ed69` (o
+  `robots.txt` é o objeto do git); o `check:texto` do commit a passar contra o HTML ao
+  vivo (1026 verificações); 114 pedidos, zero erros; "Ver CV" e "Descarregar PDF" certos
+  nas duas línguas; certificado válido até 2026-10-27. O commit seguinte, só de
+  documentação, fecha a fase 13 e não muda o site.
+- **Publicação anterior:** o commit **`cb5e0dd`**
   ("Ignore Claude outputs/ and refresh the structure map"), o último de seis, um por
   fase, das fases 6 a 11: `288142d`, `2b157e5`, `55b1368`, `f82d8e9`, `51c045d` e
   `cb5e0dd`. Leva tudo até à fase 11, incluindo o CV. **Os seis commits foram feitos
@@ -499,10 +511,8 @@ O repositório do Licas está fora do âmbito: não se lê para "confirmar" nada
   páginas, zero erros; o "Ver CV" e o "Descarregar PDF" a funcionar nas duas línguas;
   sitemap com 18 páginas.
   Antes disto, `4f13bec` (2026-09-17), feito pelo Francisco fora das sessões.
-- **Por commitar:** as fases 12 e 13 — o CV reestruturado, "Acomodei", os dois PDF
-  regenerados, o `check-texto.mjs` e o `gerar-cv.mjs` com a ordem nova e os pontos, a
-  documentação e os relatórios das fases 11, 12 e 13. A fase 13 tem autorização expressa
-  do Francisco para os publicar.
+- **Por commitar:** nada. O commit e o push só acontecem **depois de o Francisco dizer
+  "podes publicar"**.
 - **Decisões já tomadas sobre a limpeza** (o inventário está no `docs/historico/LIMPEZA-PROPOSTA.md`):
   os relatórios ficam em `docs/historico/`; as duas imagens dormentes ficam, porque a poda já
   as tira do `dist` e removê-las obrigava a mexer no `imageAlt`, que é texto canónico; o

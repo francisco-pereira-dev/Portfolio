@@ -287,7 +287,41 @@ preview responde a um pedido simples, a consola da página e o tempo até desist
 
 ## 4. O que está publicado
 
-**Hoje: `cb5e0dd`**, publicado a 2026-09-18 às 23:17 UTC. São seis commits, um por
+**Hoje: `207ed69`**, publicado a 2026-09-19 às 00:01:46 UTC (01:01 em Lisboa). São dois
+commits, feitos e enviados **numa sessão do Claude, com autorização expressa do
+Francisco**; desta vez o push passou:
+
+| Commit | Fase | Ficheiros |
+|---|---|---:|
+| `1a55793` | 12 — o CV reestruturado: experiência com o Licas, competências acima, pontos | 9 |
+| `207ed69` | 13 — "Acomodei", os relatórios da fase 11 e a documentação | 8 |
+
+O canónico e o `cv.json` foram mexidos nas duas fases. No `1a55793` vão como a fase 12
+os deixou (com "Suportei"), e o `207ed69` mostra a troca da palavra como diferença. Os
+dois commits constroem sozinhos: a árvore do `1a55793` foi construída à parte antes do
+commit (build a exit 0, `check:i18n` e `check:texto` com 1026 verificações). A única
+exceção é o `CV.pdf` português, que no `1a55793` ainda é o anterior: o da fase 12 não
+foi guardado, e o de agora já diz "Acomodei".
+
+**A Action correu verde**, pela ordem certa: `Verificar` das 00:00:52 às 00:01:05 UTC
+(checkout, Node 24, dependências, build, paridade PT/EN e "O site diz o texto aprovado"),
+`Build` das 00:01:08 às 00:01:25, `Deploy` das 00:01:28 às 00:01:46.
+
+**Verificado contra o site ao vivo a seguir**, contra um build limpo do `207ed69`:
+
+- as 18 páginas a 200; certificado Let's Encrypt válido até 2026-10-27;
+- 44 ficheiros byte a byte iguais (o `robots.txt` é o objeto do git, byte a byte);
+- o `check:texto` do commit contra o HTML ao vivo: 1026 verificações, zero
+  divergências;
+- num browser, 114 pedidos nas 18 páginas, zero erros;
+- "Ver CV" → `/cv/`, "View CV" → `/en/cv/`; os dois PDF servidos com uma página cada,
+  byte a byte os do commit.
+
+O commit seguinte, só de documentação, fecha a fase 13 e não muda o site.
+
+### A publicação anterior, `cb5e0dd`
+
+Publicado a 2026-09-18 às 23:17 UTC. São seis commits, um por
 fase, feitos numa sessão do Claude com autorização expressa do Francisco (2026-09-19,
 00:10 hora de Lisboa). O push foi feito pelo Francisco, porque as permissões da sessão
 o bloquearam:
@@ -397,13 +431,8 @@ o site:
 
 ### 4.2 Por commitar neste momento
 
-**As fases 12 e 13:** o CV reestruturado e "Acomodei" no canónico e no
-`src/data/cv.json`, o `CvPage.astro` e o `cv.css`, os dois PDF regenerados, o
-`check-texto.mjs` e o `gerar-cv.mjs` com a ordem nova e os pontos, a documentação, e os
-relatórios das fases 11, 12 e 13. A fase 13 tem autorização expressa para os publicar.
-
-Tudo o que vem a seguir nesta secção foi para os commits das fases 6 a 11, e já está
-publicado; fica como registo.
+**Nada.** Tudo o que vem a seguir nesta secção foi para os commits das fases 6 a 11, e
+já está publicado; fica como registo.
 
 O `deploy.yml` (verificações no CI), o `package.json` e o `package-lock.json` (o
 `sharp` declarado), a pasta `docs/` — que leva o `docs/ESTADO-ATUAL.md`, o
@@ -462,6 +491,10 @@ do Francisco.
 **Em 2026-09-19, às 00:10** (autor Francisco Pereira, UTC+1): os seis commits das fases
 6 a 11 (secção 4), **feitos numa sessão do Claude, com autorização expressa do
 Francisco** — ao contrário dos anteriores, feitos por ele à mão. O push foi dele.
+
+**Em 2026-09-19, às 01:00** (UTC+1): os dois commits das fases 12 e 13 (`1a55793` e
+`207ed69`), e depois um commit só de documentação, **feitos e enviados numa sessão do
+Claude, com autorização expressa do Francisco**.
 
 ## 6. Acessibilidade
 
@@ -574,6 +607,12 @@ existem porque nas páginas de case study metade dos elementos não existe; e o
 - **Menções ao nome antigo da instituição que ficam fora do site:**
   - o texto antigo guardado em `retirado` no canónico;
   - o relatório `docs/historico/FASE-4.2a-tecnico.md`.
+- **A classe `.cv-item-linha` do `cv.css` não é usada** desde a fase 12 (a experiência
+  passou a pontos). Ficou porque a fase não deixava apagar nada; sai quando o
+  Francisco autorizar.
+- **Para saber, não para fazer:** o PDF do CV tem 8,9 mm de folga — cerca de duas linhas.
+  O `audit:a11y` teve uma falha intermitente na fase 11 (secção 3); se voltar, guarda-se
+  o diagnóstico antes de repetir.
 
 **Decisões do Francisco, que já não são pendentes:**
 
