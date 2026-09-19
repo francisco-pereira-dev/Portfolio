@@ -103,7 +103,7 @@
           "en": "Built an online ordering platform for an artisan pastry shop single-handedly, with a full back-office: architecture, data model, backend, frontend and production readiness."
         },
         {
-          "pt": "Suportei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
+          "pt": "Acomodei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
           "en": "Supported two purchase flows in one application: catalogue products with fixed prices, and custom cakes that need a quote before a price exists."
         },
         {

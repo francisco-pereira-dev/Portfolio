@@ -312,10 +312,23 @@ ordem:** `npm run build`, `npm run check:i18n` e `npm run check:texto`.
 ### O CV (fase 9)
 
 - **É uma página do site**, `/cv/` e `/en/cv/`, com o BaseLayout, a navbar, o rodapé e
-  o seletor de idioma, e `hreflang` entre as duas. Um só `h1`, o nome. As secções
-  são `<section>` com `<h2>`, por esta ordem: Projetos, Experiência, Educação,
-  Competências, Idiomas e Interesses. Uma coluna, sem tabelas, sem imagens além da
-  fotografia (o mesmo `avatar.jpg` do hero, e o mesmo ficheiro gerado).
+  o seletor de idioma, e `hreflang` entre as duas. Um só `h1`, o nome. Uma coluna,
+  sem tabelas, sem imagens além da fotografia (o mesmo `avatar.jpg` do hero, e o mesmo
+  ficheiro gerado).
+- **A ordem (fase 12):** cabeçalho → resumo → **Competências → Experiência → Projetos**
+  → Educação → Idiomas → Interesses. Cada secção é uma `<section>` com `<h2>`. As
+  competências vêm logo a seguir ao resumo porque são o bloco que os sistemas de
+  triagem cruzam com o anúncio, e onde um recrutador olha primeiro quando a experiência
+  é curta.
+- **Trabalho pago vai para a Experiência, e não para os Projetos** (fase 12). O Licas é
+  trabalho para um cliente: nos Projetos ficava ao lado de um projeto pessoal, e a
+  Experiência parecia só um estágio de 2021.
+- **A Experiência leva pontos; os Projetos ficam em linha corrida, de propósito.** Cada
+  entrada da experiência tem o título, a stack e a data, e pontos que **começam por um
+  verbo no passado** ("Construí", "Apliquei"; "Built", "Enforced"), incluindo uma linha
+  de decisão técnica. É o teste dos primeiros 10 segundos: quem varre um CV lê as
+  primeiras palavras de cada linha, e a começar por substantivos lê nomes de coisas e
+  não vê o que ele fez. Um ponto novo tem de começar por um verbo.
 - **SEO próprio:** o título é "CV — Francisco Pereira" nas duas línguas; a descrição é
   o resumo, cortado como a frase de abertura dos case studies.
 - **Acentos a roxo, só quatro:** o ponto final do nome, o cargo, os títulos de secção e
@@ -336,7 +349,8 @@ ordem:** `npm run build`, `npm run check:i18n` e `npm run check:texto`.
 - **Se o CV deixar de caber numa página**, o `npm run cv` falha e diz quantos
   milímetros faltam, e os PDF que lá estão ficam como estavam. Corta-se texto (por
   decisão do Francisco) ou apertam-se as medidas de impressão; nunca se aceita um PDF
-  com duas páginas.
+  com duas páginas. **Hoje sobram 8,9 mm** no fundo da folha, em PT e em EN (eram 36,3
+  e 41,0 mm antes da fase 12): dá para cerca de duas linhas de texto, não mais.
 
 ### O SITE FUNCIONA SEM JAVASCRIPT (fase 5.1)
 
@@ -387,7 +401,8 @@ mostrar título, frase, stack e o link do repositório. Nada mais fica escondido
   **Exclui** `node_modules/`, `dist/`, `.astro/`, `.git/`, `docs/historico/` (os
   relatórios são um registo, e escrever um não desatualiza o mapa) e `Claude outputs/`
   (material de trabalho do Francisco, fora do git). `npm run mapa -- --verificar` diz
-  se o mapa está em dia sem escrever nada.
+  se o mapa está em dia sem escrever nada. Corre-se **depois do último build**: o mapa diz
+  quantos ficheiros tem o `dist/`, e por isso a ordem é `build` → `cv` → `build` → `mapa`.
 - **Nunca adicionar bibliotecas nem dependências externas** sem o Francisco aprovar.
 - **Se uma instrução colidir com o que já existe**, e não der para cumprir as duas,
   pára e explica a colisão. Não escolhas sozinho.
@@ -411,7 +426,15 @@ mostrar título, frase, stack e o link do repositório. Nada mais fica escondido
   - cada chamada de JavaScript no browser tem um limite de 45s: medições pesadas
     fazem-se em blocos de poucas páginas;
   - se o servidor cair, um separador que tentou navegar pode ficar inutilizado ou
-    guardar erros antigos na consola: usa-se um separador novo.
+    guardar erros antigos na consola: usa-se um separador novo;
+  - **o `audit:a11y` rebentou uma vez com um timeout do próprio teste** (fase 11, a
+    2026-09-18 perto das 23h UTC): no bloco sem JavaScript, no tema escuro a 375px, ao
+    seguir um link da navegação, o `page.waitForURL` esperou 30 s e desistiu, sem
+    dizer o URL. Não se reproduziu em quatro corridas seguidas, três delas com uma sonda
+    que registava cada navegação, a consola, os pedidos falhados e as respostas de erro:
+    zero de tudo. **É uma falha intermitente da auditoria, não do site.** Se voltar, guarda-se o
+    diagnóstico antes de repetir — o URL, se o servidor de preview responde a um pedido
+    simples, a consola da página e o tempo até desistir — e diz-se ao Francisco.
 
 ## CONFIDENCIALIDADE
 
@@ -429,7 +452,7 @@ repositório, em comentários nem em commits:
 
 O repositório do Licas está fora do âmbito: não se lê para "confirmar" nada.
 
-## ESTADO ATUAL (2026-09-18)
+## ESTADO ATUAL (2026-09-19)
 
 - **Fases concluídas:**
   - 2.x: a migração para Astro;
@@ -449,22 +472,37 @@ O repositório do Licas está fora do âmbito: não se lê para "confirmar" nada
   - 9: o CV como página (`/cv` e `/en/cv`), os dois PDF gerados pelo `npm run cv`, o
     botão "Ver CV" no hero e o mapa gerado pelo `npm run mapa`;
   - 10: duas afirmações falsas do CV corrigidas, o CV fora da regra de não repetição e
-    os PDF reproduzíveis.
+    os PDF reproduzíveis;
+  - 11: o lock do git, a pasta `Claude outputs/` no `.gitignore`, a medição do peso dos
+    PDF, e os seis commits das fases 6 a 11, publicados;
+  - 12: o CV reestruturado — o Licas passou para a Experiência, as competências para
+    cima, e a experiência em pontos;
+  - 13: a verificação ao vivo do `cb5e0dd`, "Suportei" → "Acomodei", a decisão da
+    fotografia dos PDF, os relatórios da fase 11 e a publicação das fases 12 e 13.
 
   Cada uma tem os relatórios `docs/historico/FASE-*-tecnico.md` e `docs/historico/FASE-*-resumo.md`.
-- **Publicado:** o site em franciscopereira.dev corresponde ao commit **`4f13bec`**
-  ("Add accessibility audits & accessibility updates", 2026-09-17 às 22:14:52), que leva
-  tudo até à Fase 5.3. **O commit e o push foram decisão do Francisco, tomada de
-  propósito fora das sessões do Claude.** A `main` está alinhada com a `origin/main`.
-  Verificado a 2026-09-18 contra o site: 16 páginas a 200, HTML byte a byte igual a um
-  build limpo do commit, `check:texto` a passar contra o HTML ao vivo e zero 404.
-- **Por commitar:** as verificações no CI (`deploy.yml`), o `sharp` declarado
-  (`package.json` e `package-lock.json`), a pasta `docs/` (com os relatórios em
-  `docs/historico/`) e o `CLAUDE.md`; e tudo o que as fases 9 e 10 fizeram (o CV, os
-  dois PDF, os dois scripts novos, as verificações alargadas e as correções da fase
-  10 — a lista está no `docs/ESTADO-ATUAL.md`, secção 4.2). O que vinha até à fase 8
-  está preparado com `git add`; o das fases 9 e 10 não foi preparado. O commit e o push só acontecem **depois de
-  o Francisco dizer "podes publicar"**.
+  Os da fase 11 foram escritos na fase 13, porque o push dela foi bloqueado pelas
+  permissões da sessão e feito pelo Francisco à mão.
+- **Publicado:** o site em franciscopereira.dev corresponde ao commit **`cb5e0dd`**
+  ("Ignore Claude outputs/ and refresh the structure map"), o último de seis, um por
+  fase, das fases 6 a 11: `288142d`, `2b157e5`, `55b1368`, `f82d8e9`, `51c045d` e
+  `cb5e0dd`. Leva tudo até à fase 11, incluindo o CV. **Os seis commits foram feitos
+  numa sessão do Claude, com autorização expressa do Francisco** (2026-09-19 às 00:10,
+  hora de Lisboa); **o push foi o Francisco que o fez**, porque as permissões da sessão
+  o bloquearam. A Action correu verde, e pela ordem certa: `Verificar` das 23:16:50 às
+  23:17:02 UTC de 2026-09-18, `Build` até às 23:17:24 e `Deploy` até às 23:17:39. A
+  `main` está alinhada com a `origin/main`. **Verificado contra o site ao vivo a 2026-09-19** (fase 13): HTTPS com certificado
+  Let's Encrypt válido até 2026-10-27; as 18 páginas a 200; o HTML, o CSS, as fontes, as
+  imagens e os dois PDF byte a byte iguais a um build limpo do `cb5e0dd` (44 ficheiros;
+  o `robots.txt` é o objeto do git, byte a byte); o `check:texto` do commit a passar
+  contra o HTML ao vivo (1016 verificações, zero divergências); 114 pedidos nas 18
+  páginas, zero erros; o "Ver CV" e o "Descarregar PDF" a funcionar nas duas línguas;
+  sitemap com 18 páginas.
+  Antes disto, `4f13bec` (2026-09-17), feito pelo Francisco fora das sessões.
+- **Por commitar:** as fases 12 e 13 — o CV reestruturado, "Acomodei", os dois PDF
+  regenerados, o `check-texto.mjs` e o `gerar-cv.mjs` com a ordem nova e os pontos, a
+  documentação e os relatórios das fases 11, 12 e 13. A fase 13 tem autorização expressa
+  do Francisco para os publicar.
 - **Decisões já tomadas sobre a limpeza** (o inventário está no `docs/historico/LIMPEZA-PROPOSTA.md`):
   os relatórios ficam em `docs/historico/`; as duas imagens dormentes ficam, porque a poda já
   as tira do `dist` e removê-las obrigava a mexer no `imageAlt`, que é texto canónico; o

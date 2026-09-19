@@ -19,7 +19,7 @@ entra com as colunas "⚠ por descrever", e o comando falha até alguém as escr
 - `docs/historico/` — os relatórios de cada fase, um técnico e um resumo por fase, e o inventário de limpeza de 2026-09-18. São o registo do que se fez e porquê, e não fazem parte da arquitetura: listá-los seria uma linha por relatório a dizer "um relatório de fase". Nem sequer se contam aqui, para escrever um relatório não desatualizar o mapa (o `npm run mapa` diz quantos são). Estão versionados, e o `docs/ESTADO-ATUAL.md` resume o que deles ficou decidido.
 - `Claude outputs/` — maquetes que a aplicação do Claude guarda aqui quando se trabalha noutro chat. Estão no `.gitignore` e não fazem parte do projeto.
 
-**Total: 102 ficheiros, 3562,7 KB.**
+**Total: 102 ficheiros, 3584,0 KB.**
 
 ## (raiz)
 
@@ -39,7 +39,7 @@ Nenhum destes ficheiros é servido a quem visita o site, com uma exceção indir
 | `.gitattributes` (68 B) | Diz ao Git que normalize os fins de linha dos ficheiros de texto. | o Git, em cada `add` e `checkout` | NÃO — só build | Ficheiros de texto passam a ir para o repositório com os fins de linha do Windows, e cada máquina vê o ficheiro inteiro como alterado. |
 | `.gitignore` (431 B) | Lista o que nunca entra no repositório: `node_modules/`, `dist/`, `.astro/`, `.env*`, caches, logs e a pasta `Claude outputs/`. | o Git, em cada `add` e `status` | NÃO — só build | O `npm install` seguinte mete 200 MB de `node_modules` e o `dist/` inteiro no próximo commit. |
 | `astro.config.mjs` (6,4 KB) | Configuração do Astro: o domínio, as duas línguas em rotas reais, o sitemap e três guardas próprias do build. | o `npm run build` e o `npm run preview` | NÃO — só build | O site perde as rotas `/en/`, o sitemap e o `og:url` absoluto; as três guardas deixam de correr e uma imagem de projeto em falta passa a ser descoberta só no site publicado. |
-| `CLAUDE.md` (33,4 KB) | O contrato de trabalho do projeto: a regra do texto canónico, as decisões já tomadas, os comandos e o estado. | quem trabalha no projeto, incluindo o Claude no início de cada sessão | NÃO — documentação | Uma sessão nova começa sem saber que o texto não se reescreve, e o texto aprovado corre risco de ser "melhorado". |
+| `CLAUDE.md` (36,4 KB) | O contrato de trabalho do projeto: a regra do texto canónico, as decisões já tomadas, os comandos e o estado. | quem trabalha no projeto, incluindo o Claude no início de cada sessão | NÃO — documentação | Uma sessão nova começa sem saber que o texto não se reescreve, e o texto aprovado corre risco de ser "melhorado". |
 | `package-lock.json` (149,0 KB) | Fixa a versão exata de cada dependência, incluindo as transitivas. | o `npm ci`, aqui e no job `verificar` da Action | NÃO — só build | O `npm ci` recusa-se a correr e a Action falha logo no primeiro passo; o build deixa de ser reprodutível. |
 | `package.json` (845 B) | Nome do projeto, os 12 comandos `npm run` e as dependências. | o npm, a Action e todos os comandos do projeto | NÃO — só build | Não há projeto: nenhum comando corre. |
 | `README.md` (4,4 KB) | A porta de entrada do repositório: o que é o site, a stack, como correr e como verificar. | quem abre o repositório no GitHub | NÃO — documentação | Quem chega ao repositório não sabe o que é aquilo nem como o pôr a correr. |
@@ -103,7 +103,7 @@ saber porque é que uma frase deixou de estar no site.
 
 | Caminho | O que é | Quem o usa | Chega ao visitante? | O que parte sem ele |
 |---|---|---|---|---|
-| `content/texto-canonico.json` (130,4 KB) | A fonte de verdade de todo o texto visível do site, nas duas línguas, com o histórico do que foi retirado e porquê. | `scripts/check-texto.mjs`, `scripts/gerar-cv.mjs` e quem escreve texto novo | NÃO — só build | Deixa de haver como saber se o site diz o texto aprovado: o `npm run check:texto` e o `npm run cv` falham por falta de ficheiro, e a garantia de que nenhuma frase foi "melhorada" desaparece. |
+| `content/texto-canonico.json` (134,3 KB) | A fonte de verdade de todo o texto visível do site, nas duas línguas, com o histórico do que foi retirado e porquê. | `scripts/check-texto.mjs`, `scripts/gerar-cv.mjs` e quem escreve texto novo | NÃO — só build | Deixa de haver como saber se o site diz o texto aprovado: o `npm run check:texto` e o `npm run cv` falham por falta de ficheiro, e a garantia de que nenhuma frase foi "melhorada" desaparece. |
 
 ## docs
 
@@ -119,7 +119,7 @@ obriga a distribuir a atribuição com o material.
 
 | Caminho | O que é | Quem o usa | Chega ao visitante? | O que parte sem ele |
 |---|---|---|---|---|
-| `docs/ESTADO-ATUAL.md` (37,7 KB) | O retrato detalhado do projeto: projetos, provas, verificações, o que está publicado e o que falta. | quem trabalha no projeto, e o `CLAUDE.md`, que lhe aponta | NÃO — documentação | Perde-se o estado: o que está no ar, o que cada verificação cobre e as decisões tomadas. |
+| `docs/ESTADO-ATUAL.md` (44,7 KB) | O retrato detalhado do projeto: projetos, provas, verificações, o que está publicado e o que falta. | quem trabalha no projeto, e o `CLAUDE.md`, que lhe aponta | NÃO — documentação | Perde-se o estado: o que está no ar, o que cada verificação cobre e as decisões tomadas. |
 | `docs/ESTRUTURA.md` (47,5 KB) | Este mapa: todos os ficheiros do projeto, fora das exclusões do topo, com o que são, quem os usa e o que parte sem eles. Refeito pelo `npm run mapa`. | quem precise de perceber o projeto sem o ler todo, e o `npm run mapa`, que o lê e reescreve | NÃO — documentação | Perde-se o mapa, e com ele as descrições que o `npm run mapa` guarda; descobrir quem usa cada ficheiro volta a ser trabalho de pesquisa. |
 | `docs/LICENCAS.md` (2,6 KB) | A atribuição do material de terceiros: os dois ícones do Devicon (MIT) e a Poppins (SIL OFL). | quem precise de saber de onde veio o material; o `Icon.astro` e o `README.md` apontam para aqui | NÃO — documentação | O repositório volta a distribuir os ícones do Devicon sem a atribuição que a licença MIT exige. |
 
@@ -134,8 +134,8 @@ extraível e o texto do canónico. Os PDF novos só chegam ao `dist/` no build s
 
 | Caminho | O que é | Quem o usa | Chega ao visitante? | O que parte sem ele |
 |---|---|---|---|---|
-| `public/assets/docs/CV-en.pdf` (210,1 KB) | O CV em PDF, em inglês: uma folha A4, gerada pelo `npm run cv` a partir da página `/en/cv/`. | `src/data/site.json` (campo `cvPathEn`), ligado no botão "Download PDF" da página `/en/cv/` | SIM | O botão "Download PDF" da página `/en/cv/` dá 404, e o `check:texto` e o `audit:teclado` falham. |
-| `public/assets/docs/CV.pdf` (210,8 KB) | O CV em PDF, em português: uma folha A4, gerada pelo `npm run cv` a partir da página `/cv/`. O caminho é o de sempre, para os links antigos continuarem a funcionar. | `src/data/site.json` (campo `cvPath`), ligado no botão "Descarregar PDF" da página `/cv/` | SIM | O botão "Descarregar PDF" da página `/cv/` dá 404, tal como qualquer link antigo para `/assets/docs/CV.pdf`; o `check:texto` e o `audit:teclado` falham. |
+| `public/assets/docs/CV-en.pdf` (212,0 KB) | O CV em PDF, em inglês: uma folha A4, gerada pelo `npm run cv` a partir da página `/en/cv/`. | `src/data/site.json` (campo `cvPathEn`), ligado no botão "Download PDF" da página `/en/cv/` | SIM | O botão "Download PDF" da página `/en/cv/` dá 404, e o `check:texto` e o `audit:teclado` falham. |
+| `public/assets/docs/CV.pdf` (212,8 KB) | O CV em PDF, em português: uma folha A4, gerada pelo `npm run cv` a partir da página `/cv/`. O caminho é o de sempre, para os links antigos continuarem a funcionar. | `src/data/site.json` (campo `cvPath`), ligado no botão "Descarregar PDF" da página `/cv/` | SIM | O botão "Descarregar PDF" da página `/cv/` dá 404, tal como qualquer link antigo para `/assets/docs/CV.pdf`; o `check:texto` e o `audit:teclado` falham. |
 
 ## public/assets/icons
 
@@ -228,8 +228,8 @@ o `gerar-og.mjs` faz as imagens de partilha, o `gerar-cv.mjs` os dois PDF do CV,
 | Caminho | O que é | Quem o usa | Chega ao visitante? | O que parte sem ele |
 |---|---|---|---|---|
 | `scripts/check-i18n.mjs` (3,0 KB) | Compara as chaves de `pt.json` e `en.json`, e apanha valores vazios ou por traduzir. | o `npm run check:i18n`, à mão e no job `verificar` da Action | NÃO — só build | Uma chave só em português deixa de ser apanhada, e a versão inglesa vai ao ar com um botão sem texto. |
-| `scripts/check-texto.mjs` (42,4 KB) | Compara o texto canónico com o HTML gerado, string a string: 1016 verificações nas duas línguas, incluindo as duas páginas do CV. | o `npm run check:texto`, à mão e no job `verificar` da Action | NÃO — só build | Deixa de haver como saber se o site diz o texto aprovado; uma frase trocada por engano passa a chegar ao ar sem aviso. |
-| `scripts/gerar-cv.mjs` (25,3 KB) | Gera os dois PDF do CV a partir das páginas `/cv/` e `/en/cv/`, no tema escuro de propósito, com três guardas: uma página, texto extraível e o texto do canónico. Apaga as datas da geração, para o mesmo texto dar sempre os mesmos bytes. Traz um leitor de PDF mínimo, sem bibliotecas. | o `npm run cv`, à mão, depois do build | NÃO — só build | Não há como regenerar os PDF quando o texto do CV mudar, e deixa de haver prova de que o PDF cabe numa página e diz o texto aprovado. |
+| `scripts/check-texto.mjs` (43,2 KB) | Compara o texto canónico com o HTML gerado, string a string: 1026 verificações nas duas línguas, incluindo as duas páginas do CV (a ordem das secções e os pontos da experiência). | o `npm run check:texto`, à mão e no job `verificar` da Action | NÃO — só build | Deixa de haver como saber se o site diz o texto aprovado; uma frase trocada por engano passa a chegar ao ar sem aviso. |
+| `scripts/gerar-cv.mjs` (25,7 KB) | Gera os dois PDF do CV a partir das páginas `/cv/` e `/en/cv/`, no tema escuro de propósito, com três guardas: uma página, texto extraível e o texto do canónico. Apaga as datas da geração, para o mesmo texto dar sempre os mesmos bytes. Traz um leitor de PDF mínimo, sem bibliotecas. | o `npm run cv`, à mão, depois do build | NÃO — só build | Não há como regenerar os PDF quando o texto do CV mudar, e deixa de haver prova de que o PDF cabe numa página e diz o texto aprovado. |
 | `scripts/gerar-estrutura.mjs` (15,0 KB) | Refaz este mapa a partir do disco — a lista de ficheiros, os tamanhos, os totais e os resumos —, guardando as descrições escritas à mão. | o `npm run mapa` | NÃO — só build | O mapa volta a envelhecer: cada ficheiro novo tem de ser acrescentado e contado à mão, e foi assim que ficou desatualizado três fases seguidas. |
 | `scripts/gerar-og.mjs` (13,1 KB) | Compõe as 9 imagens de partilha a 1200×630, desenhando o texto glifo a glifo. | o `npm run og` | NÃO — só build | Não há como regenerar as imagens de partilha depois de mudar o título de um projeto ou o screenshot. |
 
@@ -319,7 +319,7 @@ provas e o destino de cada prova.
 
 | Caminho | O que é | Quem o usa | Chega ao visitante? | O que parte sem ele |
 |---|---|---|---|---|
-| `src/data/cv.json` (6,5 KB) | O texto do CV nas duas línguas: nome, cargo, resumo, projetos, experiência, educação, competências, idiomas e interesses. Gerado a partir da secção `cv` do canónico. | `src/layouts/CvPage.astro` | SIM | O build falha no import e as duas páginas do CV deixam de existir — e com elas os PDF, que o `npm run cv` gera a partir delas. |
+| `src/data/cv.json` (7,5 KB) | O texto do CV nas duas línguas: nome, cargo, resumo, projetos, experiência, educação, competências, idiomas e interesses. Gerado a partir da secção `cv` do canónico. | `src/layouts/CvPage.astro` | SIM | O build falha no import e as duas páginas do CV deixam de existir — e com elas os PDF, que o `npm run cv` gera a partir delas. |
 | `src/data/site.json` (494 B) | O nome, o email, os endereços do GitHub e do LinkedIn, e os caminhos dos dois PDF do CV (`cvPath` e `cvPathEn`). | `Contacts.astro`, `Footer.astro`, `OverlayMenu.astro`, `Seo.astro`, `Skills.astro`, `CaseStudyPage.astro`, `CvPage.astro`, `src/lib/cv.ts`, `scripts/check-texto.mjs`, `scripts/gerar-cv.mjs` e `scripts/auditoria/teclado.mjs` | SIM | O build falha: desaparecem os contactos, os links do rodapé e os caminhos dos PDF do CV. |
 | `src/data/skills.json` (3,9 KB) | As 19 tecnologias em 4 grupos, cada uma com as provas e o destino de cada prova. | `src/components/Skills.astro` e `scripts/check-texto.mjs` | SIM | A secção Competências fica vazia e o build falha no import. |
 
@@ -365,7 +365,7 @@ corpo de cada tipo de página.
 |---|---|---|---|---|
 | `src/layouts/BaseLayout.astro` (4,3 KB) | A casca de todas as páginas: `<head>`, o script do tema, o link de saltar, o SEO e a seta de voltar ao topo. | `PortfolioPage.astro`, `CaseStudyPage.astro` e `CvPage.astro` | SIM | O build falha nas 18 páginas: não há `<html>`, nem tema, nem SEO. |
 | `src/layouts/CaseStudyPage.astro` (6,0 KB) | Monta uma página de case study: as secções pela ordem fixa, os links e o SEO próprio. | as duas rotas `[slug].astro` | SIM | As 14 páginas de case study ficam vazias. |
-| `src/layouts/CvPage.astro` (7,5 KB) | Monta a página do CV numa língua: o nome, a linha pessoal e a fotografia, os três links, o resumo e as seis secções, com SEO próprio e o botão de descarregar o PDF. | `src/pages/cv.astro` e `src/pages/en/cv.astro` | SIM | As duas páginas do CV ficam vazias, e o `npm run cv` deixa de ter de onde gerar os PDF. |
+| `src/layouts/CvPage.astro` (8,0 KB) | Monta a página do CV numa língua: o nome, a linha pessoal e a fotografia, os três links, o resumo e as seis secções, com SEO próprio e o botão de descarregar o PDF. | `src/pages/cv.astro` e `src/pages/en/cv.astro` | SIM | As duas páginas do CV ficam vazias, e o `npm run cv` deixa de ter de onde gerar os PDF. |
 | `src/layouts/PortfolioPage.astro` (2,0 KB) | Monta a página inicial inteira, numa língua: hero, Sobre, Competências, Projetos, Contactos e as 2 modais. | `src/pages/index.astro` e `src/pages/en/index.astro` | SIM | As duas páginas iniciais ficam vazias. |
 
 ## src/lib
@@ -442,19 +442,19 @@ nas 14 páginas de case study, e o `cv.css` só nas duas do CV.
 | Caminho | O que é | Quem o usa | Chega ao visitante? | O que parte sem ele |
 |---|---|---|---|---|
 | `src/styles/case-study.css` (4,0 KB) | Os estilos só das 14 páginas de case study: a coluna de leitura, as secções e a caixa do "o que correu mal". | `src/layouts/CaseStudyPage.astro` | SIM | As páginas de case study perdem a largura de leitura e passam a texto a toda a largura do ecrã. |
-| `src/styles/cv.css` (11,1 KB) | Os estilos só das duas páginas do CV: no ecrã, com os tokens e os dois temas; e o bloco de impressão, com as medidas em pt que põem o CV numa folha A4 sempre branca. | `src/layouts/CvPage.astro` | SIM | A página do CV perde a coluna, a grelha das competências e os acentos, e o PDF passa a sair com a navegação, o rodapé, as cores do tema e mais de uma página — que o `npm run cv` recusa. |
+| `src/styles/cv.css` (11,9 KB) | Os estilos só das duas páginas do CV: no ecrã, com os tokens e os dois temas; e o bloco de impressão, com as medidas em pt que põem o CV numa folha A4 sempre branca. | `src/layouts/CvPage.astro` | SIM | A página do CV perde a coluna, a grelha das competências e os acentos, e o PDF passa a sair com a navegação, o rodapé, as cores do tema e mais de uma página — que o `npm run cv` recusa. |
 | `src/styles/global.css` (43,3 KB) | Os tokens (cores, escalas de texto e de espaço) e os estilos de tudo o que não é case study nem CV. | `src/layouts/BaseLayout.astro` e `src/styles/case-study.css` | SIM | O site fica sem estilos: texto preto sobre branco, sem grelha, sem temas. |
 
 ## Resumo 1 — por destino
 
 | Destino | Ficheiros | Tamanho |
 |---|---:|---:|
-| **Chegam ao visitante** (servidos a quem abre o site, ou transformados no que é servido) | 67 | 1320,3 KB |
-| **Só build** (ferramentas, configuração, dados de origem) | 30 | 2116,8 KB |
-| **Documentação** | 5 | 125,6 KB |
-| **Total** | 102 | 3562,7 KB |
+| **Chegam ao visitante** (servidos a quem abre o site, ou transformados no que é servido) | 67 | 1326,5 KB |
+| **Só build** (ferramentas, configuração, dados de origem) | 30 | 2121,7 KB |
+| **Documentação** | 5 | 135,7 KB |
+| **Total** | 102 | 3584,0 KB |
 
-Atenção a uma diferença que os números escondem: os 67 ficheiros que "chegam ao visitante" pesam 1320,3 KB **no repositório**, não na ligação de quem abre o site. O `dist/` do último build tem 45 ficheiros e 1 510 KB, e uma visita à página inicial pede cinco ficheiros: o HTML, o CSS, a fonte 400, o avatar e o favicon.
+Atenção a uma diferença que os números escondem: os 67 ficheiros que "chegam ao visitante" pesam 1326,5 KB **no repositório**, não na ligação de quem abre o site. O `dist/` do último build tem 45 ficheiros e 1 515 KB, e uma visita à página inicial pede cinco ficheiros: o HTML, o CSS, a fonte 400, o avatar e o favicon.
 
 ## Resumo 2 — os 10 maiores
 
@@ -462,13 +462,13 @@ Atenção a uma diferença que os números escondem: os 67 ficheiros que "chegam
 |---|---:|---|
 | `assets/images/mrpizza.webp` | 550,3 KB | NÃO — só build |
 | `assets/images/dianearbus.webp` | 283,6 KB | NÃO — só build |
-| `public/assets/docs/CV.pdf` | 210,8 KB | SIM |
-| `public/assets/docs/CV-en.pdf` | 210,1 KB | SIM |
+| `public/assets/docs/CV.pdf` | 212,8 KB | SIM |
+| `public/assets/docs/CV-en.pdf` | 212,0 KB | SIM |
 | `scripts/fontes/Poppins-Regular.ttf` | 156,6 KB | NÃO — só build |
 | `scripts/fontes/Poppins-SemiBold.ttf` | 153,6 KB | NÃO — só build |
 | `scripts/fontes/Poppins-Bold.ttf` | 152,3 KB | NÃO — só build |
 | `package-lock.json` | 149,0 KB | NÃO — só build |
-| `content/texto-canonico.json` | 130,4 KB | NÃO — só build |
+| `content/texto-canonico.json` | 134,3 KB | NÃO — só build |
 | `assets/images/ti.webp` | 110,6 KB | NÃO — só build |
 
 Os três primeiros valem 29% do repositório. Dos dez, chegam ao visitante `CV.pdf` e `CV-en.pdf`.

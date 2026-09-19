@@ -1,7 +1,8 @@
-# Estado atual — 2026-09-18
+# Estado atual — 2026-09-19
 
 Retrato detalhado do projeto depois da publicação de 2026-09-17, com o que as fases seguintes
-acrescentaram — a última, a 9, pôs o CV no site como página. As regras, as decisões e o mapa
+acrescentaram — a 9 pôs o CV no site como página, a 11 publicou tudo, e a 12
+reestruturou o CV. As regras, as decisões e o mapa
 geral estão no [CLAUDE.md](../CLAUDE.md).
 
 ## 1. Os 9 projetos
@@ -134,7 +135,7 @@ antigos (nomes dos repositórios) estão em `retirado['fase-5']` no canónico.
 - Nenhum valor vazio nem começado por `TODO:`.
 - Nenhuma chave de texto de projeto nos ficheiros de interface.
 
-### `npm run check:texto` — hoje: **1016 verificações** (508 PT + 508 EN), zero divergências, zero texto fora do canónico
+### `npm run check:texto` — hoje: **1026 verificações** (513 PT + 513 EN), zero divergências, zero texto fora do canónico
 
 **Página inicial, nas duas línguas:**
 
@@ -170,7 +171,7 @@ volta, e as secções parágrafo a parágrafo.
 descrição 3, e uma cópia corrompida ficava tapada pelas outras. Agora cada cópia
 responde por si.
 
-**O CV, nas duas línguas** (90 verificações, acrescentadas na fase 9):
+**O CV, nas duas línguas** (90 verificações na fase 9; 100 desde a fase 12):
 
 - o botão "Ver CV" / "View CV" do hero leva a `/cv/` / `/en/cv/`, sem `download`;
 - na página: o `<title>`, o `og:title` e o `twitter:title` ("CV — Francisco Pereira"),
@@ -180,7 +181,11 @@ responde por si.
   imagem, com o seu `alt`; os três links por extenso e o destino de cada um; o resumo;
 - o botão "Descarregar PDF" / "Download PDF", com `download`, a apontar para o PDF da
   mesma língua, que tem de existir no `dist/`;
-- as seis secções pela ordem, cada uma com o seu título, e cada item parte a parte;
+- as seis secções pela ordem da fase 12 — Competências, Experiência, Projetos,
+  Educação, Idiomas, Interesses —, cada uma com o seu título, e cada item parte a
+  parte;
+- na Experiência, a linha da stack e da data, e os pontos um a um e pela ordem, com a
+  quantidade certa em cada entrada;
 - no fim, o `<main>` inteiro, texto a texto e pela ordem: nenhum texto a mais, nenhum
   fora do sítio.
 
@@ -189,7 +194,7 @@ responde por si.
 Gera 1 imagem geral e 8 de projeto. Mede o screenshot desenhado, e falha se as
 dimensões não forem 1200×630 ou se um ficheiro passar dos 300 KB.
 
-### `npm run cv` — hoje: exit 0, dois PDF de uma página, 52 strings do canónico em cada um
+### `npm run cv` — hoje: exit 0, dois PDF de uma página, 55 strings do canónico em cada um
 
 Gera `public/assets/docs/CV.pdf` (PT, o caminho de sempre) e `public/assets/docs/CV-en.pdf`
 (EN) a partir das páginas `/cv/` e `/en/cv/`. Corre depois do build e arranca o
@@ -200,11 +205,13 @@ propósito**: o CSS de impressão tem de dar uma folha branca seja qual for o te
 dois PDF:
 
 1. **Uma página, exatamente.** Com duas, diz quantas tem e quantos milímetros faltam.
-   Hoje sobram 36,3 mm no fundo da folha em PT e 41,0 mm em EN.
-2. **Texto extraível**: 1740 caracteres em PT e 1697 em EN, em três fontes Poppins. Um
+   **Hoje sobram 8,9 mm** no fundo da folha, em PT e em EN — cerca de duas linhas de
+   texto. Antes da fase 12 eram 36,3 mm (PT) e 41,0 mm (EN).
+2. **Texto extraível**: 2084 caracteres em PT e 2033 em EN, em três fontes Poppins. Um
    PDF feito de uma imagem dá 0 e falha.
-3. **O texto do canónico**, na língua certa: as 52 strings do CV pela ordem, e nada a
-   mais. Lista todas as divergências.
+3. **O texto do canónico**, na língua certa: as 55 strings do CV pela ordem, e nada a
+   mais (entre elas só podem aparecer os separadores e o marcador "•" dos pontos). Lista
+   todas as divergências.
 
 Verifica também o fundo: a folha e todos os retângulos grandes do PDF são brancos. O
 texto é lido do PDF sem bibliotecas, com um leitor mínimo dentro do script. Os PDF
@@ -214,7 +221,9 @@ novos só chegam ao `dist/` no build seguinte. Com `--texto`, mostra o texto ext
 `/ModDate` do dicionário `/Info`, e era só isso que mudava de uma geração para a outra
 (não há `/ID` no trailer nem metadados XMP). O script apaga essas duas entradas,
 trocando-as por espaços com o mesmo número de bytes, antes de correr as guardas. O mesmo
-texto dá sempre os mesmos bytes, e o `npm run cv` escreve o SHA-256 de cada PDF.
+texto dá sempre os mesmos bytes, e o `npm run cv` escreve o SHA-256 de cada PDF. Hoje:
+`CV.pdf` `4ebefdbc…6b4e` e `CV-en.pdf` `9a2d65a0…00c7`. Os PDF continuam com a fotografia
+sem perdas (cerca de 213 KB cada), por decisão do Francisco na fase 13 (secção 7).
 
 ### `npm run mapa` — hoje: 102 ficheiros no disco = 102 linhas no mapa
 
@@ -265,7 +274,61 @@ corre o axe com o menu, o balão, a modal e a seta abertos.
 
 As duas aceitam `--capturas`, que guarda imagens em `node_modules/.cache/auditoria`.
 
-## 4. O que foi publicado no commit `4f13bec`
+**Incidente conhecido do `audit:a11y`** (fase 11, 2026-09-18, perto das 23h UTC): numa
+corrida, a auditoria rebentou com um timeout do próprio teste, no bloco sem
+JavaScript, no tema escuro a 375px, ao seguir um link da navegação — o
+`page.waitForURL` esperou 30 s e desistiu, sem dizer qual URL. Não se reproduziu em
+quatro corridas seguidas, três delas com uma sonda de fora a registar cada navegação,
+a consola, os pedidos falhados e as respostas de erro: 845 eventos por corrida, zero
+erros de qualquer tipo, a maior pausa cerca de 3 s no arranque. **É uma falha
+intermitente da auditoria, não do site**, e fica como limite conhecido do ambiente de
+teste. Se voltar, guarda-se o diagnóstico antes de repetir: o URL, se o servidor de
+preview responde a um pedido simples, a consola da página e o tempo até desistir.
+
+## 4. O que está publicado
+
+**Hoje: `cb5e0dd`**, publicado a 2026-09-18 às 23:17 UTC. São seis commits, um por
+fase, feitos numa sessão do Claude com autorização expressa do Francisco (2026-09-19,
+00:10 hora de Lisboa). O push foi feito pelo Francisco, porque as permissões da sessão
+o bloquearam:
+
+| Commit | Fase | Ficheiros |
+|---|---|---:|
+| `288142d` | 6 — verificações no CI e o `sharp` | 2 |
+| `2b157e5` | 7 — `docs/`, licenças e a limpeza ao código | 21 |
+| `55b1368` | 8 — a prova refeita e o inventário para o histórico | 5 |
+| `f82d8e9` | 9 — o CV como página | 17 |
+| `51c045d` | 10 — as correções ao CV e os PDF reproduzíveis | 9 |
+| `cb5e0dd` | 11 — o `.gitignore` e o mapa | 3 |
+
+Cada ficheiro foi no commit da última fase que lhe mexeu, e por isso os commits das
+fases 6 e 9 não são coerentes sozinhos (o `package-lock.json` sem o `package.json`; o
+`CvPage.astro` sem o `cv.json`). Só a ponta foi construída e publicada.
+
+**A Action correu verde, pela ordem certa:** `Verificar` das 23:16:50 às 23:17:02,
+`Build` das 23:17:06 às 23:17:24 e `Deploy` das 23:17:30 às 23:17:39 (UTC). Foi a
+primeira vez que o CI novo correu a sério.
+
+**Verificação contra o site ao vivo, a 2026-09-19** (fase 13), contra o `cb5e0dd` e não
+contra a árvore de trabalho:
+
+- **Domínio:** `https://franciscopereira.dev/` responde 200 (servidor GitHub.com), e o
+  `http://` redireciona com 301. Certificado Let's Encrypt (YR1), TLS 1.3, válido de
+  2026-07-29 a **2026-10-27**, para `franciscopereira.dev` e `www.franciscopereira.dev`.
+- **As 18 páginas do sitemap respondem 200**, incluindo `/cv/` e `/en/cv/`.
+- **Byte a byte:** um build limpo do commit (`git archive` + `npm ci` + `npm run build`,
+  em `node_modules/.cache/`) e o site ao vivo são iguais em 44 ficheiros: as 18 páginas,
+  o sitemap, os dois CSS, as 8 fontes, a fotografia, as 9 imagens de partilha, o favicon
+  e os dois PDF. O `robots.txt` do export tinha 4 bytes a mais (CRLF, do
+  `core.autocrlf` do Windows); o que está no ar é byte a byte o objeto do git.
+- **`check:texto`** do `cb5e0dd`, com o canónico desse commit, **contra o HTML ao vivo**:
+  1016 verificações, zero divergências.
+- **Num browser**, as 18 páginas ao vivo: 114 pedidos, **zero erros e zero 404**.
+- **"Ver CV"** leva a `/cv/` e **"View CV"** a `/en/cv/`. **"Descarregar PDF"** e
+  **"Download PDF"** servem `/assets/docs/CV.pdf` e `CV-en.pdf`: 200,
+  `application/pdf`, uma página cada, byte a byte iguais aos do commit.
+
+### O commit anterior, `4f13bec`
 
 **O HEAD é `4f13bec` — "Add accessibility audits & accessibility updates", de
 2026-09-17 às 22:14:52 (UTC+1) — e a `main` está alinhada com a `origin/main`.** O
@@ -334,6 +397,14 @@ o site:
 
 ### 4.2 Por commitar neste momento
 
+**As fases 12 e 13:** o CV reestruturado e "Acomodei" no canónico e no
+`src/data/cv.json`, o `CvPage.astro` e o `cv.css`, os dois PDF regenerados, o
+`check-texto.mjs` e o `gerar-cv.mjs` com a ordem nova e os pontos, a documentação, e os
+relatórios das fases 11, 12 e 13. A fase 13 tem autorização expressa para os publicar.
+
+Tudo o que vem a seguir nesta secção foi para os commits das fases 6 a 11, e já está
+publicado; fica como registo.
+
 O `deploy.yml` (verificações no CI), o `package.json` e o `package-lock.json` (o
 `sharp` declarado), a pasta `docs/` — que leva o `docs/ESTADO-ATUAL.md`, o
 `docs/historico/LIMPEZA-PROPOSTA.md`, o `docs/ESTRUTURA.md`, o `docs/LICENCAS.md` e os
@@ -387,6 +458,10 @@ apontarem para a linha do projeto.
 
 Os commits duplicados de 2026-09-14 não foram corrigidos: mexer no histórico é decisão
 do Francisco.
+
+**Em 2026-09-19, às 00:10** (autor Francisco Pereira, UTC+1): os seis commits das fases
+6 a 11 (secção 4), **feitos numa sessão do Claude, com autorização expressa do
+Francisco** — ao contrário dos anteriores, feitos por ele à mão. O push foi dele.
 
 ## 6. Acessibilidade
 
@@ -502,11 +577,23 @@ existem porque nas páginas de case study metade dos elementos não existe; e o
 
 **Decisões do Francisco, que já não são pendentes:**
 
+- **A fotografia dos PDF fica sem perdas** (fase 13). A proposta era passá-la a JPEG de
+  qualidade 80, à mesma resolução (400×405 px): cada PDF passaria de cerca de 213 KB
+  para cerca de 40 KB. O Francisco comparou os dois PDF de ensaio e decidiu ficar como
+  está. O `gerar-cv.mjs` não muda.
+
 - **Os commits duplicados do histórico ficam como estão** (secção 5): reescrevê-los
   exigiria um force-push num repositório já publicado.
 - **Não haverá testes com leitores de ecrã reais.**
 - **As duas imagens dormentes ficam** (`mrpizza.webp`, `dianearbus.webp`).
 - **As classes `.modal-note` e `.btn-modal-disabled` ficam:** são dormentes, não mortas.
+- **A forma do CV** (fase 12): a ordem é cabeçalho → resumo → Competências → Experiência
+  → Projetos → Educação → Idiomas → Interesses; **trabalho pago vai para a Experiência**,
+  e não para os Projetos (o Licas passou para lá); **a Experiência leva pontos que
+  começam por um verbo no passado**, com uma linha de decisão técnica, e **os Projetos
+  ficam em linha corrida**, de propósito. A razão está no `CLAUDE.md`. A linha "Mais
+  seis projetos" continua certa: dos 9 projetos do site, o CV nomeia 3 (Licas,
+  CadflowBankSystem e 3D Analyzer), e o Portfolio não é um dos 9.
 - **O CV está fora da regra de não repetição** (fase 10; a regra e a razão estão no
   `CLAUDE.md`). Na fase 9 contaram-se **23 repetições entre o CV e o resto do site**, e
   **ficaram por decisão, não por esquecimento**. Continuam 23 depois da fase 10 (as
@@ -522,7 +609,13 @@ existem porque nas páginas de case study metade dos elementos não existe; e o
   - "Universidade de Leiria e Oeste", no hero e na meta description.
 
   Seis dos 23 pares são com o campo `description`, que nenhuma página mostra. **Dentro
-  do CV, onde a regra continua a valer, há zero.** O endereço franciscopereira.dev
+  do CV, onde a regra continua a valer, há zero.**
+
+  **Depois da fase 12 são 31**, também por decisão: os pontos do Licas contam factos
+  que estão no case study dele (os dois fluxos de compra, as regras de acesso na base
+  de dados, a verificação que dois pedidos simultâneos contornam), e o ponto do estágio
+  repete a frase da linha do Gest. Dentro do CV continua a haver zero, e o Licas
+  aparece num só sítio de cada página. O endereço franciscopereira.dev
   aparece quatro vezes no CV — nos links, no resumo, na descrição do Portfolio e na
   linha "Mais seis projetos" —, mas em quatro factos diferentes.
 
@@ -626,3 +719,22 @@ As justificações estão nos relatórios de cada fase.
     com a data (o Chromium não os escreve hoje);
   - o texto antigo em `retirado['fase-10']`, em dois pares: a última frase do resumo e
     a linha "Mais seis projetos".
+- **Fase 12:**
+  - a linha de baixo de cada entrada da Experiência é "stack — data", como nos
+    Projetos (o enunciado dava a data antes da stack);
+  - os pontos numa lista com o marcador na cor secundária, para o primeiro que se lê ser
+    o verbo;
+  - as medidas de impressão dos pontos: 8,9pt (as da linha de item que substituem),
+    2pt antes da lista, 1pt entre pontos e 11pt de recuo. Não se apertou nenhuma medida
+    que já existia;
+  - a classe `.cv-item-linha` deixou de ser usada e ficou no CSS (a fase não deixava
+    apagar nada);
+  - o texto que saiu em `retirado['fase-12']`, em três registos: o Licas inteiro, o
+    rótulo "Programador de aplicações · OutSystems" e a frase antiga do estágio.
+- **Fase 13:**
+  - "Suportei" em `retirado['fase-13']` com a frase inteira, só em português (o inglês
+    não mudou);
+  - o PDF de ensaio com JPEG foi feito sem mexer no projeto: o pedido da fotografia foi
+    respondido com um JPEG durante a geração, e os ficheiros ficaram só na cache;
+  - a verificação ao vivo comparou contra um build limpo do commit publicado, feito numa
+    cópia extraída com `git archive` em `node_modules/.cache/`.

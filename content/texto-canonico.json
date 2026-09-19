@@ -21,7 +21,8 @@
       "fase-5.2": "enunciado da fase 5.2 (2026-09-17): todas as provas das competências levam à linha do projeto na secção Projetos; \"todos\" à secção; \"Portfolio\" continua no GitHub. Só muda o destino, nenhum texto.",
       "fase-9": "enunciado da fase 9 (2026-09-18): o CV como página do site (/cv e /en/cv) — todo o texto da secção cv, os títulos das secções do CV e \"Descarregar PDF\" / \"Download PDF\"; o botão do hero passa a \"Ver CV\" / \"View CV\". Nas respostas às colisões: o título da página, \"CV — Francisco Pereira\", nas duas línguas.",
       "fase-10": "enunciado da fase 10 (2026-09-18): no CV, a última frase do resumo e a linha final dos projetos, nas duas línguas — o CV dizia que todos os projetos estão documentados no site, e o Portfolio não tem linha nem case study, e o Mr. Pizza e o Diane Arbus só têm modal.",
-      "fase-12": "enunciado da fase 12 (2026-09-19): o Licas passa de Projetos para Experiência, com três pontos; a entrada do estágio passa a um ponto, e sai o rótulo \"Programador de aplicações\" / \"Application developer\". Cada ponto começa por um verbo no passado."
+      "fase-12": "enunciado da fase 12 (2026-09-19): o Licas passa de Projetos para Experiência, com três pontos; a entrada do estágio passa a um ponto, e sai o rótulo \"Programador de aplicações\" / \"Application developer\". Cada ponto começa por um verbo no passado.",
+      "fase-13": "enunciado da fase 13 (2026-09-19): no segundo ponto do Licas, em português, \"Suportei\" passa a \"Acomodei\". O inglês (\"Supported\") fica."
     },
     "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true.",
     "extracao_legado": "Do e0a67bc: PT do conteúdo dos elementos com data-translate (e do data-tooltip), EN do objeto translations.en; aria-label do menu e do tema do setLanguage do script.js. Texto e atributos que o site nunca traduzia ficam com o mesmo valor nas duas línguas, como eram servidos. Só entrou o que coincide com os dados de hoje; a única alteração aplicada foi a autorizada (\"and\" -> \"e\" na primeira feature PT do Diane Arbus)."
@@ -1626,7 +1627,7 @@
     "_fase4.2b": "Desde a fase 4.2b as modais do Mr. Pizza e do Diane Arbus não mostram a descrição longa: a frase da linha é a descrição. A description continua nos dados de todos os projetos como texto aprovado, mas não aparece no site."
   },
   "cv": {
-    "_origem": "fase-9; a última frase do resumo e a linha \"Mais seis projetos\": fase-10; a experiência e a saída do Licas dos projetos: fase-12",
+    "_origem": "fase-9; a última frase do resumo e a linha \"Mais seis projetos\": fase-10; a experiência e a saída do Licas dos projetos: fase-12; a primeira palavra do segundo ponto do Licas (pt): fase-13",
     "_separadores": "Cada linha do enunciado foi partida nas suas partes, cortando só o \" — \" que as separa (como o \" · \" do rodapé e das tecnologias, na extração original); a página e o PDF voltam a pô-lo. O \" · \" dentro de uma parte (tecnologias, idiomas) faz parte do texto. As linhas partidas a meio de uma frase no enunciado foram juntas com um espaço. Fase 12: cada entrada da experiência tem funcao — empresa, a data (quando), a stack (tech) e os pontos; cada ponto é uma frase inteira do enunciado.",
     "_nome": "O enunciado dá o nome uma vez, na parte portuguesa; é o mesmo nas duas línguas. O email e os três links não são texto do canónico: vêm do src/data/site.json e do astro.config.mjs (site).",
     "nome": {
@@ -1733,7 +1734,7 @@
             "en": "Built an online ordering platform for an artisan pastry shop single-handedly, with a full back-office: architecture, data model, backend, frontend and production readiness."
           },
           {
-            "pt": "Suportei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
+            "pt": "Acomodei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
             "en": "Supported two purchase flows in one application: catalogue products with fixed prices, and custom cakes that need a quote before a price exists."
           },
           {
@@ -2136,6 +2137,12 @@
         "pt": "Loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
         "en": "Online computer-hardware store with warehouse management, presented as my final secondary-school project.",
         "_motivo": "fase 12: a experiência passou a pontos começados por um verbo; esta frase deu lugar a \"Desenvolvi…\" / \"Developed…\""
+      }
+    },
+    "fase-13": {
+      "cv.experiencia[0].pontos[1] (pt)": {
+        "pt": "Suportei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
+        "_motivo": "fase 13: \"Suportei\" é um anglicismo (do inglês \"support\"); passou a \"Acomodei\". O inglês \"Supported\" está correto e ficou."
       }
     }
   }
