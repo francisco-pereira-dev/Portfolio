@@ -88,6 +88,15 @@ function esperados(lang) {
     { onde: 'site.json githubUrl', texto: porExtenso(site.githubUrl) },
     { onde: 'site.json linkedinUrl', texto: porExtenso(site.linkedinUrl) },
     { onde: 'cv.resumo', texto: L(cv.resumo) },
+    // Fase 12: as competências logo a seguir ao resumo, e a experiência antes dos projetos.
+    titulo('cv-heading-skills'),
+    ...cv.competencias.flatMap((c, i) => ['rotulo', 'valor'].map((k) => ({ onde: `cv.competencias[${i}].${k}`, texto: L(c[k]) }))),
+    titulo('cv-heading-experience'),
+    // Fase 12: a stack e a data, e depois os pontos, um a um.
+    ...cv.experiencia.flatMap((e, i) => [
+      ...['funcao', 'empresa', 'tech', 'quando'].map((c) => ({ onde: `cv.experiencia[${i}].${c}`, texto: L(e[c]) })),
+      ...e.pontos.map((p, k) => ({ onde: `cv.experiencia[${i}].pontos[${k}]`, texto: L(p) })),
+    ]),
     titulo('cv-heading-projects'),
     ...cv.projetos.flatMap((p, i) => [
       { onde: `cv.projetos[${i}].titulo`, texto: L(p.titulo) },
@@ -96,12 +105,8 @@ function esperados(lang) {
       { onde: `cv.projetos[${i}].quando`, texto: L(p.quando) },
     ]),
     { onde: 'cv.projetosMais', texto: L(cv.projetosMais) },
-    titulo('cv-heading-experience'),
-    ...cv.experiencia.flatMap((e, i) => ['funcao', 'empresa', 'papel', 'quando', 'descricao'].map((c) => ({ onde: `cv.experiencia[${i}].${c}`, texto: L(e[c]) }))),
     titulo('cv-heading-education'),
     ...cv.educacao.flatMap((e, i) => ['curso', 'escola', 'quando'].map((c) => ({ onde: `cv.educacao[${i}].${c}`, texto: L(e[c]) }))),
-    titulo('cv-heading-skills'),
-    ...cv.competencias.flatMap((c, i) => ['rotulo', 'valor'].map((k) => ({ onde: `cv.competencias[${i}].${k}`, texto: L(c[k]) }))),
     titulo('cv-heading-languages'),
     { onde: 'cv.idiomas', texto: L(cv.idiomas) },
     titulo('cv-heading-interests'),
@@ -113,10 +118,11 @@ function esperados(lang) {
  * Compara sem espaços em branco: o PDF não guarda as quebras de linha como texto,
  * e partir uma frase em duas linhas não é uma divergência. Todos os outros
  * caracteres têm de estar lá, pela ordem. Entre duas strings só podem aparecer os
- * separadores que a página desenha (o ponto do nome, "·" e "—").
+ * separadores que a página desenha (o ponto do nome, "·" e "—") e o marcador dos
+ * pontos da experiência ("•", fase 12).
  */
 const plano = (s) => s.normalize('NFKC').replace(/\s+/g, '');
-const SEPARADORES = /^[.·—–]*$/;
+const SEPARADORES = /^[.·—–•]*$/;
 
 function compararComCanonico(texto, lang) {
   const divergencias = [];

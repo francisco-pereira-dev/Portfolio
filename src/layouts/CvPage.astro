@@ -112,6 +112,51 @@ const links = [
 
       {/* O id de cada secção é igual nas duas línguas, para o seletor de idioma
           levar a âncora e cair no mesmo sítio. */}
+      {/* A ordem (fase 12): as competências logo a seguir ao resumo e a experiência
+          antes dos projetos — é o que quem faz a triagem lê primeiro. */}
+      {/* Grelha de duas colunas: a do rótulo tem a largura do mais comprido, e por
+          isso "Frameworks e bibliotecas" nunca encosta ao valor. */}
+      <section id="competencias" class="cv-secao" aria-labelledby="h-competencias">
+        <h2 id="h-competencias">{ui['cv-heading-skills']}</h2>
+        <dl class="cv-competencias">
+          {
+            cv.competencias.map((c) => (
+              <>
+                <dt>{t(c.rotulo, lang)}</dt>
+                <dd>{t(c.valor, lang)}</dd>
+              </>
+            ))
+          }
+        </dl>
+      </section>
+
+      {/* Fase 12: a experiência leva pontos, cada um começado por um verbo, porque quem
+          varre um CV lê as primeiras palavras de cada linha. Os projetos ficam em linha
+          corrida, de propósito. A stack e a data na mesma linha, como nos projetos. */}
+      <section id="experiencia" class="cv-secao" aria-labelledby="h-experiencia">
+        <h2 id="h-experiencia">{ui['cv-heading-experience']}</h2>
+        <ul class="cv-itens">
+          {
+            cv.experiencia.map((e) => (
+              <li class="cv-item">
+                <p class="cv-item-titulo">
+                  <strong>{t(e.funcao, lang)}</strong> <span class="cv-sep" aria-hidden="true">—</span>{' '}
+                  {t(e.empresa, lang)}
+                </p>
+                <p class="cv-item-meta">
+                  {t(e.tech, lang)} <span class="cv-sep" aria-hidden="true">—</span> <span>{t(e.quando, lang)}</span>
+                </p>
+                <ul class="cv-pontos">
+                  {e.pontos.map((p) => (
+                    <li>{t(p, lang)}</li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
       <section id="projetos" class="cv-secao" aria-labelledby="h-projetos">
         <h2 id="h-projetos">{ui['cv-heading-projects']}</h2>
         <ul class="cv-itens">
@@ -132,26 +177,6 @@ const links = [
         <p class="cv-mais">{t(cv.projetosMais, lang)}</p>
       </section>
 
-      <section id="experiencia" class="cv-secao" aria-labelledby="h-experiencia">
-        <h2 id="h-experiencia">{ui['cv-heading-experience']}</h2>
-        <ul class="cv-itens">
-          {
-            cv.experiencia.map((e) => (
-              <li class="cv-item">
-                <p class="cv-item-titulo">
-                  <strong>{t(e.funcao, lang)}</strong> <span class="cv-sep" aria-hidden="true">—</span>{' '}
-                  {t(e.empresa, lang)}
-                </p>
-                <p class="cv-item-meta">
-                  {t(e.papel, lang)} <span class="cv-sep" aria-hidden="true">—</span> <span>{t(e.quando, lang)}</span>
-                </p>
-                <p class="cv-item-linha">{t(e.descricao, lang)}</p>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
       <section id="educacao" class="cv-secao" aria-labelledby="h-educacao">
         <h2 id="h-educacao">{ui['cv-heading-education']}</h2>
         <ul class="cv-itens">
@@ -168,22 +193,6 @@ const links = [
             ))
           }
         </ul>
-      </section>
-
-      {/* Grelha de duas colunas: a do rótulo tem a largura do mais comprido, e por
-          isso "Frameworks e bibliotecas" nunca encosta ao valor. */}
-      <section id="competencias" class="cv-secao" aria-labelledby="h-competencias">
-        <h2 id="h-competencias">{ui['cv-heading-skills']}</h2>
-        <dl class="cv-competencias">
-          {
-            cv.competencias.map((c) => (
-              <>
-                <dt>{t(c.rotulo, lang)}</dt>
-                <dd>{t(c.valor, lang)}</dd>
-              </>
-            ))
-          }
-        </dl>
       </section>
 
       <section id="idiomas" class="cv-secao" aria-labelledby="h-idiomas">

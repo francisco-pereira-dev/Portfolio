@@ -20,7 +20,8 @@
       "fase-5.1": "enunciado da fase 5.1 (2026-09-17): nome acessível do seletor de idioma, \"Mudar para inglês\" / \"Switch to Portuguese\"; texto alternativo da foto, \"Fotografia de Francisco Pereira\" / \"Photograph of Francisco Pereira\"",
       "fase-5.2": "enunciado da fase 5.2 (2026-09-17): todas as provas das competências levam à linha do projeto na secção Projetos; \"todos\" à secção; \"Portfolio\" continua no GitHub. Só muda o destino, nenhum texto.",
       "fase-9": "enunciado da fase 9 (2026-09-18): o CV como página do site (/cv e /en/cv) — todo o texto da secção cv, os títulos das secções do CV e \"Descarregar PDF\" / \"Download PDF\"; o botão do hero passa a \"Ver CV\" / \"View CV\". Nas respostas às colisões: o título da página, \"CV — Francisco Pereira\", nas duas línguas.",
-      "fase-10": "enunciado da fase 10 (2026-09-18): no CV, a última frase do resumo e a linha final dos projetos, nas duas línguas — o CV dizia que todos os projetos estão documentados no site, e o Portfolio não tem linha nem case study, e o Mr. Pizza e o Diane Arbus só têm modal."
+      "fase-10": "enunciado da fase 10 (2026-09-18): no CV, a última frase do resumo e a linha final dos projetos, nas duas línguas — o CV dizia que todos os projetos estão documentados no site, e o Portfolio não tem linha nem case study, e o Mr. Pizza e o Diane Arbus só têm modal.",
+      "fase-12": "enunciado da fase 12 (2026-09-19): o Licas passa de Projetos para Experiência, com três pontos; a entrada do estágio passa a um ponto, e sai o rótulo \"Programador de aplicações\" / \"Application developer\". Cada ponto começa por um verbo no passado."
     },
     "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true.",
     "extracao_legado": "Do e0a67bc: PT do conteúdo dos elementos com data-translate (e do data-tooltip), EN do objeto translations.en; aria-label do menu e do tema do setLanguage do script.js. Texto e atributos que o site nunca traduzia ficam com o mesmo valor nas duas línguas, como eram servidos. Só entrou o que coincide com os dados de hoje; a única alteração aplicada foi a autorizada (\"and\" -> \"e\" na primeira feature PT do Diane Arbus)."
@@ -1625,8 +1626,8 @@
     "_fase4.2b": "Desde a fase 4.2b as modais do Mr. Pizza e do Diane Arbus não mostram a descrição longa: a frase da linha é a descrição. A description continua nos dados de todos os projetos como texto aprovado, mas não aparece no site."
   },
   "cv": {
-    "_origem": "fase-9; a última frase do resumo e a linha \"Mais seis projetos\": fase-10",
-    "_separadores": "Cada linha do enunciado foi partida nas suas partes, cortando só o \" — \" que as separa (como o \" · \" do rodapé e das tecnologias, na extração original); a página e o PDF voltam a pô-lo. O \" · \" dentro de uma parte (tecnologias, papel, idiomas) faz parte do texto. As linhas partidas a meio de uma frase no enunciado foram juntas com um espaço.",
+    "_origem": "fase-9; a última frase do resumo e a linha \"Mais seis projetos\": fase-10; a experiência e a saída do Licas dos projetos: fase-12",
+    "_separadores": "Cada linha do enunciado foi partida nas suas partes, cortando só o \" — \" que as separa (como o \" · \" do rodapé e das tecnologias, na extração original); a página e o PDF voltam a pô-lo. O \" · \" dentro de uma parte (tecnologias, idiomas) faz parte do texto. As linhas partidas a meio de uma frase no enunciado foram juntas com um espaço. Fase 12: cada entrada da experiência tem funcao — empresa, a data (quando), a stack (tech) e os pontos; cada ponto é uma frase inteira do enunciado.",
     "_nome": "O enunciado dá o nome uma vez, na parte portuguesa; é o mesmo nas duas línguas. O email e os três links não são texto do canónico: vêm do src/data/site.json e do astro.config.mjs (site).",
     "nome": {
       "pt": "Francisco Pereira",
@@ -1649,24 +1650,6 @@
       "en": "I started programming at fifteen. I am in the final year of a Computer Engineering degree, taken in evening classes, and I work in full-stack web — from the data model to the interface — and in native C++. My work is documented at franciscopereira.dev, with the technical decisions and what went wrong."
     },
     "projetos": [
-      {
-        "titulo": {
-          "pt": "Licas",
-          "en": "Licas"
-        },
-        "descricao": {
-          "pt": "plataforma de encomendas online para uma pastelaria artesanal, com back-office. Sozinho, de ponta a ponta.",
-          "en": "online ordering platform for an artisan pastry shop, with a full back-office. Built alone, end to end."
-        },
-        "tech": {
-          "pt": "React · TypeScript · Supabase · PostgreSQL · Vite",
-          "en": "React · TypeScript · Supabase · PostgreSQL · Vite"
-        },
-        "quando": {
-          "pt": "cliente real, 2026 – em curso",
-          "en": "real client, 2026 – ongoing"
-        }
-      },
       {
         "titulo": {
           "pt": "CadflowBankSystem",
@@ -1729,6 +1712,38 @@
     "experiencia": [
       {
         "funcao": {
+          "pt": "Developer",
+          "en": "Developer"
+        },
+        "empresa": {
+          "pt": "Licas, projeto de cliente",
+          "en": "Licas, client project"
+        },
+        "quando": {
+          "pt": "2026 – em curso",
+          "en": "2026 – ongoing"
+        },
+        "tech": {
+          "pt": "React · TypeScript · Supabase · PostgreSQL · Vite",
+          "en": "React · TypeScript · Supabase · PostgreSQL · Vite"
+        },
+        "pontos": [
+          {
+            "pt": "Construí sozinho uma plataforma de encomendas online para uma pastelaria artesanal, com back-office: arquitetura, modelo de dados, backend, frontend e preparação para produção.",
+            "en": "Built an online ordering platform for an artisan pastry shop single-handedly, with a full back-office: architecture, data model, backend, frontend and production readiness."
+          },
+          {
+            "pt": "Suportei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
+            "en": "Supported two purchase flows in one application: catalogue products with fixed prices, and custom cakes that need a quote before a price exists."
+          },
+          {
+            "pt": "Apliquei as regras de acesso na base de dados, e não na interface, e tornei o resgate de cupões de uso único atómico — uma verificação em código é contornável por dois pedidos simultâneos.",
+            "en": "Enforced access rules in the database rather than in the interface, and made single-use coupon redemption atomic — a check in code can be bypassed by two simultaneous requests."
+          }
+        ]
+      },
+      {
+        "funcao": {
           "pt": "Estagiário",
           "en": "Intern"
         },
@@ -1736,18 +1751,20 @@
           "pt": "ITGlee, Figueira da Foz",
           "en": "ITGlee, Figueira da Foz"
         },
-        "papel": {
-          "pt": "Programador de aplicações · OutSystems",
-          "en": "Application developer · OutSystems"
-        },
         "quando": {
           "pt": "jan. – mai. 2021",
           "en": "Jan – May 2021"
         },
-        "descricao": {
-          "pt": "Loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
-          "en": "Online computer-hardware store with warehouse management, presented as my final secondary-school project."
-        }
+        "tech": {
+          "pt": "OutSystems",
+          "en": "OutSystems"
+        },
+        "pontos": [
+          {
+            "pt": "Desenvolvi uma loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
+            "en": "Developed an online computer-hardware store with warehouse management, presented as my final secondary-school project."
+          }
+        ]
       }
     ],
     "educacao": [
@@ -2088,6 +2105,37 @@
         "pt": "Mais seis projetos, com o contexto e as decisões de cada um, em franciscopereira.dev",
         "en": "Six more projects, each with its context and decisions, at franciscopereira.dev",
         "_motivo": "fase 10: afirmação falsa — o Portfolio não tem linha nem case study no site, e o Mr. Pizza e o Diane Arbus só têm modal"
+      }
+    },
+    "fase-12": {
+      "cv.projetos[0] (Licas)": {
+        "titulo": {
+          "pt": "Licas",
+          "en": "Licas"
+        },
+        "descricao": {
+          "pt": "plataforma de encomendas online para uma pastelaria artesanal, com back-office. Sozinho, de ponta a ponta.",
+          "en": "online ordering platform for an artisan pastry shop, with a full back-office. Built alone, end to end."
+        },
+        "tech": {
+          "pt": "React · TypeScript · Supabase · PostgreSQL · Vite",
+          "en": "React · TypeScript · Supabase · PostgreSQL · Vite"
+        },
+        "quando": {
+          "pt": "cliente real, 2026 – em curso",
+          "en": "real client, 2026 – ongoing"
+        },
+        "_motivo": "fase 12: trabalho pago para um cliente vai para a Experiência, e não para os Projetos, onde ficava ao lado de um projeto pessoal. O Licas passou a ser a primeira entrada da Experiência, em três pontos."
+      },
+      "cv.experiencia[0].papel": {
+        "pt": "Programador de aplicações · OutSystems",
+        "en": "Application developer · OutSystems",
+        "_motivo": "fase 12: \"Programador de aplicações\" / \"Application developer\" é linguagem de formulário, e o cargo já está no título; o OutSystems passou para a linha da stack"
+      },
+      "cv.experiencia[0].descricao": {
+        "pt": "Loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
+        "en": "Online computer-hardware store with warehouse management, presented as my final secondary-school project.",
+        "_motivo": "fase 12: a experiência passou a pontos começados por um verbo; esta frase deu lugar a \"Desenvolvi…\" / \"Developed…\""
       }
     }
   }

@@ -22,24 +22,6 @@
   "projetos": [
     {
       "titulo": {
-        "pt": "Licas",
-        "en": "Licas"
-      },
-      "descricao": {
-        "pt": "plataforma de encomendas online para uma pastelaria artesanal, com back-office. Sozinho, de ponta a ponta.",
-        "en": "online ordering platform for an artisan pastry shop, with a full back-office. Built alone, end to end."
-      },
-      "tech": {
-        "pt": "React · TypeScript · Supabase · PostgreSQL · Vite",
-        "en": "React · TypeScript · Supabase · PostgreSQL · Vite"
-      },
-      "quando": {
-        "pt": "cliente real, 2026 – em curso",
-        "en": "real client, 2026 – ongoing"
-      }
-    },
-    {
-      "titulo": {
         "pt": "CadflowBankSystem",
         "en": "CadflowBankSystem"
       },
@@ -100,6 +82,38 @@
   "experiencia": [
     {
       "funcao": {
+        "pt": "Developer",
+        "en": "Developer"
+      },
+      "empresa": {
+        "pt": "Licas, projeto de cliente",
+        "en": "Licas, client project"
+      },
+      "quando": {
+        "pt": "2026 – em curso",
+        "en": "2026 – ongoing"
+      },
+      "tech": {
+        "pt": "React · TypeScript · Supabase · PostgreSQL · Vite",
+        "en": "React · TypeScript · Supabase · PostgreSQL · Vite"
+      },
+      "pontos": [
+        {
+          "pt": "Construí sozinho uma plataforma de encomendas online para uma pastelaria artesanal, com back-office: arquitetura, modelo de dados, backend, frontend e preparação para produção.",
+          "en": "Built an online ordering platform for an artisan pastry shop single-handedly, with a full back-office: architecture, data model, backend, frontend and production readiness."
+        },
+        {
+          "pt": "Suportei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
+          "en": "Supported two purchase flows in one application: catalogue products with fixed prices, and custom cakes that need a quote before a price exists."
+        },
+        {
+          "pt": "Apliquei as regras de acesso na base de dados, e não na interface, e tornei o resgate de cupões de uso único atómico — uma verificação em código é contornável por dois pedidos simultâneos.",
+          "en": "Enforced access rules in the database rather than in the interface, and made single-use coupon redemption atomic — a check in code can be bypassed by two simultaneous requests."
+        }
+      ]
+    },
+    {
+      "funcao": {
         "pt": "Estagiário",
         "en": "Intern"
       },
@@ -107,18 +121,20 @@
         "pt": "ITGlee, Figueira da Foz",
         "en": "ITGlee, Figueira da Foz"
       },
-      "papel": {
-        "pt": "Programador de aplicações · OutSystems",
-        "en": "Application developer · OutSystems"
-      },
       "quando": {
         "pt": "jan. – mai. 2021",
         "en": "Jan – May 2021"
       },
-      "descricao": {
-        "pt": "Loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
-        "en": "Online computer-hardware store with warehouse management, presented as my final secondary-school project."
-      }
+      "tech": {
+        "pt": "OutSystems",
+        "en": "OutSystems"
+      },
+      "pontos": [
+        {
+          "pt": "Desenvolvi uma loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
+          "en": "Developed an online computer-hardware store with warehouse management, presented as my final secondary-school project."
+        }
+      ]
     }
   ],
   "educacao": [

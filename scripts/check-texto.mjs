@@ -558,10 +558,11 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
         botoes.map((a) => `${a.texto} -> ${a.href}`).join(' | ') + (comDownload ? '' : ', sem download') + (fs.existsSync(path.join(root, 'dist', pdf)) ? '' : `, falta dist${pdf}`) || '(nenhum)',
       );
 
-      // As secções, pela ordem, cada uma com o seu título.
+      // As secções, pela ordem, cada uma com o seu título. Fase 12: as competências logo
+      // a seguir ao resumo, e a experiência antes dos projetos.
       const CV_SECOES = [
-        ['projetos', 'cv-heading-projects'], ['experiencia', 'cv-heading-experience'], ['educacao', 'cv-heading-education'],
-        ['competencias', 'cv-heading-skills'], ['idiomas', 'cv-heading-languages'], ['interesses', 'cv-heading-interests'],
+        ['competencias', 'cv-heading-skills'], ['experiencia', 'cv-heading-experience'], ['projetos', 'cv-heading-projects'],
+        ['educacao', 'cv-heading-education'], ['idiomas', 'cv-heading-languages'], ['interesses', 'cv-heading-interests'],
       ];
       const idsCv = [...main.matchAll(/<section id="([^"]+)" class="cv-secao"/g)].map((m) => m[1]);
       exigir(JSON.stringify(idsCv) === JSON.stringify(CV_SECOES.map(([id]) => id)), lang, 'cv (secções e ordem)', CV_SECOES.map(([id]) => id).join(', '), idsCv.join(', ') || '(nenhuma)');
@@ -589,7 +590,15 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       cmpItens('projetos', cv.projetos, [['cv-item-titulo', ['titulo', 'descricao']], ['cv-item-meta', ['tech', 'quando']]]);
       const mais = um(secCv.projetos, /<p class="cv-mais">([\s\S]*?)<\/p>/);
       exigir(mais === L(cv.projetosMais), lang, 'cv.projetosMais', L(cv.projetosMais), mais ?? '(em falta)');
-      cmpItens('experiencia', cv.experiencia, [['cv-item-titulo', ['funcao', 'empresa']], ['cv-item-meta', ['papel', 'quando']], ['cv-item-linha', ['descricao']]]);
+      // Fase 12: a experiência tem a stack e a data na linha de baixo, e depois os pontos,
+      // um a um e pela ordem — nem um a mais, nem um a menos.
+      cmpItens('experiencia', cv.experiencia, [['cv-item-titulo', ['funcao', 'empresa']], ['cv-item-meta', ['tech', 'quando']]]);
+      itens('experiencia').forEach((item, i) => {
+        const esperados = (cv.experiencia[i]?.pontos ?? []).map(L);
+        const achados = todos((item.match(/<ul class="cv-pontos">([\s\S]*?)<\/ul>/) || ['', ''])[1], /<li>([\s\S]*?)<\/li>/g);
+        exigir(achados.length === esperados.length, lang, `cv.experiencia[${i}].pontos (quantidade)`, String(esperados.length), String(achados.length));
+        esperados.forEach((p, k) => exigir(achados[k] === p, lang, `cv.experiencia[${i}].pontos[${k}]`, p, achados[k] ?? '(em falta)'));
+      });
       cmpItens('educacao', cv.educacao, [['cv-item-titulo', ['curso']], ['cv-item-meta', ['escola', 'quando']]]);
 
       // Competências: rótulo e valor, par a par, numa grelha (dl).
@@ -608,10 +617,10 @@ for (const [lang, ficheiro] of Object.entries(PAGINAS)) {
       const sequenciaEsperada = [
         L(ui['cv-btn-download']), L(cv.nome), L(cv.cargo), L(cv.localidade), siteJson.email,
         ...linksEsperados.map((l) => l.split(' -> ')[0]), L(cv.resumo),
-        L(ui['cv-heading-projects']), ...cv.projetos.flatMap((p) => [p.titulo, p.descricao, p.tech, p.quando].map(L)), L(cv.projetosMais),
-        L(ui['cv-heading-experience']), ...cv.experiencia.flatMap((e) => [e.funcao, e.empresa, e.papel, e.quando, e.descricao].map(L)),
-        L(ui['cv-heading-education']), ...cv.educacao.flatMap((e) => [e.curso, e.escola, e.quando].map(L)),
         L(ui['cv-heading-skills']), ...cv.competencias.flatMap((c) => [c.rotulo, c.valor].map(L)),
+        L(ui['cv-heading-experience']), ...cv.experiencia.flatMap((e) => [e.funcao, e.empresa, e.tech, e.quando, ...e.pontos].map(L)),
+        L(ui['cv-heading-projects']), ...cv.projetos.flatMap((p) => [p.titulo, p.descricao, p.tech, p.quando].map(L)), L(cv.projetosMais),
+        L(ui['cv-heading-education']), ...cv.educacao.flatMap((e) => [e.curso, e.escola, e.quando].map(L)),
         L(ui['cv-heading-languages']), L(cv.idiomas), L(ui['cv-heading-interests']), L(cv.interesses),
       ];
       const primeira = sequenciaEsperada.findIndex((e, i) => sequencia[i] !== e);

@@ -188,6 +188,26 @@
     color: var(--text-primary);
 }
 
+/* Os pontos da experiência (fase 12): cada um começa por um verbo, e quem varre o CV
+   lê as primeiras palavras de cada linha. O marcador fica na cor secundária, para o
+   que se lê primeiro ser o verbo. */
+.cv-pontos {
+    margin-top: var(--sp-2);
+    padding-left: var(--sp-6);
+    list-style: disc;
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
+    color: var(--text-primary);
+}
+
+.cv-pontos li + li {
+    margin-top: var(--sp-1);
+}
+
+.cv-pontos li::marker {
+    color: var(--text-secondary);
+}
+
 .cv-mais {
     margin-top: var(--sp-4);
     font-size: var(--fs-small);
@@ -452,6 +472,18 @@
         margin-top: 2pt;
         font-size: 8.9pt;
         line-height: 1.4;
+    }
+
+    /* Os pontos têm o tamanho da linha de item, que substituem (fase 12). */
+    .cv-pontos {
+        margin-top: 2pt;
+        padding-left: 11pt;
+        font-size: 8.9pt;
+        line-height: 1.4;
+    }
+
+    .cv-pontos li + li {
+        margin-top: 1pt;
     }
 
     .cv-mais {
