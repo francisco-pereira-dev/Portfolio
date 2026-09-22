@@ -1,0 +1,26 @@
+# dependências
+node_modules/
+
+# output de build
+dist/
+.astro/
+
+# variáveis de ambiente
+.env*
+
+# caches e resultados de ferramentas
+.cache/
+.eslintcache
+*.tsbuildinfo
+test-results/
+playwright-report/
+
+# sistema operativo / logs
+.DS_Store
+Thumbs.db
+*.log
+
+# maquetes que a aplicação do Claude guarda aqui quando se trabalha noutro chat;
+# não pertencem ao projeto (o CV a sério é a página /cv e o npm run cv)
+Claude outputs/
+

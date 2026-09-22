@@ -1,0 +1,83 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Só na branch main. Nenhuma outra branch dispara o deploy.
+  push:
+    branches:
+      - main
+  # Permite disparar manualmente a partir do separador Actions.
+  workflow_dispatch:
+
+# Permissões necessárias para publicar no GitHub Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy de cada vez; não cancela um deploy já em curso.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # Porta de entrada: se uma verificação falhar, este job falha, o "build" não
+  # arranca (needs: verificar) e o "deploy" também não (needs: build). Nada chega
+  # ao ar. Faz o seu próprio checkout, npm ci e build, para não depender do que a
+  # withastro/action faz a seguir.
+  #
+  # As auditorias de acessibilidade (npm run audit:a11y e audit:teclado) ficam de
+  # fora de propósito: precisam do Chromium do Playwright (cerca de 707 MB), que
+  # tornaria cada publicação lenta e sujeita a falhas intermitentes. Correm à mão.
+  verificar:
+    name: Verificar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Instalar as dependências
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Paridade entre PT e EN
+        run: npm run check:i18n
+
+      - name: O site diz o texto aprovado
+        run: npm run check:texto
+
+  build:
+    name: Build
+    needs: verificar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install, build and upload the site
+        uses: withastro/action@v3
+        with:
+          # A action usa Node 20 por omissão e o Astro 7 exige >= 22.12.0, o que
+          # fez o primeiro deploy falhar em 13 segundos. O 24 é a versão em que
+          # o site foi construído e verificado localmente.
+          node-version: "24"
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+

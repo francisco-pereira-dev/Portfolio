@@ -1,0 +1,54 @@
+---
+import { localeHref, otherLang, type Lang, type Ui } from '../i18n';
+import NavSemJs from './NavSemJs.astro';
+
+interface Props {
+  ui: Ui;
+  lang: Lang;
+  /** A mesma página na outra língua. Por omissão, a página inicial dessa língua. */
+  hrefOutra?: string;
+  /** Fora da página inicial, as âncoras da navegação sem JavaScript apontam para ela. */
+  prefixo?: string;
+}
+
+const { ui, lang, hrefOutra, prefixo } = Astro.props;
+
+// O seletor de idioma deixou de trocar innerHTML: é um link para a outra língua.
+// A âncora da secção atual é acrescentada em runtime por src/scripts/main.js.
+const href = hrefOutra ?? localeHref[otherLang(lang)];
+---
+
+{/* Fase 5: é o marco <header> da página. A navegação (<nav>) é o menu overlay,
+    que o botão da esquerda abre; aria-expanded é atualizado em src/scripts/main.js. */}
+<header class="navbar">
+  <div class="nav-left">
+    <button
+      id="hamburger-btn"
+      class="hamburger-btn"
+      aria-label={ui['a11y-menu-toggle']}
+      aria-expanded="false"
+      aria-controls="overlay-menu"
+    >
+      <span class="bar bar1"></span>
+      <span class="bar bar2"></span>
+      <span class="bar bar3"></span>
+    </button>
+    <NavSemJs ui={ui} posicao="topo" prefixo={prefixo} />
+  </div>
+  <div class="nav-center">
+    <span>{ui['nav-brand']}</span>
+  </div>
+  <div class="nav-right">
+    <a id="lang-toggle" class="lang-switch" href={href} aria-label={ui['a11y-lang-toggle']}>
+      {/* Fase 5.1: cada código com a sua língua, para ser lido com a pronúncia certa. */}
+      <span class:list={['lang-pt', { 'active-lang': lang === 'pt' }]} lang="pt">PT</span>
+      <span class="lang-sep">|</span>
+      <span class:list={['lang-en', { 'active-lang': lang === 'en' }]} lang="en">EN</span>
+    </a>
+    <button id="theme-toggle" class="theme-switch" aria-label={ui['a11y-theme-toggle']}>
+      <span class="icon-moon" aria-hidden="true">🌙</span>
+      <span class="icon-sun" aria-hidden="true">☀️</span>
+    </button>
+  </div>
+</header>
+

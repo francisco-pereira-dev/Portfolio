@@ -1,0 +1,182 @@
+/* Página de case study: texto para ler, numa coluna.
+   A largura da coluna foi medida no browser para dar 60-75 caracteres por
+   linha em 1440px (ver FASE-3.3a.md). Só é carregado nestas páginas.
+   Fase 4: tamanhos e espaçamentos das escalas de global.css. */
+
+.case-page {
+    padding: var(--sp-32) var(--sp-6) var(--sp-24);
+}
+
+.case-article {
+    max-width: var(--measure);
+    margin: 0 auto;
+}
+
+.case-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-height: var(--touch);
+    color: var(--accent-text);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    /* Fase 5: sublinhado sempre, e não só no hover, para não depender só da cor. */
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+}
+
+.case-back:hover {
+    color: var(--text-primary);
+}
+
+.case-header {
+    margin: var(--sp-8) 0 0;
+}
+
+.case-tagline {
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    color: var(--accent-text);
+    margin-bottom: var(--sp-3);
+}
+
+.case-title {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-6);
+}
+
+/* A frase de abertura: a cor principal, destacada do corpo. */
+.case-lede {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    color: var(--text-primary);
+}
+
+/* Tecnologias, links e nota: o que antes estava na modal. */
+.case-meta {
+    margin-top: var(--sp-12);
+    padding-top: var(--sp-6);
+    border-top: 1px solid var(--border-color);
+}
+
+.case-tech {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--fs-meta);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+}
+
+.case-tech li + li::before {
+    content: '·';
+    content: '·' / '';
+    margin: 0 var(--sp-2);
+}
+
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--sp-8);
+    margin-top: var(--sp-2);
+}
+
+/* Estado in-development: não é link, e não deve parecer um. */
+.case-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    font-size: var(--fs-small);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+.case-note {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-meta);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+}
+
+.case-section {
+    margin-top: var(--sp-16);
+}
+
+/* Títulos de secção: rótulos em maiúsculas pequenas, a roxo. O texto no HTML
+   continua o do canónico; as maiúsculas são só CSS. */
+.case-section h2 {
+    font-size: var(--fs-micro);
+    line-height: var(--lh-lead);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: var(--sp-4);
+}
+
+.case-section p {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--text-secondary);
+}
+
+.case-section p + p {
+    margin-top: var(--sp-4);
+}
+
+.case-decisions {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-8);
+}
+
+/* Cada decisão com uma barra de 2px a roxo translúcido. */
+.case-decision {
+    padding-left: var(--sp-6);
+    border-left: 2px solid rgba(139, 92, 246, 0.5);
+}
+
+.case-decision h3 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-3);
+}
+
+/* "O que correu mal" é a secção que se quer que se note: caixa com fundo de
+   superfície e o rótulo a âmbar em vez de roxo. */
+#correu-mal {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--sp-8);
+}
+
+#correu-mal h2 {
+    color: var(--warning-text);
+}
+
+.case-end {
+    margin-top: var(--sp-16);
+    padding-top: var(--sp-8);
+    border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .case-page {
+        padding: var(--sp-24) var(--sp-6) var(--sp-16);
+    }
+
+    #correu-mal {
+        padding: var(--sp-6);
+    }
+}
+

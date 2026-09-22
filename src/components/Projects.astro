@@ -1,0 +1,34 @@
+---
+/**
+ * Secção de projetos, como lista.
+ *
+ * Cada projeto é uma linha: número, título, etiqueta por baixo, a frase do
+ * projeto, stack e uma ação. Fase 4.2c: o Licas deixou de ter um bloco de
+ * destaque. Fase 4.2d: acabou a sub-secção "Design → Código" — os nove projetos
+ * estão na mesma lista, pela ordem, e o que a distinguia passou para a etiqueta
+ * e para o botão "?" desses dois projetos.
+ *
+ * Nenhuma linha mostra imagem: os screenshots servem só as imagens de partilha.
+ */
+import type { CollectionEntry } from 'astro:content';
+import type { Lang, Ui } from '../i18n';
+import ProjectRow from './ProjectRow.astro';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+  lang: Lang;
+  ui: Ui;
+}
+
+const { projects, lang, ui } = Astro.props;
+---
+
+<section id="projects" class="projects-section">
+  <SectionHeading titulo={ui['projects-heading']} />
+
+  <ul class="project-list">
+    {projects.map((project) => <ProjectRow project={project} lang={lang} ui={ui} />)}
+  </ul>
+</section>
+

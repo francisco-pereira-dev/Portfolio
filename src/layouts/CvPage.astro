@@ -1,0 +1,214 @@
+---
+/**
+ * O CV como página do site (fase 9), numa língua.
+ *
+ * Uma coluna, sem tabelas nem imagens além da fotografia. A mesma página dá o
+ * PDF: o npm run cv abre-a em modo de impressão e o CSS de impressão
+ * (src/styles/cv.css) põe-na numa folha A4, sempre em branco.
+ *
+ * O texto vem de src/data/cv.json (gerado do canónico); os títulos das secções
+ * e o botão, do i18n. O email e os três links vêm do site.json e do
+ * astro.config.mjs (site), e os links escrevem-se por extenso: o endereço sem
+ * o protocolo nem a barra final.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import OverlayMenu from '../components/OverlayMenu.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import NavSemJs from '../components/NavSemJs.astro';
+import site from '../data/site.json';
+import cv from '../data/cv.json';
+import { translations, localeHref, otherLang, t, type Lang } from '../i18n';
+import { resumir } from '../lib/caseStudy';
+import { cvHref, cvPdfHref } from '../lib/cv';
+import type { PaginaSeo } from '../lib/seo';
+import avatar from '../../assets/images/avatar.jpg';
+import '../styles/cv.css';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const ui = translations[lang];
+
+// A meta description é o resumo, inteiro ou cortado numa palavra, como a frase de
+// abertura nos case studies.
+const seo: PaginaSeo = {
+  titulo: ui['cv-meta-title'],
+  descricao: resumir(t(cv.resumo, lang)),
+  caminho: cvHref(lang),
+  caminhoOutra: cvHref(otherLang(lang)),
+  tipo: 'website',
+};
+
+// O site leva à página inicial da mesma língua. Os endereços são absolutos para
+// continuarem certos dentro do PDF, que é gerado a partir de um servidor local.
+const base = Astro.site ?? new URL('https://franciscopereira.dev/');
+const porExtenso = (href: string) => href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+const links = [
+  { href: new URL(localeHref[lang], base).href, texto: porExtenso(base.href), externo: false },
+  { href: site.githubUrl, texto: porExtenso(site.githubUrl), externo: true },
+  { href: site.linkedinUrl, texto: porExtenso(site.linkedinUrl), externo: true },
+];
+---
+
+<BaseLayout lang={lang} ui={ui} seo={seo}>
+  <OverlayMenu ui={ui} prefixo={localeHref[lang]} />
+
+  <Navbar ui={ui} lang={lang} hrefOutra={cvHref(otherLang(lang))} prefixo={localeHref[lang]} />
+
+  {/* id e tabindex: destino do link "Saltar para o conteúdo" (fase 5). */}
+  <main id="conteudo" class="cv-page" tabindex="-1">
+    <article class="cv">
+      {/* Escondido na impressão: o PDF não leva o botão que o descarrega. */}
+      <div class="cv-acoes">
+        <a class="btn btn-primary cv-download" href={cvPdfHref(lang)} download>{ui['cv-btn-download']}</a>
+      </div>
+
+      <header class="cv-topo">
+        <div class="cv-id">
+          {/* O ponto final a roxo é CSS, como no hero: o h1 fica exatamente o nome. */}
+          <h1 class="cv-nome">{t(cv.nome, lang)}</h1>
+          <p class="cv-cargo">{t(cv.cargo, lang)}</p>
+          {/* O "·" entre os dois é CSS, como nos links: no telemóvel passam a linhas próprias. */}
+          <p class="cv-pessoal">
+            <span>{t(cv.localidade, lang)}</span>
+            <span>{site.email}</span>
+          </p>
+        </div>
+        {/* A mesma largura do hero: o Astro reaproveita o ficheiro que já gera para ele. */}
+        <Image
+          src={avatar}
+          alt={t(cv.fotoAlt, lang)}
+          class="cv-foto"
+          width={Math.min(400, avatar.width)}
+          loading="eager"
+          decoding="async"
+        />
+      </header>
+
+      {/* Numa linha própria, à largura toda: ao lado da fotografia partiam em três. */}
+      <ul class="cv-links">
+        {
+          links.map((l) =>
+            l.externo ? (
+              <li>
+                <a href={l.href} target="_blank" rel="noopener noreferrer">
+                  {l.texto}
+                </a>
+              </li>
+            ) : (
+              <li>
+                <a href={l.href}>{l.texto}</a>
+              </li>
+            )
+          )
+        }
+      </ul>
+
+      <p class="cv-resumo">{t(cv.resumo, lang)}</p>
+
+      {/* O id de cada secção é igual nas duas línguas, para o seletor de idioma
+          levar a âncora e cair no mesmo sítio. */}
+      {/* A ordem (fase 12): as competências logo a seguir ao resumo e a experiência
+          antes dos projetos — é o que quem faz a triagem lê primeiro. */}
+      {/* Grelha de duas colunas: a do rótulo tem a largura do mais comprido, e por
+          isso "Frameworks e bibliotecas" nunca encosta ao valor. */}
+      <section id="competencias" class="cv-secao" aria-labelledby="h-competencias">
+        <h2 id="h-competencias">{ui['cv-heading-skills']}</h2>
+        <dl class="cv-competencias">
+          {
+            cv.competencias.map((c) => (
+              <>
+                <dt>{t(c.rotulo, lang)}</dt>
+                <dd>{t(c.valor, lang)}</dd>
+              </>
+            ))
+          }
+        </dl>
+      </section>
+
+      {/* Fase 12: a experiência leva pontos, cada um começado por um verbo, porque quem
+          varre um CV lê as primeiras palavras de cada linha. Os projetos ficam em linha
+          corrida, de propósito. A stack e a data na mesma linha, como nos projetos. */}
+      <section id="experiencia" class="cv-secao" aria-labelledby="h-experiencia">
+        <h2 id="h-experiencia">{ui['cv-heading-experience']}</h2>
+        <ul class="cv-itens">
+          {
+            cv.experiencia.map((e) => (
+              <li class="cv-item">
+                <p class="cv-item-titulo">
+                  <strong>{t(e.funcao, lang)}</strong> <span class="cv-sep" aria-hidden="true">—</span>{' '}
+                  {t(e.empresa, lang)}
+                </p>
+                <p class="cv-item-meta">
+                  {t(e.tech, lang)} <span class="cv-sep" aria-hidden="true">—</span> <span>{t(e.quando, lang)}</span>
+                </p>
+                <ul class="cv-pontos">
+                  {e.pontos.map((p) => (
+                    <li>{t(p, lang)}</li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section id="projetos" class="cv-secao" aria-labelledby="h-projetos">
+        <h2 id="h-projetos">{ui['cv-heading-projects']}</h2>
+        <ul class="cv-itens">
+          {
+            cv.projetos.map((p) => (
+              <li class="cv-item">
+                <p class="cv-item-titulo">
+                  <strong>{t(p.titulo, lang)}</strong> <span class="cv-sep" aria-hidden="true">—</span>{' '}
+                  {t(p.descricao, lang)}
+                </p>
+                <p class="cv-item-meta">
+                  {t(p.tech, lang)} <span class="cv-sep" aria-hidden="true">—</span> <span>{t(p.quando, lang)}</span>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="cv-mais">{t(cv.projetosMais, lang)}</p>
+      </section>
+
+      <section id="educacao" class="cv-secao" aria-labelledby="h-educacao">
+        <h2 id="h-educacao">{ui['cv-heading-education']}</h2>
+        <ul class="cv-itens">
+          {
+            cv.educacao.map((e) => (
+              <li class="cv-item">
+                <p class="cv-item-titulo">
+                  <strong>{t(e.curso, lang)}</strong>
+                </p>
+                <p class="cv-item-meta">
+                  {t(e.escola, lang)} <span class="cv-sep" aria-hidden="true">—</span> <span>{t(e.quando, lang)}</span>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section id="idiomas" class="cv-secao" aria-labelledby="h-idiomas">
+        <h2 id="h-idiomas">{ui['cv-heading-languages']}</h2>
+        <p class="cv-simples">{t(cv.idiomas, lang)}</p>
+      </section>
+
+      <section id="interesses" class="cv-secao" aria-labelledby="h-interesses">
+        <h2 id="h-interesses">{ui['cv-heading-interests']}</h2>
+        <p class="cv-simples">{t(cv.interesses, lang)}</p>
+      </section>
+    </article>
+  </main>
+
+  <NavSemJs ui={ui} posicao="fundo" prefixo={localeHref[lang]} />
+
+  <Footer ui={ui} />
+</BaseLayout>
+

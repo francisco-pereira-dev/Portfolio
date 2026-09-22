@@ -1,0 +1,59 @@
+{
+  "slug": "mr-pizza",
+  "order": 8,
+  "title": {
+    "pt": "Mr. Pizza - Plataforma E-commerce",
+    "en": "Mr. Pizza - E-commerce Platform"
+  },
+  "tagline": {
+    "pt": "Design → Código",
+    "en": "Design → Code"
+  },
+  "description": {
+    "pt": "Plataforma de encomenda e entrega ao domicílio, construída a partir de um design meu no Figma. O protótipo inicial foi gerado com Figma Make; o meu trabalho está na modelação dos dados e no conteúdo — catálogo de produtos com preços e alergénios, e as lojas com moradas, contactos e localizações reais.",
+    "en": "An ordering and delivery platform built from a design of mine in Figma. The initial prototype was generated with Figma Make; my own work is in the data modelling and content — a product catalogue with prices and allergens, and the stores with real addresses, contacts and locations."
+  },
+  "resumo": {
+    "pt": "Plataforma de encomenda e entrega ao domicílio, construída a partir de um design meu no Figma.",
+    "en": "An ordering and delivery platform, built from a design of mine in Figma."
+  },
+  "features": [
+    {
+      "pt": "Catálogo completo de produtos (pizzas, bebidas e sobremesas).",
+      "en": "Full product catalog (pizzas, drinks, and desserts)."
+    },
+    {
+      "pt": "Sistema de carrinho de compras e encomendas online.",
+      "en": "Shopping cart and online ordering system."
+    },
+    {
+      "pt": "Opção de entrega ao domicílio integrada.",
+      "en": "Integrated home delivery option."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "React",
+      "en": "React"
+    },
+    {
+      "pt": "TypeScript",
+      "en": "TypeScript"
+    },
+    {
+      "pt": "Figma",
+      "en": "Figma"
+    }
+  ],
+  "repoUrl": "https://github.com/francisco-pereira-dev/MR.PIZZA",
+  "demoUrl": "https://www.figma.com/make/57gTE2ImwjuWhgp7xvIOt0/Mr.Pizza?t=ozhxbP5UJsBfrlE4-20&fullscreen=1",
+  "status": "live",
+  "nota": "projects-design-text",
+  "coldStart": false,
+  "image": "../../../assets/images/mrpizza.webp",
+  "imageAlt": {
+    "pt": "Mr. Pizza - Plataforma E-commerce",
+    "en": "Mr. Pizza - E-commerce Platform"
+  }
+}
+

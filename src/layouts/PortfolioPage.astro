@@ -1,0 +1,62 @@
+---
+/**
+ * Monta a página inteira para uma língua.
+ *
+ * As duas rotas (/ e /en/) são a mesma estrutura com dados diferentes, por isso
+ * vivem aqui em vez de duplicadas nos dois ficheiros de página. A ordem dos
+ * blocos reproduz a do index.html legado: menu overlay, navbar, main, rodapé,
+ * fundo das modais e as modais — desde a fase 4, só as dos projetos sem case
+ * study; os outros ligam à sua página.
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import { translations, type Lang } from '../i18n';
+
+import OverlayMenu from '../components/OverlayMenu.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contacts from '../components/Contacts.astro';
+import Footer from '../components/Footer.astro';
+import NavSemJs from '../components/NavSemJs.astro';
+import ProjectModal from '../components/ProjectModal.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const ui = translations[lang];
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout lang={lang} ui={ui}>
+  <OverlayMenu ui={ui} />
+
+  <Navbar ui={ui} lang={lang} />
+
+  {/* id e tabindex: destino do link "Saltar para o conteúdo" (fase 5). */}
+  <main id="conteudo" tabindex="-1">
+    <Hero ui={ui} lang={lang} />
+    <About ui={ui} />
+    <Skills ui={ui} lang={lang} />
+    <Projects projects={projects} lang={lang} ui={ui} />
+    <Contacts ui={ui} />
+  </main>
+
+  <NavSemJs ui={ui} posicao="fundo" />
+
+  <Footer ui={ui} />
+
+  <div class="modal-overlay" id="modal-overlay"></div>
+
+  {
+    projects
+      .filter((project) => !project.data.caseStudy)
+      .map((project) => <ProjectModal project={project} lang={lang} ui={ui} />)
+  }
+</BaseLayout>
+

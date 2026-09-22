@@ -1,0 +1,78 @@
+---
+import type { Ui } from '../i18n';
+import site from '../data/site.json';
+import Icon from './Icon.astro';
+
+interface Props {
+  ui: Ui;
+  /** Fora da página inicial, as âncoras apontam para ela ("/" ou "/en/"). */
+  prefixo?: string;
+}
+
+const { ui, prefixo = '' } = Astro.props;
+
+const links = [
+  { href: prefixo + '#about', label: ui['overlay-about'] },
+  { href: prefixo + '#skills', label: ui['overlay-skills'] },
+  { href: prefixo + '#projects', label: ui['overlay-projects'] },
+  { href: prefixo + '#contacts', label: ui['overlay-contacts'] },
+];
+---
+
+{/* Fase 5: é o marco <nav> da página. Fechado, fica com visibility: hidden e sai
+    da ordem de tabulação; o link da secção atual leva aria-current (main.js). */}
+<nav id="overlay-menu" class="overlay-menu">
+  <div class="overlay-content reveal">
+    <ul class="overlay-links">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} class="overlay-link">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="overlay-footer">
+      <a
+        href={site.linkedinUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="overlay-social-icon"
+        aria-label={ui['a11y-social-linkedin']}
+      >
+        <Icon name="linkedin-plain" />
+      </a>
+      <a
+        href={site.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="overlay-social-icon"
+        aria-label={ui['a11y-social-github']}
+      >
+        <Icon name="github-original" />
+      </a>
+      <a href={`mailto:${site.email}`} class="overlay-social-icon" aria-label={ui['a11y-social-email']}>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+

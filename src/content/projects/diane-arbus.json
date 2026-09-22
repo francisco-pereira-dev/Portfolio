@@ -1,0 +1,59 @@
+{
+  "slug": "diane-arbus",
+  "order": 9,
+  "title": {
+    "pt": "Catálogo Digital - Diane Arbus",
+    "en": "Diane Arbus - Digital Catalog"
+  },
+  "tagline": {
+    "pt": "Design → Código",
+    "en": "Design → Code"
+  },
+  "description": {
+    "pt": "Catálogo digital da obra da fotógrafa Diane Arbus, com um efeito de paginação em flipbook. O protótipo inicial foi gerado com Figma Make; o componente de flipbook — orquestração da animação e pré-carregamento das imagens — e as 37 obras com os respetivos textos de contexto são trabalho meu.",
+    "en": "A digital catalogue of photographer Diane Arbus's work, with a flipbook pagination effect. The initial prototype was generated with Figma Make; the flipbook component — animation orchestration and image preloading — and the 37 works with their context texts are my own work."
+  },
+  "resumo": {
+    "pt": "Catálogo digital da obra da fotógrafa Diane Arbus, com um efeito de paginação em flipbook.",
+    "en": "A digital catalogue of photographer Diane Arbus's work, with a flipbook pagination effect."
+  },
+  "features": [
+    {
+      "pt": "Galeria interativa de fotografias e autorretratos.",
+      "en": "Interactive gallery of photographs and self-portraits."
+    },
+    {
+      "pt": "Secções informativas com detalhes e contexto histórico de cada obra.",
+      "en": "Informative sections with details and historical context of each work."
+    },
+    {
+      "pt": "Design minimalista focado na experiência de visualização artística.",
+      "en": "Minimalist design focused on the artistic viewing experience."
+    }
+  ],
+  "tech": [
+    {
+      "pt": "React",
+      "en": "React"
+    },
+    {
+      "pt": "TypeScript",
+      "en": "TypeScript"
+    },
+    {
+      "pt": "Figma",
+      "en": "Figma"
+    }
+  ],
+  "repoUrl": "https://github.com/francisco-pereira-dev/Catalogo-Diane-Arbus",
+  "demoUrl": "https://www.figma.com/make/6iWnse0T44fvjOiNlQpPvj/Catalogo-Diane-Arbus?t=ozhxbP5UJsBfrlE4-20&fullscreen=1",
+  "status": "live",
+  "nota": "projects-design-text",
+  "coldStart": false,
+  "image": "../../../assets/images/dianearbus.webp",
+  "imageAlt": {
+    "pt": "Catálogo Digital - Diane Arbus",
+    "en": "Digital Catalog - Diane Arbus"
+  }
+}
+

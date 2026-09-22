@@ -1,0 +1,90 @@
+---
+/**
+ * Competências, agrupadas e com prova.
+ *
+ * Cada tecnologia liga ao que a demonstra. É o que distingue esta secção de uma
+ * lista de palavras: o link é verificável, não é uma afirmação.
+ *
+ * Fase 4.2d: as provas apontam para dentro do site.
+ *   - projeto com case study  -> a página do case study, na língua certa;
+ *   - projeto sem case study  -> a linha do projeto na página inicial;
+ *   - "todos" (Git)           -> a secção de projetos;
+ *   - "Portfolio"             -> o repositório no GitHub (a única exceção: o
+ *                                repositório deste site não tem página nem linha).
+ * Fase 5: os rótulos são os nomes dos projetos (campo "rotulo", por língua), e já
+ * não os nomes dos repositórios.
+ * Fase 5.2: todas as provas de projeto levam à linha do projeto na secção Projetos
+ * (campo "projeto"), com ou sem case study; o case study abre-se pelo "Ver mais"
+ * da linha. Nenhuma prova usa hoje o ramo "caseStudy", que continua suportado.
+ *
+ * Desde a fase 4 é informação e não exibição: sem cartões, sem ícones e sem
+ * entrada em cascata.
+ */
+import type { Lang, Ui } from '../i18n';
+import { localeHref, t } from '../i18n';
+import site from '../data/site.json';
+import grupos from '../data/skills.json';
+import { caseStudyHref } from '../lib/caseStudy';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  ui: Ui;
+  lang: Lang;
+}
+
+const { ui, lang } = Astro.props;
+
+const urlRepo = (repo: string) => `${site.githubUrl}/${repo}`;
+const inicio = localeHref[lang];
+---
+
+<section id="skills" class="skills-section">
+  <SectionHeading titulo={ui['skills-heading']} />
+
+  <div class="skills-grid">
+    {
+      grupos.map((grupo) => (
+        <div class="skill-group">
+          <h3 class="skill-group-title">
+            {ui[`skills-group-${grupo.id}` as keyof Ui]}
+          </h3>
+
+          <ul class="skill-list">
+            {grupo.items.map((item) => (
+              <li class="skill-row">
+                <span class="skill-tech">{item.name}</span>
+                <span class="skill-proofs">
+                  {item.proofs.map((prova) =>
+                    'allRepos' in prova && prova.allRepos ? (
+                      <a class="proof-link" href={`${inicio}#projects`}>
+                        {ui['skills-proof-all']}
+                      </a>
+                    ) : 'caseStudy' in prova && prova.caseStudy ? (
+                      <a class="proof-link" href={caseStudyHref(prova.caseStudy, lang)}>
+                        {t(prova.rotulo!, lang)}
+                      </a>
+                    ) : 'projeto' in prova && prova.projeto ? (
+                      <a class="proof-link" href={`${inicio}#projeto-${prova.projeto}`}>
+                        {t(prova.rotulo!, lang)}
+                      </a>
+                    ) : (
+                      <a
+                        class="proof-link"
+                        href={urlRepo(prova.repo!)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {t(prova.rotulo!, lang)}
+                      </a>
+                    )
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
+

@@ -1,0 +1,2150 @@
+{
+  "_sobre": {
+    "descricao": "Texto aprovado do portefólio, tal como foi entregue nos enunciados. É a fonte de verdade de npm run check:texto, que o compara com o HTML gerado. Não se edita à mão: uma mudança de texto do site entra aqui primeiro, copiada do enunciado que a aprova, e só depois nos ficheiros de dados.",
+    "fontes": {
+      "3.1": "mensagem de 2026-09-07T17:22:49.725Z no registo da sessão de migração",
+      "3.2": "mensagem de 2026-09-07T18:02:23.721Z no registo da sessão de migração",
+      "3.3": "mensagem de 2026-09-09T22:52:02.877Z no registo da sessão de migração",
+      "legado": "index.html e js/script.js no commit e0a67bc: o site original, de onde o texto foi extraído na fase 2.2",
+      "instrucao-2026-09-10": "hero-title e skills-proof-all em inglês, definidos pelo Francisco",
+      "3.3a": "enunciado da fase 3.3a (2026-09-10): case study do Licas e rótulo do botão de case study",
+      "3.3b": "enunciado da fase 3.3b (2026-09-12): títulos de secção do case study, regra para o alt e as tecnologias em inglês, case study do 3D Analyzer",
+      "3.3-final": "enunciado da fase 3.3-final (2026-09-12): descrição do Hotel Inteligente, case studies do DAE, AINET, Gest e Hotel Inteligente, e a decisão de quem tem case study",
+      "publicacao-2026-09-14": "enunciado da publicação da Fase 3 (2026-09-14): resultado do AINET, decisão 4 e primeiro parágrafo do correuMal do 3D Analyzer",
+      "fase-4": "enunciado da fase 4 (2026-09-14) e respostas às colisões: rótulos atuais mantidos; \"Copiar email\" / \"Copy email\" e \"Email copiado\" / \"Email copied\" aprovados; \"Ver Mais\" retirado com as modais dos projetos com case study",
+      "fase-4.2a": "enunciado da fase 4.2a (2026-09-16): hero, Sobre, contactos, uma frase por projeto, correções nos case studies do DAE, Gest e Licas, case study do CadflowBankSystem, rótulos \"Ver mais\" e \"Ainda não publicado\", meta descrições; respostas às colisões: frase num campo novo (resumo), etiqueta do Licas mantida",
+      "fase-4.2b": "enunciado da fase 4.2b (2026-09-16): etiquetas do Gest, do CadflowBankSystem e do Licas; umaFrase e frase da linha do Gest; contexto do DAE; contexto e resultado do CadflowBankSystem; modais sem descrição. Resposta às colisões: aria-label \"Voltar ao topo\" / \"Back to top\".",
+      "fase-4.2c": "enunciado da fase 4.2c (2026-09-17): etiquetas do DAE, AINET e Hotel Inteligente; etiqueta, frase da linha e umaFrase do Gest; sai a introdução dos contactos",
+      "fase-4.2d": "enunciado da fase 4.2d (2026-09-17): Sobre com dois parágrafos; Universidade de Leiria e Oeste no hero e na meta descrição; contextos do DAE, AINET e Hotel sem o tamanho da equipa; fim da sub-secção Design → Código. Respostas às colisões: aria-label \"Mais informação\" / \"More information\"; provas \"Portfolio\" continuam no GitHub; rótulos das provas mantêm os nomes dos repositórios.",
+      "fase-5": "enunciado da fase 5 (2026-09-17): rótulos das provas das competências; \"Saltar para o conteúdo\" / \"Skip to content\". Resposta às colisões: \"Fechar\" / \"Close\" no botão das modais.",
+      "fase-5.1": "enunciado da fase 5.1 (2026-09-17): nome acessível do seletor de idioma, \"Mudar para inglês\" / \"Switch to Portuguese\"; texto alternativo da foto, \"Fotografia de Francisco Pereira\" / \"Photograph of Francisco Pereira\"",
+      "fase-5.2": "enunciado da fase 5.2 (2026-09-17): todas as provas das competências levam à linha do projeto na secção Projetos; \"todos\" à secção; \"Portfolio\" continua no GitHub. Só muda o destino, nenhum texto.",
+      "fase-9": "enunciado da fase 9 (2026-09-18): o CV como página do site (/cv e /en/cv) — todo o texto da secção cv, os títulos das secções do CV e \"Descarregar PDF\" / \"Download PDF\"; o botão do hero passa a \"Ver CV\" / \"View CV\". Nas respostas às colisões: o título da página, \"CV — Francisco Pereira\", nas duas línguas.",
+      "fase-10": "enunciado da fase 10 (2026-09-18): no CV, a última frase do resumo e a linha final dos projetos, nas duas línguas — o CV dizia que todos os projetos estão documentados no site, e o Portfolio não tem linha nem case study, e o Mr. Pizza e o Diane Arbus só têm modal.",
+      "fase-12": "enunciado da fase 12 (2026-09-19): o Licas passa de Projetos para Experiência, com três pontos; a entrada do estágio passa a um ponto, e sai o rótulo \"Programador de aplicações\" / \"Application developer\". Cada ponto começa por um verbo no passado.",
+      "fase-13": "enunciado da fase 13 (2026-09-19): no segundo ponto do Licas, em português, \"Suportei\" passa a \"Acomodei\". O inglês (\"Supported\") fica."
+    },
+    "extracao": "Cada valor é uma fatia literal da mensagem de origem, confirmada automaticamente na extração. As únicas transformações foram cortes: os rótulos \"(primário)\", \"(secundário)\" e \"(terciário)\" dos CTAs, o separador \" · \" do rodapé e das listas de tecnologias, e as anotações \"(sem link ...)\" das provas, convertidas em private: true.",
+    "extracao_legado": "Do e0a67bc: PT do conteúdo dos elementos com data-translate (e do data-tooltip), EN do objeto translations.en; aria-label do menu e do tema do setLanguage do script.js. Texto e atributos que o site nunca traduzia ficam com o mesmo valor nas duas línguas, como eram servidos. Só entrou o que coincide com os dados de hoje; a única alteração aplicada foi a autorizada (\"and\" -> \"e\" na primeira feature PT do Diane Arbus)."
+  },
+  "interface": {
+    "navegacao": {
+      "overlay-about": {
+        "_origem": "legado e0a67bc",
+        "pt": "Sobre",
+        "en": "About"
+      },
+      "overlay-skills": {
+        "_origem": "legado e0a67bc",
+        "pt": "Competências",
+        "en": "Skills"
+      },
+      "overlay-projects": {
+        "_origem": "legado e0a67bc",
+        "pt": "Projetos",
+        "en": "Projects"
+      },
+      "overlay-contacts": {
+        "_origem": "legado e0a67bc",
+        "pt": "Contactos",
+        "en": "Contacts"
+      },
+      "nav-brand": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "Portfolio",
+        "en": "Portfolio"
+      }
+    },
+    "hero": {
+      "hero-title": {
+        "pt": "Francisco Pereira",
+        "en": "Francisco Pereira",
+        "_origem": "enunciado; EN: instrução de 2026-09-10"
+      },
+      "hero-subtitle": {
+        "pt": "Developer full-stack",
+        "en": "Full-stack developer"
+      },
+      "hero-paragraph": {
+        "pt": "Finalista de Engenharia Informática na Universidade de Leiria e Oeste.",
+        "en": "Final-year Computer Engineering student at Universidade de Leiria e Oeste."
+      },
+      "hero-btn-projects": {
+        "pt": "Ver projetos",
+        "en": "View projects"
+      },
+      "hero-btn-cv": {
+        "_origem": "fase-9",
+        "pt": "Ver CV",
+        "en": "View CV"
+      },
+      "hero-btn-contact": {
+        "pt": "Falar comigo",
+        "en": "Get in touch"
+      }
+    },
+    "sobre": {
+      "about-p1": {
+        "pt": "Comecei a programar no 10.º ano e nunca mais parei. O que era curiosidade — perceber o que acontecia do outro lado do ecrã — tornou-se a forma como resolvo problemas.",
+        "en": "I started programming in the 10th grade and never stopped. What began as curiosity — figuring out what happened on the other side of the screen — became how I solve problems."
+      },
+      "about-p2": {
+        "pt": "No secundário aprendi as bases de várias linguagens e estagiei na ITGlee. Na licenciatura aprofundei bases de dados, algoritmos, engenharia de software e aplicações distribuídas, e apliquei-as em projetos de equipa com prazos reais e código que outras pessoas tinham de conseguir ler.",
+        "en": "In secondary school I learned the fundamentals of several languages and interned at ITGlee. My degree took that further into databases, algorithms, software engineering and distributed applications, applied in team projects with real deadlines and code other people had to read."
+      },
+      "about-heading": {
+        "_origem": "legado e0a67bc",
+        "pt": "Sobre mim",
+        "en": "About me"
+      }
+    },
+    "competencias": {
+      "skills-group-languages": {
+        "pt": "Linguagens",
+        "en": "Languages"
+      },
+      "skills-group-frameworks": {
+        "pt": "Frameworks e bibliotecas",
+        "en": "Frameworks & libraries"
+      },
+      "skills-group-data": {
+        "pt": "Dados",
+        "en": "Data"
+      },
+      "skills-group-tools": {
+        "pt": "Ferramentas e plataformas",
+        "en": "Tools & platforms"
+      },
+      "skills-proof-all": {
+        "pt": "todos",
+        "en": "all",
+        "_origem": "enunciado; EN: instrução de 2026-09-10"
+      },
+      "skills-heading": {
+        "_origem": "legado e0a67bc",
+        "pt": "Competências",
+        "en": "Skills"
+      }
+    },
+    "projetos": {
+      "projects-design-text": {
+        "pt": "Dois exercícios de tradução: do protótipo em Figma até à interface funcional. O foco aqui é fidelidade visual e comportamento, não arquitetura.",
+        "en": "Two translation exercises: from Figma prototype to working interface. The focus here is visual fidelity and behaviour, not architecture."
+      },
+      "project-status-in-development": {
+        "pt": "Ainda não publicado",
+        "en": "Not yet published"
+      },
+      "projects-heading": {
+        "_origem": "legado e0a67bc",
+        "pt": "Projetos",
+        "en": "Projects"
+      },
+      "modal-btn-project": {
+        "_origem": "legado e0a67bc",
+        "pt": "Ver Projeto",
+        "en": "View Project"
+      },
+      "modal-btn-repo": {
+        "_origem": "legado e0a67bc",
+        "pt": "Ver Repositório",
+        "en": "View Repository"
+      },
+      "project-btn-case-study": {
+        "pt": "Ver mais",
+        "en": "Read more"
+      }
+    },
+    "contactos": {
+      "contacts-heading": {
+        "pt": "Vamos falar",
+        "en": "Let's talk"
+      },
+      "contact-title-email": {
+        "_origem": "legado e0a67bc",
+        "pt": "E-mail",
+        "en": "E-mail"
+      },
+      "contact-title-linkedin": {
+        "_origem": "legado e0a67bc",
+        "pt": "Linkedin",
+        "en": "Linkedin"
+      },
+      "contact-title-github": {
+        "_origem": "legado e0a67bc",
+        "pt": "Github",
+        "en": "Github"
+      }
+    },
+    "rodape": {
+      "footer-github": {
+        "pt": "GitHub",
+        "en": "GitHub"
+      },
+      "footer-linkedin": {
+        "pt": "LinkedIn",
+        "en": "LinkedIn"
+      },
+      "footer-source": {
+        "pt": "Código deste site",
+        "en": "Source code"
+      },
+      "_linha": {
+        "pt": "© 2026 Francisco Pereira · GitHub · LinkedIn · Código deste site",
+        "en": "© 2026 Francisco Pereira · GitHub · LinkedIn · Source code",
+        "nota": "O ano é gerado no build; o check:texto aceita qualquer ano de 4 dígitos no lugar de 2026."
+      }
+    },
+    "seo": {
+      "meta-title": {
+        "pt": "Francisco Pereira — Full-Stack Developer | Portefólio",
+        "en": "Francisco Pereira — Full-Stack Developer | Portfolio"
+      },
+      "meta-description": {
+        "pt": "Developer full-stack e finalista de Engenharia Informática na Universidade de Leiria e Oeste. React, TypeScript, Laravel, Java, C++ e Docker. Nove projetos, sete com case study.",
+        "en": "Full-stack developer and final-year Computer Engineering student at Universidade de Leiria e Oeste. React, TypeScript, Laravel, Java, C++ and Docker. Nine projects, seven with a case study."
+      }
+    },
+    "acessibilidade": {
+      "a11y-menu-toggle": {
+        "_origem": "legado e0a67bc",
+        "pt": "Alternar Menu",
+        "en": "Toggle Menu"
+      },
+      "a11y-theme-toggle": {
+        "_origem": "legado e0a67bc",
+        "pt": "Alternar Modo Escuro/Claro",
+        "en": "Toggle Dark/Light Mode"
+      },
+      "a11y-lang-toggle": {
+        "_origem": "fase-5.1",
+        "pt": "Mudar para inglês",
+        "en": "Switch to Portuguese"
+      },
+      "a11y-social-linkedin": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "LinkedIn",
+        "en": "LinkedIn"
+      },
+      "a11y-social-github": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "GitHub",
+        "en": "GitHub"
+      },
+      "a11y-social-email": {
+        "_origem": "legado e0a67bc",
+        "_nota": "sem tradução no legado: o site servia este texto igual nas duas línguas",
+        "pt": "E-mail",
+        "en": "E-mail"
+      },
+      "a11y-avatar-alt": {
+        "_origem": "fase-5.1",
+        "pt": "Fotografia de Francisco Pereira",
+        "en": "Photograph of Francisco Pereira"
+      },
+      "a11y-back-to-top": {
+        "pt": "Voltar ao topo",
+        "en": "Back to top"
+      },
+      "a11y-more-info": {
+        "pt": "Mais informação",
+        "en": "More information"
+      },
+      "a11y-skip-to-content": {
+        "pt": "Saltar para o conteúdo",
+        "en": "Skip to content"
+      },
+      "a11y-close": {
+        "pt": "Fechar",
+        "en": "Close"
+      }
+    },
+    "caseStudy": {
+      "case-heading-context": {
+        "pt": "Contexto",
+        "en": "Context",
+        "_origem": "enunciado 3.3b"
+      },
+      "case-heading-problem": {
+        "pt": "O problema",
+        "en": "The problem",
+        "_origem": "enunciado 3.3b"
+      },
+      "case-heading-my-part": {
+        "pt": "A minha parte",
+        "en": "My part",
+        "_origem": "enunciado 3.3b"
+      },
+      "case-heading-decisions": {
+        "pt": "Decisões técnicas",
+        "en": "Technical decisions",
+        "_origem": "enunciado 3.3b"
+      },
+      "case-heading-went-wrong": {
+        "pt": "O que correu mal",
+        "en": "What went wrong",
+        "_origem": "enunciado 3.3b"
+      },
+      "case-heading-outcome": {
+        "pt": "Resultado",
+        "en": "Outcome",
+        "_origem": "enunciado 3.3b"
+      },
+      "case-heading-differently": {
+        "pt": "O que faria diferente",
+        "en": "What I'd do differently",
+        "_origem": "enunciado 3.3b"
+      },
+      "case-back": {
+        "pt": "Voltar aos projetos",
+        "en": "Back to projects",
+        "_origem": "enunciado 3.3b"
+      },
+      "modal-tooltip-note": {
+        "_origem": "legado e0a67bc",
+        "pt": "Nota: Este projeto está num servidor gratuito. Se não tiver acessos recentes, o servidor pode demorar entre 1 a 2 minutos a arrancar no primeiro clique. Obrigado pela paciência!",
+        "en": "Note: This project is hosted on a free server. If there have been no recent accesses, the server may take 1 to 2 minutes to start up on the first click. Thank you for your patience!"
+      }
+    },
+    "cv": {
+      "_origem": "fase-9 (cv-meta-title: resposta às colisões da fase 9)",
+      "cv-heading-projects": {
+        "pt": "Projetos",
+        "en": "Projects"
+      },
+      "cv-heading-experience": {
+        "pt": "Experiência",
+        "en": "Experience"
+      },
+      "cv-heading-education": {
+        "pt": "Educação",
+        "en": "Education"
+      },
+      "cv-heading-skills": {
+        "pt": "Competências",
+        "en": "Skills"
+      },
+      "cv-heading-languages": {
+        "pt": "Idiomas",
+        "en": "Languages"
+      },
+      "cv-heading-interests": {
+        "pt": "Interesses",
+        "en": "Interests"
+      },
+      "cv-btn-download": {
+        "pt": "Descarregar PDF",
+        "en": "Download PDF"
+      },
+      "cv-meta-title": {
+        "pt": "CV — Francisco Pereira",
+        "en": "CV — Francisco Pereira"
+      }
+    }
+  },
+  "competencias": {
+    "_origem": "3.1",
+    "itens": [
+      {
+        "grupo": "languages",
+        "name": "TypeScript",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "Licas",
+              "en": "Licas"
+            },
+            "projeto": "licas"
+          },
+          {
+            "rotulo": {
+              "pt": "Mr. Pizza",
+              "en": "Mr. Pizza"
+            },
+            "projeto": "mr-pizza"
+          },
+          {
+            "rotulo": {
+              "pt": "Diane Arbus",
+              "en": "Diane Arbus"
+            },
+            "projeto": "diane-arbus"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "JavaScript",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "3D Analyzer",
+              "en": "3D Analyzer"
+            },
+            "projeto": "3d-analyzer"
+          },
+          {
+            "rotulo": {
+              "pt": "Portfolio",
+              "en": "Portfolio"
+            },
+            "repo": "Portfolio"
+          },
+          {
+            "rotulo": {
+              "pt": "Hotel Inteligente",
+              "en": "Smart Hotel"
+            },
+            "projeto": "hotel-inteligente"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "C++",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "3D Analyzer",
+              "en": "3D Analyzer"
+            },
+            "projeto": "3d-analyzer"
+          },
+          {
+            "rotulo": {
+              "pt": "CadflowBankSystem",
+              "en": "CadflowBankSystem"
+            },
+            "projeto": "cadflow-bank-system"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "Java",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "DAE",
+              "en": "DAE"
+            },
+            "projeto": "dae"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "PHP",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "AINET",
+              "en": "AINET"
+            },
+            "projeto": "ainet"
+          },
+          {
+            "rotulo": {
+              "pt": "Hotel Inteligente",
+              "en": "Smart Hotel"
+            },
+            "projeto": "hotel-inteligente"
+          }
+        ]
+      },
+      {
+        "grupo": "languages",
+        "name": "HTML5, CSS3",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "Portfolio",
+              "en": "Portfolio"
+            },
+            "repo": "Portfolio"
+          },
+          {
+            "rotulo": {
+              "pt": "Mr. Pizza",
+              "en": "Mr. Pizza"
+            },
+            "projeto": "mr-pizza"
+          },
+          {
+            "rotulo": {
+              "pt": "Diane Arbus",
+              "en": "Diane Arbus"
+            },
+            "projeto": "diane-arbus"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "React",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "Licas",
+              "en": "Licas"
+            },
+            "projeto": "licas"
+          },
+          {
+            "rotulo": {
+              "pt": "Mr. Pizza",
+              "en": "Mr. Pizza"
+            },
+            "projeto": "mr-pizza"
+          },
+          {
+            "rotulo": {
+              "pt": "Diane Arbus",
+              "en": "Diane Arbus"
+            },
+            "projeto": "diane-arbus"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "Vue 3",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "3D Analyzer",
+              "en": "3D Analyzer"
+            },
+            "projeto": "3d-analyzer"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "Astro",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "Portfolio",
+              "en": "Portfolio"
+            },
+            "repo": "Portfolio"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "Laravel",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "AINET",
+              "en": "AINET"
+            },
+            "projeto": "ainet"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "Three.js / WebGL",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "3D Analyzer",
+              "en": "3D Analyzer"
+            },
+            "projeto": "3d-analyzer"
+          }
+        ]
+      },
+      {
+        "grupo": "frameworks",
+        "name": "MFC",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "CadflowBankSystem",
+              "en": "CadflowBankSystem"
+            },
+            "projeto": "cadflow-bank-system"
+          }
+        ]
+      },
+      {
+        "grupo": "data",
+        "name": "PostgreSQL / Supabase",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "Licas",
+              "en": "Licas"
+            },
+            "projeto": "licas"
+          }
+        ]
+      },
+      {
+        "grupo": "data",
+        "name": "MySQL",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "AINET",
+              "en": "AINET"
+            },
+            "projeto": "ainet"
+          }
+        ]
+      },
+      {
+        "grupo": "data",
+        "name": "REST APIs",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "DAE",
+              "en": "DAE"
+            },
+            "projeto": "dae"
+          },
+          {
+            "rotulo": {
+              "pt": "AINET",
+              "en": "AINET"
+            },
+            "projeto": "ainet"
+          },
+          {
+            "rotulo": {
+              "pt": "Hotel Inteligente",
+              "en": "Smart Hotel"
+            },
+            "projeto": "hotel-inteligente"
+          }
+        ]
+      },
+      {
+        "grupo": "tools",
+        "name": "Docker",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "DAE",
+              "en": "DAE"
+            },
+            "projeto": "dae"
+          }
+        ]
+      },
+      {
+        "grupo": "tools",
+        "name": "Vite",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "Licas",
+              "en": "Licas"
+            },
+            "projeto": "licas"
+          },
+          {
+            "rotulo": {
+              "pt": "AINET",
+              "en": "AINET"
+            },
+            "projeto": "ainet"
+          },
+          {
+            "rotulo": {
+              "pt": "DAE",
+              "en": "DAE"
+            },
+            "projeto": "dae"
+          }
+        ]
+      },
+      {
+        "grupo": "tools",
+        "name": "Git",
+        "proofs": [
+          {
+            "allRepos": true
+          }
+        ]
+      },
+      {
+        "grupo": "tools",
+        "name": "OutSystems",
+        "proofs": [
+          {
+            "rotulo": {
+              "pt": "Gest",
+              "en": "Gest"
+            },
+            "projeto": "gest"
+          }
+        ]
+      }
+    ],
+    "removidas": [
+      "C#",
+      "Python",
+      "Node.js",
+      "Tailwind CSS",
+      "Linux"
+    ]
+  },
+  "projetos": {
+    "ordem": {
+      "_origem": "3.2",
+      "slugs": [
+        "licas",
+        "dae",
+        "ainet",
+        "3d-analyzer",
+        "cadflow-bank-system",
+        "hotel-inteligente",
+        "gest",
+        "mr-pizza",
+        "diane-arbus"
+      ]
+    },
+    "licas": {
+      "_origem": "3.2 + 3.3a (caseStudy)",
+      "order": 1,
+      "status": "in-development",
+      "coldStart": false,
+      "tech": [
+        "React",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "Vite"
+      ],
+      "repoUrl": null,
+      "demoUrl": null,
+      "tagline": {
+        "pt": "Cliente real",
+        "en": "Real client"
+      },
+      "title": {
+        "pt": "Licas — Plataforma de encomendas online",
+        "en": "Licas — Online ordering platform"
+      },
+      "description": {
+        "pt": "Plataforma de encomendas online para uma pastelaria artesanal, desenvolvida de raiz como developer contratado. Loja para o cliente final e back-office completo para o negócio: catálogo com alergénios, encomendas e pedidos de orçamento, cupões, contas de cliente com níveis de permissão e notificações automáticas para a gestão.",
+        "en": "An online ordering platform for an artisan pastry shop, built from scratch as the contracted developer. Customer-facing storefront plus a full back-office: allergen-aware catalogue, orders and quote requests, coupons, customer accounts with permission levels, and automated notifications for the business."
+      },
+      "resumo": {
+        "pt": "Plataforma de encomendas online para uma pastelaria artesanal, construída de raiz como developer contratado.",
+        "en": "An online ordering platform for an artisan pastry shop, built from scratch as the contracted developer."
+      },
+      "features": [
+        {
+          "pt": "Controlo de acessos por níveis, validado na base de dados e não apenas na interface.",
+          "en": "Role-based access enforced at the database level, not just in the interface."
+        },
+        {
+          "pt": "Dois fluxos de compra no mesmo sistema: catálogo com preço fixo e pedidos de orçamento.",
+          "en": "Two purchase flows in one system: fixed-price catalogue and quote requests."
+        },
+        {
+          "pt": "Sistema de cupões com resgate atómico, à prova de utilização duplicada.",
+          "en": "Coupon system with atomic redemption, safe against double use."
+        },
+        {
+          "pt": "Gestão de 14 alergénios, com distinção entre \"não declarado\" e \"declarado sem alergénios\".",
+          "en": "14-allergen management, distinguishing \"undeclared\" from \"declared with none\"."
+        }
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "Uma pastelaria artesanal recebia encomendas por telefone e mensagem. Construí-lhe uma plataforma onde o cliente encomenda sozinho e o negócio gere tudo a partir de um back-office.",
+          "en": "An artisan pastry shop was taking orders by phone and text message. I built them a platform where customers order on their own and the business runs everything from a back-office."
+        },
+        "contexto": {
+          "pt": "Projeto profissional, como developer contratado. Trabalhei sozinho: arquitetura, modelo de dados, backend, frontend, documentos legais e preparação para produção.",
+          "en": "A professional project, as the contracted developer. I worked alone: architecture, data model, backend, frontend, legal documents and production readiness."
+        },
+        "problema": {
+          "pt": "Uma encomenda de pastelaria artesanal não é uma compra de supermercado. Parte dos pedidos são bolos personalizados, que precisam de orçamento antes de existir preço; os restantes são produtos de catálogo com preço fixo. Há alergénios que têm de ser declarados. Há épocas em que o volume dispara e períodos em que a loja fecha. E há uma pessoa a gerir isto tudo, que não é técnica e não pode ter medo de carregar num botão.\n\nO sistema tinha de suportar dois fluxos de compra diferentes sem se transformar em duas aplicações separadas.",
+          "en": "Ordering from an artisan pastry shop is not the same as buying at a supermarket. Some orders are custom cakes that need a quote before a price exists; the rest are catalogue products with fixed prices. Allergens have to be declared. There are peak seasons and periods when the shop closes. And there is one person running all of it, who is not technical and cannot be afraid of pressing a button.\n\nThe system had to support two different purchase flows without turning into two separate applications."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Supabase em vez de um backend próprio",
+              "en": "Supabase instead of a backend of my own"
+            },
+            "texto": {
+              "pt": "Escolhi Postgres gerido, com autenticação e políticas de acesso incluídas, em vez de escrever uma API de raiz. O ganho foi tempo: sozinho, um backend próprio significava semanas em autenticação, permissões e infraestrutura antes da primeira funcionalidade útil. O custo é dependência de um fornecedor e ter de pensar em segurança dentro do modelo do Postgres em vez de em código de aplicação — menos familiar e menos perdoador.",
+              "en": "I chose managed Postgres, with authentication and access policies included, over writing an API from scratch. The gain was time: working alone, a custom backend meant weeks on authentication, permissions and infrastructure before the first useful feature. The cost is vendor dependency, and having to think about security inside the Postgres model rather than in application code — less familiar, and less forgiving."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Permissões validadas na base de dados, não na interface",
+              "en": "Permissions enforced in the database, not the interface"
+            },
+            "texto": {
+              "pt": "Esconder um botão não é segurança. Todas as regras de acesso são aplicadas ao nível da base de dados, e a interface limita-se a refletir o que o servidor já decidiu. Um utilizador que manipule o frontend não ganha nada com isso. O custo é que cada funcionalidade nova obriga a pensar em permissões antes de pensar em ecrãs, o que abranda o desenvolvimento. Compensa: um erro de permissões numa loja com dados de clientes reais não é um bug, é um incidente.",
+              "en": "Hiding a button is not security. Every access rule is enforced at the database level, and the interface merely reflects what the server has already decided. A user who tampers with the frontend gains nothing. The cost is that every new feature forces you to think about permissions before thinking about screens, which slows development down. It is worth it: a permissions mistake in a shop holding real customer data is not a bug, it is an incident."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Cupões com resgate atómico",
+              "en": "Coupons with atomic redemption"
+            },
+            "texto": {
+              "pt": "A primeira versão do sistema de cupões tinha um problema que só aparece com azar. Resolvi-o com uma restrição de unicidade ao nível da base de dados, em vez de uma verificação em código. A diferença é fundamental: uma verificação em código pode ser contornada por dois pedidos simultâneos; uma restrição na base de dados não pode ser contornada por nada.",
+              "en": "The first version of the coupon system had a problem that only shows up with bad luck. I solved it with a uniqueness constraint at the database level rather than a check in code. The difference matters: a check in code can be defeated by two simultaneous requests; a database constraint cannot be defeated by anything."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Alergénios com três estados, não dois",
+              "en": "Allergens with three states, not two"
+            },
+            "texto": {
+              "pt": "Havia uma distinção que o modelo inicial não conseguia representar. Um produto sem alergénios declarados não é a mesma coisa que um produto que ninguém verificou: o primeiro é informação, o segundo é ausência de informação. Separei os dois estados no modelo de dados. Parece um detalhe, mas num negócio alimentar é a diferença entre \"este bolo não tem frutos secos\" e \"não sabemos se este bolo tem frutos secos\".",
+              "en": "There was a distinction the initial model could not represent. A product with no declared allergens is not the same as a product nobody has checked: the first is information, the second is the absence of it. I separated the two states in the data model. It looks like a detail, but in a food business it is the difference between \"this cake contains no nuts\" and \"we don't know whether this cake contains nuts\"."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "O maior desafio não foi técnico.\n\nAo longo do desenvolvimento, o cliente foi mudando de ideias: coisas que pedia e que depois deixavam de fazer sentido, funcionalidades que queria retirar, outras que apareciam a meio. Muitas vezes tive de ser eu a propor como é que uma ideia podia funcionar — algumas propostas ele aceitava, outras não eram o que tinha em mente.\n\nA parte difícil foi perceber o que o cliente queria quando o que ele descrevia não era bem isso. Aprendi a mostrar em vez de perguntar: montar a coisa depressa, pô-la à frente dele, e deixar que fosse o que estava no ecrã a corrigir o que faltava explicar.\n\nNo fim correu bem e o sistema ficou como ele queria.",
+          "en": "The hardest part was not technical.\n\nThrough the build, the client kept changing his mind: things he had asked for that stopped making sense, features he wanted removed, others that appeared halfway through. Often it fell to me to propose how an idea could work — some proposals he accepted, others were not what he had in mind.\n\nThe difficulty was understanding what the client wanted when what he described was not quite it. I learned to show rather than ask: build the thing quickly, put it in front of him, and let what was on the screen correct what he had not managed to explain.\n\nIt ended well, and the system turned out the way he wanted it."
+        },
+        "resultado": {
+          "pt": "Concluído e a aguardar autorização do cliente para publicar. O sistema está pronto; a decisão de abrir ao público é dele.",
+          "en": "Finished and waiting for the client's go-ahead to publish. The system is ready; the decision to open it to the public is his."
+        },
+        "fariaDiferente": {
+          "pt": "Pensaria no modelo de permissões antes de escrever o primeiro ecrã, e não à medida que as funcionalidades apareciam. Voltar atrás para acrescentar regras de acesso a um sistema já construído custou-me várias reescritas que uma tarde de desenho à frente teria evitado.",
+          "en": "I would design the permission model before writing the first screen, instead of growing it as features appeared. Going back to add access rules to an already-built system cost me several rewrites that an afternoon of design up front would have avoided."
+        }
+      }
+    },
+    "dae": {
+      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech [pt]) + 3.3-final (caseStudy)",
+      "tech": {
+        "pt": [
+          "Docker",
+          "LLaMA 3 (IA)",
+          "Full-Stack",
+          "Vite"
+        ],
+        "en": [
+          "Docker",
+          "LLaMA 3 (AI)",
+          "Full-Stack",
+          "Vite"
+        ],
+        "_en": "enunciado 3.3b: Docker, LLaMA 3 e Vite são nomes próprios; \"(IA)\" é rótulo genérico e traduz-se; Full-Stack é igual nas duas línguas"
+      },
+      "title": {
+        "pt": "DAE - Arquitetura Full-Stack & IA",
+        "en": "DAE - Full-Stack Architecture & AI"
+      },
+      "tagline": {
+        "pt": "Projeto universitário · Equipa de 4",
+        "en": "University project · Team of 4"
+      },
+      "imageAlt": {
+        "pt": "DAE - Arquitetura Full-Stack & IA",
+        "en": "DAE - Full-Stack Architecture & AI",
+        "_en": "enunciado 3.3b: já era a tradução direta do PT; mantido"
+      },
+      "description": {
+        "pt": "Projeto de Engenharia Informática focado na criação de uma arquitetura full-stack robusta e escalável, com forte separação de responsabilidades (SoC). O ecossistema destaca-se pela contentorização completa da infraestrutura e pela integração nativa de um modelo de Inteligência Artificial a correr localmente.",
+        "en": "Computer Engineering project focused on creating a robust and scalable full-stack architecture, with strong Separation of Concerns (SoC). The ecosystem stands out for its fully containerized infrastructure and the native integration of a locally running Artificial Intelligence model."
+      },
+      "resumo": {
+        "pt": "Aplicação empresarial containerizada, com um modelo de inteligência artificial a correr na própria máquina.",
+        "en": "A containerised business application, with an AI model running on the machine itself."
+      },
+      "features": [
+        {
+          "pt": "Infraestrutura 100% contentorizada via Docker (serviços móveis, bases de dados e backend isolados).",
+          "en": "100% containerized infrastructure via Docker (isolated mobile services, databases, and backend)."
+        },
+        {
+          "pt": "Integração de IA local (LLaMA 3) no ecossistema utilizando o Ollama.",
+          "en": "Integration of local AI (LLaMA 3) into the ecosystem using Ollama."
+        },
+        {
+          "pt": "Sistema de permissões RBAC com diferentes níveis de acesso e ambiente de testes seguro com interceção de emails (MailHog).",
+          "en": "RBAC permission system with different access levels and a secure test environment with email interception (MailHog)."
+        }
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "Uma aplicação empresarial em que cada serviço corre no seu contentor e o modelo de inteligência artificial corre na própria máquina, sem que os dados saiam para fora.",
+          "en": "A business application where every service runs in its own container and the AI model runs on the machine itself, without data ever leaving the infrastructure."
+        },
+        "contexto": {
+          "pt": "Projeto da unidade curricular de Desenvolvimento de Aplicações Empresariais, no 3.º ano da licenciatura. O modelo de dados foi dado pelo docente; o resto foi construído por nós.",
+          "en": "A project for the Enterprise Application Development course, in the third year of my degree. The data model was given by the lecturer; everything else we built."
+        },
+        "problema": {
+          "pt": "Construir uma aplicação empresarial em Java com controlo de acessos por papéis e funcionalidades de inteligência artificial, com uma exigência que moldou tudo o resto: o ambiente tinha de ser reproduzível por qualquer pessoa, em qualquer máquina, sem depender de instalações locais e sem \"no meu computador funciona\".",
+          "en": "Building a business application in Java with role-based access control and AI features, under one requirement that shaped everything else: the environment had to be reproducible by anyone, on any machine, without local installs and without \"it works on my computer\"."
+        },
+        "minhaParte": {
+          "pt": "A minha parte era o frontend. Acabei por fazer e corrigir também grande parte do backend.",
+          "en": "My part was the frontend. I ended up building and fixing much of the backend as well."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Containerização total, sem exceções",
+              "en": "Full containerisation, no exceptions"
+            },
+            "texto": {
+              "pt": "Backend, base de dados, frontend e o modelo de inteligência artificial — cada um no seu contentor, ligados por rede interna. A alternativa era instalar dependências localmente e documentar o processo num ficheiro de instruções. Escolhi contentores porque um ficheiro de instruções desatualiza-se em duas semanas e um comando único não. O custo é um primeiro arranque lento e mais uma camada para depurar quando alguma coisa falha.",
+              "en": "Backend, database, frontend and the AI model — each in its own container, connected over an internal network. The alternative was installing dependencies locally and documenting the process in an instructions file. I chose containers because an instructions file goes stale in two weeks and a single command does not. The cost is a slow first start and one more layer to debug when something fails."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Modelo de IA local em vez de uma API externa",
+              "en": "A local AI model instead of an external API"
+            },
+            "texto": {
+              "pt": "Chamar uma API comercial teria sido mais rápido de integrar, mais barato em hardware e teria produzido melhores respostas. Corri o modelo localmente à mesma, por três razões: os dados nunca saem da infraestrutura, o que num contexto empresarial é frequentemente um requisito e não uma preferência; o custo por pedido é zero, o que muda a economia de qualquer funcionalidade usada com frequência; e a aplicação funciona sem ligação à internet. O custo é real e não o escondo — respostas mais lentas, qualidade inferior a um modelo comercial, e uma exigência de hardware que uma chamada HTTP não tem. Numa aplicação virada para o consumidor teria escolhido a API. Numa aplicação empresarial que lida com dados de clientes, repetiria esta escolha.",
+              "en": "Calling a commercial API would have been faster to integrate, cheaper in hardware, and would have produced better answers. I ran the model locally anyway, for three reasons: the data never leaves the infrastructure, which in a business context is often a requirement rather than a preference; the cost per request is zero, which changes the economics of any frequently used feature; and the application works with no internet connection. The cost is real and I do not hide it — slower answers, lower quality than a commercial model, and a hardware requirement an HTTP call does not have. In a consumer-facing application I would have chosen the API. In a business application handling customer data, I would make this choice again."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Emails intercetados em ambiente de testes",
+              "en": "Emails intercepted in the test environment"
+            },
+            "texto": {
+              "pt": "A aplicação envia notificações por email. Em desenvolvimento, esses emails são capturados por um servidor de testes em vez de saírem para o mundo. É uma precaução pequena com uma consequência grande: nenhum endereço real recebe um email de teste, e continua a ser possível verificar exatamente o que teria sido enviado.",
+              "en": "The application sends notifications by email. In development, those emails are captured by a test server instead of going out into the world. It is a small precaution with a large consequence: no real address ever receives a test email, and it remains possible to check exactly what would have been sent."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Aproveitar parte do backend e reescrever o resto",
+              "en": "Keeping part of the backend and rewriting the rest"
+            },
+            "texto": {
+              "pt": "Parte do backend já estava construída quando percebi que não servia — decisões de estrutura que não aguentavam os requisitos de permissões. Com prazo em cima, a escolha era entre deitar tudo fora e recomeçar, ou avaliar peça a peça. Escolhi a segunda: mantive o que estava correto e reconstruí o que não estava. Deitar tudo fora é mais rápido de decidir e desperdiça trabalho que servia; salvar tudo é mais confortável e arrasta os problemas até ao fim. O meio-termo custou mais tempo a decidir e foi o que permitiu entregar.",
+              "en": "Part of the backend was already built when I realised it would not do — structural decisions that could not carry the permission requirements. With a deadline running, the choice was between throwing it all away and starting over, or judging it piece by piece. I chose the second: I kept what was correct and rebuilt what was not. Throwing everything away is quicker to decide and wastes work that was fine; keeping everything is more comfortable and drags the problems to the end. The middle path cost more to decide, and it is what made delivery possible."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "Descobri tarde de mais que parte do backend não estava a servir. Não porque alguém o escondesse, mas porque eu só fui olhar quando precisei de o usar — assumi que estava a andar porque ninguém tinha dito o contrário.\n\nQuando abri o código, encontrei estrutura que não suportava o que o sistema de permissões precisava, e já não havia tempo para recomeçar do zero. Tive de julgar cada parte separadamente e decidir o que salvava e o que refazia, com o prazo a correr.\n\nA lição não é sobre código. É que num trabalho de equipa o progresso presume-se até se ver, e ver custa pouco quando é cedo. Se eu tivesse olhado para aquele código duas semanas antes, a decisão teria sido a mesma e o custo teria sido metade.",
+          "en": "I found out too late that part of the backend was not going to work. Not because anyone hid it, but because I only looked when I needed to use it — I assumed it was progressing because nobody had said otherwise.\n\nWhen I opened the code, I found structure that could not support what the permission system needed, and there was no longer time to start over. I had to judge each part separately and decide what to save and what to redo, with the clock running.\n\nThe lesson is not about code. It is that on a team, progress is assumed until it is seen, and seeing costs little when it is early. Had I looked at that code two weeks sooner, the decision would have been the same and the cost would have been half."
+        },
+        "resultado": {
+          "pt": "Aplicação funcional, com demonstração publicada e o ambiente inteiro a arrancar por um comando único.",
+          "en": "A working application, with a published demo and the entire environment starting from a single command."
+        },
+        "fariaDiferente": {
+          "pt": "Rever o trabalho de todas as partes cedo e com regularidade, em vez de esperar pelo momento em que preciso delas. Não por desconfiança — porque descobrir um problema cedo custa uma conversa e descobri-lo tarde custa um fim de semana.",
+          "en": "Review everyone's work early and regularly, instead of waiting for the moment I need it. Not out of distrust — because finding a problem early costs a conversation, and finding it late costs a weekend."
+        }
+      }
+    },
+    "ainet": {
+      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech) + 3.3-final (caseStudy)",
+      "tech": [
+        "Laravel",
+        "PHP",
+        "MVC",
+        "MySQL",
+        "Vite"
+      ],
+      "title": {
+        "pt": "AINET - Plataforma Full-Stack Laravel",
+        "en": "AINET - Laravel Full-Stack Platform"
+      },
+      "tagline": {
+        "pt": "Projeto universitário · Equipa de 4",
+        "en": "University project · Team of 4"
+      },
+      "imageAlt": {
+        "pt": "AINET - Plataforma Full-Stack Laravel",
+        "en": "AINET - Laravel Full-Stack Platform",
+        "_en": "enunciado 3.3b: já era a tradução direta do PT; mantido"
+      },
+      "description": {
+        "pt": "Projeto Full-Stack desenvolvido em equipa no âmbito universitário, funcionando como uma plataforma híbrida de Associação e E-commerce. Construído sob a framework Laravel utilizando o padrão arquitetural MVC e Vite no frontend. O grande foco técnico é a segurança e gestão de base de dados relacional.",
+        "en": "Full-Stack project developed in a team as part of a university course, functioning as a hybrid Association and E-commerce platform. Built with the Laravel framework using the MVC architectural pattern and Vite on the frontend. The main technical focus is on relational database management and security."
+      },
+      "resumo": {
+        "pt": "Gestão de sócios de uma associação e loja online no mesmo sistema, com três níveis de acesso.",
+        "en": "An association's membership management and an online store in one system, with three access levels."
+      },
+      "features": [
+        {
+          "pt": "Implementação de sistema RBAC com 3 níveis de acesso estritos: Board (Direção), Employee (Funcionários) e Member (Sócios).",
+          "en": "Implementation of RBAC system with 3 strict access levels: Board, Employee, and Member."
+        },
+        {
+          "pt": "Proteção e segurança avançada de rotas consoante o tipo e privilégios do utilizador autenticado.",
+          "en": "Advanced protection and security of routes based on the authenticated user's type and privileges."
+        },
+        {
+          "pt": "Gestão relacional complexa de Produtos, Categorias, Encomendas, Custos de Envio e Carrinho de Compras.",
+          "en": "Complex relational management of Products, Categories, Orders, Shipping Costs, and Shopping Cart."
+        }
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "Uma plataforma que junta a gestão de sócios de uma associação e uma loja online, com três níveis de acesso sobre os mesmos utilizadores.",
+          "en": "A platform combining an association's membership management and an online store, with three access levels over the same users."
+        },
+        "contexto": {
+          "pt": "Projeto da unidade curricular de Aplicações para a Internet, ano letivo 2024/25. Fiquei responsável pelo frontend e acabei por cobrir também parte do backend.",
+          "en": "A project for the Internet Applications course, academic year 2024/25. I was responsible for the frontend and ended up covering part of the backend as well."
+        },
+        "problema": {
+          "pt": "Dois sistemas com regras diferentes a partilhar as mesmas pessoas. Um sócio da associação não é um cliente da loja, mas pode ser as duas coisas ao mesmo tempo — e o que cada um pode ver e fazer muda conforme o papel. Modelar isso sem duplicar utilizadores nem encher o código de condições era o verdadeiro problema. A loja, em si, é trabalho conhecido.",
+          "en": "Two systems with different rules sharing the same people. An association member is not a store customer, but can be both at once — and what each one may see and do changes with the role. Modelling that without duplicating users or filling the code with conditions was the real problem. The store itself is familiar work."
+        },
+        "minhaParte": {
+          "pt": "O frontend completo: as vistas, os formulários, o fluxo de compra e os ecrãs de gestão. No backend, corrigi o que era preciso para o frontend se comportar como devia — sobretudo na aplicação de permissões e nas relações entre entidades.",
+          "en": "The complete frontend: the views, the forms, the purchase flow and the management screens. In the backend, I fixed what was needed for the frontend to behave correctly — mostly around permission enforcement and the relationships between entities."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Permissões aplicadas no servidor, refletidas no cliente",
+              "en": "Permissions enforced on the server, reflected on the client"
+            },
+            "texto": {
+              "pt": "Os três níveis de acesso são verificados no backend, em todos os pedidos. O frontend esconde o que o utilizador não pode usar, mas esconder é conveniência, não segurança. Construí as vistas a partir do princípio de que o servidor é a autoridade: o cliente pergunta o que pode mostrar, não decide.",
+              "en": "The three access levels are checked in the backend, on every request. The frontend hides what the user cannot use, but hiding is convenience, not security. I built the views on the principle that the server is the authority: the client asks what it may show, it does not decide."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Lógica de negócio fora dos controladores",
+              "en": "Business logic outside the controllers"
+            },
+            "texto": {
+              "pt": "A framework torna fácil enfiar as regras dentro dos controladores e resolver o problema num dia. Funciona até ao momento em que duas partes da aplicação precisam da mesma regra e ela existe em dois sítios ligeiramente diferentes. Manter a lógica fora custou mais no início e evitou esse tipo de divergência.",
+              "en": "The framework makes it easy to push rules into the controllers and solve the problem in a day. That works right up until two parts of the application need the same rule and it exists in two slightly different places. Keeping the logic out cost more up front and avoided that kind of divergence."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Um só modelo de utilizador, com papéis",
+              "en": "One user model, with roles"
+            },
+            "texto": {
+              "pt": "A alternativa óbvia era ter sócios e clientes como entidades separadas. Teria sido mais rápido de construir e garantia de problemas assim que a mesma pessoa fosse as duas coisas. Um só utilizador, com papéis atribuídos, mantém a identidade única e põe a complexidade onde ela pertence: nas permissões, não na duplicação de dados.",
+              "en": "The obvious alternative was to keep members and customers as separate entities. It would have been faster to build and guaranteed trouble the moment the same person was both. A single user, with assigned roles, keeps identity unique and puts the complexity where it belongs: in permissions, not in duplicated data."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "A equipa não se organizou. Não combinámos ao início quem fazia o quê nem o que cada parte esperava da outra, e o resultado apareceu todo de uma vez, no fim, quando foi preciso juntar as peças.\n\nAcabei a fazer a minha parte e uma parte do que faltava. Não por escolha — porque à medida que o prazo se aproximava, as peças que não encaixavam eram as que impediam a aplicação de funcionar, e alguém tinha de as fazer encaixar.\n\nAprendi que a organização de uma equipa não é burocracia que se acrescenta a um projeto técnico. É parte do projeto técnico. Duas frases combinadas no primeiro dia — quem faz o quê, e o que é que a tua parte me vai devolver — teriam poupado semanas.",
+          "en": "The team did not organise itself. We did not agree up front on who was doing what, or on what each part expected from the others, and the result all arrived at once, at the end, when the pieces had to fit together.\n\nI ended up doing my part and some of what was missing. Not by choice — because as the deadline approached, the pieces that did not fit were the ones stopping the application from working, and somebody had to make them fit.\n\nI learned that organising a team is not bureaucracy added on top of a technical project. It is part of the technical project. Two sentences agreed on day one — who does what, and what your part hands back to mine — would have saved weeks."
+        },
+        "resultado": {
+          "pt": "Aplicação funcional, com demonstração publicada.",
+          "en": "A working application, with a published demo."
+        },
+        "fariaDiferente": {
+          "pt": "Combinaria as interfaces entre as partes antes de alguém escrever código, e integraria desde o primeiro dia em vez de deixar para o fim. Conflitos que aparecem cedo são pequenos e resolvem-se numa tarde; os mesmos conflitos no fim aparecem todos ao mesmo tempo e já não há onde os pôr.",
+          "en": "I would agree the interfaces between the parts before anyone wrote code, and integrate from day one instead of leaving it to the end. Conflicts that surface early are small and resolve in an afternoon; the same conflicts at the end arrive all together, with nowhere left to put them."
+        }
+      }
+    },
+    "3d-analyzer": {
+      "_origem": "3.2 (campos estruturais) + 3.3 (texto) + 3.3b (caseStudy)",
+      "order": 4,
+      "status": "no-demo",
+      "coldStart": false,
+      "tech": [
+        "C++",
+        "Vue 3",
+        "Three.js",
+        "WebGL"
+      ],
+      "repoUrl": "https://github.com/francisco-pereira-dev/3D-Analyzer",
+      "demoUrl": null,
+      "tagline": {
+        "pt": "Projeto pessoal · C++ e WebGL",
+        "en": "Personal project · C++ and WebGL"
+      },
+      "title": {
+        "pt": "3D Analyzer — Inspetor de malhas com motor C++",
+        "en": "3D Analyzer — Mesh inspector with a C++ engine"
+      },
+      "description": {
+        "pt": "Inspetor de malhas 3D com arquitetura híbrida: um motor nativo em C++ lê ficheiros STL e OBJ em streaming e calcula a geometria — volume, área e contagem de triângulos — enquanto uma interface em Vue 3 com Three.js mostra o modelo em WebGL e produz a estimativa de material.",
+        "en": "A 3D mesh inspector with a hybrid architecture: a native C++ engine streams STL and OBJ files and computes the geometry — volume, area and triangle count — while a Vue 3 interface renders the model in WebGL through Three.js and produces the material estimate."
+      },
+      "resumo": {
+        "pt": "Inspetor de malhas 3D com motor de cálculo em C++ nativo e visualização em WebGL.",
+        "en": "A 3D mesh inspector with a native C++ computation engine and WebGL visualisation."
+      },
+      "features": [
+        {
+          "pt": "Volume calculado pelo teorema da divergência sobre os triângulos da malha, em vez da caixa envolvente: uma esfera deixou de custar como o cubo que a contém.",
+          "en": "Volume computed with the divergence theorem over the mesh triangles instead of the bounding box: a sphere no longer costs the same as the cube around it."
+        },
+        {
+          "pt": "Resíduo de fecho calculado no mesmo passo, para dizer se o volume é de confiança — uma malha com buracos pode dar o valor certo por acidente.",
+          "en": "Mesh closure residual computed in the same pass, to say whether the volume can be trusted — a mesh with holes can produce the right number by accident."
+        },
+        {
+          "pt": "Leitura de STL em streaming, com memória constante independentemente do tamanho do ficheiro.",
+          "en": "Streaming STL parsing, with constant memory regardless of file size."
+        },
+        {
+          "pt": "Visualização em WebGL com Three.js, com gestão explícita da memória gráfica entre modelos.",
+          "en": "WebGL visualisation with Three.js, with explicit GPU memory management between models."
+        },
+        {
+          "pt": "34 testes compilados contra o motor real, dois deles a provar que o volume varia com a translação e o resíduo não.",
+          "en": "34 tests compiled against the real engine — two of them exist to prove that volume changes under translation while the residual does not."
+        }
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "Orçamentar uma peça para fabrico exige medi-la. Construí uma ferramenta que lê o ficheiro 3D, calcula o volume real da malha e estima o material necessário.",
+          "en": "Quoting a part for manufacturing means measuring it. I built a tool that reads the 3D file, computes the mesh's real volume and estimates the material needed."
+        },
+        "contexto": {
+          "pt": "Projeto pessoal, individual. Motor de cálculo em C++ nativo, interface em Vue 3 com Three.js.",
+          "en": "A personal project, built alone. Computation engine in native C++, interface in Vue 3 with Three.js."
+        },
+        "problema": {
+          "pt": "Um ficheiro STL ou OBJ de uma peça real tem dezenas ou centenas de milhares de triângulos. Processar isso em JavaScript, na thread principal do browser, congela a interface — e uma interface congelada durante o cálculo parece avariada.\n\nMas o problema maior não era a velocidade. Era o número estar errado.",
+          "en": "An STL or OBJ file of a real part has tens or hundreds of thousands of triangles. Processing that in JavaScript, on the browser's main thread, freezes the interface — and an interface frozen during a calculation looks broken.\n\nBut the bigger problem was not speed. It was that the number was wrong."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Dois processos, duas linguagens",
+              "en": "Two processes, two languages"
+            },
+            "texto": {
+              "pt": "O motor em C++ trata da geometria — carrega a malha, percorre os triângulos, calcula volume e área. O Vue trata daquilo em que o browser é bom: interface reativa e renderização em WebGL através do Three.js. Cada lado faz o que faz melhor. O custo é honesto e grande: a aplicação deixa de ser portável, deixa de correr só num browser, e passa a exigir compilação antes de arrancar. Para distribuir a utilizadores seria a decisão errada. Para uma ferramenta local de análise, é a certa — e foi a que me ensinou mais.",
+              "en": "The C++ engine handles geometry — it loads the mesh, walks the triangles, computes volume and area. Vue handles what the browser is good at: a reactive interface and WebGL rendering through Three.js. Each side does what it does best. The cost is real and large: the application stops being portable, stops running in a browser alone, and requires compilation before it starts. To ship it to users this would be the wrong call. For a local analysis tool it is the right one — and it is the one that taught me the most."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Volume pelo teorema da divergência, não pela caixa envolvente",
+              "en": "Volume by the divergence theorem, not the bounding box"
+            },
+            "texto": {
+              "pt": "A primeira versão calculava o volume multiplicando as três dimensões da caixa que envolve a peça. É simples, é rápido e está errado para tudo o que não seja um paralelepípedo: uma esfera pagava como o cubo que a contém. Substituí-o pelo teorema da divergência aplicado aos triângulos da malha, acumulado no mesmo passo de leitura que já percorria o ficheiro. O cálculo passou a dar o volume do sólido em vez do volume do espaço que ele ocupa.",
+              "en": "The first version computed volume by multiplying the three dimensions of the box around the part. It is simple, it is fast, and it is wrong for anything that is not a cuboid: a sphere cost the same as the cube containing it. I replaced it with the divergence theorem applied to the mesh triangles, accumulated in the same pass that was already reading the file. The calculation went from the volume of the space the part occupies to the volume of the part itself."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Um número que diz se o outro é de confiança",
+              "en": "A number that tells you whether the other one can be trusted"
+            },
+            "texto": {
+              "pt": "O teorema da divergência assume que a malha é fechada. Uma malha com buracos devolve um valor à mesma, e esse valor pode até estar certo por acidente. Passei a acumular também o somatório dos vetores de área — o resíduo de fecho — no mesmo passo. Se a malha for estanque, o resíduo é praticamente zero; se não for, o resíduo denuncia-a. A ferramenta deixou de dar só um número e passou a dizer se pode confiar nele.",
+              "en": "The divergence theorem assumes a closed mesh. A mesh with holes still returns a value, and that value can even be correct by accident. I began accumulating the sum of the area vectors as well — the closure residual — in the same pass. If the mesh is watertight the residual is effectively zero; if it is not, the residual gives it away. The tool stopped returning just a number and started saying whether that number can be trusted."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Leitura de STL em streaming, com memória constante",
+              "en": "Streaming STL parsing, with constant memory"
+            },
+            "texto": {
+              "pt": "Os ficheiros STL são percorridos triângulo a triângulo, acumulando os resultados à medida que a leitura avança, em vez de serem carregados inteiros para memória. O consumo deixa de depender do tamanho do ficheiro: uma peça de duzentos megabytes usa a mesma memória que uma de dois.",
+              "en": "STL files are walked triangle by triangle, accumulating results as the read progresses, instead of being loaded into memory whole. Consumption stops depending on file size: a two-hundred-megabyte part uses the same memory as a two-megabyte one."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Gestão explícita da memória gráfica",
+              "en": "Explicit GPU memory management"
+            },
+            "texto": {
+              "pt": "O Three.js não liberta automaticamente a memória do GPU das malhas e materiais que saem de cena — o coletor de lixo do JavaScript não sabe nada sobre VRAM. Uma aplicação que carrega modelos em sequência sem destruir os anteriores acumula memória até ficar lenta e morrer, e o erro aparece longe da causa. Destruo explicitamente as malhas e os materiais antigos antes de cada modelo novo.",
+              "en": "Three.js does not automatically free the GPU memory of meshes and materials that leave the scene — the JavaScript garbage collector knows nothing about VRAM. An application that loads models in sequence without disposing of the previous ones accumulates memory until it slows down and dies, and the error surfaces far from its cause. I explicitly dispose of the old meshes and materials before each new model."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "O volume estava errado desde o início e ninguém o teria notado a olhar para a interface. A caixa envolvente dá sempre um número plausível — só é o número certo quando a peça é um paralelepípedo. Numa esfera, a caixa dá quase o dobro do volume real.\n\nSó percebi ao comparar o resultado com uma peça cujo volume eu conhecia. E depois de o corrigir, percebi que tinha um segundo problema por baixo: a fórmula nova assume uma malha fechada, e nada no programa verificava isso. Uma peça com um buraco continuaria a devolver um número de aparência normal.\n\nA solução dos dois problemas acabou por ser a mesma passagem pelo ficheiro: o volume e o resíduo de fecho são acumulados lado a lado, e o segundo qualifica o primeiro.\n\nEscrevi dois testes que existem só para isto: provam que o volume varia quando a peça é deslocada no espaço, e que o resíduo não. Se algum dia alguém trocar a fórmula por uma que dependa da posição, os testes apanham.",
+          "en": "The volume was wrong from the start, and nobody would have noticed by looking at the interface. A bounding box always gives a plausible number — it is only the right number when the part is a cuboid. For a sphere, the box gives nearly twice the real volume.\n\nI only caught it by comparing the result against a part whose volume I already knew. And once I had fixed it, I realised there was a second problem underneath: the new formula assumes a closed mesh, and nothing in the program checked for that. A part with a hole would still return a normal-looking number.\n\nThe fix for both turned out to be the same pass over the file: volume and closure residual are accumulated side by side, and the second qualifies the first.\n\nI wrote two tests that exist only for this: they prove that volume changes when the part is moved through space, and that the residual does not. If anyone ever swaps the formula for one that depends on position, the tests catch it."
+        },
+        "resultado": {
+          "pt": "Ferramenta funcional, com 34 testes compilados contra o motor real. Lê STL e OBJ, calcula volume, área e contagem de triângulos, mostra o modelo em WebGL e exporta para PDF e Excel.",
+          "en": "A working tool, with 34 tests compiled against the real engine. It reads STL and OBJ, computes volume, area and triangle count, renders the model in WebGL and exports to PDF and Excel."
+        },
+        "fariaDiferente": {
+          "pt": "Partiria o App.vue mais cedo. Tem mil setecentas linhas e cresceu por acumulação, porque cada funcionalidade nova era mais rápida de acrescentar ali do que de separar. Hoje é o ficheiro que mais custa a alterar — e o custo de o ter deixado crescer é maior do que teria sido o de o dividir a meio do caminho.",
+          "en": "I would have split App.vue much earlier. It runs to one thousand seven hundred lines and grew by accumulation, because every new feature was faster to add there than to separate out. Today it is the file that costs the most to change — and the price of letting it grow is higher than splitting it halfway would have been."
+        }
+      }
+    },
+    "cadflow-bank-system": {
+      "_origem": "3.2",
+      "order": 5,
+      "status": "no-demo",
+      "coldStart": false,
+      "tech": [
+        "C++",
+        "MFC",
+        "Windows"
+      ],
+      "repoUrl": "https://github.com/francisco-pereira-dev/CadflowBankSystem",
+      "demoUrl": null,
+      "tagline": {
+        "pt": "C++ · Desktop",
+        "en": "C++ · Desktop"
+      },
+      "title": {
+        "pt": "CadflowBankSystem — Sistema bancário em C++/MFC",
+        "en": "CadflowBankSystem — Banking system in C++/MFC"
+      },
+      "description": {
+        "pt": "Desafio técnico proposto por uma empresa, resolvido em C++ nativo com MFC: gestão de contas, movimentos e transferências numa aplicação Windows de secretária. Sem framework web e sem rede de segurança — memória, estado e interface tratados à mão.",
+        "en": "A technical challenge set by a company, solved in native C++ with MFC: account, transaction and transfer management in a Windows desktop application. No web framework, no safety net — memory, state and UI handled by hand."
+      },
+      "resumo": {
+        "pt": "Sistema bancário de secretária em C++ nativo, resolvido como desafio técnico proposto por uma empresa.",
+        "en": "A native C++ desktop banking system, solved as a technical challenge set by a company."
+      },
+      "features": [
+        {
+          "pt": "Modelo de domínio separado da interface: as classes Account, Transaction e BankManager não importam MFC.",
+          "en": "Domain model kept separate from the UI: the Account, Transaction and BankManager classes import no MFC."
+        },
+        {
+          "pt": "Gestão de contas, movimentos, transferências e consulta de saldos.",
+          "en": "Account, transaction, transfer and balance management."
+        },
+        {
+          "pt": "C++ sem coletor de lixo: o tempo de vida de cada objeto é uma decisão explícita.",
+          "en": "C++ with no garbage collector: every object's lifetime is an explicit decision."
+        }
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "Uma empresa propôs-me um desafio técnico: construir um sistema bancário de secretária em C++ nativo, sem frameworks. Este é o resultado.",
+          "en": "A company set me a technical challenge: build a desktop banking system in native C++, with no frameworks. This is the result."
+        },
+        "contexto": {
+          "pt": "Resolvido individualmente em cerca de um mês. C++ com MFC, sobre Windows.",
+          "en": "Solved alone in about a month. C++ with MFC, on Windows."
+        },
+        "problema": {
+          "pt": "Contas, movimentos, transferências e consulta de saldos numa aplicação de secretária. Sem framework web, sem ORM, sem coletor de lixo: a gestão de memória, o estado da interface e a persistência dos dados passam todos a ser responsabilidade de quem escreve o código.",
+          "en": "Accounts, transactions, transfers and balance queries in a desktop application. No web framework, no ORM, no garbage collector: memory management, UI state and data persistence all become the responsibility of whoever writes the code."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Modelo de domínio separado da interface",
+              "en": "Domain model kept separate from the UI"
+            },
+            "texto": {
+              "pt": "As classes Account, Transaction e BankManager não sabem que existe uma janela. Toda a lógica bancária vive em código que não importa nada do MFC, e os diálogos limitam-se a recolher dados, chamar o modelo e mostrar o resultado. Em MFC o caminho fácil é escrever a lógica dentro do handler do botão, porque é onde os dados já estão. Funciona, e depois a mesma regra existe em três diálogos com três variações.",
+              "en": "The Account, Transaction and BankManager classes do not know a window exists. All the banking logic lives in code that imports nothing from MFC, and the dialogs only collect data, call the model and show the result. In MFC the easy path is writing the logic inside the button's handler, because that is where the data already is. It works, and then the same rule exists in three dialogs with three variations."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Persistência em ficheiro de texto",
+              "en": "Persistence in a text file"
+            },
+            "texto": {
+              "pt": "Os dados são guardados em texto simples. Foi rápido de escrever e deixa ver o conteúdo sem ferramentas, o que ajuda a depurar. O custo é que tudo o que se lê de volta tem de ser validado à mão, e qualquer erro de formato só aparece quando o programa já está a correr.",
+              "en": "Data is stored as plain text. It was quick to write and lets you read the contents without tools, which helps when debugging. The cost is that everything read back has to be validated by hand, and any format error only shows up once the program is already running."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "C++ nativo, com o que isso implica",
+              "en": "Native C++, with what that implies"
+            },
+            "texto": {
+              "pt": "Sem coletor de lixo, o tempo de vida de cada objeto é uma decisão consciente. Foi o projeto que me obrigou a perceber o que as linguagens com gestão automática de memória me tinham deixado ignorar.",
+              "en": "With no garbage collector, every object's lifetime is a conscious decision. It was the project that forced me to understand what languages with automatic memory management had let me ignore."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "O MFC foi metade do problema. É uma biblioteca antiga, com convenções próprias, mapas de mensagens e ligações entre controlos e variáveis que não se parecem com nada do que eu tinha usado antes. Passei mais tempo a perceber como se faz do que a escrever a lógica em si.\n\nA outra metade foi decidir o que cada classe devia conter. Quando se começa com Account, Transaction e BankManager numa folha em branco, cada operação pode viver em três sítios diferentes e os três parecem razoáveis à primeira. Escolher mal significa descobrir duas semanas depois que uma regra simples precisa de dados que ficaram do outro lado.\n\nRefiz essa divisão mais do que uma vez, até ela deixar de me atrapalhar. Foi a primeira vez que percebi que desenhar classes é uma decisão sobre quem sabe o quê, e não sobre onde arrumar o código.",
+          "en": "MFC was half the problem. It is an old library, with its own conventions, message maps and bindings between controls and variables that resemble nothing I had used before. I spent more time working out how it is done than writing the logic itself.\n\nThe other half was deciding what each class should hold. When you start with Account, Transaction and BankManager on a blank page, every operation could live in three different places and all three look reasonable at first. Choosing badly means discovering two weeks later that a simple rule needs data that ended up on the other side.\n\nI redid that split more than once, until it stopped getting in my way. It was the first time I understood that designing classes is a decision about who knows what, not about where to file the code."
+        },
+        "resultado": {
+          "pt": "Entregue, com resposta positiva da empresa.",
+          "en": "Delivered, with a positive response from the company."
+        },
+        "fariaDiferente": {
+          "pt": "Trocava o ficheiro de texto por SQLite. Guardar em texto foi rápido de escrever, mas obriga a validar à mão tudo o que se lê de volta, e um ficheiro corrompido só dá sinal quando já é tarde. Uma base de dados embebida resolvia isso sem acrescentar dependências que a aplicação não pudesse levar consigo.",
+          "en": "I would swap the text file for SQLite. Storing as text was quick to write, but it forces you to validate everything read back by hand, and a corrupted file only announces itself when it is already too late. An embedded database solves that without adding a dependency the application could not carry with it."
+        }
+      }
+    },
+    "hotel-inteligente": {
+      "_origem": "legado e0a67bc (title, description, imageAlt [pt], features, tech) + 3.3-final (description) + 3.3-final (caseStudy)",
+      "tech": [
+        "PHP (Vanilla)",
+        "IoT",
+        "AJAX",
+        "Hardware"
+      ],
+      "title": {
+        "pt": "Hotel Inteligente - Plataforma IoT",
+        "en": "Smart Hotel - IoT Platform"
+      },
+      "tagline": {
+        "pt": "Projeto universitário · Equipa de 2",
+        "en": "University project · Team of 2"
+      },
+      "imageAlt": {
+        "pt": "Hotel Inteligente - Plataforma IoT",
+        "en": "Smart Hotel - IoT Platform",
+        "_en": "enunciado 3.3b: já era a tradução direta do PT; mantido"
+      },
+      "description": {
+        "pt": "Plataforma web de monitorização de sensores e hardware (Arduino/ESP32), construída em PHP puro, sem framework e sem base de dados: as leituras dos sensores são guardadas em ficheiros. Foi o primeiro projeto da licenciatura, feito com as ferramentas que tínhamos na altura — PHP, HTML, CSS e JavaScript.",
+        "en": "A web platform for monitoring sensors and hardware (Arduino/ESP32), built in plain PHP with no framework and no database: sensor readings are stored in files. It was the first project of my degree, built with the tools we had at the time — PHP, HTML, CSS and JavaScript.",
+        "_origem": "enunciado 3.3-final: substitui a descrição do site original, que apresentava como decisão de arquitetura uma coisa que não foi"
+      },
+      "resumo": {
+        "pt": "Sensores instalados em quartos a alimentar um painel de monitorização que se atualiza sozinho.",
+        "en": "Sensors installed in rooms feeding a monitoring dashboard that updates by itself."
+      },
+      "features": [
+        {
+          "pt": "Integração direta com hardware (sensores e webcam) via sistema de ficheiros com proteção contra Path Traversal e injeções.",
+          "en": "Direct integration with hardware (sensors and webcam) via file system with protection against Path Traversal and injections."
+        },
+        {
+          "pt": "Dashboard dinâmica com atualização assíncrona (Fetch API/AJAX) sem necessidade de refresh.",
+          "en": "Dynamic dashboard with asynchronous updates (Fetch API/AJAX) without needing to refresh."
+        },
+        {
+          "pt": "Arquitetura otimizada com Princípio DRY e sistema de paginação nativa em ficheiros de log.",
+          "en": "Optimized architecture with DRY Principle and native pagination in log files."
+        },
+        {
+          "pt": "Segurança reforçada com sanitização de dados (htmlspecialchars) e autenticação robusta (password_hash).",
+          "en": "Reinforced security with data sanitization (htmlspecialchars) and robust authentication (password_hash)."
+        }
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "Sensores instalados em quartos a enviar leituras para uma aplicação web que as mostra num painel que se atualiza sozinho.",
+          "en": "Sensors installed in rooms sending readings to a web application that displays them on a dashboard that updates by itself."
+        },
+        "contexto": {
+          "pt": "Primeiro projeto da licenciatura. Fiquei responsável pela aplicação web e o meu colega pela parte do Arduino — mas acabámos os dois a aprender as duas coisas. Feito com o que sabíamos na altura: PHP, HTML, CSS e JavaScript, sem framework e sem base de dados.",
+          "en": "The first project of my degree. I was responsible for the web application and my teammate for the Arduino side — but we both ended up learning both. Built with what we knew at the time: PHP, HTML, CSS and JavaScript, with no framework and no database."
+        },
+        "problema": {
+          "pt": "Hardware a escrever de um lado, um browser a ler do outro, e no meio nada que soubéssemos usar. Ainda não tínhamos dado bases de dados. As leituras dos sensores tinham de ir para algum sítio, e esse sítio acabou por ser um ficheiro de texto — não por opção de arquitetura, mas porque era a ferramenta que tínhamos.",
+          "en": "Hardware writing on one side, a browser reading on the other, and nothing in between that we knew how to use. We had not covered databases yet. The sensor readings had to go somewhere, and that somewhere turned out to be a text file — not as an architectural choice, but because it was the tool we had."
+        },
+        "minhaParte": {
+          "pt": "A aplicação web inteira: a API em PHP que recebe as leituras, a camada que as guarda e lê dos ficheiros, o painel de monitorização e a autenticação. O meu colega ficou com o Arduino e os sensores. Na prática acabámos ambos a perceber os dois lados, porque quase todos os problemas apareciam na fronteira entre eles.",
+          "en": "The entire web application: the PHP API that receives the readings, the layer that stores and reads them from files, the monitoring dashboard and the authentication. My teammate took the Arduino and the sensors. In practice we both ended up understanding both sides, because nearly every problem appeared on the boundary between them."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Guardar em ficheiros, e assumi-lo",
+              "en": "Storing in files, and owning it"
+            },
+            "texto": {
+              "pt": "Sem base de dados, cada leitura vai para ficheiro. Uma base de dados resolve por ti a escrita simultânea, a consistência e a pesquisa; com ficheiros, esses problemas passam a ser teus. Não foi uma escolha de engenharia — foi o que sabíamos fazer. Prefiro dizê-lo assim do que chamar-lhe arquitetura, porque a diferença entre as duas coisas é exatamente o que eu não sabia na altura.",
+              "en": "With no database, every reading goes to a file. A database solves concurrent writes, consistency and lookup for you; with files, those problems become yours. It was not an engineering choice — it was what we knew how to do. I would rather say it that way than call it architecture, because the difference between the two is exactly what I did not understand at the time."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Atualizar o painel sem recarregar a página",
+              "en": "Updating the dashboard without reloading the page"
+            },
+            "texto": {
+              "pt": "O painel pede dados novos periodicamente e atualiza só o que mudou. Num ecrã de monitorização que fica aberto horas, recarregar a página inteira desperdiça largura de banda e faz perder o contexto visual — quem está a olhar perde o sítio onde estava.",
+              "en": "The dashboard requests new data periodically and updates only what changed. On a monitoring screen left open for hours, reloading the whole page wastes bandwidth and loses visual context — whoever is watching loses their place."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Tratar o hardware como uma fonte não confiável",
+              "en": "Treating the hardware as an untrusted source"
+            },
+            "texto": {
+              "pt": "Os dados vinham de um dispositivo na rede, e o que chega pela rede pode chegar mal formado, de propósito ou por acidente. Validámos os caminhos de ficheiro contra travessia de diretórios e sanitizámos tudo o que era escrito ou mostrado. Um sensor não é um atacante, mas o código não tem como saber a diferença.",
+              "en": "The data came from a device on the network, and what arrives over a network can arrive malformed, deliberately or by accident. We validated file paths against directory traversal and sanitised everything written or displayed. A sensor is not an attacker, but the code has no way of telling the difference."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "Houve bastantes erros, e a maior parte não estava em nenhum dos dois lados — estava na costura entre eles.\n\nLeituras que chegavam mal formadas. Ficheiros que ficavam num estado estranho quando o sensor escrevia ao mesmo tempo que o painel lia. Dados que desapareciam sem deixar rasto do que tinha acontecido. E como não tínhamos registo de erros, cada problema começava por uma pergunta a que não sabíamos responder: o problema está no Arduino, na rede, ou no PHP?\n\nPassámos mais tempo a descobrir de que lado estava o problema do que a resolvê-lo. No fim organizámos tudo e entregámos a funcionar.\n\nA lição ficou: num sistema feito por duas pessoas em duas metades, a parte que falha quase nunca é uma das metades. É a costura — e ninguém é dono dela a menos que alguém decida ser.",
+          "en": "There were plenty of problems, and most of them were not on either side — they were in the seam between them.\n\nReadings that arrived malformed. Files left in an odd state when the sensor wrote at the same moment the dashboard read. Data that disappeared leaving no trace of what had happened. And since we had no error logging, every problem started with a question we could not answer: is this the Arduino, the network, or the PHP?\n\nWe spent more time working out which side the problem was on than fixing it. In the end we got it organised and delivered it working.\n\nThe lesson stuck: in a system built by two people in two halves, the part that fails is almost never one of the halves. It is the seam — and nobody owns it unless somebody decides to."
+        },
+        "resultado": {
+          "pt": "Entregue a funcionar, com os sensores a alimentar o painel em tempo real.",
+          "en": "Delivered and working, with the sensors feeding the dashboard in real time."
+        },
+        "fariaDiferente": {
+          "pt": "Duas coisas. Usaria uma base de dados: hoje sei que aquilo que estávamos a resolver à mão — escritas em simultâneo, consistência, não perder leituras — é precisamente o problema que uma base de dados existe para resolver, e resolvê-lo mal é muito mais trabalho do que usá-la.\n\nE registaria erros desde o primeiro dia. Não teria evitado os problemas, mas teria transformado horas de adivinha em minutos de leitura.",
+          "en": "Two things. I would use a database: I now know that what we were solving by hand — concurrent writes, consistency, not losing readings — is precisely the problem a database exists to solve, and solving it badly is far more work than using one.\n\nAnd I would log errors from day one. It would not have prevented the problems, but it would have turned hours of guessing into minutes of reading."
+        }
+      }
+    },
+    "gest": {
+      "_origem": "3.2 + legado e0a67bc (title, imageAlt [pt], features, tech [pt]) + 3.3-final (caseStudy)",
+      "order": 7,
+      "tech": {
+        "pt": [
+          "OutSystems",
+          "Base de Dados"
+        ],
+        "en": [
+          "OutSystems",
+          "Database"
+        ],
+        "_en": "enunciado 3.3b: OutSystems é nome próprio; \"Base de Dados\" é rótulo genérico e traduz-se"
+      },
+      "tagline": {
+        "pt": "Secundário · 2021",
+        "en": "Secondary school · 2021"
+      },
+      "title": {
+        "pt": "Gest - E-commerce e Gestão de Stock",
+        "en": "Gest - E-commerce & Stock Management"
+      },
+      "imageAlt": {
+        "pt": "Gest - E-commerce e Gestão de Stock",
+        "en": "Gest - E-commerce & Stock Management",
+        "_en": "enunciado 3.3b: já era a tradução direta do PT; mantido"
+      },
+      "description": {
+        "pt": "Loja online de informática com gestão de armazém, construída em OutSystems durante o estágio na ITGlee e depois alargada como Prova de Aptidão Profissional. Catálogo e checkout para o cliente final, aplicação de stock para quem gere o inventário. O primeiro projeto em que tive de pensar em dois utilizadores ao mesmo tempo — quem compra e quem gere.",
+        "en": "An online computer-hardware store with warehouse management, built in OutSystems during my internship at ITGlee and later extended as my secondary-school final project. Catalogue and checkout for the customer, a stock application for whoever runs the inventory. The first project where I had to design for two users at once — the buyer and the manager."
+      },
+      "resumo": {
+        "pt": "Loja online de informática com gestão de armazém, construída em OutSystems para a Prova de Aptidão Profissional.",
+        "en": "An online computer-hardware store with warehouse management, built in OutSystems for my secondary-school final project."
+      },
+      "features": [
+        {
+          "pt": "Desenvolvimento Full-Stack em plataforma Low-Code.",
+          "en": "Full-stack development on a Low-Code platform."
+        },
+        {
+          "pt": "Loja online com catálogo de produtos e sistema de carrinho de compras.",
+          "en": "Online store with product catalog and shopping cart system."
+        },
+        {
+          "pt": "Sincronização de base de dados e gestão de stock em tempo real.",
+          "en": "Real-time database synchronization and stock management."
+        }
+      ],
+      "caseStudy": {
+        "umaFrase": {
+          "pt": "O meu primeiro projeto grande, construído em OutSystems no último ano do secundário.",
+          "en": "My first large project, built in OutSystems in my final year of secondary school."
+        },
+        "contexto": {
+          "pt": "Estágio curricular na ITGlee, em 2021. O projeto foi meu: comecei-o durante o estágio e continuei-o como Prova de Aptidão Profissional do ensino secundário, até ao dia da apresentação. Construído em OutSystems.",
+          "en": "A curricular internship at ITGlee in 2021. The project was my own: I started it during the internship and continued it as my secondary-school final project, right up to presentation day. Built in OutSystems."
+        },
+        "problema": {
+          "pt": "Uma loja de informática tem dois utilizadores com necessidades opostas. O cliente quer procurar, comparar e comprar depressa, e não quer saber do que se passa por trás. Quem gere o armazém quer saber o que há, o que falta e o que está a sair, e não quer navegar numa loja para descobrir isso.\n\nServir os dois a partir da mesma informação, sem construir duas aplicações desligadas que teriam de ser mantidas em sincronia, era o problema real. A loja em si é a parte fácil.",
+          "en": "A hardware store has two users with opposite needs. The customer wants to search, compare and buy quickly, and does not care what happens behind the scenes. Whoever runs the warehouse wants to know what is in stock, what is missing and what is moving, and does not want to browse a shop to find out.\n\nServing both from the same information, without building two disconnected applications that would have to be kept in sync, was the real problem. The store itself is the easy part."
+        },
+        "decisoes": [
+          {
+            "titulo": {
+              "pt": "Uma só fonte de informação para os dois lados",
+              "en": "One source of information for both sides"
+            },
+            "texto": {
+              "pt": "O stock que o gestor vê e a disponibilidade que o cliente vê são a mesma informação apresentada de duas maneiras, não dois sistemas a tentar manter-se sincronizados. Duplicar teria sido mais rápido de construir e era garantia de divergência à primeira alteração — o momento em que a loja mostra um produto que o armazém já sabe que acabou.",
+              "en": "The stock the manager sees and the availability the customer sees are the same information presented two ways, not two systems trying to stay in sync. Duplicating would have been faster to build and guaranteed divergence at the first change — the moment the shop shows a product the warehouse already knows has run out."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "Back-office desenhado para quem não é técnico",
+              "en": "A back-office designed for someone who is not technical"
+            },
+            "texto": {
+              "pt": "Quem gere o inventário não é programador e não vai ler instruções. As operações que se fazem todos os dias — entrada de stock, correção de quantidades, ver o que está a acabar — tinham de estar à vista e ser difíceis de fazer por engano. Isso muda o desenho: não é a funcionalidade que decide o ecrã, é a frequência com que é usada.",
+              "en": "The person running the inventory is not a programmer and is not going to read instructions. The operations done every day — receiving stock, correcting quantities, seeing what is running low — had to be in plain sight and hard to trigger by accident. That changes the design: the screen is not decided by the feature, it is decided by how often the feature is used."
+            }
+          },
+          {
+            "titulo": {
+              "pt": "OutSystems, com o que isso traz e tira",
+              "en": "OutSystems, with what that gives and takes"
+            },
+            "texto": {
+              "pt": "A plataforma foi o contexto em que o projeto nasceu. Acelera muito a construção de ecrãs e formulários, e tira liberdade assim que é preciso sair do caminho previsto. Foi a primeira vez que percebi que uma ferramenta que resolve noventa por cento do trabalho em metade do tempo pode transformar os últimos dez por cento na parte mais difícil de todas.",
+              "en": "The platform was the context the project was born in. It speeds up building screens and forms enormously, and takes away freedom the moment you need to step off the expected path. It was the first time I understood that a tool which solves ninety per cent of the work in half the time can turn the last ten per cent into the hardest part of all."
+            }
+          }
+        ],
+        "correuMal": {
+          "pt": "Estava a aprender a ferramenta ao mesmo tempo que tinha de entregar com ela.\n\nNão houve uma parte mais difícil que as outras — foi tudo difícil, porque cada decisão de estrutura vinha antes de eu ter experiência suficiente para a tomar. Escolhia uma forma de organizar os dados, avançava, e duas semanas depois percebia porque é que não servia. Repeti isso vezes suficientes para deixar de ser azar e passar a ser aprendizagem.\n\nFoi o projeto que me ensinou que escrever código é a parte fácil. A parte difícil é decidir a estrutura que o sustenta — e essa decisão toma-se antes de existir código para a julgar.",
+          "en": "I was learning the tool at the same time as I had to deliver with it.\n\nThere was no part harder than the rest — all of it was hard, because every structural decision came before I had the experience to make it. I would choose a way to organise the data, move forward, and two weeks later understand why it did not work. I repeated that enough times for it to stop being bad luck and start being learning.\n\nIt was the project that taught me writing code is the easy part. The hard part is deciding the structure that holds it up — and that decision is made before there is any code to judge it by."
+        },
+        "resultado": {
+          "pt": "Entregue e apresentada em 2021, com a loja e o back-office a funcionar sobre o mesmo modelo de dados.",
+          "en": "Delivered and presented in 2021, with the store and the back-office running on the same data model."
+        },
+        "fariaDiferente": {
+          "pt": "Desenharia o modelo de dados no papel antes de abrir a ferramenta. Em 2021 comecei pelos ecrãs, porque eram a parte que eu conseguia ver — e cada vez que a estrutura por baixo estava errada, tinha de refazer os ecrãs também.",
+          "en": "I would design the data model on paper before opening the tool. In 2021 I started with the screens, because they were the part I could see — and every time the structure underneath was wrong, I had to redo the screens as well."
+        }
+      }
+    },
+    "mr-pizza": {
+      "_origem": "3.2 + legado e0a67bc (title, imageAlt [pt], features)",
+      "order": 8,
+      "tech": [
+        "React",
+        "TypeScript",
+        "Figma"
+      ],
+      "tagline": {
+        "pt": "Design → Código",
+        "en": "Design → Code"
+      },
+      "title": {
+        "pt": "Mr. Pizza - Plataforma E-commerce",
+        "en": "Mr. Pizza - E-commerce Platform"
+      },
+      "imageAlt": {
+        "pt": "Mr. Pizza - Plataforma E-commerce",
+        "en": "Mr. Pizza - E-commerce Platform",
+        "_en": "enunciado 3.3b: já era a tradução direta do PT; mantido"
+      },
+      "description": {
+        "pt": "Plataforma de encomenda e entrega ao domicílio, construída a partir de um design meu no Figma. O protótipo inicial foi gerado com Figma Make; o meu trabalho está na modelação dos dados e no conteúdo — catálogo de produtos com preços e alergénios, e as lojas com moradas, contactos e localizações reais.",
+        "en": "An ordering and delivery platform built from a design of mine in Figma. The initial prototype was generated with Figma Make; my own work is in the data modelling and content — a product catalogue with prices and allergens, and the stores with real addresses, contacts and locations."
+      },
+      "resumo": {
+        "pt": "Plataforma de encomenda e entrega ao domicílio, construída a partir de um design meu no Figma.",
+        "en": "An ordering and delivery platform, built from a design of mine in Figma."
+      },
+      "features": [
+        {
+          "pt": "Catálogo completo de produtos (pizzas, bebidas e sobremesas).",
+          "en": "Full product catalog (pizzas, drinks, and desserts)."
+        },
+        {
+          "pt": "Sistema de carrinho de compras e encomendas online.",
+          "en": "Shopping cart and online ordering system."
+        },
+        {
+          "pt": "Opção de entrega ao domicílio integrada.",
+          "en": "Integrated home delivery option."
+        }
+      ]
+    },
+    "diane-arbus": {
+      "_origem": "3.2 + legado e0a67bc (title, imageAlt [pt], features)",
+      "order": 9,
+      "tech": [
+        "React",
+        "TypeScript",
+        "Figma"
+      ],
+      "tagline": {
+        "pt": "Design → Código",
+        "en": "Design → Code"
+      },
+      "title": {
+        "pt": "Catálogo Digital - Diane Arbus",
+        "en": "Diane Arbus - Digital Catalog"
+      },
+      "imageAlt": {
+        "pt": "Catálogo Digital - Diane Arbus",
+        "en": "Digital Catalog - Diane Arbus",
+        "_en": "enunciado 3.3b: era \"Diane Arbus - Digital Catalog\", com a ordem invertida em relação ao PT; passou à tradução direta"
+      },
+      "description": {
+        "pt": "Catálogo digital da obra da fotógrafa Diane Arbus, com um efeito de paginação em flipbook. O protótipo inicial foi gerado com Figma Make; o componente de flipbook — orquestração da animação e pré-carregamento das imagens — e as 37 obras com os respetivos textos de contexto são trabalho meu.",
+        "en": "A digital catalogue of photographer Diane Arbus's work, with a flipbook pagination effect. The initial prototype was generated with Figma Make; the flipbook component — animation orchestration and image preloading — and the 37 works with their context texts are my own work."
+      },
+      "resumo": {
+        "pt": "Catálogo digital da obra da fotógrafa Diane Arbus, com um efeito de paginação em flipbook.",
+        "en": "A digital catalogue of photographer Diane Arbus's work, with a flipbook pagination effect."
+      },
+      "features": [
+        {
+          "pt": "Galeria interativa de fotografias e autorretratos.",
+          "en": "Interactive gallery of photographs and self-portraits.",
+          "_nota": "PT: \"and\" do legado passou a \"e\" — a única alteração autorizada desde o e0a67bc"
+        },
+        {
+          "pt": "Secções informativas com detalhes e contexto histórico de cada obra.",
+          "en": "Informative sections with details and historical context of each work."
+        },
+        {
+          "pt": "Design minimalista focado na experiência de visualização artística.",
+          "en": "Minimalist design focused on the artistic viewing experience."
+        }
+      ]
+    }
+  },
+  "_fora_do_canonico": {
+    "motivo": "Texto do site sem aprovação. O check:texto calcula a cobertura do i18n por si e lista aqui o que ficar de fora.",
+    "interface": [],
+    "projetos": {}
+  },
+  "caseStudies": {
+    "_origem": "enunciado 3.3-final: CadflowBankSystem, Mr. Pizza e Catálogo Diane Arbus não vão ter case study; ficam em cartão e modal",
+    "com": [
+      "licas",
+      "3d-analyzer",
+      "dae",
+      "ainet",
+      "gest",
+      "hotel-inteligente",
+      "cadflow-bank-system"
+    ],
+    "sem": [
+      "mr-pizza",
+      "diane-arbus"
+    ],
+    "_fase4": "Desde a fase 4 os projetos com case study não têm modal. As features desses seis continuam no canónico como texto aprovado, mas não aparecem no site; os links de demonstração e de repositório, e a nota de arranque a frio, passaram para o cabeçalho da página de case study (decisão do Francisco, 2026-09-14). A página inicial deixou de mostrar imagens de projetos, também nas modais: o imageAlt do Mr. Pizza e do Catálogo Diane Arbus fica no canónico sem aparecer no site.",
+    "_fase4.2a": "Desde a fase 4.2a: o CadflowBankSystem tem case study (7 com página, 2 sem). \"A minha parte\" só existe em projetos de equipa: dae, ainet e hotel-inteligente. As páginas de case study não mostram imagens. Cada projeto tem uma frase (resumo) na lista da página inicial; a descrição longa só aparece nas modais dos 2 projetos sem case study.",
+    "_fase4.2b": "Desde a fase 4.2b as modais do Mr. Pizza e do Diane Arbus não mostram a descrição longa: a frase da linha é a descrição. A description continua nos dados de todos os projetos como texto aprovado, mas não aparece no site."
+  },
+  "cv": {
+    "_origem": "fase-9; a última frase do resumo e a linha \"Mais seis projetos\": fase-10; a experiência e a saída do Licas dos projetos: fase-12; a primeira palavra do segundo ponto do Licas (pt): fase-13",
+    "_separadores": "Cada linha do enunciado foi partida nas suas partes, cortando só o \" — \" que as separa (como o \" · \" do rodapé e das tecnologias, na extração original); a página e o PDF voltam a pô-lo. O \" · \" dentro de uma parte (tecnologias, idiomas) faz parte do texto. As linhas partidas a meio de uma frase no enunciado foram juntas com um espaço. Fase 12: cada entrada da experiência tem funcao — empresa, a data (quando), a stack (tech) e os pontos; cada ponto é uma frase inteira do enunciado.",
+    "_nome": "O enunciado dá o nome uma vez, na parte portuguesa; é o mesmo nas duas línguas. O email e os três links não são texto do canónico: vêm do src/data/site.json e do astro.config.mjs (site).",
+    "nome": {
+      "pt": "Francisco Pereira",
+      "en": "Francisco Pereira"
+    },
+    "cargo": {
+      "pt": "Developer full-stack",
+      "en": "Full-stack Developer"
+    },
+    "localidade": {
+      "pt": "Figueira da Foz, Portugal",
+      "en": "Figueira da Foz, Portugal"
+    },
+    "fotoAlt": {
+      "pt": "Fotografia de Francisco Pereira",
+      "en": "Photograph of Francisco Pereira"
+    },
+    "resumo": {
+      "pt": "Comecei a programar no 10.º ano. Sou finalista de Engenharia Informática, em horário pós-laboral, e trabalho em web full-stack — do modelo de dados à interface — e em C++ nativo. O meu trabalho está documentado em franciscopereira.dev, com as decisões técnicas e o que correu mal.",
+      "en": "I started programming at fifteen. I am in the final year of a Computer Engineering degree, taken in evening classes, and I work in full-stack web — from the data model to the interface — and in native C++. My work is documented at franciscopereira.dev, with the technical decisions and what went wrong."
+    },
+    "projetos": [
+      {
+        "titulo": {
+          "pt": "CadflowBankSystem",
+          "en": "CadflowBankSystem"
+        },
+        "descricao": {
+          "pt": "sistema bancário de secretária, com o domínio separado da interface. Desafio técnico proposto por uma empresa, resolvido sozinho em cerca de um mês.",
+          "en": "desktop banking system with the domain separated from the interface. Technical challenge set by a company, solved alone in about a month."
+        },
+        "tech": {
+          "pt": "C++ · MFC · Windows",
+          "en": "C++ · MFC · Windows"
+        },
+        "quando": {
+          "pt": "2026",
+          "en": "2026"
+        }
+      },
+      {
+        "titulo": {
+          "pt": "3D Analyzer",
+          "en": "3D Analyzer"
+        },
+        "descricao": {
+          "pt": "inspetor de malhas 3D: motor de cálculo em C++ nativo e painel web que mostra o resultado.",
+          "en": "3D mesh inspector: a native C++ computation engine and a web dashboard that shows the result."
+        },
+        "tech": {
+          "pt": "C++ · Vue 3 · Three.js · WebGL",
+          "en": "C++ · Vue 3 · Three.js · WebGL"
+        },
+        "quando": {
+          "pt": "projeto pessoal, junho 2026",
+          "en": "personal project, June 2026"
+        }
+      },
+      {
+        "titulo": {
+          "pt": "Portfolio",
+          "en": "Portfolio"
+        },
+        "descricao": {
+          "pt": "franciscopereira.dev: site estático em duas línguas, com auditorias de acessibilidade e verificação automática do texto publicado.",
+          "en": "franciscopereira.dev: a static site in two languages, with accessibility audits and automated verification of the published text."
+        },
+        "tech": {
+          "pt": "Astro · TypeScript · Playwright",
+          "en": "Astro · TypeScript · Playwright"
+        },
+        "quando": {
+          "pt": "2026",
+          "en": "2026"
+        }
+      }
+    ],
+    "projetosMais": {
+      "pt": "Mais seis projetos em franciscopereira.dev",
+      "en": "Six more projects at franciscopereira.dev"
+    },
+    "experiencia": [
+      {
+        "funcao": {
+          "pt": "Developer",
+          "en": "Developer"
+        },
+        "empresa": {
+          "pt": "Licas, projeto de cliente",
+          "en": "Licas, client project"
+        },
+        "quando": {
+          "pt": "2026 – em curso",
+          "en": "2026 – ongoing"
+        },
+        "tech": {
+          "pt": "React · TypeScript · Supabase · PostgreSQL · Vite",
+          "en": "React · TypeScript · Supabase · PostgreSQL · Vite"
+        },
+        "pontos": [
+          {
+            "pt": "Construí sozinho uma plataforma de encomendas online para uma pastelaria artesanal, com back-office: arquitetura, modelo de dados, backend, frontend e preparação para produção.",
+            "en": "Built an online ordering platform for an artisan pastry shop single-handedly, with a full back-office: architecture, data model, backend, frontend and production readiness."
+          },
+          {
+            "pt": "Acomodei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
+            "en": "Supported two purchase flows in one application: catalogue products with fixed prices, and custom cakes that need a quote before a price exists."
+          },
+          {
+            "pt": "Apliquei as regras de acesso na base de dados, e não na interface, e tornei o resgate de cupões de uso único atómico — uma verificação em código é contornável por dois pedidos simultâneos.",
+            "en": "Enforced access rules in the database rather than in the interface, and made single-use coupon redemption atomic — a check in code can be bypassed by two simultaneous requests."
+          }
+        ]
+      },
+      {
+        "funcao": {
+          "pt": "Estagiário",
+          "en": "Intern"
+        },
+        "empresa": {
+          "pt": "ITGlee, Figueira da Foz",
+          "en": "ITGlee, Figueira da Foz"
+        },
+        "quando": {
+          "pt": "jan. – mai. 2021",
+          "en": "Jan – May 2021"
+        },
+        "tech": {
+          "pt": "OutSystems",
+          "en": "OutSystems"
+        },
+        "pontos": [
+          {
+            "pt": "Desenvolvi uma loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
+            "en": "Developed an online computer-hardware store with warehouse management, presented as my final secondary-school project."
+          }
+        ]
+      }
+    ],
+    "educacao": [
+      {
+        "curso": {
+          "pt": "Licenciatura em Engenharia Informática",
+          "en": "BSc in Computer Engineering"
+        },
+        "escola": {
+          "pt": "Universidade de Leiria e Oeste",
+          "en": "Universidade de Leiria e Oeste"
+        },
+        "quando": {
+          "pt": "set. 2021 – em curso, conclusão prevista em 2026",
+          "en": "Sep 2021 – in progress, expected 2026"
+        }
+      },
+      {
+        "curso": {
+          "pt": "Curso Profissional de Informática (Sistemas)",
+          "en": "Vocational Course in Computing (Systems)"
+        },
+        "escola": {
+          "pt": "Escola Secundária Dr. Joaquim de Carvalho, Figueira da Foz",
+          "en": "Escola Secundária Dr. Joaquim de Carvalho, Figueira da Foz"
+        },
+        "quando": {
+          "pt": "2018 – 2021",
+          "en": "2018 – 2021"
+        }
+      }
+    ],
+    "competencias": [
+      {
+        "rotulo": {
+          "pt": "Linguagens",
+          "en": "Languages"
+        },
+        "valor": {
+          "pt": "TypeScript, JavaScript, C++, Java, PHP, HTML/CSS",
+          "en": "TypeScript, JavaScript, C++, Java, PHP, HTML/CSS"
+        }
+      },
+      {
+        "rotulo": {
+          "pt": "Frameworks e bibliotecas",
+          "en": "Frameworks and libraries"
+        },
+        "valor": {
+          "pt": "React, Vue 3, Astro, Laravel, Three.js, MFC",
+          "en": "React, Vue 3, Astro, Laravel, Three.js, MFC"
+        }
+      },
+      {
+        "rotulo": {
+          "pt": "Dados",
+          "en": "Data"
+        },
+        "valor": {
+          "pt": "PostgreSQL/Supabase, MySQL, REST APIs",
+          "en": "PostgreSQL/Supabase, MySQL, REST APIs"
+        }
+      },
+      {
+        "rotulo": {
+          "pt": "Ferramentas",
+          "en": "Tools"
+        },
+        "valor": {
+          "pt": "Docker, Vite, Git, OutSystems, Playwright",
+          "en": "Docker, Vite, Git, OutSystems, Playwright"
+        }
+      }
+    ],
+    "idiomas": {
+      "pt": "Português (língua materna) · Inglês (B2)",
+      "en": "Portuguese (native) · English (B2)"
+    },
+    "interesses": {
+      "pt": "Ginásio e kickboxing.",
+      "en": "Gym and kickboxing."
+    }
+  },
+  "retirado": {
+    "_sobre": "Texto aprovado que deixou de aparecer no site. Fica aqui para o registo; o check:texto não o procura.",
+    "project-btn-view-more": {
+      "_origem": "legado e0a67bc",
+      "pt": "Ver Mais",
+      "en": "View More",
+      "_motivo": "fase 4: os cartões saíram; a linha de um projeto sem case study abre a modal pelo título e a ação é o repositório"
+    },
+    "fase-4.2a": {
+      "hero-badge": {
+        "pt": "Disponível imediatamente para trabalhar a tempo inteiro",
+        "en": "Available immediately for full-time work",
+        "_motivo": "fase 4.2a: sai a linguagem de procura de emprego (badge de disponibilidade)"
+      },
+      "about-p4": {
+        "pt": "Hoje sou o developer responsável pelo Licas, uma plataforma de encomendas online para uma pastelaria artesanal: React, TypeScript e Supabase, com controlo de acessos por níveis, gestão de encomendas e orçamentos, cupões e notificações automáticas. É o meu primeiro projeto com utilizadores reais e consequências reais — e onde aprendi mais em menos tempo.",
+        "en": "Today I'm the developer behind Licas, an online ordering platform for an artisan pastry shop: React, TypeScript and Supabase, with role-based access, order and quote management, coupons and automated notifications. It's my first project with real users and real consequences — and where I've learned the most in the least time.",
+        "_motivo": "fase 4.2a: o Sobre passa a três parágrafos, sem descrever projetos nem procurar emprego"
+      },
+      "about-p5": {
+        "pt": "Procuro o meu primeiro emprego a tempo inteiro como developer. Como as aulas são em horário pós-laboral, posso começar já. Interessa-me trabalho onde o backend importa: arquitetura, modelo de dados e segurança.",
+        "en": "I'm looking for my first full-time developer role. Because my classes run in the evening, I can start now. I'm drawn to work where the backend matters: architecture, data modelling and security.",
+        "_motivo": "fase 4.2a: o Sobre passa a três parágrafos, sem descrever projetos nem procurar emprego"
+      },
+      "contact-btn-copy-email": {
+        "pt": "Copiar email",
+        "en": "Copy email",
+        "_motivo": "fase 4.2a: o botão \"Copiar email\" foi revertido"
+      },
+      "contact-copy-done": {
+        "pt": "Email copiado",
+        "en": "Email copied",
+        "_motivo": "fase 4.2a: o botão \"Copiar email\" foi revertido"
+      },
+      "hero-subtitle": {
+        "pt": "Construo aplicações web full-stack — do esquema da base de dados à interface que o utilizador vê.",
+        "en": "I build full-stack web applications — from the database schema to the interface the user sees.",
+        "_motivo": "fase 4.2a: hero reescrito"
+      },
+      "hero-paragraph": {
+        "pt": "Finalista de Engenharia Informática no Politécnico de Leiria, em horário pós-laboral — as aulas são à noite e os dias estão livres para trabalhar. Estagiei na ITGlee e sou hoje o developer responsável por uma plataforma de encomendas online a entrar em produção para um cliente real.",
+        "en": "Final-year Computer Engineering student at the Polytechnic of Leiria, on the evening programme — classes are at night and my days are free to work. Former intern at ITGlee, currently the developer behind an online ordering platform going live for a real client.",
+        "_motivo": "fase 4.2a: hero reescrito"
+      },
+      "about-p2": {
+        "pt": "No secundário aprendi as bases de várias linguagens e estagiei na ITGlee, onde construí em OutSystems uma loja online de informática com gestão de armazém: catálogo e checkout para o cliente, aplicação de stock para quem gere o inventário. Foi o primeiro código meu a resolver o problema de uma empresa a sério, e foi a base sobre a qual construí a minha Prova de Aptidão Profissional.",
+        "en": "In secondary school I learned the fundamentals of several languages and interned at ITGlee, where I built an online computer-hardware store with warehouse management in OutSystems: catalogue and checkout for the customer, a stock application for whoever runs the inventory. It was the first code of mine to solve a real company's problem, and the foundation I built my secondary-school final project on.",
+        "_motivo": "fase 4.2a: Sobre reescrito"
+      },
+      "about-p3": {
+        "pt": "Na licenciatura em Engenharia Informática no Politécnico de Leiria aprofundei isso em Bases de Dados, Algoritmos e Estruturas de Dados, Programação Avançada, Engenharia de Software e Desenvolvimento de Aplicações Distribuídas — e apliquei-o em projetos de equipa com prazos reais, requisitos que mudavam a meio e código que outras pessoas tinham de conseguir ler.",
+        "en": "My Computer Engineering degree at the Polytechnic of Leiria took that further — Databases, Data Structures & Algorithms, Advanced Programming, Software Engineering and Distributed Applications — applied in team projects with real deadlines, shifting requirements, and code other people had to read.",
+        "_motivo": "fase 4.2a: Sobre reescrito"
+      },
+      "contacts-text": {
+        "pt": "Estou à procura do meu primeiro emprego a tempo inteiro como developer. Se tens uma vaga, um projeto, ou só uma pergunta sobre algum destes trabalhos — escreve.",
+        "en": "I'm looking for my first full-time developer role. If you have an opening, a project, or just a question about any of this work — get in touch.",
+        "_motivo": "fase 4.2a: contactos sem linguagem de procura de emprego"
+      },
+      "project-status-in-development": {
+        "pt": "Em desenvolvimento",
+        "en": "In development",
+        "_motivo": "fase 4.2a: rótulo novo"
+      },
+      "project-btn-case-study": {
+        "pt": "Ver case study",
+        "en": "Read case study",
+        "_motivo": "fase 4.2a: rótulo novo"
+      },
+      "meta-description": {
+        "pt": "Developer full-stack e finalista de Engenharia Informática no Politécnico de Leiria. React, TypeScript, Laravel, Java e Docker. Plataforma de encomendas online em produção para cliente real. Disponível para primeiro emprego.",
+        "en": "Full-stack developer and final-year Computer Engineering student at the Polytechnic of Leiria. React, TypeScript, Laravel, Java and Docker. Online ordering platform in production for a real client. Available for a first full-time role.",
+        "_motivo": "fase 4.2a: meta descrição sem procura de emprego"
+      },
+      "licas.caseStudy.minhaParte": {
+        "pt": "Tudo. Desde o esquema da base de dados até ao texto dos botões.",
+        "en": "All of it. From the database schema to the wording on the buttons.",
+        "_motivo": "fase 4.2a: \"A minha parte\" só em projetos de equipa"
+      },
+      "3d-analyzer.caseStudy.minhaParte": {
+        "pt": "Tudo: o motor em C++, o frontend, a camada que os liga e a exportação dos resultados.",
+        "en": "All of it: the C++ engine, the frontend, the layer connecting them, and the result export.",
+        "_motivo": "fase 4.2a: \"A minha parte\" só em projetos de equipa"
+      },
+      "gest.caseStudy.minhaParte": {
+        "pt": "O desenvolvimento da aplicação, do catálogo e do checkout até ao back-office de gestão de stock.",
+        "en": "Building the application, from the catalogue and checkout through to the stock-management back-office.",
+        "_motivo": "fase 4.2a: \"A minha parte\" só em projetos de equipa"
+      },
+      "dae.caseStudy.minhaParte": {
+        "pt": "A maior parte do desenvolvimento: a containerização de toda a infraestrutura, a integração do modelo de inteligência artificial, o sistema de permissões e a reconstrução de parte do backend.",
+        "en": "Most of the development: containerising the whole infrastructure, integrating the AI model, the permission system, and rebuilding part of the backend.",
+        "_motivo": "fase 4.2a: substituído"
+      },
+      "gest.caseStudy.contexto": {
+        "pt": "Estágio curricular na ITGlee, em 2021, continuado como Prova de Aptidão Profissional do ensino secundário até ao dia da apresentação. Construída em OutSystems.",
+        "en": "A curricular internship at ITGlee in 2021, continued as my secondary-school final project until presentation day. Built in OutSystems.",
+        "_motivo": "fase 4.2a: sugeria que o projeto foi encomendado pela empresa"
+      },
+      "licas.caseStudy.correuMal": {
+        "pt": "O sistema de cupões deixava reutilizar um cupão de uso único. Bastava cancelar a encomenda e criar outra: a verificação em código via o cupão como disponível outra vez.\n\nA tentação foi acrescentar mais uma condição ao código. Não resolvia — duas operações em simultâneo continuariam a passar as duas pela verificação antes de qualquer uma escrever. Fechei-o com uma restrição de unicidade na própria base de dados, que torna o segundo resgate impossível independentemente de quantos pedidos cheguem ao mesmo tempo.\n\nFoi a primeira vez que percebi, a sério, a diferença entre validar e garantir.",
+        "en": "The coupon system allowed a single-use coupon to be used again. All it took was cancelling the order and creating another: the check in code saw the coupon as available once more.\n\nThe temptation was to add one more condition to the code. It would not have solved it — two simultaneous operations would still both pass the check before either one wrote anything. I closed it with a uniqueness constraint in the database itself, which makes a second redemption impossible no matter how many requests arrive at the same time.\n\nIt was the first time I properly understood the difference between validating and guaranteeing.",
+        "_motivo": "fase 4.2a: substituído; o bug dos cupões fica na decisão técnica"
+      },
+      "licas.caseStudy.resultado": {
+        "pt": "Em fase final de preparação para lançamento. O sistema está construído e a passar por auditoria de segurança da base de dados, testes de cenários e uma lista de verificação de produção antes de abrir ao público.",
+        "en": "In the final stretch before launch. The system is built and going through a database security audit, scenario testing and a production checklist before it opens to the public.",
+        "_motivo": "fase 4.2a: substituído"
+      }
+    },
+    "fase-4.2b": {
+      "gest.caseStudy.umaFrase": {
+        "pt": "Uma loja online de informática com gestão de armazém, construída numa empresa durante o estágio e continuada até ao dia da apresentação.",
+        "en": "An online computer-hardware store with warehouse management, built inside a company during my internship and carried on until the day I presented it.",
+        "_motivo": "fase 4.2b: dizia que foi construída numa empresa, e não foi"
+      },
+      "gest.resumo": {
+        "pt": "Loja online de informática com gestão de armazém, começada durante o estágio na ITGlee e continuada como Prova de Aptidão Profissional.",
+        "en": "An online computer-hardware store with warehouse management, started during my internship at ITGlee and continued as my secondary-school final project.",
+        "_motivo": "fase 4.2b: a ITGlee sai da frase da linha"
+      },
+      "gest.tagline": {
+        "pt": "Estágio ITGlee · Prova de Aptidão Profissional",
+        "en": "ITGlee internship · Secondary-school final project",
+        "_motivo": "fase 4.2b: a ITGlee sai da etiqueta"
+      },
+      "dae.caseStudy.contexto": {
+        "pt": "Projeto da unidade curricular de Desenvolvimento de Aplicações Empresariais, no 3.º ano da licenciatura. Equipa de quatro. O modelo de dados foi dado pelo docente; o resto foi construído por nós. Acabei por assumir a maior parte do desenvolvimento.",
+        "en": "A project for the Enterprise Application Development course, in the third year of my degree. A team of four. The data model was given by the lecturer; everything else we built. I ended up taking on most of the development.",
+        "_motivo": "fase 4.2b: sai a frase que se repetia e quase contradizia \"A minha parte\""
+      },
+      "cadflow-bank-system.tagline": {
+        "pt": "Desafio técnico de empresa · Desktop",
+        "en": "Company technical challenge · Desktop",
+        "_motivo": "fase 4.2b: \"desafio técnico de empresa\" sai da etiqueta"
+      },
+      "cadflow-bank-system.caseStudy.contexto": {
+        "pt": "Desafio técnico proposto por uma empresa, resolvido individualmente em cerca de um mês. C++ com MFC, sobre Windows.",
+        "en": "A technical challenge set by a company, solved alone in about a month. C++ with MFC, on Windows.",
+        "_motivo": "fase 4.2b: \"desafio técnico proposto por uma empresa\" fica só na frase da linha e na umaFrase"
+      },
+      "cadflow-bank-system.caseStudy.resultado": {
+        "pt": "Entregue dentro do prazo, com resposta positiva da empresa.",
+        "en": "Delivered on time, with a positive response from the company.",
+        "_motivo": "fase 4.2b: o prazo não está confirmado"
+      },
+      "licas.tagline": {
+        "pt": "Cliente real · Em desenvolvimento",
+        "en": "Real client · In development",
+        "_motivo": "fase 4.2b: o sistema já não está em desenvolvimento"
+      }
+    },
+    "fase-4.2c": {
+      "contacts-text": {
+        "pt": "Para dúvidas sobre qualquer um destes trabalhos, ou só para dizer olá.",
+        "en": "For questions about any of this work, or just to say hello.",
+        "_motivo": "fase 4.2c: a secção de contactos fica com o título, a régua e os cartões"
+      },
+      "gest.tagline": {
+        "pt": "Prova de Aptidão Profissional · 2021",
+        "en": "Secondary-school final project · 2021",
+        "_motivo": "fase 4.2c: \"Prova de Aptidão Profissional\" aparecia quatro vezes"
+      },
+      "gest.resumo": {
+        "pt": "Loja online de informática com gestão de armazém, construída em OutSystems e apresentada como Prova de Aptidão Profissional do ensino secundário.",
+        "en": "An online computer-hardware store with warehouse management, built in OutSystems and presented as my secondary-school final project.",
+        "_motivo": "fase 4.2c: em inglês era igual à umaFrase"
+      },
+      "gest.caseStudy.umaFrase": {
+        "pt": "Uma loja online de informática com gestão de armazém, construída em OutSystems e apresentada como Prova de Aptidão Profissional.",
+        "en": "An online computer-hardware store with warehouse management, built in OutSystems and presented as my secondary-school final project.",
+        "_motivo": "fase 4.2c: em inglês era igual à frase da linha"
+      }
+    },
+    "fase-4.2d": {
+      "about-p3": {
+        "pt": "Interessa-me trabalho onde o backend importa: arquitetura, modelo de dados e segurança. Fora da web, C++.",
+        "en": "I'm drawn to work where the backend matters: architecture, data modelling and security. Outside the web, C++.",
+        "_motivo": "fase 4.2d: o Sobre fica com dois parágrafos"
+      },
+      "hero-paragraph": {
+        "pt": "Finalista de Engenharia Informática no Politécnico de Leiria.",
+        "en": "Final-year Computer Engineering student at the Polytechnic of Leiria.",
+        "_motivo": "fase 4.2d: o Instituto Politécnico de Leiria passou a chamar-se Universidade de Leiria e Oeste"
+      },
+      "meta-description": {
+        "pt": "Developer full-stack e finalista de Engenharia Informática no Politécnico de Leiria. React, TypeScript, Laravel, Java, C++ e Docker. Nove projetos, sete com case study.",
+        "en": "Full-stack developer and final-year Computer Engineering student at the Polytechnic of Leiria. React, TypeScript, Laravel, Java, C++ and Docker. Nine projects, seven with a case study.",
+        "_motivo": "fase 4.2d: nome novo da instituição"
+      },
+      "projects-design-heading": {
+        "pt": "Design → Código",
+        "en": "Design → Code",
+        "_motivo": "fase 4.2d: acabou a sub-secção \"Design → Código\"; é a etiqueta do Mr. Pizza e do Diane Arbus"
+      },
+      "dae.caseStudy.contexto": {
+        "pt": "Projeto da unidade curricular de Desenvolvimento de Aplicações Empresariais, no 3.º ano da licenciatura. Equipa de quatro. O modelo de dados foi dado pelo docente; o resto foi construído por nós.",
+        "en": "A project for the Enterprise Application Development course, in the third year of my degree. A team of four. The data model was given by the lecturer; everything else we built.",
+        "_motivo": "fase 4.2d: o tamanho da equipa está na etiqueta"
+      },
+      "ainet.caseStudy.contexto": {
+        "pt": "Projeto da unidade curricular de Aplicações para a Internet, ano letivo 2024/25. Equipa de quatro. Fiquei responsável pelo frontend e acabei por cobrir também parte do backend.",
+        "en": "A project for the Internet Applications course, academic year 2024/25. A team of four. I was responsible for the frontend and ended up covering part of the backend as well.",
+        "_motivo": "fase 4.2d: o tamanho da equipa está na etiqueta"
+      },
+      "hotel-inteligente.caseStudy.contexto": {
+        "pt": "Primeiro projeto da licenciatura, em equipa de dois. Fiquei responsável pela aplicação web e o meu colega pela parte do Arduino — mas acabámos os dois a aprender as duas coisas. Feito com o que sabíamos na altura: PHP, HTML, CSS e JavaScript, sem framework e sem base de dados.",
+        "en": "The first project of my degree, in a team of two. I was responsible for the web application and my teammate for the Arduino side — but we both ended up learning both. Built with what we knew at the time: PHP, HTML, CSS and JavaScript, with no framework and no database.",
+        "_motivo": "fase 4.2d: o tamanho da equipa está na etiqueta"
+      }
+    },
+    "fase-5": {
+      "competencias.proofs.repo": {
+        "_motivo": "fase 5: os rótulos das provas eram nomes de repositórios; passaram a ser os nomes dos projetos",
+        "rotulos": {
+          "Licas": "Licas",
+          "DAE": "DAE",
+          "Ainet2425": "Ainet2425",
+          "3D-Analyzer": "3D-Analyzer",
+          "CadflowBankSystem": "CadflowBankSystem",
+          "TI": "TI",
+          "PAP": "PAP",
+          "MR.PIZZA": "MR.PIZZA",
+          "Catalogo-Diane-Arbus": "Catalogo-Diane-Arbus",
+          "Portfolio": "Portfolio"
+        }
+      }
+    },
+    "fase-5.1": {
+      "interface.acessibilidade.a11y-lang-toggle": {
+        "pt": "Alterar idioma / Switch language",
+        "en": "Alterar idioma / Switch language",
+        "_motivo": "fase 5.1: não dizia para onde o link leva, e era igual nas duas línguas"
+      },
+      "interface.acessibilidade.a11y-avatar-alt": {
+        "pt": "Francisco Pereira Avatar",
+        "en": "Francisco Pereira Avatar",
+        "_motivo": "fase 5.1: \"Avatar\" não descreve a imagem a quem não a vê"
+      }
+    },
+    "fase-9": {
+      "hero-btn-cv": {
+        "pt": "Descarregar CV",
+        "en": "Download CV",
+        "_motivo": "fase 9: o CV passou a ser uma página do site; o botão do hero leva a ela (\"Ver CV\"), e descarregar o PDF é o botão dessa página"
+      }
+    },
+    "fase-10": {
+      "cv.resumo (última frase)": {
+        "pt": "Cada projeto abaixo está documentado em franciscopereira.dev, com as decisões técnicas e o que correu mal.",
+        "en": "Every project below is documented at franciscopereira.dev, with the technical decisions and what went wrong.",
+        "_motivo": "fase 10: afirmação falsa — o Portfolio não tem linha nem case study no site, e o Mr. Pizza e o Diane Arbus só têm modal"
+      },
+      "cv.projetosMais": {
+        "pt": "Mais seis projetos, com o contexto e as decisões de cada um, em franciscopereira.dev",
+        "en": "Six more projects, each with its context and decisions, at franciscopereira.dev",
+        "_motivo": "fase 10: afirmação falsa — o Portfolio não tem linha nem case study no site, e o Mr. Pizza e o Diane Arbus só têm modal"
+      }
+    },
+    "fase-12": {
+      "cv.projetos[0] (Licas)": {
+        "titulo": {
+          "pt": "Licas",
+          "en": "Licas"
+        },
+        "descricao": {
+          "pt": "plataforma de encomendas online para uma pastelaria artesanal, com back-office. Sozinho, de ponta a ponta.",
+          "en": "online ordering platform for an artisan pastry shop, with a full back-office. Built alone, end to end."
+        },
+        "tech": {
+          "pt": "React · TypeScript · Supabase · PostgreSQL · Vite",
+          "en": "React · TypeScript · Supabase · PostgreSQL · Vite"
+        },
+        "quando": {
+          "pt": "cliente real, 2026 – em curso",
+          "en": "real client, 2026 – ongoing"
+        },
+        "_motivo": "fase 12: trabalho pago para um cliente vai para a Experiência, e não para os Projetos, onde ficava ao lado de um projeto pessoal. O Licas passou a ser a primeira entrada da Experiência, em três pontos."
+      },
+      "cv.experiencia[0].papel": {
+        "pt": "Programador de aplicações · OutSystems",
+        "en": "Application developer · OutSystems",
+        "_motivo": "fase 12: \"Programador de aplicações\" / \"Application developer\" é linguagem de formulário, e o cargo já está no título; o OutSystems passou para a linha da stack"
+      },
+      "cv.experiencia[0].descricao": {
+        "pt": "Loja online de informática com gestão de armazém, apresentada como Prova de Aptidão Profissional.",
+        "en": "Online computer-hardware store with warehouse management, presented as my final secondary-school project.",
+        "_motivo": "fase 12: a experiência passou a pontos começados por um verbo; esta frase deu lugar a \"Desenvolvi…\" / \"Developed…\""
+      }
+    },
+    "fase-13": {
+      "cv.experiencia[0].pontos[1] (pt)": {
+        "pt": "Suportei dois fluxos de compra na mesma aplicação: catálogo com preço fixo, e bolos personalizados que precisam de orçamento antes de haver preço.",
+        "_motivo": "fase 13: \"Suportei\" é um anglicismo (do inglês \"support\"); passou a \"Acomodei\". O inglês \"Supported\" está correto e ficou."
+      }
+    }
+  }
+}
+

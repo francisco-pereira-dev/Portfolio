@@ -1,0 +1,121 @@
+---
+/**
+ * Casca do documento.
+ *
+ * O <!DOCTYPE html> é intencional: o index.html legado não o tem e corre em
+ * quirks mode. Isto passa o site para standards mode.
+ */
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import type { Lang, Ui } from '../i18n';
+import type { PaginaSeo } from '../lib/seo';
+
+interface Props {
+  lang: Lang;
+  ui: Ui;
+  /** SEO de uma página que não é a inicial (case studies). */
+  seo?: PaginaSeo;
+}
+
+const { lang, ui, seo } = Astro.props;
+
+// pt-PT para o atributo do documento; o "pt" simples é o código da rota.
+const langDocumento = lang === 'pt' ? 'pt-PT' : 'en';
+---
+
+<!DOCTYPE html>
+{/* Fase 5.1: sem classe de tema no HTML. Com JavaScript, o script abaixo põe
+    "js" e a classe do tema antes da primeira pintura; sem JavaScript, o tema
+    segue o sistema (prefers-color-scheme, em global.css). */}
+<html lang={langDocumento}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon" />
+
+    <Seo lang={lang} ui={ui} pagina={seo} />
+
+    {/* Poppins auto-alojada: sem pedidos a terceiros nem ligacao a dois dominios.
+        O peso 400 e o do corpo de texto, o mais usado, por isso vem em preload. */}
+    <link
+      rel="preload"
+      href="/fonts/poppins-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <script is:inline>
+      // Tema antes da primeira pintura, para não haver flash.
+      // O site legado punha light-mode no <body> e só corrigia no DOMContentLoaded:
+      // quem tinha "dark" guardado via a página em claro durante uns instantes.
+      // A classe está no <html> precisamente para poder ser aplicada aqui.
+      (function () {
+        var el = document.documentElement;
+        // Fase 5.1: marca que há JavaScript. Só com esta classe o conteúdo .reveal
+        // começa escondido para a animação de entrada, e os controlos que dependem
+        // do script (menu, tema, "?") aparecem. Sem ela, tudo fica visível.
+        el.classList.add('js');
+        var tema = null;
+        try {
+          tema = localStorage.getItem('theme');
+        } catch (e) {
+          /* armazenamento bloqueado */
+        }
+        if (tema !== 'dark' && tema !== 'light') {
+          // Não existia fallback nenhum: um visitante novo recebia sempre claro,
+          // mesmo com o sistema em escuro.
+          tema =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        }
+        el.classList.remove('light-mode', 'dark-mode');
+        el.classList.add(tema === 'dark' ? 'dark-mode' : 'light-mode');
+      })();
+    </script>
+
+    <script is:inline>
+      // Portado de js/script.js L14-19, que corria fora do DOMContentLoaded.
+      // Num recarregamento, tira a âncora do URL e volta ao topo, para o browser
+      // não repor o scroll a meio de uma secção. Precisa de correr já — daí o inline.
+      if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+        window.history.replaceState(null, null, window.location.pathname);
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+        }, 0);
+      }
+    </script>
+  </head>
+  <body>
+    {/* Fase 5: o primeiro elemento focável da página. Fica fora do ecrã até
+        receber foco pelo teclado e salta para o <main id="conteudo">. */}
+    <a class="skip-link" href="#conteudo">{ui['a11y-skip-to-content']}</a>
+
+    <slot />
+
+    {/* Voltar ao topo (fase 4.2b). Escondido até se passar o hero; o
+        comportamento está em src/scripts/main.js. */}
+    <button type="button" id="back-to-top" class="back-to-top" aria-label={ui['a11y-back-to-top']}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M12 19V5"></path>
+        <path d="m5 12 7-7 7 7"></path>
+      </svg>
+    </button>
+
+    <script>
+      import '../scripts/main.js';
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,67 @@
+---
+/**
+ * Modal de um projeto sem página de case study (fase 4: são três). Os projetos
+ * com case study ligam à página e não têm modal.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang, type Ui } from '../i18n';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+  ui: Ui;
+}
+
+const { project, lang, ui } = Astro.props;
+const p = project.data;
+
+// As modais ficam no HTML desde o início: openModal() faz getElementById sobre
+// markup estático e o restauro de foco depende de os nós já existirem.
+const modalId = `modal-${p.slug}`;
+const titleId = `title-${p.slug}`;
+---
+
+<div class="modal" id={modalId} role="dialog" aria-modal="true" aria-labelledby={titleId}>
+  <button type="button" class="modal-close" aria-label={ui['a11y-close']}>
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="modal-content">
+    {/* Sem imagem: a página inicial não mostra screenshots de projetos (fase 4). */}
+    <h3 class="modal-title" id={titleId}>{t(p.title, lang)}</h3>
+    {/* Sem descrição (fase 4.2b): a frase da linha é a descrição, e a descrição
+        longa começava com essa mesma frase. Ficam as features e os links. */}
+    <ul class="modal-features">
+      {p.features.map((feature) => <li>{t(feature, lang)}</li>)}
+    </ul>
+    {p.coldStart && <p class="modal-note">{ui['modal-tooltip-note']}</p>}
+    <div class="modal-actions">
+      {/* O estado do projeto decide o botão de demonstração:
+          live            -> link normal
+          in-development  -> rótulo inerte, sem href, com aria-disabled
+          no-demo         -> não há botão nenhum */}
+      {
+        p.status === 'live' && p.demoUrl && (
+          <a href={p.demoUrl} target="_blank" rel="noopener noreferrer" class="btn-modal">
+            {ui['modal-btn-project']}
+          </a>
+        )
+      }
+      {
+        p.status === 'in-development' && (
+          <span class="btn-modal btn-modal-disabled" aria-disabled="true">
+            {ui['project-status-in-development']}
+          </span>
+        )
+      }
+      {/* Sem repositório não há botão: um link para um repo privado dava 404. */}
+      {
+        p.repoUrl && (
+          <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="btn-modal">
+            {ui['modal-btn-repo']}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>
+

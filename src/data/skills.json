@@ -1,0 +1,99 @@
+[
+  {
+    "id": "languages",
+    "items": [
+      {
+        "name": "TypeScript",
+        "proofs": [{ "rotulo": { "pt": "Licas", "en": "Licas" }, "projeto": "licas" }, { "rotulo": { "pt": "Mr. Pizza", "en": "Mr. Pizza" }, "projeto": "mr-pizza" }, { "rotulo": { "pt": "Diane Arbus", "en": "Diane Arbus" }, "projeto": "diane-arbus" }]
+      },
+      {
+        "name": "JavaScript",
+        "proofs": [{ "rotulo": { "pt": "3D Analyzer", "en": "3D Analyzer" }, "projeto": "3d-analyzer" }, { "rotulo": { "pt": "Portfolio", "en": "Portfolio" }, "repo": "Portfolio" }, { "rotulo": { "pt": "Hotel Inteligente", "en": "Smart Hotel" }, "projeto": "hotel-inteligente" }]
+      },
+      {
+        "name": "C++",
+        "proofs": [{ "rotulo": { "pt": "3D Analyzer", "en": "3D Analyzer" }, "projeto": "3d-analyzer" }, { "rotulo": { "pt": "CadflowBankSystem", "en": "CadflowBankSystem" }, "projeto": "cadflow-bank-system" }]
+      },
+      {
+        "name": "Java",
+        "proofs": [{ "rotulo": { "pt": "DAE", "en": "DAE" }, "projeto": "dae" }]
+      },
+      {
+        "name": "PHP",
+        "proofs": [{ "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }, { "rotulo": { "pt": "Hotel Inteligente", "en": "Smart Hotel" }, "projeto": "hotel-inteligente" }]
+      },
+      {
+        "name": "HTML5, CSS3",
+        "proofs": [{ "rotulo": { "pt": "Portfolio", "en": "Portfolio" }, "repo": "Portfolio" }, { "rotulo": { "pt": "Mr. Pizza", "en": "Mr. Pizza" }, "projeto": "mr-pizza" }, { "rotulo": { "pt": "Diane Arbus", "en": "Diane Arbus" }, "projeto": "diane-arbus" }]
+      }
+    ]
+  },
+  {
+    "id": "frameworks",
+    "items": [
+      {
+        "name": "React",
+        "proofs": [{ "rotulo": { "pt": "Licas", "en": "Licas" }, "projeto": "licas" }, { "rotulo": { "pt": "Mr. Pizza", "en": "Mr. Pizza" }, "projeto": "mr-pizza" }, { "rotulo": { "pt": "Diane Arbus", "en": "Diane Arbus" }, "projeto": "diane-arbus" }]
+      },
+      {
+        "name": "Vue 3",
+        "proofs": [{ "rotulo": { "pt": "3D Analyzer", "en": "3D Analyzer" }, "projeto": "3d-analyzer" }]
+      },
+      {
+        "name": "Astro",
+        "proofs": [{ "rotulo": { "pt": "Portfolio", "en": "Portfolio" }, "repo": "Portfolio" }]
+      },
+      {
+        "name": "Laravel",
+        "proofs": [{ "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }]
+      },
+      {
+        "name": "Three.js / WebGL",
+        "proofs": [{ "rotulo": { "pt": "3D Analyzer", "en": "3D Analyzer" }, "projeto": "3d-analyzer" }]
+      },
+      {
+        "name": "MFC",
+        "proofs": [{ "rotulo": { "pt": "CadflowBankSystem", "en": "CadflowBankSystem" }, "projeto": "cadflow-bank-system" }]
+      }
+    ]
+  },
+  {
+    "id": "data",
+    "items": [
+      {
+        "name": "PostgreSQL / Supabase",
+        "proofs": [{ "rotulo": { "pt": "Licas", "en": "Licas" }, "projeto": "licas" }]
+      },
+      {
+        "name": "MySQL",
+        "proofs": [{ "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }]
+      },
+      {
+        "name": "REST APIs",
+        "proofs": [{ "rotulo": { "pt": "DAE", "en": "DAE" }, "projeto": "dae" }, { "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }, { "rotulo": { "pt": "Hotel Inteligente", "en": "Smart Hotel" }, "projeto": "hotel-inteligente" }]
+      }
+    ]
+  },
+  {
+    "id": "tools",
+    "items": [
+      {
+        "name": "Docker",
+        "proofs": [{ "rotulo": { "pt": "DAE", "en": "DAE" }, "projeto": "dae" }]
+      },
+      {
+        "name": "Vite",
+        "proofs": [{ "rotulo": { "pt": "Licas", "en": "Licas" }, "projeto": "licas" }, { "rotulo": { "pt": "AINET", "en": "AINET" }, "projeto": "ainet" }, { "rotulo": { "pt": "DAE", "en": "DAE" }, "projeto": "dae" }]
+      },
+      {
+        "name": "Git",
+        "proofs": [{ "allRepos": true }]
+      },
+      {
+        "name": "OutSystems",
+        "proofs": [{ "rotulo": { "pt": "Gest", "en": "Gest" }, "projeto": "gest" }]
+      }
+    ]
+  }
+]
+

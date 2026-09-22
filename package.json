@@ -1,0 +1,31 @@
+{
+  "name": "portfolio",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:texto": "node scripts/check-texto.mjs",
+    "og": "node scripts/gerar-og.mjs",
+    "cv": "node scripts/gerar-cv.mjs",
+    "mapa": "node scripts/gerar-estrutura.mjs",
+    "audit:a11y": "node scripts/auditoria/acessibilidade.mjs",
+    "audit:teclado": "node scripts/auditoria/teclado.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.2.10"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "opentype.js": "^2.0.0",
+    "playwright": "^1.63.0",
+    "sharp": "0.35.4"
+  }
+}
+

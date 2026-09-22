@@ -1,0 +1,493 @@
+/* Página do CV (fase 9): /cv/ e /en/cv/. Só é carregado nestas duas páginas.
+
+   No ecrã segue o tema do site, claro ou escuro, com os tokens de global.css.
+   Os acentos a roxo são só quatro: o ponto final do nome, o cargo, os títulos
+   de secção e a barra do resumo. O texto a roxo usa --accent-text (o #8B5CF6
+   como texto fica abaixo de 4,5:1); a barra, que não é texto, usa --accent-color.
+
+   Na impressão (o bloco @media print, no fim) é outra folha: sempre branca,
+   numa página A4, com medidas próprias em pt. */
+
+.cv-page {
+    padding: var(--sp-32) var(--sp-6) var(--sp-24);
+}
+
+/* 48rem é uma medida de desenho: a largura em que a linha dos três links cabe
+   inteira ao tamanho --fs-small. A coluna dos case studies (--measure, 37,5rem)
+   partia-a em duas. */
+.cv {
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.cv-acoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--sp-8);
+}
+
+/* --- Nome, cargo, linha pessoal e fotografia --- */
+
+.cv-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-8);
+}
+
+.cv-id {
+    min-width: 0;
+}
+
+.cv-nome {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-2);
+}
+
+/* O ponto final a roxo, como no hero; a segunda declaração esconde-o dos
+   leitores de ecrã onde é suportada. */
+.cv-nome::after {
+    content: '.';
+    content: '.' / '';
+    color: var(--accent-text);
+}
+
+.cv-cargo {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-heading);
+    font-weight: 500;
+    color: var(--accent-text);
+    margin-bottom: var(--sp-3);
+}
+
+.cv-pessoal {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+}
+
+.cv-pessoal span + span::before {
+    content: '·';
+    content: '·' / '';
+    margin: 0 var(--sp-2);
+}
+
+.cv-sep {
+    color: var(--text-secondary);
+}
+
+/* 128px: medida de desenho da fotografia, como os 200px do hero. */
+.cv-foto {
+    display: block;
+    flex: 0 0 auto;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* --- Os três links, numa linha própria com uma régua fina por cima --- */
+
+.cv-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-2);
+    border-top: 1px solid var(--border-color);
+    font-size: var(--fs-small);
+    color: var(--text-secondary);
+}
+
+.cv-links li + li::before {
+    content: '·';
+    content: '·' / '';
+    margin: 0 var(--sp-2);
+}
+
+/* Sublinhados, como os do rodapé: têm a cor do texto à volta. */
+.cv-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition: color 0.2s ease;
+}
+
+.cv-links a:hover {
+    color: var(--accent-text);
+}
+
+/* --- Resumo, com a barra vertical a roxo --- */
+
+.cv-resumo {
+    margin-top: var(--sp-6);
+    padding-left: var(--sp-4);
+    border-left: 2px solid var(--accent-color);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--text-primary);
+}
+
+/* --- Secções --- */
+
+.cv-secao {
+    margin-top: var(--sp-12);
+}
+
+.cv-secao h2 {
+    font-size: var(--fs-meta);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    padding-bottom: var(--sp-2);
+    margin-bottom: var(--sp-4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cv-itens {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+}
+
+.cv-item-titulo {
+    font-size: var(--fs-body);
+    line-height: var(--lh-lead);
+    color: var(--text-primary);
+}
+
+.cv-item-titulo strong {
+    font-weight: 600;
+}
+
+.cv-item-meta {
+    margin-top: var(--sp-1);
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+}
+
+/* Os pontos da experiência (fase 12): cada um começa por um verbo, e quem varre o CV
+   lê as primeiras palavras de cada linha. O marcador fica na cor secundária, para o
+   que se lê primeiro ser o verbo. */
+.cv-pontos {
+    margin-top: var(--sp-2);
+    padding-left: var(--sp-6);
+    list-style: disc;
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
+    color: var(--text-primary);
+}
+
+.cv-pontos li + li {
+    margin-top: var(--sp-1);
+}
+
+.cv-pontos li::marker {
+    color: var(--text-secondary);
+}
+
+.cv-mais {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
+    color: var(--text-secondary);
+}
+
+/* Duas colunas em grelha, e não um rótulo com min-width: com min-width, o
+   rótulo mais comprido ("Frameworks e bibliotecas") transbordava e encostava ao
+   valor. Aqui a coluna do rótulo tem a largura do mais comprido (max-content), e
+   o espaço entre as duas é sempre o column-gap. */
+.cv-competencias {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: var(--sp-2) var(--sp-6);
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
+}
+
+.cv-competencias dt {
+    color: var(--text-secondary);
+}
+
+.cv-competencias dd {
+    color: var(--text-primary);
+}
+
+.cv-simples {
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
+    color: var(--text-primary);
+}
+
+/* --- Telemóvel ---
+   Só no ecrã: impressa, a folha A4 tem cerca de 688px úteis, e sem o "screen"
+   estas regras também valiam para o PDF. */
+@media screen and (max-width: 768px) {
+    .cv-page {
+        padding: var(--sp-24) var(--sp-6) var(--sp-16);
+    }
+
+    .cv-acoes {
+        justify-content: flex-start;
+    }
+
+    /* A fotografia sobe para cima do nome. */
+    .cv-topo {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: var(--sp-6);
+    }
+
+    /* A localidade e o email, um por linha: a linha partia a meio da localidade. */
+    .cv-pessoal {
+        flex-direction: column;
+    }
+
+    .cv-pessoal span + span::before {
+        content: none;
+    }
+
+    /* Um link por linha, sem separadores a começar linhas. */
+    .cv-links {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cv-links li + li::before {
+        content: none;
+    }
+
+    /* O rótulo passa para cima do valor. */
+    .cv-competencias {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+    }
+
+    .cv-competencias dt:not(:first-child) {
+        margin-top: var(--sp-3);
+    }
+}
+
+/* ==========================================================================
+   IMPRESSÃO — o PDF do CV (npm run cv) e o "Imprimir" do browser
+
+   Sempre em branco, seja qual for o tema com que a página está a ser vista: os
+   tokens são redefinidos para o conjunto claro, com o fundo a branco puro e o
+   roxo a #7C3AED, e o html e o body levam fundo branco à força.
+
+   As medidas aqui são em pt, e ficam fora das escalas --fs-* e --sp-* de
+   propósito. A impressão é um sistema à parte: o que conta é caber numa folha
+   A4, e a diferença entre uma e duas páginas são milímetros — um degrau das
+   escalas de ecrã (4px, ou um salto de 13 para 15px na letra) é grosso demais
+   para acertar isso. Por isso todas as medidas de impressão vivem só dentro
+   deste bloco, e nenhuma vira token. Partiram do protótipo que provou caber
+   numa página, e o npm run cv falha se o PDF deixar de ter exatamente uma.
+   ========================================================================== */
+@media print {
+    @page {
+        size: A4;
+        margin: 1.15cm 1.4cm;
+    }
+
+    /* O conjunto claro de html.light-mode, com o fundo a branco puro e o roxo
+       da impressão. O !important vence o tema escuro de :root e o de
+       html.dark-mode, qualquer que seja a ordem das folhas. */
+    :root {
+        --bg-color: #FFFFFF !important;
+        --surface-color: #FFFFFF !important;
+        --surface-hover: #F1F5F9 !important;
+        --text-primary: #0F172A !important;
+        --text-secondary: #475569 !important;
+        --border-color: rgba(0, 0, 0, 0.1) !important;
+        --shadow-glow: rgba(139, 92, 246, 0.3) !important;
+        --modal-bg: #FFFFFF !important;
+        --nav-bg: rgba(255, 255, 255, 0.85) !important;
+        --nav-color: #0F172A !important;
+        --overlay-bg: rgba(248, 250, 252, 0.96) !important;
+        --overlay-text: #475569 !important;
+        --overlay-border: rgba(0, 0, 0, 0.08) !important;
+        --accent-color: #7C3AED !important;
+        --accent-text: #7C3AED !important;
+        --warning-text: #B45309 !important;
+    }
+
+    html,
+    body {
+        background: #fff !important;
+    }
+
+    body {
+        color: var(--text-primary);
+        font-size: 9.6pt;
+        line-height: 1.4;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Sem transições: a troca de tema para a impressão não passa por cores
+       intermédias. */
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    /* Fora do PDF: a navegação, o menu, o rodapé, os botões do tema e de voltar
+       ao topo, o link de saltar e o próprio "Descarregar PDF". */
+    .skip-link,
+    .navbar,
+    .overlay-menu,
+    .theme-switch,
+    .nav-sem-js,
+    .site-footer,
+    .back-to-top,
+    .cv-acoes {
+        display: none !important;
+    }
+
+    .cv-page {
+        padding: 0;
+    }
+
+    .cv {
+        max-width: none;
+    }
+
+    .cv-topo {
+        gap: 14pt;
+    }
+
+    .cv-nome {
+        font-size: 18pt;
+        line-height: 1.15;
+        margin-bottom: 2pt;
+    }
+
+    .cv-cargo {
+        font-size: 10pt;
+        margin-bottom: 4pt;
+    }
+
+    .cv-pessoal {
+        font-size: 8.8pt;
+        line-height: 1.45;
+    }
+
+    .cv-pessoal span + span::before,
+    .cv-links li + li::before {
+        margin: 0 5pt;
+    }
+
+    .cv-foto {
+        width: 70pt;
+        height: 70pt;
+    }
+
+    /* Os links já estão escritos por extenso: não se acrescenta o URL com
+       ::after, que ficaria duplicado. Numa linha só, sem sublinhado. */
+    .cv-links {
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        margin-top: 7pt;
+        padding-top: 4pt;
+        border-top-width: 0.75pt;
+        font-size: 8.3pt;
+    }
+
+    .cv-links a {
+        min-height: 0;
+        text-decoration: none;
+    }
+
+    .cv-resumo {
+        margin-top: 9pt;
+        padding-left: 9pt;
+        border-left-width: 1.5pt;
+        font-size: 9pt;
+        line-height: 1.45;
+    }
+
+    /* Nem uma secção nem um item ficam partidos entre duas páginas. */
+    .cv-secao,
+    .cv-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .cv-secao {
+        margin-top: 8pt;
+    }
+
+    .cv-resumo + .cv-secao {
+        margin-top: 10pt;
+    }
+
+    .cv-secao h2 {
+        font-size: 7.8pt;
+        letter-spacing: 0.14em;
+        padding-bottom: 3pt;
+        margin-bottom: 4.5pt;
+        border-bottom-width: 0.75pt;
+    }
+
+    .cv-itens {
+        gap: 5pt;
+    }
+
+    .cv-item-titulo {
+        font-size: 9.6pt;
+        line-height: 1.4;
+    }
+
+    .cv-item-meta {
+        margin-top: 1pt;
+        font-size: 8.4pt;
+        line-height: 1.45;
+    }
+
+    /* Os pontos têm o tamanho da linha de item, que substituem (fase 12). */
+    .cv-pontos {
+        margin-top: 2pt;
+        padding-left: 11pt;
+        font-size: 8.9pt;
+        line-height: 1.4;
+    }
+
+    .cv-pontos li + li {
+        margin-top: 1pt;
+    }
+
+    .cv-mais {
+        margin-top: 5pt;
+        font-size: 8.5pt;
+        line-height: 1.4;
+    }
+
+    .cv-competencias {
+        gap: 3pt 14pt;
+        font-size: 8.9pt;
+        line-height: 1.45;
+    }
+
+    .cv-simples {
+        font-size: 8.9pt;
+        line-height: 1.4;
+    }
+}
+
